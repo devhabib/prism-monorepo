@@ -1,4 +1,19 @@
+@use 'themes/light';
+@use 'themes/dark';
+
+// Forward all core files to make them available when _index.scss is imported
 @forward 'core/variables';
-@forward 'core/functions';
 @forward 'core/mixins';
+@forward 'core/functions';
 @forward 'core/reset';
+
+// The "Senior" Theme Loader
+// This automatically applies Light theme to :root
+// And Dark theme when [data-theme="dark"] is present.
+:root {
+  @include light.load-theme;
+}
+
+[data-theme='dark'] {
+  @include dark.load-theme;
+}

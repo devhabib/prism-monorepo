@@ -1,0 +1,32 @@
+@use '../core/variables' as v;
+@use 'sass:map';
+@use '../core/mixins' as m; // Ensure mixins are available for generate-vars if needed
+
+@mixin load-theme {
+  // Generate CSS variables from the SASS maps
+  // For dark theme, we primarily override surface and semantic colors
+  // Primary colors might remain the same or have dark-specific adjustments
+  @include m.generate-vars(v.$primary, 'primary'); // Can be adjusted for dark mode if $primary-dark map exists
+  @include m.generate-vars(v.$semantic, 'semantic'); // Apply semantic colors
+
+  // Invert Surface Colors (Manual Override for Dark Mode)
+  // This re-maps light values to dark values and vice-versa
+  --surface-0:   #{map.get(v.$surface, 900)};
+  --surface-50:  #{map.get(v.$surface, 800)};
+  --surface-100: #{map.get(v.$surface, 700)};
+  --surface-200: #{map.get(v.$surface, 600)};
+  --surface-300: #{map.get(v.$surface, 500)};
+  --surface-400: #{map.get(v.$surface, 400)};
+  --surface-500: #{map.get(v.$surface, 300)};
+  --surface-600: #{map.get(v.$surface, 200)};
+  --surface-700: #{map.get(v.$surface, 100)};
+  --surface-800: #{map.get(v.$surface, 50)};
+  --surface-900: #{map.get(v.$surface, 0)};
+
+  // Semantic Layer Re-mapping (using the now-inverted surface variables)
+  --bg-app:     var(--surface-800);  // Now Darker
+  --bg-card:    var(--surface-900);   // Now Darkest
+  --text-main:  var(--surface-0); // Now White
+  --text-muted: var(--surface-400); // Light Gray
+  --border:     var(--surface-700); // Dark Gray
+}
