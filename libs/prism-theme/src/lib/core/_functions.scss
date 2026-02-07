@@ -1,0 +1,7 @@
+// libs/prism-theme/src/lib/core/_functions.scss
+
+// Function to convert pixels to rem units for better accessibility
+// Assumes a base font-size of 16px (1rem = 16px)
+@function rem($pixels) {
+  @return calc($pixels / 16) * 1rem;
+}

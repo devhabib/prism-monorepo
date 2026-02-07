@@ -1,0 +1,9 @@
+{
+  "name": "prism-theme",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/prism-theme/src",
+  "projectType": "library",
+  "tags": ["type:lib", "scope:theme"],
+  "// targets": "to see all targets run: nx show project prism-theme --web",
+  "targets": {}
+}

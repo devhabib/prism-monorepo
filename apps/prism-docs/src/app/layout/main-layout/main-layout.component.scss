@@ -1,0 +1,17 @@
+.main-layout {
+  display: flex;
+  height: 100vh; // Full viewport height
+
+  .sidebar {
+    width: 250px; // Example width
+    background-color: #f0f0f0; // Example background
+    padding: 1rem;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .content {
+    flex-grow: 1;
+    padding: 1rem;
+    overflow-y: auto; // Enable scrolling for content
+  }
+}

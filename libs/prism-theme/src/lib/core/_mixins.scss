@@ -1,0 +1,39 @@
+// libs/prism-theme/src/lib/core/_mixins.scss
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Media Query Manager
+// Example: @include respond-to(md) { ... }
+// Breakpoints: xs, sm, md, lg, xl, xxl
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint `#{$breakpoint}` not found in $breakpoints map.";
+  }
+}
+
+// Theme-aware styling for dark/light mode
+// Example: @include theme-aware(background-color, primary-600);
+@mixin theme-aware($property, $color-key) {
+  #{$property}: var(--color-light-#{$color-key}); // Default for light mode
+
+  .dark & {
+    #{$property}: var(--color-dark-#{$color-key}); // Override for dark mode
+  }
+}
