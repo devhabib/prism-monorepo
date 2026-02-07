@@ -1,0 +1,29 @@
+<table>
+  <thead>
+    <tr>
+      @for (col of columns(); track col.key) {
+        <th (click)="toggleSort(col.key)">
+          {{ col.header }}
+          @if (sortConfig()?.key === col.key) {
+            <span>{{ sortConfig()?.direction === 'asc' ? '↑' : '↓' }}</span>
+          }
+        </th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (row of sortedData(); track $index) {
+      <tr>
+        @for (col of columns(); track col.key) {
+          <td>
+            @if (col.cellTemplate) {
+              <ng-container *ngTemplateOutlet="col.cellTemplate; context: { $implicit: row[col.key], row: row }"></ng-container>
+            } @else {
+              {{ row[col.key] }}
+            }
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>

@@ -1,0 +1,57 @@
+@use 'sass:map';
+@use '../../../../prism-theme/src/lib/index' as *;
+
+:host {
+  display: block;
+  font-family: 'Inter', sans-serif; // Ensure font consistency
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: map.get($surface, 0); // var(--surface-0) equivalent
+  border: 1px solid map.get($surface, 200); // var(--border) equivalent
+  border-radius: 8px;
+  overflow: hidden; // For rounded corners
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+  thead {
+    background-color: map.get($surface, 50);
+    
+    th {
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      color: map.get($surface, 700);
+      border-bottom: 2px solid map.get($surface, 200);
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s, color 0.2s;
+
+      &:hover {
+        background-color: map.get($surface, 100);
+        color: map.get($primary, main);
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid map.get($surface, 200);
+      transition: background-color 0.2s;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background-color: map.get($surface, 50);
+      }
+
+      td {
+        padding: 1rem;
+        color: map.get($surface, 900); // var(--text-main) equivalent
+      }
+    }
+  }
+}
