@@ -1,27 +1,21 @@
 @use 'sass:map';
 @use 'sass:meta';
 
-// MIXIN: Convert a SASS Map to CSS Custom Properties
-// Usage: @include generate-vars($primary, 'primary');
-// Result: --primary-main: #...; --primary-light: #...;
 @mixin generate-vars($map, $prefix) {
   @each $key, $value in $map {
     @if meta.type-of($value) == 'map' {
-      // Skip nested maps for now (simple flat maps only for this level)
     } @else {
       --#{$prefix}-#{$key}: #{$value};
     }
   }
 }
 
-// MIXIN: Utility for Flexbox centering (Senior Shortcut)
 @mixin flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-// MIXIN: Focus Ring (Accessibility Standard)
 @mixin focus-ring {
   &:focus-visible {
     outline: 2px solid var(--primary-main);

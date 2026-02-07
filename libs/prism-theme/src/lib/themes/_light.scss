@@ -3,12 +3,10 @@
 @use 'sass:map';
 
 @mixin load-theme {
-  // Generate CSS variables from the SASS maps
   @include m.generate-vars(v.$primary, 'primary');
   @include m.generate-vars(v.$surface, 'surface');
   @include m.generate-vars(v.$semantic, 'semantic');
 
-  // Manual Mapping for Layout (The "Semantic" Layer)
   --bg-app:     var(--surface-50);
   --bg-card:    var(--surface-0);
   --text-main:  var(--surface-900);
