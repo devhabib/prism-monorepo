@@ -1,39 +1,39 @@
-// libs/prism-theme/src/lib/core/_mixins.scss
+// -----------------------------------------------------------------------------
+// Prism Core: Mixins
+// -----------------------------------------------------------------------------
 
+@use 'sass:map';
+@use '_variables' as *;
+
+// -----------------------------------------------------------------------------
+// Flex Center
+// Quickly centers items horizontally and vertically.
+// -----------------------------------------------------------------------------
 @mixin flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-// Media Query Manager
-// Example: @include respond-to(md) { ... }
-// Breakpoints: xs, sm, md, lg, xl, xxl
-$breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px
-);
-
-@mixin respond-to($breakpoint) {
-  @if map-has-key($breakpoints, $breakpoint) {
-    @media (min-width: map-get($breakpoints, $breakpoint)) {
-      @content;
-    }
-  } @else {
-    @warn "Breakpoint `#{$breakpoint}` not found in $breakpoints map.";
-  }
+// -----------------------------------------------------------------------------
+// Glassmorphism
+// Creates a modern frosted-glass effect.
+// -----------------------------------------------------------------------------
+@mixin glassmorphism($blur: 10px, $opacity: 0.1) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur); // Safari support
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-// Theme-aware styling for dark/light mode
-// Example: @include theme-aware(background-color, primary-600);
-@mixin theme-aware($property, $color-key) {
-  #{$property}: var(--color-light-#{$color-key}); // Default for light mode
-
-  .dark & {
-    #{$property}: var(--color-dark-#{$color-key}); // Override for dark mode
-  }
+// -----------------------------------------------------------------------------
+// Accessible Focus Ring
+// Standard focus outline for interactive elements.
+// -----------------------------------------------------------------------------
+@mixin focus-ring {
+  outline: none;
+  // Use a box-shadow to avoid layout shifts and enable rounded corners
+  box-shadow: 0 0 0 3px rgba(map.get($primary, main), 0.4);
+  transition: box-shadow 0.2s ease-in-out;
 }

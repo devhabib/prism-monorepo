@@ -1,0 +1,50 @@
+@use 'sass:map';
+@use '../../../../libs/prism-theme/src/lib/index' as *;
+
+.smoke-test {
+  padding: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  h1 {
+    color: map.get($primary, main); // Updated to use map.get
+    font-size: 3rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .card {
+    background: map.get($surface, 0); // Updated to use map.get
+    border: 1px solid map.get($surface, 200); // Updated to use map.get
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+
+    h2 {
+      margin-bottom: 1rem;
+      color: map.get($surface, 800); // Updated to use map.get
+    }
+  }
+
+  .color-box {
+    padding: 1rem;
+    margin-top: 0.5rem;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+
+    &.primary {
+      background-color: map.get($primary, main); // Updated to use map.get
+    }
+
+    &.secondary {
+      background-color: map.get($surface, 500); // Using new Secondary (Slate)
+    }
+  }
+}

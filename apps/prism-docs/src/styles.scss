@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@use 'sass:map';
+@use '../../../libs/prism-theme/src/lib/index' as *;
+
+body {
+  background-color: map.get($surface, 50); // Using map.get as $surface is a map
+  color: map.get($surface, 900);
+  font-family: 'Inter', sans-serif; // Assuming Inter is available, or fallback
+}

@@ -1,7 +1,41 @@
-// libs/prism-theme/src/lib/core/_functions.scss
+// -----------------------------------------------------------------------------
+// Prism Core: Functions
+// -----------------------------------------------------------------------------
 
-// Function to convert pixels to rem units for better accessibility
-// Assumes a base font-size of 16px (1rem = 16px)
+@use 'sass:math';
+@use 'sass:color';
+
+// -----------------------------------------------------------------------------
+// Convert Pixels to Rem
+// Assumes a base font-size of 16px.
+// Usage: font-size: rem(24); -> font-size: 1.5rem;
+// -----------------------------------------------------------------------------
 @function rem($pixels) {
-  @return calc($pixels / 16) * 1rem;
+  @if unitless($pixels) {
+    @return math.div($pixels, 16) * 1rem;
+  } @else {
+    @error "The rem() function expects unitless numbers. Passed: #{$pixels}";
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Contrast Text Color
+// Returns black or white based on background luminance for WCAG compliance.
+// Usage: color: contrast-color($primary-color);
+// -----------------------------------------------------------------------------
+@function contrast-color($color) {
+  // Extract RGB channels
+  $r: color.red($color);
+  $g: color.green($color);
+  $b: color.blue($color);
+
+  // Calculate YIQ luminance
+  $yiq: (($r * 299) + ($g * 587) + ($b * 114)) * 0.001;
+
+  // Threshold (standard is usually 128)
+  @if ($yiq >= 128) {
+    @return #000000;
+  } @else {
+    @return #FFFFFF;
+  }
 }

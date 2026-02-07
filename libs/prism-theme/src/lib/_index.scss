@@ -1,11 +1,4 @@
-// libs/prism-theme/src/lib/_index.scss
-
-// Forward all core files to make them available when _index.scss is imported
 @forward 'core/variables';
-@forward 'core/mixins';
 @forward 'core/functions';
+@forward 'core/mixins';
 @forward 'core/reset';
-
-// Forward theme files (light/dark) - these will be conditionally used
-@forward 'themes/light';
-@forward 'themes/dark';
