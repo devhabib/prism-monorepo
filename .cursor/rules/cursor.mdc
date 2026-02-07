@@ -1,0 +1,6 @@
+globs: ['**/*.ts', '**/*.scss']
+always apply:
+- Prefer standalone components.
+- Use strict typing (no 'any').
+- Implement 'inject()' over constructor injection.
+- Ensure 100% accessibility (WCAG 2.1 AA) for all UI components.

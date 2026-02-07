@@ -1,0 +1,1 @@
+Suggest Angular 21 patterns only. Prioritize 'signal()', 'computed()', and 'effect()'. Avoid RxJS where Signals suffice.

@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@prism-monorepo/prism-core": ["libs/prism-core/src/index.ts"],
+      "@prism-monorepo/prism-theme": ["libs/prism-theme/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
