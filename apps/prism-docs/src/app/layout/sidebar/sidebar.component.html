@@ -1,0 +1,28 @@
+<div class="sidebar-header">
+  <span class="logo-text">Prism Docs</span>
+</div>
+
+<nav class="sidebar-menu">
+  @for (group of menu; track group.label) {
+    <div class="menu-group">
+      <div class="group-label">{{ group.label }}</div>
+      <ul>
+        @for (item of group.items; track item.label) {
+          <li>
+            <a [routerLink]="item.route" routerLinkActive="active">
+              {{ item.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+</nav>
+
+<div class="sidebar-footer">
+  <prism-avatar label="ME" shape="circle" size="md"></prism-avatar>
+  <div class="user-info">
+    <span class="username">User</span>
+    <span class="role">Admin</span>
+  </div>
+</div>

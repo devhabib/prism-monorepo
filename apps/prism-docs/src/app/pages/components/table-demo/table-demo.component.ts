@@ -31,7 +31,7 @@ interface DemoRow {
 export class TableDemoComponent implements OnInit, AfterViewInit {
 
 
-  activeTab = signal<'examples' | 'api'>('examples');
+  activeTab = signal<'examples' | 'api'>('examples'); // Default to 'examples' tab
   striped = signal(false);
   gridlines = signal(false);
   size = signal<'sm' | 'md' | 'lg'>('md');

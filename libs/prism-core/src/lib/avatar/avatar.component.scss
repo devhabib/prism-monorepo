@@ -1,0 +1,54 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border-radius: 6px; // default square
+  background-color: var(--surface-200, #e2e8f0);
+  color: var(--text-main, #334155);
+  font-size: 1rem;
+  font-weight: 500;
+  user-select: none;
+  vertical-align: middle;
+
+  // Shapes
+  &.p-avatar-circle {
+    border-radius: 50%;
+  }
+
+  // Sizes
+  &.p-avatar-sm {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0.75rem;
+  }
+
+  &.p-avatar-md {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+  }
+
+  &.p-avatar-lg {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.25rem;
+  }
+
+  &.p-avatar-xl {
+    width: 4rem;
+    height: 4rem;
+    font-size: 1.5rem;
+  }
+
+  // Image Content
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

@@ -5,6 +5,11 @@
   </aside>
   <main class="content">
     <!-- Main content goes here -->
-    <ng-content></ng-content>
+    <div class="layout-wrapper">
+      <app-sidebar class="layout-sidebar"></app-sidebar>
+      <main class="layout-content">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
   </main>
 </div>
