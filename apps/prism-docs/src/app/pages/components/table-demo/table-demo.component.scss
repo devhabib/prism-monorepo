@@ -6,6 +6,26 @@
   padding: 2rem;
 }
 
+.product-info-cell {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .product-image {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color, #e2e8f0);
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .product-name {
+    font-weight: 500;
+    color: var(--text-main);
+  }
+}
+
 // Layout for the Demo Page
 .demo-header {
   margin-bottom: 2rem;

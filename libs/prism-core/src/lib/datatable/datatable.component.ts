@@ -3,6 +3,8 @@ import {
   Component,
   computed,
   input,
+  Output,
+  EventEmitter,
   signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -34,6 +36,9 @@ export class PrismTableComponent<T> {
   // State
   sortConfig = signal<SortConfig<T> | null>(null);
   first = signal(0); // Pagination state
+  
+  // Outputs
+  @Output() page = new EventEmitter<PageEvent>();
 
   // Computed
   filteredData = computed(() => {
@@ -98,5 +103,6 @@ export class PrismTableComponent<T> {
 
   onPageChange(event: PageEvent) {
     this.first.set(event.first);
+    this.page.emit(event);
   }
 }

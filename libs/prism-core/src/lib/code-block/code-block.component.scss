@@ -1,0 +1,100 @@
+:host {
+  display: block;
+  margin-top: 1.5rem;
+}
+
+.code-shell {
+  background-color: #1e1e1e; // VSCode Dark
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  background-color: #252526;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  height: 44px;
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .traffic-lights {
+    display: flex;
+    gap: 8px;
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      
+      &.red { background: #ff5f56; }
+      &.yellow { background: #ffbd2e; }
+      &.green { background: #27c93f; }
+    }
+  }
+
+  .tabs {
+    display: flex;
+    height: 100%;
+
+    button {
+      background: none;
+      border: none;
+      color: #858585;
+      font-size: 13px;
+      padding: 0 1rem;
+      cursor: pointer;
+      height: 44px;
+      transition: all 0.2s;
+      border-bottom: 2px solid transparent;
+
+      &:hover {
+        color: #cccccc;
+      }
+
+      &.active {
+        color: #ffffff;
+        background-color: #1e1e1e;
+        border-bottom-color: #2563eb; // Primary Blue
+      }
+    }
+  }
+
+  .copy-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #cccccc;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 4px;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+  }
+}
+
+pre {
+  margin: 0;
+  padding: 1.25rem;
+  overflow-x: auto;
+  
+  code {
+    font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #d4d4d4;
+  }
+}

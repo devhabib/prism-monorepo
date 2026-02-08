@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, TemplateRef, ViewChild, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PrismTableComponent, PrismColumn, PrismPaginatorComponent, PageEvent } from '@prism-monorepo/prism-core';
+import { PrismTableComponent, PrismColumn, PrismPaginatorComponent, PageEvent, PrismAvatarComponent, PrismCodeBlockComponent } from '@prism-monorepo/prism-core';
 
 interface DemoRow {
   id?: number;
@@ -24,14 +24,14 @@ interface DemoRow {
 @Component({
   selector: 'prism-table-demo',
   standalone: true,
-  imports: [CommonModule, PrismTableComponent],
+  imports: [CommonModule, PrismTableComponent, PrismAvatarComponent, PrismCodeBlockComponent],
   templateUrl: './table-demo.component.html',
   styleUrl: './table-demo.component.scss',
 })
 export class TableDemoComponent implements OnInit, AfterViewInit {
 
 
-  activeTab = signal<'examples' | 'api'>('examples'); // Default to 'examples' tab
+  activeTab = signal<'examples' | 'api'>('examples');
   striped = signal(false);
   gridlines = signal(false);
   size = signal<'sm' | 'md' | 'lg'>('md');
@@ -55,6 +55,7 @@ export class TableDemoComponent implements OnInit, AfterViewInit {
 
   inventoryData = Array.from({ length: 15 }, (_, i) => ({
     sku: `SKU-${1000 + i}`,
+    image: `https://placehold.co/50x50?text=Product+${String.fromCharCode(65 + i)}`,
     product: `Product ${String.fromCharCode(65 + i)}`,
     category: i % 2 === 0 ? 'Electronics' : 'Home',
     stock: Math.floor(Math.random() * 100),
@@ -73,29 +74,29 @@ export class TableDemoComponent implements OnInit, AfterViewInit {
     { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Controls cell padding and density.' },
   ];
 
-  // Column Configurations
-  financeCols: PrismColumn<any>[] = [
+  // Column Configurations (Signals for reactivity)
+  financeCols = signal<PrismColumn<any>[]>([
     { key: 'id', header: 'ID' },
     { key: 'merchant', header: 'Merchant' },
-    { key: 'amount', header: 'Amount', sortable: true }, // Template bound in AfterViewInit
+    { key: 'amount', header: 'Amount', sortable: true },
     { key: 'date', header: 'Date' },
-    { key: 'status', header: 'Status' }, // Re-using status cell if appropriate or define new
-  ];
+    { key: 'status', header: 'Status' },
+  ]);
 
-  employeeCols: PrismColumn<any>[] = [
-    { key: 'name', header: 'Name', sortable: true, cellTemplate: undefined }, // Bind avatar template
+  employeeCols = signal<PrismColumn<any>[]>([
+    { key: 'name', header: 'Name', sortable: true, cellTemplate: undefined },
     { key: 'role', header: 'Role', sortable: true },
-    { key: 'status', header: 'Status' }, // Bind status template
+    { key: 'status', header: 'Status' },
     { key: 'lastLogin', header: 'Last Login' },
-  ];
+  ]);
 
-  inventoryCols: PrismColumn<any>[] = [
+  inventoryCols = signal<PrismColumn<any>[]>([
+    { key: 'product', header: 'Product', cellTemplate: undefined },
     { key: 'sku', header: 'SKU' },
-    { key: 'product', header: 'Product' },
     { key: 'category', header: 'Category' },
     { key: 'stock', header: 'Stock', sortable: true },
     { key: 'price', header: 'Price' },
-  ];
+  ]);
 
   apiCols: PrismColumn<any>[] = [
     { key: 'name', header: 'Name' },
@@ -104,31 +105,87 @@ export class TableDemoComponent implements OnInit, AfterViewInit {
     { key: 'description', header: 'Description' },
   ];
 
-  @ViewChild('amountCell', { static: true }) amountTemplate!: TemplateRef<any>;
-  @ViewChild('statusCell', { static: true }) statusTemplate!: TemplateRef<any>;
-  @ViewChild('nameCell', { static: true }) nameTemplate!: TemplateRef<any>;
+  @ViewChild('amountCell') amountTemplate!: TemplateRef<any>;
+  @ViewChild('statusCell') statusTemplate!: TemplateRef<any>;
+  @ViewChild('nameCell') nameTemplate!: TemplateRef<any>;
+  @ViewChild('productCell') productTemplate!: TemplateRef<any>;
 
   ngOnInit() {}
 
   ngAfterViewInit() {
+     // Small delay to ensure ViewChild templates are captured
      setTimeout(() => {
        // Bind Finance Templates
        if (this.amountTemplate) {
-         this.financeCols = this.financeCols.map(c => c.key === 'amount' ? { ...c, cellTemplate: this.amountTemplate } : c);
+         this.financeCols.update(cols => cols.map(c => c.key === 'amount' ? { ...c, cellTemplate: this.amountTemplate } : c));
        }
        
        // Bind Employee Templates
        if (this.nameTemplate) {
-         this.employeeCols = this.employeeCols.map(c => c.key === 'name' ? { ...c, cellTemplate: this.nameTemplate } : c);
+         this.employeeCols.update(cols => cols.map(c => c.key === 'name' ? { ...c, cellTemplate: this.nameTemplate } : c));
        }
        if (this.statusTemplate) {
-          this.employeeCols = this.employeeCols.map(c => c.key === 'status' ? { ...c, cellTemplate: this.statusTemplate } : c);
-          this.financeCols = this.financeCols.map(c => c.key === 'status' ? { ...c, cellTemplate: this.statusTemplate } : c);
+          this.employeeCols.update(cols => cols.map(c => c.key === 'status' ? { ...c, cellTemplate: this.statusTemplate } : c));
+          this.financeCols.update(cols => cols.map(c => c.key === 'status' ? { ...c, cellTemplate: this.statusTemplate } : c));
        }
-     });
+
+       // Bind Inventory Templates
+       if (this.productTemplate) {
+         this.inventoryCols.update(cols => cols.map(c => c.key === 'product' ? { ...c, cellTemplate: this.productTemplate } : c));
+       }
+     }, 0);
   }
 
   onPageChange(event: PageEvent) {
     console.log('Page Changed:', event);
   }
+  // Code Snippets
+  financeCode = `<prism-table 
+  [data]="financeData" 
+  [columns]="financeCols" 
+  [striped]="striped()" 
+  [gridlines]="gridlines()" 
+  [size]="size()">
+</prism-table>`;
+
+  teamCode = `<prism-table [data]="employeeData" [columns]="employeeCols">
+  <ng-template #nameCell let-row="row">
+    <div class="user-cell">
+      <prism-avatar [image]="row.avatar" [label]="row.name.charAt(0)">
+      </prism-avatar>
+      <span>{{ row.name }}</span>
+    </div>
+  </ng-template>
+</prism-table>`;
+
+  inventoryHTML = `<prism-table 
+  [data]="inventoryData" 
+  [columns]="inventoryCols" 
+  [paginator]="true" 
+  [rows]="5">
+  
+  <ng-template #productCell let-row="row">
+    <div class="product-info-cell">
+      <img [src]="row.image" class="product-image" />
+      <span class="product-name">{{ row.product }}</span>
+    </div>
+  </ng-template>
+</prism-table>`;
+
+  inventoryTS = `interface Product {
+  image: string;
+  sku: string;
+  product: string;
+  category: string;
+  stock: number;
+  price: string;
+}
+
+inventoryCols: PrismColumn<Product>[] = [
+  { key: 'product', header: 'Product' },
+  { key: 'sku', header: 'SKU' },
+  { key: 'category', header: 'Category' },
+  { key: 'stock', header: 'Stock', sortable: true },
+  { key: 'price', header: 'Price' },
+];`;
 }

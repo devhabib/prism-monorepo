@@ -1,0 +1,40 @@
+<div class="code-shell">
+  <div class="code-header">
+    <div class="header-left">
+      <div class="traffic-lights">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+      
+      <div class="tabs">
+        @if (html() || code()) {
+          <button 
+            (click)="activeTab.set('html')" 
+            [class.active]="activeTab() === 'html'">
+            HTML
+          </button>
+        }
+        @if (ts()) {
+          <button 
+            (click)="activeTab.set('ts')" 
+            [class.active]="activeTab() === 'ts'">
+            TypeScript
+          </button>
+        }
+        @if (scss()) {
+          <button 
+            (click)="activeTab.set('scss')" 
+            [class.active]="activeTab() === 'scss'">
+            SCSS
+          </button>
+        }
+      </div>
+    </div>
+
+    <button class="copy-btn" (click)="copyToClipboard()">
+      {{ copied() ? 'Copied!' : 'Copy' }}
+    </button>
+  </div>
+  <pre><code>{{ currentCode() }}</code></pre>
+</div>
