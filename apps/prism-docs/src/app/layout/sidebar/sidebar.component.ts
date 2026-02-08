@@ -23,6 +23,7 @@ export class SidebarComponent {
       items: [
         { label: 'Table', route: '/components/table' },
         { label: 'Avatar', route: '/components/avatar' },
+        { label: 'Toast', route: '/components/toast' },
       ],
     },
   ];

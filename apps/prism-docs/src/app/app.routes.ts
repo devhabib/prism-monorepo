@@ -20,9 +20,16 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'components/avatar',
-         loadComponent: () =>
-          import('./pages/components/avatar-demo').then(
+        loadComponent: () =>
+          import('./pages/components/avatar-demo/avatar-demo.component').then(
             (m) => m.AvatarDemoComponent
+          ),
+      },
+      {
+        path: 'components/toast',
+        loadComponent: () =>
+          import('./pages/components/toast-demo/toast-demo.component').then(
+            (m) => m.ToastDemoComponent
           ),
       }
     ],

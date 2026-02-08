@@ -1,0 +1,23 @@
+<div class="demo-container">
+  <div class="demo-header">
+    <h1>Toast</h1>
+    <p>Contextual feedback messages for user actions.</p>
+  </div>
+
+  <div class="example-section">
+    <h3>Simple Notifications</h3>
+    <p>Trigger different severity levels to notify users.</p>
+    
+    <div class="demo-actions">
+      <button class="btn btn-success" (click)="showSuccess()">Success Toast</button>
+      <button class="btn btn-warning" (click)="showWarning()">Warning Toast</button>
+      <button class="btn btn-danger" (click)="showDanger()">Danger Toast</button>
+      <button class="btn btn-info" (click)="showInfo()">Info Toast</button>
+    </div>
+  </div>
+
+  <div class="example-section">
+    <h3>Usage</h3>
+    <prism-code-block [ts]="usageTS" [html]="usageHTML"></prism-code-block>
+  </div>
+</div>

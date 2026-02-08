@@ -9,10 +9,13 @@ import {
   withEventReplay,
 } from '@angular/platform-browser';
 
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideClientHydration(withEventReplay()),
     provideBrowserGlobalErrorListeners(),
     provideRouter(appRoutes),
+    provideAnimationsAsync()
   ],
 };
