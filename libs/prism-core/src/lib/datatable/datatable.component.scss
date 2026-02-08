@@ -20,8 +20,32 @@ th {
   &.sortable {
     cursor: pointer;
     &:hover {
-      background: var(--surface-100);
+      background-color: var(--surface-50);
     }
+  }
+}
+
+// Variations
+:host ::ng-deep {
+  .p-striped tbody tr:nth-child(even) {
+    background-color: var(--surface-50);
+  }
+
+  .p-gridlines td, .p-gridlines th {
+    border-right: 1px solid var(--border);
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .p-sm td, .p-sm th {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .p-lg td, .p-lg th {
+    padding: 1.25rem 1.5rem;
+    font-size: 1.125rem;
   }
 }
 

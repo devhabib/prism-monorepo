@@ -1,17 +1,96 @@
-<h1>Prism Data Table</h1>
+<ng-template #amountCell let-row="row">
+  <span [class]="row.amount >= 0 ? 'text-success' : 'text-danger'">
+    {{ row.amount | currency }}
+  </span>
+</ng-template>
 
-<prism-table [data]="mockData" [columns]="cols">
-  <ng-template #statusCell let-row="row">
-    <span class="badge" [class]="row.status.toLowerCase()">
-      {{ row.status }}
-    </span>
-  </ng-template>
-</prism-table>
+<ng-template #statusCell let-row="row">
+  <span class="badge" [class]="row.status.toLowerCase()">
+    {{ row.status }}
+  </span>
+</ng-template>
 
-<div class="paginator-container">
-  <prism-paginator 
-    [totalRecords]="50" 
-    [rows]="5" 
-    (onPageChange)="onPageChange($event)">
-  </prism-paginator>
+<ng-template #nameCell let-row="row">
+  <div class="user-cell">
+    <img [src]="row.avatar || 'https://i.pravatar.cc/150?u='+row.id" class="avatar" alt="avatar" />
+    <span>{{ row.name }}</span>
+  </div>
+</ng-template>
+
+<header class="page-header">
+  <h1>Table</h1>
+  <p class="subtitle">Displays data in rows and columns with sorting and pagination.</p>
+</header>
+
+<div class="tabs">
+  <button 
+    class="tab-btn" 
+    [class.active]="activeTab() === 'examples'"
+    (click)="activeTab.set('examples')"
+  >
+    Examples
+  </button>
+  <button 
+    class="tab-btn" 
+    [class.active]="activeTab() === 'api'"
+    (click)="activeTab.set('api')"
+  >
+    API
+  </button>
 </div>
+
+@if (activeTab() === 'examples') {
+  <div class="examples-gallery">
+    
+    <!-- Section 1: Financial Ledger -->
+    <section class="example-section">
+      <h3>Financial Ledger (High Density)</h3>
+      <p>Compact view with gridlines. Amounts are color-coded.</p>
+      
+      <prism-table 
+        [data]="financeData" 
+        [columns]="financeCols" 
+        size="sm" 
+        [gridlines]="true">
+      </prism-table>
+    </section>
+
+    <!-- Section 2: Team Roster -->
+    <section class="example-section">
+      <h3>Team Roster (Comfortable)</h3>
+      <p>Striped rows with avatars and badges.</p>
+      
+      <prism-table 
+        [data]="employeeData" 
+        [columns]="employeeCols" 
+        [striped]="true" 
+        size="lg">
+      </prism-table>
+    </section>
+
+    <!-- Section 3: Inventory -->
+    <section class="example-section">
+      <h3>Inventory (Pagination)</h3>
+      <p>Standard view with pagination enabled.</p>
+      
+      <prism-table 
+        [data]="inventoryData" 
+        [columns]="inventoryCols" 
+        [paginator]="true" 
+        [rows]="5">
+      </prism-table>
+    </section>
+
+  </div>
+} @else {
+  <section class="api-section">
+    <h2>Component API</h2>
+    <p>Documentation for <code>&lt;prism-table&gt;</code> inputs.</p>
+
+    <prism-table
+      [data]="apiData"
+      [columns]="apiCols"
+      [striped]="true">
+    </prism-table>
+  </section>
+}

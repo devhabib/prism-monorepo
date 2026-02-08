@@ -1,18 +1,20 @@
-<table>
+<table [class.p-striped]="striped()" [class.p-gridlines]="gridlines()" [class.p-sm]="size() === 'sm'" [class.p-lg]="size() === 'lg'">
   <thead>
     <tr>
       @for (col of columns(); track col) {
         <th (click)="toggleSort(col.key)" [class.sortable]="col.sortable">
           {{ col.header }}
           @if (sortConfig()?.key === col.key) {
-            <span>{{ sortConfig()?.direction === 'asc' ? '↑' : '↓' }}</span>
+            <span>
+              <i [class]="sortConfig()?.direction === 'asc' ? 'ri-arrow-up-s-fill' : 'ri-arrow-down-s-fill'"></i>
+            </span>
           }
         </th>
       }
     </tr>
   </thead>
   <tbody>
-    @for (row of sortedData(); track $index) {
+    @for (row of processedData(); track $index) {
       <tr>
         @for (col of columns(); track col) {
           <td>
@@ -27,3 +29,12 @@
     }
   </tbody>
 </table>
+
+@if (paginator()) {
+  <prism-paginator 
+    [totalRecords]="filteredData().length" 
+    [rows]="rows()" 
+    [first]="first()"
+    (onPageChange)="onPageChange($event)">
+  </prism-paginator>
+}
