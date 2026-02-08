@@ -1,18 +1,9 @@
-<div class="demo-container">
-  <h1>Data Table Engine</h1>
-  <p>Headless, Signal-based, Type-safe.</p>
+<h1>Prism Data Table</h1>
 
-  <prism-table [data]="projects()" [columns]="tableCols">
-    <!-- Status Column Template -->
-    <ng-template #statusCell let-val let-row="row">
-      <span class="badge" [class]="row.status.toLowerCase()">
-        {{ row.status }}
-      </span>
-    </ng-template>
-
-    <!-- Revenue Column Template -->
-    <ng-template #revenueCell let-val>
-      {{ val | currency:'USD':'symbol':'1.0-0' }}
-    </ng-template>
-  </prism-table>
-</div>
+<prism-table [data]="mockData" [columns]="cols">
+  <ng-template #statusCell let-row="row">
+    <span class="badge" [class]="row.status.toLowerCase()">
+      {{ row.status }}
+    </span>
+  </ng-template>
+</prism-table>
