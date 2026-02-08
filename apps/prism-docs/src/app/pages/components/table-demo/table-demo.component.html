@@ -1,23 +1,16 @@
 <ng-template #amountCell let-row="row">
-  <span [class]="row.amount >= 0 ? 'text-success' : 'text-danger'">
+  <span [class]="row.amount < 0 ? 'text-danger' : 'text-success'">
     {{ row.amount | currency }}
   </span>
 </ng-template>
 
 <ng-template #statusCell let-row="row">
-  <span class="badge" [class]="row.status.toLowerCase()">
-    {{ row.status }}
-  </span>
+  <span class="badge" [class]="row.status.toLowerCase()">{{ row.status }}</span>
 </ng-template>
 
 <ng-template #nameCell let-row="row">
   <div class="user-cell">
-    <prism-avatar 
-      [image]="row.avatar" 
-      [label]="row.name.charAt(0)" 
-      shape="circle" 
-      size="md">
-    </prism-avatar>
+    <prism-avatar [image]="row.avatar" [label]="row.name.charAt(0)" shape="circle" size="md"></prism-avatar>
     <div class="user-info">
       <span class="font-bold block">{{ row.name }}</span>
       <span class="text-sm text-muted">{{ row.role }}</span>
@@ -25,102 +18,53 @@
   </div>
 </ng-template>
 
-<ng-template #productCell let-row="row">
-  <div class="product-info-cell">
-    <img [src]="row.image" class="product-image" alt="Product Image" />
-    <span class="product-name">{{ row.product }}</span>
-  </div>
+<ng-template #imageCell let-row="row">
+  <img [src]="row.image" class="product-image" alt="Product" />
 </ng-template>
 
-<header class="page-header">
-  <h1>Table</h1>
-  <p class="subtitle">Displays data in rows and columns with sorting and pagination.</p>
-</header>
-
-<div class="tabs">
-  <button 
-    class="tab-btn" 
-    [class.active]="activeTab() === 'examples'"
-    (click)="activeTab.set('examples')"
-  >
-    Examples
-  </button>
-  <button 
-    class="tab-btn" 
-    [class.active]="activeTab() === 'api'"
-    (click)="activeTab.set('api')"
-  >
-    API
-  </button>
-</div>
-
-@if (activeTab() === 'examples') {
-  <div class="examples-gallery">
-    
-    <!-- Section 1: Financial Ledger -->
-    <section class="example-section">
-      <h3>Financial Ledger (High Density)</h3>
-      <p>Compact view with gridlines. Amounts are color-coded.</p>
-      
-      <prism-table 
-        [data]="financeData" 
-        [columns]="financeCols()" 
-        [striped]="striped()" 
-        [gridlines]="gridlines()" 
-        [size]="size()">
-      </prism-table>
-      <prism-code-block 
-        [html]="financeHTML" 
-        [ts]="financeTS">
-      </prism-code-block>
-    </section>
-
-    <!-- Section 2: Team Roster -->
-    <section class="example-section">
-      <h3>Team Roster (Comfortable)</h3>
-      <p>Striped rows with avatars and badges.</p>
-      
-      <prism-table 
-        [data]="employeeData" 
-        [columns]="employeeCols()" 
-        [striped]="true" 
-        size="lg">
-      </prism-table>
-      <prism-code-block 
-        [html]="teamHTML" 
-        [ts]="teamTS">
-      </prism-code-block>
-    </section>
-
-    <!-- Section 3: Inventory -->
-    <section class="example-section">
-      <h3>Inventory (E-commerce Style)</h3>
-      <p>Standard view with combined product image and name.</p>
-      
-      <prism-table 
-        [data]="inventoryData" 
-        [columns]="inventoryCols()" 
-        [paginator]="true" 
-        [rows]="5"
-        (page)="onPageChange($event)">
-      </prism-table>
-
-      <prism-code-block 
-        [html]="inventoryHTML" 
-        [ts]="inventoryTS">
-      </prism-code-block>
-    </section>
-
+<div class="demo-container">
+  <div class="demo-header">
+    <h1>Data Table</h1>
+    <p>Displays data in rows and columns with sorting, pagination, and custom templates.</p>
   </div>
-} @else {
-  <section class="api-section">
-    <h2>Component API</h2>
-    <p>Documentation for <code>&lt;prism-table&gt;</code> inputs.</p>
 
-    <prism-table
-      [data]="apiData"
-      [columns]="apiCols"
-      [striped]="true">
-    </prism-table>
-  </section>
-}
+  <div class="tabs-nav">
+    <button (click)="activeTab.set('examples')" [class.active]="activeTab() === 'examples'">Examples</button>
+    <button (click)="activeTab.set('api')" [class.active]="activeTab() === 'api'">API</button>
+  </div>
+
+  @if (activeTab() === 'examples') {
+    
+    <div class="example-section">
+      <h3>1. Financial Ledger (Gridlines & Conditional Styling)</h3>
+      
+      <prism-table [data]="financeData" [columns]="financeCols" size="sm" [gridlines]="true" [striped]="true">
+      </prism-table>
+
+      <prism-code-block [html]="financeHTML" [ts]="financeTS"></prism-code-block>
+    </div>
+
+    <div class="example-section">
+      <h3>2. Team Roster (Avatars & Rich Content)</h3>
+      
+      <prism-table [data]="teamData" [columns]="teamCols" size="lg">
+      </prism-table>
+
+      <prism-code-block [html]="teamHTML" [ts]="teamTS"></prism-code-block>
+    </div>
+
+    <div class="example-section">
+      <h3>3. Inventory (Images, Sorting & Pagination)</h3>
+      
+      <prism-table [data]="inventoryData" [columns]="inventoryCols" [paginator]="true" [rows]="3">
+      </prism-table>
+
+      <prism-code-block [html]="inventoryHTML" [ts]="inventoryTS"></prism-code-block>
+    </div>
+
+  } @else {
+    <div class="api-placeholder">
+       <p>API Documentation Coming Soon...</p>
+    </div>
+  }
+</div>
