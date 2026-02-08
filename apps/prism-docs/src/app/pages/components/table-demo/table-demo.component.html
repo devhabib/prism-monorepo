@@ -69,7 +69,10 @@
         [gridlines]="gridlines()" 
         [size]="size()">
       </prism-table>
-      <prism-code-block [code]="financeCode"></prism-code-block>
+      <prism-code-block 
+        [html]="financeHTML" 
+        [ts]="financeTS">
+      </prism-code-block>
     </section>
 
     <!-- Section 2: Team Roster -->
@@ -83,7 +86,10 @@
         [striped]="true" 
         size="lg">
       </prism-table>
-      <prism-code-block [code]="teamCode"></prism-code-block>
+      <prism-code-block 
+        [html]="teamHTML" 
+        [ts]="teamTS">
+      </prism-code-block>
     </section>
 
     <!-- Section 3: Inventory -->
