@@ -1,8 +1,8 @@
 <table>
   <thead>
     <tr>
-      @for (col of columns(); track col.key) {
-        <th (click)="toggleSort(col.key)">
+      @for (col of columns(); track col) {
+        <th (click)="toggleSort(col.key)" [class.sortable]="col.sortable">
           {{ col.header }}
           @if (sortConfig()?.key === col.key) {
             <span>{{ sortConfig()?.direction === 'asc' ? '↑' : '↓' }}</span>
@@ -14,7 +14,7 @@
   <tbody>
     @for (row of sortedData(); track $index) {
       <tr>
-        @for (col of columns(); track col.key) {
+        @for (col of columns(); track col) {
           <td>
             @if (col.cellTemplate) {
               <ng-container *ngTemplateOutlet="col.cellTemplate; context: { $implicit: row[col.key], row: row }"></ng-container>
