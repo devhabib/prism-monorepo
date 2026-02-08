@@ -1,11 +1,10 @@
 @use '../core/variables' as v;
-@use 'sass:map';
 @use '../core/mixins' as m;
+@use 'sass:map';
 
 @mixin load-theme {
-  @include m.generate-vars(v.$primary, 'primary');
-  @include m.generate-vars(v.$semantic, 'semantic');
-
+  /* --- 1. PRIMITIVE PALETTE (Inversion) --- */
+  /* Redefine surface variables so components using them (Table, Sidebar) turn dark */
   --surface-0:   #{map.get(v.$surface, 900)};
   --surface-50:  #{map.get(v.$surface, 800)};
   --surface-100: #{map.get(v.$surface, 700)};
@@ -18,9 +17,27 @@
   --surface-800: #{map.get(v.$surface, 50)};
   --surface-900: #{map.get(v.$surface, 0)};
 
-  --bg-app:     var(--surface-800);
-  --bg-card:    var(--surface-900);
-  --text-main:  var(--surface-0);
-  --text-muted: var(--surface-400);
-  --border:     var(--surface-700);
+  /* --- 2. SEMANTIC TOKENS (The User's Core) --- */
+  
+  /* Backgrounds: Flip to Dark */
+  --bg-app: #0f172a;   /* Slate-900 (Deepest) */
+  --bg-card: #1e293b;  /* Slate-800 (Card Surface) */
+  --bg-overlay: #334155; /* Slate-700 (Dropdowns/Modals) */
+
+  /* Text: Flip to Light */
+  --text-main: #f8fafc;   /* Slate-50 (White-ish) */
+  --text-muted: #94a3b8;  /* Slate-400 (Muted Grey) */
+  --text-inverse: #0f172a; /* Slate-900 (Text on Primary Buttons) */
+
+  /* Borders: Darken them */
+  --border: #334155;      /* Slate-700 */
+  --border-light: #1e293b;
+
+  /* Primary: Adjust for Dark Mode */
+  --primary-500: #6366f1; /* Indigo-500 */
+  
+  /* Status Colors (Pastels for Dark Mode) */
+  --success: #34d399; /* Emerald-400 */
+  --warning: #fbbf24; /* Amber-400 */
+  --danger: #f87171;  /* Red-400 */
 }

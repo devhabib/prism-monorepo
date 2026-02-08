@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { PrismAvatarComponent } from '@prism-monorepo/prism-core';
+import { PrismAvatarComponent, ThemeToggleComponent } from '@prism-monorepo/prism-core';
 
 interface MenuItem {
   label: string;
@@ -12,7 +12,7 @@ interface MenuItem {
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, PrismAvatarComponent],
+  imports: [CommonModule, RouterLink, RouterLinkActive, PrismAvatarComponent, ThemeToggleComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
