@@ -8,5 +8,7 @@ export * from './lib/services/theme.service';
 export * from './lib/theme-toggle/theme-toggle.component';
 export * from './lib/services/toast.service';
 export * from './lib/toast/toast.component';
+export * from './lib/button/button.component';
+export * from './lib/input/input.directive';
 
 

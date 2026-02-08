@@ -1,0 +1,141 @@
+<div class="demo-container">
+  <div class="demo-header">
+    <h1>Form Primitives</h1>
+    <p>Foundational interaction blocks for the Prism Design System.</p>
+  </div>
+
+  <!-- Tab Navigation -->
+  <div class="demo-tabs mb-4">
+    <button class="tab-btn" [class.active]="activeTab() === 'buttons'" (click)="setTab('buttons')">Buttons</button>
+    <button class="tab-btn" [class.active]="activeTab() === 'inputs'" (click)="setTab('inputs')">Inputs & Groups</button>
+  </div>
+
+  <!-- Buttons Showcase -->
+  @if (activeTab() === 'buttons') {
+    <div class="fade-in">
+      <section class="section">
+        <h2>Button Variants</h2>
+        <div class="demo-grid">
+          <prism-button label="Primary"></prism-button>
+          <prism-button label="Secondary" variant="secondary"></prism-button>
+          <prism-button label="Outline" variant="outline"></prism-button>
+          <prism-button label="Danger" variant="danger"></prism-button>
+          <prism-button label="Text Only" variant="text"></prism-button>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Sizes & Icon Layouts</h2>
+        <div class="demo-grid">
+          <prism-button label="Small" size="sm"></prism-button>
+          <prism-button label="Medium" size="md"></prism-button>
+          <prism-button label="Large" size="lg"></prism-button>
+          <prism-button label="Settings" icon="ri-settings-line"></prism-button>
+          <prism-button label="Send Message" icon="ri-send-plane-fill" iconPos="right"></prism-button>
+          <prism-button icon="ri-notification-3-line" variant="secondary"></prism-button>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Functional States</h2>
+        <div class="demo-grid">
+          <prism-button label="Loading" [loading]="true"></prism-button>
+          <prism-button label="Disabled" [disabled]="true"></prism-button>
+          <prism-button label="Destructive Disabled" variant="danger" [disabled]="true" icon="ri-delete-bin-line"></prism-button>
+        </div>
+      </section>
+
+      <section class="mt-4">
+        <h3>Usage Guide</h3>
+        <prism-code-block [html]="buttonUsage"></prism-code-block>
+      </section>
+    </div>
+  }
+
+  <!-- Inputs Showcase -->
+  @if (activeTab() === 'inputs') {
+    <div class="fade-in">
+      <section class="section">
+        <h2>Base Input Controls</h2>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="field">
+            <label>Standard</label>
+            <input prismInput placeholder="Enter placeholder..." />
+          </div>
+          <div class="field">
+            <label>Small Variant</label>
+            <input prismInput size="sm" placeholder="Search data..." />
+          </div>
+          <div class="field">
+            <label>Validation: Success</label>
+            <input prismInput [success]="true" value="valid.email@prism.com" />
+          </div>
+          <div class="field">
+            <label>Validation: Error</label>
+            <input prismInput [error]="true" placeholder="Incorrect password" />
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Icon Decorators</h2>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="field">
+            <label>Prefix Icon</label>
+            <div class="prism-input-icon-wrapper icon-left">
+              <i class="ri-mail-line"></i>
+              <input prismInput placeholder="Email Address" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Suffix Icon</label>
+            <div class="prism-input-icon-wrapper icon-right">
+              <i class="ri-eye-off-line"></i>
+              <input prismInput type="password" placeholder="Password" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Input Grouping (Addons & Mixed)</h2>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="field">
+            <label>Prefix Addon</label>
+            <div class="prism-input-group">
+              <span class="prism-input-addon">https://</span>
+              <input prismInput placeholder="prism.design" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Mixed Group</label>
+            <div class="prism-input-group">
+              <span class="prism-input-addon">$</span>
+              <input prismInput placeholder="0.00" />
+              <span class="prism-input-addon">.00</span>
+            </div>
+          </div>
+          <div class="field">
+             <label>Prefix Button (Integrated Search)</label>
+             <div class="prism-input-group">
+               <prism-button icon="ri-search-line" variant="primary"></prism-button>
+               <input prismInput placeholder="Search components..." />
+             </div>
+          </div>
+          <div class="field">
+            <label>Action Suffix</label>
+            <div class="prism-input-group">
+              <input prismInput placeholder="Voucher Code" />
+              <prism-button label="Apply"></prism-button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-4">
+        <h3>Usage Guide</h3>
+        <prism-code-block [html]="inputUsage"></prism-code-block>
+      </section>
+    </div>
+  }
+</div>

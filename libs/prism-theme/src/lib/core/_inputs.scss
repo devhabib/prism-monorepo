@@ -1,0 +1,147 @@
+.prism-input {
+  display: inline-block;
+  width: 100%;
+  vertical-align: middle;
+  box-sizing: border-box; 
+  font-family: inherit;
+  color: var(--text-main);
+  background: var(--surface-0);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: all 0.2s;
+  outline: none;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+
+  &::placeholder { color: var(--text-muted); opacity: 0.7; }
+
+  &:focus {
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px var(--primary-100);
+    z-index: 2;
+    position: relative;
+  }
+
+  &:disabled {
+    background: var(--surface-50);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+
+  // --- Validation States ---
+  &.p-error {
+    border-color: var(--danger, #ef4444);
+    &:focus { box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15); }
+  }
+
+  &.p-success {
+    border-color: var(--success, #10b981);
+    &:focus { box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15); }
+  }
+
+  // --- SIZES ---
+  &.prism-input-sm { height: 32px; padding: 0 0.75rem; font-size: 0.75rem; border-radius: 6px; }
+  &.prism-input-md { height: 40px; padding: 0 1rem;    font-size: 0.875rem; } 
+  &.prism-input-lg { height: 48px; padding: 0 1.25rem; font-size: 1rem; }
+}
+
+// --- ICON OVERLAY SUPPORT ---
+.prism-input-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  i {
+    position: absolute;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  &.icon-left {
+    i { left: 0.75rem; }
+    .prism-input { padding-left: 2.5rem; }
+  }
+
+  &.icon-right {
+    i { right: 0.75rem; }
+    .prism-input { padding-right: 2.5rem; }
+  }
+}
+
+// --- INPUT GROUP (The Container) ---
+.prism-input-group {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+
+  // Select all interactive parts
+  > .prism-input, 
+  > .prism-input-addon, 
+  > prism-button > button, 
+  > button,
+  > .prism-input-icon-wrapper .prism-input {
+    border-radius: 0;
+    margin: 0;
+    
+    &:not(:first-child) { 
+      margin-left: -1px; 
+    }
+  }
+
+  // Handle Host Wrappers (Prism Button)
+  > prism-button {
+    display: flex;
+    flex-shrink: 0;
+    
+    &:not(:first-child) button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    &:not(:last-child) button {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  // Outer Radii for Direct Children
+  > *:first-child:not(prism-button),
+  > prism-button:first-child button {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+
+  > *:last-child:not(prism-button),
+  > prism-button:last-child button {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  // Specific handle for icon wrapper inside group
+  > .prism-input-icon-wrapper {
+     &:first-child .prism-input { border-top-left-radius: 8px; border-bottom-left-radius: 8px; }
+     &:last-child .prism-input { border-top-right-radius: 8px; border-bottom-right-radius: 8px; }
+  }
+}
+
+// --- ADDON STYLE ---
+.prism-input-addon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  background: var(--surface-50);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  
+  [data-theme="dark"] & {
+    background: var(--surface-800);
+    border-color: var(--surface-700);
+  }
+}

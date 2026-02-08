@@ -31,6 +31,13 @@ export const appRoutes: Route[] = [
           import('./pages/components/toast-demo/toast-demo.component').then(
             (m) => m.ToastDemoComponent
           ),
+      },
+      {
+        path: 'components/forms',
+        loadComponent: () =>
+          import('./pages/components/form-demo/form-demo.component').then(
+            (m) => m.FormDemoComponent
+          ),
       }
     ],
   },

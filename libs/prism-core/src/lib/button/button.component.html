@@ -1,0 +1,18 @@
+<button 
+  [disabled]="isButtonDisabled()"
+  [class]="buttonClasses()"
+>
+  @if (loading()) {
+    <i class="ri-loader-4-line p-button-loading-icon"></i>
+  } @else if (icon() && iconPos() === 'left') {
+    <i [class]="icon()" class="p-button-icon-left"></i>
+  }
+
+  @if (label()) {
+    <span class="p-button-label">{{ label() }}</span>
+  }
+
+  @if (!loading() && icon() && iconPos() === 'right') {
+    <i [class]="icon()" class="p-button-icon-right"></i>
+  }
+</button>
