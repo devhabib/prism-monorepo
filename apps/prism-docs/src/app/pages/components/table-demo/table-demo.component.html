@@ -7,3 +7,11 @@
     </span>
   </ng-template>
 </prism-table>
+
+<div class="paginator-container">
+  <prism-paginator 
+    [totalRecords]="50" 
+    [rows]="5" 
+    (onPageChange)="onPageChange($event)">
+  </prism-paginator>
+</div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PrismTableComponent, PrismColumn } from '@prism-monorepo/prism-core';
+import { PrismTableComponent, PrismColumn, PrismPaginatorComponent, PageEvent } from '@prism-monorepo/prism-core';
 
 interface DemoRow {
   id: number;
@@ -13,7 +13,7 @@ interface DemoRow {
 @Component({
   selector: 'prism-table-demo',
   standalone: true,
-  imports: [CommonModule, PrismTableComponent],
+  imports: [CommonModule, PrismTableComponent, PrismPaginatorComponent],
   templateUrl: './table-demo.component.html',
   styleUrl: './table-demo.component.scss',
 })
@@ -67,5 +67,11 @@ export class TableDemoComponent implements OnInit {
       { key: 'status', header: 'Status', cellTemplate: this.statusTemplate },
       { key: 'lastLogin', header: 'Last Login' },
     ];
+  }
+
+  onPageChange(event: PageEvent) {
+    console.log('Page Changed:', event);
+    // In a real app, we would slice the data here or fetch new data.
+    // For demo purposes, we just log it.
   }
 }
