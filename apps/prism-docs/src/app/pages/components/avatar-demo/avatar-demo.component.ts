@@ -1,11 +1,11 @@
 import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PrismAvatarComponent, PrismTableComponent, PrismColumn, PrismCodeBlockComponent } from '@prism-monorepo/prism-core';
+import { PrismAvatarComponent, PrismCodeBlockComponent, ApiTableComponent, ApiDoc } from '@prism-monorepo/prism-core';
 
 @Component({
   selector: 'app-avatar-demo',
   standalone: true,
-  imports: [CommonModule, PrismAvatarComponent, PrismTableComponent, PrismCodeBlockComponent],
+  imports: [CommonModule, PrismAvatarComponent, PrismCodeBlockComponent, ApiTableComponent],
   styleUrl: './avatar-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
@@ -71,11 +71,7 @@ import { PrismAvatarComponent, PrismTableComponent, PrismColumn, PrismCodeBlockC
     } @else {
       <section class="api-section">
         <h2>Component API</h2>
-        <prism-table
-          [data]="apiData"
-          [columns]="apiCols"
-          [striped]="true">
-        </prism-table>
+        <prism-api-table [data]="apiData" />
       </section>
     }
   `
@@ -94,17 +90,10 @@ export class AvatarDemoComponent {
 <prism-avatar label="AB" size="lg" style="background-color: #3b82f6;"></prism-avatar>`
   };
 
-  readonly apiData: {name: string; type: string; default: string; description: string}[] = [
+  readonly apiData: ApiDoc[] = [
     { name: 'image', type: 'string | null', default: 'null', description: 'URL of the image to display.' },
     { name: 'label', type: 'string | null', default: 'null', description: 'Text to display if no image (e.g. initials).' },
     { name: 'size', type: "'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Size of the avatar.' },
     { name: 'shape', type: "'circle' | 'square'", default: "'circle'", description: 'Shape of the avatar.' },
-  ];
-
-  readonly apiCols: PrismColumn<{name: string; type: string; default: string; description: string}>[] = [
-    { key: 'name', header: 'Name' },
-    { key: 'type', header: 'Type' },
-    { key: 'default', header: 'Default' },
-    { key: 'description', header: 'Description' },
   ];
 }

@@ -1,0 +1,72 @@
+:host {
+  display: block;
+  margin-top: 2rem;
+}
+
+.api-table-container {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.api-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+
+  thead {
+    background: var(--surface-50);
+    
+    th {
+      text-align: left;
+      padding: 0.875rem 1rem;
+      font-weight: 600;
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid var(--border);
+      transition: background-color 0.15s;
+
+      &:hover {
+        background: var(--surface-50);
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    td {
+      padding: 1rem;
+      vertical-align: top;
+
+      code {
+        font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+        font-size: 0.85rem;
+        padding: 0.125rem 0.375rem;
+        border-radius: 3px;
+        background: var(--surface-100);
+        
+        &.prop-name {
+          color: var(--primary-500);
+          font-weight: 600;
+        }
+
+        &.prop-type {
+          color: var(--secondary-500);
+        }
+
+        &.prop-default {
+          color: var(--text-muted);
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { Component, TemplateRef, signal, effect, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PrismTableComponent, PrismColumn, PrismCodeBlockComponent, PrismAvatarComponent } from '@prism-monorepo/prism-core';
+import { PrismTableComponent, PrismColumn, PrismCodeBlockComponent, PrismAvatarComponent, ApiTableComponent, ApiDoc } from '@prism-monorepo/prism-core';
 
 type Finance = { id: string; date: string; amount: number; status: string; }
 type Employee = { id: string; name: string; role: string; status: string; avatar: string; }
@@ -10,7 +10,7 @@ type Product = { sku: string; name: string; category: string; stock: number; pri
 @Component({
   selector: 'prism-table-demo',
   standalone: true,
-  imports: [CommonModule, PrismTableComponent, PrismCodeBlockComponent, PrismAvatarComponent, ReactiveFormsModule],
+  imports: [CommonModule, PrismTableComponent, PrismCodeBlockComponent, PrismAvatarComponent, ReactiveFormsModule, ApiTableComponent],
   templateUrl: './table-demo.component.html',
   styleUrl: './table-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -171,4 +171,14 @@ ngAfterViewInit() {
     ];
   });
 }`;
+
+  readonly apiData: ApiDoc[] = [
+    { name: 'data', type: 'T[]', default: '[]', description: 'Array of data to display in the table.' },
+    { name: 'columns', type: 'PrismColumn<T>[]', default: '[]', description: 'Column definitions including keys, headers, and optional templates.' },
+    { name: 'striped', type: 'boolean', default: 'false', description: 'Enable alternating row background colors.' },
+    { name: 'gridlines', type: 'boolean', default: 'false', description: 'Show borders between cells.' },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Size of the table rows and padding.' },
+    { name: 'paginator', type: 'boolean', default: 'false', description: 'Enable pagination controls.' },
+    { name: 'rows', type: 'number', default: '10', description: 'Number of rows per page when paginator is enabled.' },
+  ];
 }

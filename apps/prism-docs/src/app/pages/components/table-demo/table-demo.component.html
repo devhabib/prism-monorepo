@@ -63,8 +63,9 @@
     </div>
 
   } @else {
-    <div class="api-placeholder">
-       <p>API Documentation Coming Soon...</p>
-    </div>
+    <section class="api-section">
+      <h2>Component API</h2>
+      <prism-api-table [data]="apiData" />
+    </section>
   }
 </div>

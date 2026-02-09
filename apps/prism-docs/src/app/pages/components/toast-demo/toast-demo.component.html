@@ -4,20 +4,34 @@
     <p>Contextual feedback messages for user actions.</p>
   </div>
 
-  <div class="example-section">
-    <h3>Simple Notifications</h3>
-    <p>Trigger different severity levels to notify users.</p>
-    
-    <div class="demo-actions">
-      <button class="btn btn-success" (click)="showSuccess()">Success Toast</button>
-      <button class="btn btn-warning" (click)="showWarning()">Warning Toast</button>
-      <button class="btn btn-danger" (click)="showDanger()">Danger Toast</button>
-      <button class="btn btn-info" (click)="showInfo()">Info Toast</button>
-    </div>
+  <!-- Tab Navigation -->
+  <div class="demo-tabs mb-4">
+    <button class="tab-btn" [class.active]="activeTab() === 'examples'" (click)="activeTab.set('examples')">Examples</button>
+    <button class="tab-btn" [class.active]="activeTab() === 'api'" (click)="activeTab.set('api')">API</button>
   </div>
 
-  <div class="example-section">
-    <h3>Usage</h3>
-    <prism-code-block [ts]="usageTS" [html]="usageHTML"></prism-code-block>
-  </div>
+  @if (activeTab() === 'examples') {
+    <div class="example-section">
+      <h3>Simple Notifications</h3>
+      <p>Trigger different severity levels to notify users.</p>
+      
+      <div class="demo-actions">
+        <button class="btn btn-success" (click)="showSuccess()">Success Toast</button>
+        <button class="btn btn-warning" (click)="showWarning()">Warning Toast</button>
+        <button class="btn btn-danger" (click)="showDanger()">Danger Toast</button>
+        <button class="btn btn-info" (click)="showInfo()">Info Toast</button>
+      </div>
+    </div>
+
+    <div class="example-section">
+      <h3>Usage</h3>
+      <prism-code-block [ts]="usageTS" [html]="usageHTML"></prism-code-block>
+    </div>
+  } @else {
+    <section class="api-section">
+      <h2>ToastService API</h2>
+      <prism-api-table [data]="apiData" />
+    </section>
+  }
 </div>
+

@@ -10,5 +10,7 @@ export * from './lib/services/toast.service';
 export * from './lib/toast/toast.component';
 export * from './lib/button/button.component';
 export * from './lib/input/input.directive';
+export * from './lib/api-table/api-table.component';
+
 
 

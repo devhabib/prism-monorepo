@@ -78,6 +78,9 @@
     padding: 4px 10px;
     border-radius: 4px;
     transition: all 0.2s;
+    /* Force small size - prevent global button inheritance */
+    height: auto;
+    min-height: 0;
 
     &:hover {
       background-color: rgba(255, 255, 255, 0.1);

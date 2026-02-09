@@ -8,6 +8,7 @@
   <div class="demo-tabs mb-4">
     <button class="tab-btn" [class.active]="activeTab() === 'buttons'" (click)="setTab('buttons')">Buttons</button>
     <button class="tab-btn" [class.active]="activeTab() === 'inputs'" (click)="setTab('inputs')">Inputs & Groups</button>
+    <button class="tab-btn" [class.active]="activeTab() === 'api'" (click)="setTab('api')">API</button>
   </div>
 
   <!-- Buttons Showcase -->
@@ -135,6 +136,21 @@
       <section class="mt-4">
         <h3>Usage Guide</h3>
         <prism-code-block [html]="inputUsage"></prism-code-block>
+      </section>
+    </div>
+  }
+
+  <!-- API Documentation -->
+  @if (activeTab() === 'api') {
+    <div class="fade-in">
+      <section class="section">
+        <h2>Button Component API</h2>
+        <prism-api-table [data]="buttonApiData" />
+      </section>
+
+      <section class="section mt-6">
+        <h2>Input Directive API</h2>
+        <prism-api-table [data]="inputApiData" />
       </section>
     </div>
   }

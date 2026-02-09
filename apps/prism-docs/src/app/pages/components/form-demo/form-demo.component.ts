@@ -1,17 +1,17 @@
 import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PrismButtonComponent, PrismInputDirective, PrismCodeBlockComponent } from '@prism-monorepo/prism-core';
+import { PrismButtonComponent, PrismInputDirective, PrismCodeBlockComponent, ApiTableComponent, ApiDoc } from '@prism-monorepo/prism-core';
 
 @Component({
   selector: 'prism-form-demo',
   standalone: true,
-  imports: [CommonModule, PrismButtonComponent, PrismInputDirective, PrismCodeBlockComponent],
+  imports: [CommonModule, PrismButtonComponent, PrismInputDirective, PrismCodeBlockComponent, ApiTableComponent],
   templateUrl: './form-demo.component.html',
   styleUrl: './form-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormDemoComponent {
-  readonly activeTab = signal<'buttons' | 'inputs'>('buttons');
+  readonly activeTab = signal<'buttons' | 'inputs' | 'api'>('buttons');
 
   buttonUsage = `<!-- Variants -->
 <prism-button label="Primary" variant="primary"></prism-button>
@@ -47,7 +47,23 @@ export class FormDemoComponent {
   <input prismInput placeholder="Search everything..." />
 </div>`;
 
-  setTab(tab: 'buttons' | 'inputs'): void {
+  setTab(tab: 'buttons' | 'inputs' | 'api'): void {
     this.activeTab.set(tab);
   }
+
+  readonly buttonApiData: ApiDoc[] = [
+    { name: 'label', type: 'string', default: "''", description: 'Text to display inside the button.' },
+    { name: 'variant', type: "'primary' | 'secondary' | 'outline' | 'danger' | 'text'", default: "'primary'", description: 'Visual style of the button.' },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Size of the button.' },
+    { name: 'icon', type: 'string', default: "''", description: 'Remix Icon class name to display.' },
+    { name: 'iconPos', type: "'left' | 'right'", default: "'left'", description: 'Position of the icon relative to label.' },
+    { name: 'loading', type: 'boolean', default: 'false', description: 'Shows loading spinner and disables interaction.' },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the button.' },
+  ];
+
+  readonly inputApiData: ApiDoc[] = [
+    { name: 'size', type: "'sm' | 'md'", default: "'md'", description: 'Size of the input field.' },
+    { name: 'error', type: 'boolean', default: 'false', description: 'Applies error styling to indicate validation failure.' },
+    { name: 'success', type: 'boolean', default: 'false', description: 'Applies success styling to indicate validation passed.' },
+  ];
 }
