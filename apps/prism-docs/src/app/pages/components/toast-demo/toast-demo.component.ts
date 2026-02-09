@@ -8,28 +8,7 @@ import { ToastService, PrismCodeBlockComponent, ApiTableComponent, ApiDoc } from
   imports: [CommonModule, PrismCodeBlockComponent, ApiTableComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './toast-demo.component.html',
-  styles: [`
-    .demo-actions {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-    }
-    .btn {
-      padding: 0.6rem 1.2rem;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: all 0.2s;
-    }
-    .btn-success { background: var(--success); color: white; }
-    .btn-warning { background: var(--warning); color: white; }
-    .btn-danger { background: var(--danger); color: white; }
-    .btn-info { background: var(--primary-500); color: white; }
-    
-    .btn:hover { opacity: 0.9; transform: translateY(-1px); }
-  `]
+  styleUrl: './toast-demo.component.scss',
 })
 export class ToastDemoComponent {
   readonly toast = inject(ToastService);
