@@ -38,6 +38,13 @@ export const appRoutes: Route[] = [
           import('./pages/components/form-demo/form-demo.component').then(
             (m) => m.FormDemoComponent
           ),
+      },
+      {
+        path: 'components/empty',
+        loadComponent: () =>
+          import('./pages/components/empty-demo/empty-demo.component').then(
+            (m) => m.EmptyDemoComponent
+          ),
       }
     ],
   },

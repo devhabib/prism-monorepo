@@ -1,17 +1,62 @@
 import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PrismButtonComponent, PrismInputDirective, PrismCodeBlockComponent, ApiTableComponent, ApiDoc } from '@prism-monorepo/prism-core';
+import { 
+  PrismButtonComponent, 
+  PrismInputDirective, 
+  PrismCodeBlockComponent, 
+  ApiTableComponent, 
+  ApiDoc,
+  PrismCheckboxComponent,
+  PrismSelectComponent,
+  SelectOption
+} from '@prism-monorepo/prism-core';
 
 @Component({
   selector: 'prism-form-demo',
   standalone: true,
-  imports: [CommonModule, PrismButtonComponent, PrismInputDirective, PrismCodeBlockComponent, ApiTableComponent],
+  imports: [
+    CommonModule, 
+    PrismButtonComponent, 
+    PrismInputDirective, 
+    PrismCodeBlockComponent, 
+    ApiTableComponent,
+    PrismCheckboxComponent,
+    PrismSelectComponent
+  ],
   templateUrl: './form-demo.component.html',
   styleUrl: './form-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormDemoComponent {
-  readonly activeTab = signal<'buttons' | 'inputs' | 'api'>('buttons');
+  readonly activeTab = signal<'buttons' | 'inputs' | 'checks' | 'selects' | 'api'>('buttons');
+
+  // Checkbox/Radio state
+  checkbox1 = signal(false);
+  checkbox2 = signal(true);
+  checkboxDisabled = signal(true);
+  radioValue = signal('option1');
+
+  // Select state
+  simpleSelect = signal(null);
+  customSelect = signal(null);
+  searchableSelect = signal(null);
+  multiSelect = signal<any[]>([]);
+
+  // Select options
+  readonly colorOptions: SelectOption[] = [
+    { label: 'Red', value: 'red' },
+    { label: 'Blue', value: 'blue' },
+    { label: 'Green', value: 'green' },
+  ];
+
+  readonly skillOptions: SelectOption[] = [
+    { label: 'Angular', value: 'angular' },
+    { label: 'React', value: 'react' },
+    { label: 'Vue', value: 'vue' },
+    { label: 'Svelte', value: 'svelte' },
+    { label: 'TypeScript', value: 'typescript' },
+    { label: 'JavaScript', value: 'javascript' },
+  ];
 
   buttonUsage = `<!-- Variants -->
 <prism-button label="Primary" variant="primary"></prism-button>
@@ -47,7 +92,29 @@ export class FormDemoComponent {
   <input prismInput placeholder="Search everything..." />
 </div>`;
 
-  setTab(tab: 'buttons' | 'inputs' | 'api'): void {
+  checkboxUsage = `<prism-checkbox label="Subscribe" [(checked)]="checked" />
+<prism-checkbox label="Disabled" [disabled]="true" />`;
+
+  radioUsage = `<prism-checkbox 
+  type="radio" 
+  label="Option 1" 
+  [checked]="selected === '1'"
+  (checkedChange)="selected = '1'" />`;
+
+  selectUsage = `<!-- Single Select -->
+<prism-select 
+  [options]="options" 
+  placeholder="Choose one"
+  [(value)]="value" />
+
+<!-- Searchable Multi-Select -->
+<prism-select 
+  [options]="options" 
+  [searchable]="true"
+  [multiple]="true"
+  [(value)]="values" />`;
+
+  setTab(tab: 'buttons' | 'inputs' | 'checks' | 'selects' | 'api'): void {
     this.activeTab.set(tab);
   }
 
@@ -65,5 +132,21 @@ export class FormDemoComponent {
     { name: 'size', type: "'sm' | 'md'", default: "'md'", description: 'Size of the input field.' },
     { name: 'error', type: 'boolean', default: 'false', description: 'Applies error styling to indicate validation failure.' },
     { name: 'success', type: 'boolean', default: 'false', description: 'Applies success styling to indicate validation passed.' },
+  ];
+
+  readonly checkboxApiData: ApiDoc[] = [
+    { name: 'label', type: 'string', default: "''", description: 'Text to display next to the control.' },
+    { name: 'type', type: "'checkbox' | 'radio'", default: "'checkbox'", description: 'Specifies the type of control.' },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables interaction.' },
+    { name: 'checked', type: 'boolean', default: 'false', description: 'Two-way binding for selection state.' },
+  ];
+
+  readonly selectApiData: ApiDoc[] = [
+    { name: 'options', type: 'SelectOption[]', default: '[]', description: 'Array of data objects with label and value.' },
+    { name: 'placeholder', type: 'string', default: "'Select...'", description: 'Placeholder when no value is selected.' },
+    { name: 'mode', type: "'native' | 'custom'", default: "'custom'", description: 'Use native browser select or custom dropdown.' },
+    { name: 'searchable', type: 'boolean', default: 'false', description: 'Enable internal search/filter.' },
+    { name: 'multiple', type: 'boolean', default: 'false', description: 'Enable multi-selection with tags.' },
+    { name: 'closeOnOutsideClick', type: 'boolean', default: 'true', description: 'Dropdown closes when clicking outside.' },
   ];
 }

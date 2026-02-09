@@ -1,7 +1,15 @@
 import { Component, TemplateRef, signal, effect, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PrismTableComponent, PrismColumn, PrismCodeBlockComponent, PrismAvatarComponent, ApiTableComponent, ApiDoc } from '@prism-monorepo/prism-core';
+import { 
+  PrismTableComponent, 
+  PrismColumn, 
+  PrismCodeBlockComponent, 
+  PrismAvatarComponent, 
+  ApiTableComponent, 
+  ApiDoc,
+  PrismEmptyComponent
+} from '@prism-monorepo/prism-core';
 
 type Finance = { id: string; date: string; amount: number; status: string; }
 type Employee = { id: string; name: string; role: string; status: string; avatar: string; }
@@ -10,7 +18,15 @@ type Product = { sku: string; name: string; category: string; stock: number; pri
 @Component({
   selector: 'prism-table-demo',
   standalone: true,
-  imports: [CommonModule, PrismTableComponent, PrismCodeBlockComponent, PrismAvatarComponent, ReactiveFormsModule, ApiTableComponent],
+  imports: [
+    CommonModule, 
+    PrismTableComponent, 
+    PrismCodeBlockComponent, 
+    PrismAvatarComponent, 
+    ReactiveFormsModule, 
+    ApiTableComponent,
+    PrismEmptyComponent
+  ],
   templateUrl: './table-demo.component.html',
   styleUrl: './table-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -49,6 +65,23 @@ export class TableDemoComponent {
     { sku: 'HP-300', name: 'Headset', category: 'Audio', stock: 20, price: 199, image: 'https://placehold.co/100x100/333/fff?text=Headset' },
   ];
   inventoryCols: PrismColumn<Product>[] = [];
+
+  // --- 4. Selection Examples ---
+  userSelectionData: Employee[] = [
+    { id: '1', name: 'Alice Johnson', role: 'Engineer', status: 'Active', avatar: 'https://i.pravatar.cc/150?u=alice' },
+    { id: '2', name: 'Bob Williams', role: 'Designer', status: 'Active', avatar: 'https://i.pravatar.cc/150?u=bob' },
+    { id: '3', name: 'Charlie Brown', role: 'Manager', status: 'Offline', avatar: 'https://i.pravatar.cc/150?u=charlie' },
+  ];
+  userCols: PrismColumn<Employee>[] = [
+    { key: 'name', header: 'Name' },
+    { key: 'role', header: 'Role' },
+    { key: 'status', header: 'Status' },
+  ];
+  singleSelection = signal<any>(null);
+  multipleSelection = signal<any[]>([]);
+
+  // Empty state data
+  emptyTableData = signal<any[]>([]);
 
   constructor() {
     // Initialize columns after templates are available using effect

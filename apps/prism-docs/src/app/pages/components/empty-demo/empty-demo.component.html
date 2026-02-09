@@ -1,0 +1,155 @@
+<div class="demo-container">
+  <div class="demo-header">
+    <h1>Empty State</h1>
+    <p>Display placeholders for empty data sets with icons, illustrations, and call-to-actions.</p>
+  </div>
+
+  <!-- Tab Navigation -->
+  <div class="demo-tabs mb-4">
+    <button 
+      class="tab-btn" 
+      [class.active]="activeTab() === 'overview'" 
+      (click)="setActiveTab('overview')">
+      Overview
+    </button>
+    <button 
+      class="tab-btn" 
+      [class.active]="activeTab() === 'variations'" 
+      (click)="setActiveTab('variations')">
+      Variations
+    </button>
+    <button 
+      class="tab-btn" 
+      [class.active]="activeTab() === 'api'" 
+      (click)="setActiveTab('api')">
+      API
+    </button>
+  </div>
+
+  <!-- Content -->
+  @if (activeTab() === 'overview') {
+    <div class="fade-in">
+      <section class="demo-section">
+        <h2>Default State</h2>
+        <p>The standard combination of a descriptive icon, title, and optional description.</p>
+        <div class="demo-preview">
+          <prism-empty 
+            title="No Records Found" 
+            description="We couldn't find any items matching your current view." 
+          />
+        </div>
+      </section>
+    </div>
+  }
+
+  @if (activeTab() === 'variations') {
+    <div class="fade-in">
+      <section class="demo-section">
+        <h2>Icon Variations</h2>
+        <div class="demo-grid">
+          <prism-empty 
+            title="Inbox Zero" 
+            description="You have no new messages." 
+          />
+          <prism-empty 
+            icon="ri-folder-open-line"
+            title="No Files" 
+            description="Upload your first document to get started." 
+          />
+          <prism-empty 
+            icon="ri-search-line"
+            title="No Results" 
+            description="Try adjusting your filters or search term." 
+          />
+        </div>
+      </section>
+
+      <section class="demo-section">
+        <h2>Actions Integration</h2>
+        <p>Project custom buttons into the empty state to guide user next steps.</p>
+        <div class="demo-preview">
+          <prism-empty 
+            icon="ri-add-circle-line"
+            title="First Step" 
+            description="Create your first project to start tracking your progress.">
+            <prism-button label="Create Project" icon="ri-add-line" />
+            <prism-button label="Import Data" variant="outline" />
+          </prism-empty>
+        </div>
+      </section>
+
+      <section class="demo-section">
+        <h2>Custom Illustrations</h2>
+        <p>Use images for a more vibrant empty state experience.</p>
+        <div class="demo-preview">
+          <prism-empty 
+            image="https://illustrations.popsy.co/gray/crashed-error.svg" 
+            title="Something Went Wrong" 
+            description="We're having trouble connecting to the server.">
+            <prism-button label="Retry Now" />
+          </prism-empty>
+        </div>
+      </section>
+    </div>
+  }
+
+  @if (activeTab() === 'api') {
+    <div class="fade-in">
+      <section class="demo-section">
+        <h2>Component API</h2>
+        
+        <div class="api-table">
+          <h3>Inputs</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>icon</code></td>
+                <td><code>string</code></td>
+                <td><code>'ri-inbox-2-line'</code></td>
+                <td>RemixIcon class. Hidden if <code>image</code> is set.</td>
+              </tr>
+              <tr>
+                <td><code>image</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td>Custom illustration URL. Precedes <code>icon</code>.</td>
+              </tr>
+              <tr>
+                <td><code>title</code></td>
+                <td><code>string</code></td>
+                <td><code>'No Data'</code></td>
+                <td>Main bold heading.</td>
+              </tr>
+              <tr>
+                <td><code>description</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td>Sub-text below the title.</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <h3 class="mt-4">Content Projection</h3>
+          <p>The <code>prism-empty</code> component supports projecting buttons or other components into its actions area.</p>
+        </div>
+
+        <div class="usage-example">
+          <h3>Usage Example</h3>
+          <pre><code>&lt;prism-empty 
+  icon="ri-search-line"
+  title="No Results"&gt;
+  &lt;prism-button label="Reset" /&gt;
+&lt;/prism-empty&gt;</code></pre>
+        </div>
+      </section>
+    </div>
+  }
+</div>

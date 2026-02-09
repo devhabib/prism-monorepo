@@ -12,5 +12,11 @@ export * from './lib/button/button.component';
 export * from './lib/input/input.directive';
 export * from './lib/api-table/api-table.component';
 
+// Form Primitives
+export * from './lib/checkbox/checkbox.component';
+export * from './lib/select/select.component';
 
-
+// Visual Helpers
+export * from './lib/badge/badge.component';
+export * from './lib/tag/tag.component';
+export * from './lib/empty/empty.component';

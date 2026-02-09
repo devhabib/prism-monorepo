@@ -57,3 +57,13 @@ td {
 tr:hover td {
   background-color: var(--surface-50); // Row highlight effect
 }
+
+// Selection styles
+.prism-table__selection-cell {
+  width: 48px;
+  text-align: center;
+}
+
+.prism-table__row--selected td {
+  background-color: var(--color-primary-subtle) !important;
+}

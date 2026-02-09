@@ -26,6 +26,7 @@ export class SidebarComponent {
         { label: 'Avatar', route: '/components/avatar' },
         { label: 'Toast', route: '/components/toast' },
         { label: 'Forms', route: '/components/forms' },
+        { label: 'Empty', route: '/components/empty' },
       ],
     },
   ];

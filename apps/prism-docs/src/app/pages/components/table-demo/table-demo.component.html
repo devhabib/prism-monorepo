@@ -62,6 +62,57 @@
       <prism-code-block [html]="inventoryHTML" [ts]="inventoryTS"></prism-code-block>
     </div>
 
+    <div class="example-section">
+      <h3>4. Single Row Selection</h3>
+      @if (singleSelection()) {
+        <p class="mt-2 mb-2 text-info">
+          Selected: <strong>{{ singleSelection().name }}</strong> ({{ singleSelection().role }})
+        </p>
+      } @else {
+        <p class="mt-2 mb-2 text-muted">No row selected. Click a row to select.</p>
+      }
+      
+      <prism-table 
+        [data]="userSelectionData" 
+        [columns]="userCols"
+        selectionMode="single"
+        dataKey="id"
+        [(selection)]="singleSelection">
+      </prism-table>
+    </div>
+
+    <div class="example-section">
+      <h3>5. Multiple Row Selection</h3>
+      <p class="mt-2 mb-2">
+        Selected Count: <strong>{{ multipleSelection().length }}</strong>
+      </p>
+      
+      <prism-table 
+        [data]="userSelectionData" 
+        [columns]="userCols"
+        selectionMode="multiple"
+        dataKey="id"
+        [(selection)]="multipleSelection">
+      </prism-table>
+    </div>
+
+    <div class="example-section">
+      <h3>6. Empty State</h3>
+      
+      @if (emptyTableData().length === 0) {
+        <prism-empty 
+          icon="ri-inbox-2-line"
+          title="No Data Available"
+          description="This table is empty. Try adding some data to see it in action.">
+        </prism-empty>
+      } @else {
+        <prism-table 
+          [data]="emptyTableData()" 
+          [columns]="userCols">
+        </prism-table>
+      }
+    </div>
+
   } @else {
     <section class="api-section">
       <h2>Component API</h2>

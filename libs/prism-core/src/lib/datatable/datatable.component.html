@@ -1,6 +1,15 @@
 <table [class.p-striped]="striped()" [class.p-gridlines]="gridlines()" [class.p-sm]="size() === 'sm'" [class.p-lg]="size() === 'lg'">
   <thead>
     <tr>
+      @if (selectionMode()) {
+        <th class="prism-table__selection-cell">
+          @if (selectionMode() === 'multiple') {
+            <prism-checkbox 
+              [checked]="isAllSelected()"
+              (checkedChange)="toggleSelectAll()" />
+          }
+        </th>
+      }
       @for (col of columns(); track col) {
         <th (click)="toggleSort(col.key)" [class.sortable]="col.sortable">
           {{ col.header }}
@@ -15,7 +24,15 @@
   </thead>
   <tbody>
     @for (row of processedData(); track $index) {
-      <tr>
+      <tr [class.prism-table__row--selected]="isSelected(row)" (click)="toggleRowSelection(row)">
+        @if (selectionMode()) {
+          <td class="prism-table__selection-cell">
+            <prism-checkbox 
+              [type]="selectionMode() === 'single' ? 'radio' : 'checkbox'"
+              [checked]="isSelected(row)"
+              (checkedChange)="toggleRowSelection(row)" />
+          </td>
+        }
         @for (col of columns(); track col) {
           <td>
             @if (col.cellTemplate) {

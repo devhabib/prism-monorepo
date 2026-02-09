@@ -8,6 +8,8 @@
   <div class="demo-tabs mb-4">
     <button class="tab-btn" [class.active]="activeTab() === 'buttons'" (click)="setTab('buttons')">Buttons</button>
     <button class="tab-btn" [class.active]="activeTab() === 'inputs'" (click)="setTab('inputs')">Inputs & Groups</button>
+    <button class="tab-btn" [class.active]="activeTab() === 'checks'" (click)="setTab('checks')">Checks</button>
+    <button class="tab-btn" [class.active]="activeTab() === 'selects'" (click)="setTab('selects')">Selects</button>
     <button class="tab-btn" [class.active]="activeTab() === 'api'" (click)="setTab('api')">API</button>
   </div>
 
@@ -140,6 +142,121 @@
     </div>
   }
 
+  <!-- Checks Showcase -->
+  @if (activeTab() === 'checks') {
+    <div class="fade-in">
+      <section class="section">
+        <h2>Checkboxes</h2>
+        <div class="demo-grid">
+          <prism-checkbox label="Unchecked" [(checked)]="checkbox1" />
+          <prism-checkbox label="Checked" [(checked)]="checkbox2" />
+          <prism-checkbox label="Disabled" [disabled]="true" [(checked)]="checkboxDisabled" />
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Radio Buttons</h2>
+        <p class="mb-2 text-muted">Selected: {{ radioValue() }}</p>
+        <div class="demo-grid">
+          <prism-checkbox 
+            type="radio" 
+            label="Option 1" 
+            [checked]="radioValue() === 'option1'"
+            (checkedChange)="radioValue.set('option1')" />
+          <prism-checkbox 
+            type="radio" 
+            label="Option 2" 
+            [checked]="radioValue() === 'option2'"
+            (checkedChange)="radioValue.set('option2')" />
+          <prism-checkbox 
+            type="radio" 
+            label="Option 3" 
+            [checked]="radioValue() === 'option3'"
+            (checkedChange)="radioValue.set('option3')" />
+        </div>
+      </section>
+
+      <section class="mt-4">
+        <h3>Usage Guide</h3>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <h4>Checkbox</h4>
+            <prism-code-block [html]="checkboxUsage"></prism-code-block>
+          </div>
+          <div>
+            <h4>Radio</h4>
+            <prism-code-block [html]="radioUsage"></prism-code-block>
+          </div>
+        </div>
+      </section>
+    </div>
+  }
+
+  <!-- Selects Showcase -->
+  @if (activeTab() === 'selects') {
+    <div class="fade-in">
+      <section class="section">
+        <h2>Native Select</h2>
+        <div class="field">
+          <label>Browser Default</label>
+          <prism-select 
+            mode="native" 
+            [options]="colorOptions" 
+            placeholder="Choose a color"
+            [(value)]="simpleSelect" />
+          <p class="text-sm text-muted mt-1">Selected: {{ simpleSelect() || 'None' }}</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Custom Select</h2>
+        <div class="field">
+          <label>Styled Dropdown</label>
+          <prism-select 
+            mode="custom" 
+            [options]="colorOptions" 
+            placeholder="Choose a color"
+            [(value)]="customSelect" />
+          <p class="text-sm text-muted mt-1">Selected: {{ customSelect() || 'None' }}</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Searchable Select</h2>
+        <div class="field">
+          <label>With Filter Input</label>
+          <prism-select 
+            mode="custom" 
+            [searchable]="true"
+            [options]="skillOptions" 
+            placeholder="Search skills..."
+            [(value)]="searchableSelect" />
+          <p class="text-sm text-muted mt-1">Selected: {{ searchableSelect() || 'None' }}</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Multi-Select with Tags</h2>
+        <div class="field">
+          <label>Choose Skills</label>
+          <prism-select 
+            mode="custom" 
+            [multiple]="true"
+            [searchable]="true"
+            [options]="skillOptions" 
+            placeholder="Select multiple..."
+            [(value)]="multiSelect" />
+          <p class="text-sm text-muted mt-1">Selected Count: {{ multiSelect().length }}</p>
+        </div>
+      </section>
+
+      <section class="mt-4">
+        <h3>Usage Guide</h3>
+        <prism-code-block [html]="selectUsage"></prism-code-block>
+      </section>
+    </div>
+  }
+
   <!-- API Documentation -->
   @if (activeTab() === 'api') {
     <div class="fade-in">
@@ -151,6 +268,16 @@
       <section class="section mt-6">
         <h2>Input Directive API</h2>
         <prism-api-table [data]="inputApiData" />
+      </section>
+
+      <section class="section mt-6">
+        <h2>Checkbox & Radio API</h2>
+        <prism-api-table [data]="checkboxApiData" />
+      </section>
+
+      <section class="section mt-6">
+        <h2>Select Component API</h2>
+        <prism-api-table [data]="selectApiData" />
       </section>
     </div>
   }
