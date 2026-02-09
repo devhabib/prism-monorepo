@@ -1,12 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { ToastService } from '../services/toast.service';
+import { ToastService, Toast } from '../services/toast.service';
 
 @Component({
   selector: 'prism-toast',
   standalone: true,
   imports: [CommonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="toast-container">
       <div 
@@ -127,9 +128,9 @@ import { ToastService } from '../services/toast.service';
   ]
 })
 export class ToastComponent {
-  toastService = inject(ToastService);
+  readonly toastService = inject(ToastService);
 
-  trackById(index: number, item: any) {
+  trackById(index: number, item: Toast): number {
     return item.id;
   }
 

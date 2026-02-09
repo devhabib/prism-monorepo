@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, input, signal, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './avatar.component.html',
   styleUrl: './avatar.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   host: {
     '[class.p-avatar]': 'true',
     '[class.p-avatar-circle]': 'shape() === "circle"',

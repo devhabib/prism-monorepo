@@ -1,4 +1,4 @@
-import { Component, input, signal, computed } from '@angular/core';
+import { Component, input, signal, computed, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './code-block.component.html',
   styleUrl: './code-block.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class PrismCodeBlockComponent {
   // Single code input (legacy)

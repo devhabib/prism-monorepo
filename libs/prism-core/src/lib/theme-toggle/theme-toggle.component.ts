@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from '../services/theme.service';
 
@@ -6,6 +6,7 @@ import { ThemeService } from '../services/theme.service';
   selector: 'prism-theme-toggle',
   standalone: true,
   imports: [CommonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <button 
       class="theme-toggle" 
@@ -47,5 +48,5 @@ import { ThemeService } from '../services/theme.service';
   `]
 })
 export class ThemeToggleComponent {
-  themeService = inject(ThemeService);
+  readonly themeService = inject(ThemeService);
 }

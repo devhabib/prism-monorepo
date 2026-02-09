@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core';
 
 export type ToastSeverity = 'success' | 'warning' | 'danger' | 'info';
 
-export interface Toast {
+export type Toast = {
   id: number;
   message: string;
   severity: ToastSeverity;
@@ -14,7 +14,7 @@ export interface Toast {
 })
 export class ToastService {
   private nextId = 0;
-  toasts = signal<Toast[]>([]);
+  readonly toasts = signal<Toast[]>([]);
 
   show(message: string, severity: ToastSeverity = 'info', duration: number = 3000) {
     const id = this.nextId++;

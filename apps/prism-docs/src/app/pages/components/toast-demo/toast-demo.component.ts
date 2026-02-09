@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToastService, PrismCodeBlockComponent } from '@prism-monorepo/prism-core';
 
@@ -6,6 +6,7 @@ import { ToastService, PrismCodeBlockComponent } from '@prism-monorepo/prism-cor
   selector: 'prism-toast-demo',
   standalone: true,
   imports: [CommonModule, PrismCodeBlockComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './toast-demo.component.html',
   styles: [`
     .demo-actions {
@@ -31,12 +32,12 @@ import { ToastService, PrismCodeBlockComponent } from '@prism-monorepo/prism-cor
   `]
 })
 export class ToastDemoComponent {
-  toast = inject(ToastService);
+  readonly toast = inject(ToastService);
 
-  showSuccess() { this.toast.success('Configuration saved successfully!'); }
-  showWarning() { this.toast.warning('Storage limit approaching (85%).'); }
-  showDanger() { this.toast.danger('Failed to connect to the database.'); }
-  showInfo() { this.toast.info('New updates available for your system.'); }
+  showSuccess(): void { this.toast.success('Configuration saved successfully!'); }
+  showWarning(): void { this.toast.warning('Storage limit approaching (85%).'); }
+  showDanger(): void { this.toast.danger('Failed to connect to the database.'); }
+  showInfo(): void { this.toast.info('New updates available for your system.'); }
 
   usageTS = `import { inject } from '@angular/core';
 import { ToastService } from '@prism-monorepo/prism-core';

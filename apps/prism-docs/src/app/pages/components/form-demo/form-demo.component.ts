@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrismButtonComponent, PrismInputDirective, PrismCodeBlockComponent } from '@prism-monorepo/prism-core';
 
@@ -7,10 +7,11 @@ import { PrismButtonComponent, PrismInputDirective, PrismCodeBlockComponent } fr
   standalone: true,
   imports: [CommonModule, PrismButtonComponent, PrismInputDirective, PrismCodeBlockComponent],
   templateUrl: './form-demo.component.html',
-  styleUrl: './form-demo.component.scss'
+  styleUrl: './form-demo.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormDemoComponent {
-  activeTab = signal<'buttons' | 'inputs'>('buttons');
+  readonly activeTab = signal<'buttons' | 'inputs'>('buttons');
 
   buttonUsage = `<!-- Variants -->
 <prism-button label="Primary" variant="primary"></prism-button>
@@ -46,7 +47,7 @@ export class FormDemoComponent {
   <input prismInput placeholder="Search everything..." />
 </div>`;
 
-  setTab(tab: 'buttons' | 'inputs') {
+  setTab(tab: 'buttons' | 'inputs'): void {
     this.activeTab.set(tab);
   }
 }

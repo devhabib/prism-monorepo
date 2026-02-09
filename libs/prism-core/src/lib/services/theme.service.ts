@@ -1,4 +1,4 @@
-import { Injectable, signal, effect, PLATFORM_ID, Inject } from '@angular/core';
+import { Injectable, signal, effect, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
@@ -6,11 +6,13 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class ThemeService {
   private readonly THEME_KEY = 'prism-theme';
-  currentTheme = signal<'light' | 'dark'>('light');
-  private isBrowser: boolean;
+  private readonly _platformId = inject(PLATFORM_ID);
+  private readonly isBrowser: boolean;
+  
+  readonly currentTheme = signal<'light' | 'dark'>('light');
 
-  constructor(@Inject(PLATFORM_ID) platformId: object) {
-    this.isBrowser = isPlatformBrowser(platformId);
+  constructor() {
+    this.isBrowser = isPlatformBrowser(this._platformId);
     this.initializeTheme();
     
     // Opt-in: Reactively apply theme whenever it changes

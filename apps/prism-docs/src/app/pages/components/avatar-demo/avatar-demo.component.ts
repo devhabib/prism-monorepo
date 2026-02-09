@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrismAvatarComponent, PrismTableComponent, PrismColumn, PrismCodeBlockComponent } from '@prism-monorepo/prism-core';
 
@@ -7,6 +7,7 @@ import { PrismAvatarComponent, PrismTableComponent, PrismColumn, PrismCodeBlockC
   standalone: true,
   imports: [CommonModule, PrismAvatarComponent, PrismTableComponent, PrismCodeBlockComponent],
   styleUrl: './avatar-demo.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <header class="page-header">
       <h1>Avatar</h1>
@@ -80,9 +81,9 @@ import { PrismAvatarComponent, PrismTableComponent, PrismColumn, PrismCodeBlockC
   `
 })
 export class AvatarDemoComponent {
-  activeTab = signal<'examples' | 'api'>('examples');
+  readonly activeTab = signal<'examples' | 'api'>('examples');
 
-  snippets = {
+  readonly snippets = {
     shapes: `<prism-avatar label="C" shape="circle" size="lg"></prism-avatar>
 <prism-avatar label="S" shape="square" size="lg"></prism-avatar>`,
     sizes: `<prism-avatar label="S" size="sm"></prism-avatar>
@@ -93,14 +94,14 @@ export class AvatarDemoComponent {
 <prism-avatar label="AB" size="lg" style="background-color: #3b82f6;"></prism-avatar>`
   };
 
-  apiData = [
+  readonly apiData: {name: string; type: string; default: string; description: string}[] = [
     { name: 'image', type: 'string | null', default: 'null', description: 'URL of the image to display.' },
     { name: 'label', type: 'string | null', default: 'null', description: 'Text to display if no image (e.g. initials).' },
     { name: 'size', type: "'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Size of the avatar.' },
     { name: 'shape', type: "'circle' | 'square'", default: "'circle'", description: 'Shape of the avatar.' },
   ];
 
-  apiCols: PrismColumn<any>[] = [
+  readonly apiCols: PrismColumn<{name: string; type: string; default: string; description: string}>[] = [
     { key: 'name', header: 'Name' },
     { key: 'type', header: 'Type' },
     { key: 'default', header: 'Default' },

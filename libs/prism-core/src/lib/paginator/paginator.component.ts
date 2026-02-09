@@ -3,8 +3,8 @@ import {
   computed,
   input,
   output,
-  signal,
   ChangeDetectionStrategy,
+  ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageEvent } from './paginator.types';
@@ -16,6 +16,7 @@ import { PageEvent } from './paginator.types';
   templateUrl: './paginator.component.html',
   styleUrl: './paginator.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class PrismPaginatorComponent {
   // Inputs

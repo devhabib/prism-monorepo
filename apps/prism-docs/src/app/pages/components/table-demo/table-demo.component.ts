@@ -1,11 +1,11 @@
-import { Component, ViewChild, TemplateRef, AfterViewInit, OnInit, signal, ChangeDetectorRef } from '@angular/core';
+import { Component, TemplateRef, signal, effect, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PrismTableComponent, PrismColumn, PrismCodeBlockComponent, PrismAvatarComponent, PrismPaginatorComponent } from '@prism-monorepo/prism-core';
+import { PrismTableComponent, PrismColumn, PrismCodeBlockComponent, PrismAvatarComponent } from '@prism-monorepo/prism-core';
 
-interface Finance { id: string; date: string; amount: number; status: string; }
-interface Employee { id: string; name: string; role: string; status: string; avatar: string; }
-interface Product { sku: string; name: string; category: string; stock: number; price: number; image: string; }
+type Finance = { id: string; date: string; amount: number; status: string; }
+type Employee = { id: string; name: string; role: string; status: string; avatar: string; }
+type Product = { sku: string; name: string; category: string; stock: number; price: number; image: string; }
 
 @Component({
   selector: 'prism-table-demo',
@@ -13,15 +13,16 @@ interface Product { sku: string; name: string; category: string; stock: number; 
   imports: [CommonModule, PrismTableComponent, PrismCodeBlockComponent, PrismAvatarComponent, ReactiveFormsModule],
   templateUrl: './table-demo.component.html',
   styleUrl: './table-demo.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableDemoComponent implements OnInit, AfterViewInit {
-  // --- Templates (Linked via ViewChild) ---
-  @ViewChild('amountCell') amountTemplate!: TemplateRef<any>;
-  @ViewChild('nameCell') nameTemplate!: TemplateRef<any>;
-  @ViewChild('statusCell') statusTemplate!: TemplateRef<any>;
-  @ViewChild('imageCell') imageTemplate!: TemplateRef<any>;
+export class TableDemoComponent {
+  // --- Templates (Using viewChild) ---
+  readonly amountTemplate = viewChild<TemplateRef<Finance>>('amountCell');
+  readonly nameTemplate = viewChild<TemplateRef<Employee>>('nameCell');
+  readonly statusTemplate = viewChild<TemplateRef<Finance | Employee>>('statusCell');
+  readonly imageTemplate = viewChild<TemplateRef<Product>>('imageCell');
 
-  activeTab = signal<'examples' | 'api'>('examples');
+  readonly activeTab = signal<'examples' | 'api'>('examples');
 
   // --- 1. Finance Data & Config ---
   financeData: Finance[] = [
@@ -49,35 +50,41 @@ export class TableDemoComponent implements OnInit, AfterViewInit {
   ];
   inventoryCols: PrismColumn<Product>[] = [];
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor() {
+    // Initialize columns after templates are available using effect
+    effect(() => {
+      const amountTpl = this.amountTemplate();
+      const nameTpl = this.nameTemplate();
+      const statusTpl = this.statusTemplate();
+      const imageTpl = this.imageTemplate();
 
-  ngOnInit() {}
+      if (amountTpl && statusTpl) {
+        this.financeCols = [
+          { key: 'id', header: 'Transaction ID' },
+          { key: 'date', header: 'Date', sortable: true },
+          { key: 'amount', header: 'Amount', sortable: true, cellTemplate: amountTpl },
+          { key: 'status', header: 'Status', cellTemplate: statusTpl }
+        ];
+      }
 
-  ngAfterViewInit() {
-    // Small delay to ensure templates are captured and avoid ExpressionChangedAfterItHasBeenCheckedError
-    setTimeout(() => {
-      this.financeCols = [
-        { key: 'id', header: 'Transaction ID' },
-        { key: 'date', header: 'Date', sortable: true },
-        { key: 'amount', header: 'Amount', sortable: true, cellTemplate: this.amountTemplate },
-        { key: 'status', header: 'Status', cellTemplate: this.statusTemplate }
-      ];
+      if (nameTpl && statusTpl) {
+        this.teamCols = [
+          { key: 'name', header: 'Employee', cellTemplate: nameTpl },
+          { key: 'role', header: 'Role' },
+          { key: 'status', header: 'Status', cellTemplate: statusTpl }
+        ];
+      }
 
-      this.teamCols = [
-        { key: 'name', header: 'Employee', cellTemplate: this.nameTemplate },
-        { key: 'role', header: 'Role' },
-        { key: 'status', header: 'Status', cellTemplate: this.statusTemplate }
-      ];
-
-      this.inventoryCols = [
-        { key: 'image', header: 'Preview', cellTemplate: this.imageTemplate },
-        { key: 'name', header: 'Product', sortable: true },
-        { key: 'category', header: 'Category' },
-        { key: 'stock', header: 'Stock', sortable: true },
-        { key: 'price', header: 'Price', sortable: true }
-      ];
-      this.cdr.detectChanges();
-    }, 0);
+      if (imageTpl) {
+        this.inventoryCols = [
+          { key: 'image', header: 'Preview', cellTemplate: imageTpl },
+          { key: 'name', header: 'Product', sortable: true },
+          { key: 'category', header: 'Category' },
+          { key: 'stock', header: 'Stock', sortable: true },
+          { key: 'price', header: 'Price', sortable: true }
+        ];
+      }
+    });
   }
 
   // --- CODE SNIPPETS (For the Docs) ---

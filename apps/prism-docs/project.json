@@ -2,7 +2,6 @@
   "name": "prism-docs",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "prefix": "app",
   "sourceRoot": "apps/prism-docs/src",
   "tags": ["type:app", "scope:docs"],
   "targets": {

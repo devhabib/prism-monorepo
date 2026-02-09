@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { PrismAvatarComponent, ThemeToggleComponent } from '@prism-monorepo/prism-core';
 
-interface MenuItem {
+type MenuItem = {
   label: string;
   route?: string;
   items?: MenuItem[];
@@ -15,6 +15,7 @@ interface MenuItem {
   imports: [CommonModule, RouterLink, RouterLinkActive, PrismAvatarComponent, ThemeToggleComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
   menu: MenuItem[] = [

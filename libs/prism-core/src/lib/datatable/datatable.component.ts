@@ -3,9 +3,9 @@ import {
   Component,
   computed,
   input,
-  Output,
-  EventEmitter,
+  output,
   signal,
+  ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrismColumn, SortConfig } from './datatable.types';
@@ -19,6 +19,7 @@ import { PageEvent } from '../paginator/paginator.types';
   templateUrl: './datatable.component.html',
   styleUrl: './datatable.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class PrismTableComponent<T> {
   // Inputs
@@ -34,11 +35,11 @@ export class PrismTableComponent<T> {
   rows = input(10);
 
   // State
-  sortConfig = signal<SortConfig<T> | null>(null);
-  first = signal(0); // Pagination state
+  readonly sortConfig = signal<SortConfig<T> | null>(null);
+  readonly first = signal(0); // Pagination state
   
   // Outputs
-  @Output() page = new EventEmitter<PageEvent>();
+  readonly page = output<PageEvent>();
 
   // Computed
   filteredData = computed(() => {
@@ -50,7 +51,7 @@ export class PrismTableComponent<T> {
     if (filter) {
       processed = rawData.filter((row) => {
         // Simple check: does any column value contain the filter string?
-        return Object.values(row as any).some((val) =>
+        return Object.values(row as Record<string, unknown>).some((val) =>
           String(val).toLowerCase().includes(filter)
         );
       });
