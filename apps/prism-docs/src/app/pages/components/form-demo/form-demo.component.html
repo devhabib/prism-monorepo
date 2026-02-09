@@ -196,57 +196,52 @@
   @if (activeTab() === 'selects') {
     <div class="fade-in">
       <section class="section">
-        <h2>Native Select</h2>
+        <h2>Single Select (Standard)</h2>
         <div class="field">
-          <label>Browser Default</label>
+          <label>Choose a City</label>
           <prism-select 
-            mode="native" 
-            [options]="colorOptions" 
-            placeholder="Choose a color"
-            [(value)]="simpleSelect" />
-          <p class="text-sm text-muted mt-1">Selected: {{ simpleSelect() || 'None' }}</p>
+            [options]="cityOptions" 
+            placeholder="Select a city..."
+            [(value)]="citySelect" />
+          <p class="text-sm text-muted mt-1">Selected ID: {{ citySelect() || 'None' }}</p>
         </div>
       </section>
 
       <section class="section">
-        <h2>Custom Select</h2>
+        <h2>Searchable Select (Countries)</h2>
         <div class="field">
-          <label>Styled Dropdown</label>
+          <label>Filter Countries</label>
           <prism-select 
-            mode="custom" 
-            [options]="colorOptions" 
-            placeholder="Choose a color"
-            [(value)]="customSelect" />
-          <p class="text-sm text-muted mt-1">Selected: {{ customSelect() || 'None' }}</p>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>Searchable Select</h2>
-        <div class="field">
-          <label>With Filter Input</label>
-          <prism-select 
-            mode="custom" 
             [searchable]="true"
-            [options]="skillOptions" 
-            placeholder="Search skills..."
-            [(value)]="searchableSelect" />
-          <p class="text-sm text-muted mt-1">Selected: {{ searchableSelect() || 'None' }}</p>
+            [options]="countryOptions" 
+            placeholder="Search countries..."
+            [(value)]="countrySelect" />
+          <p class="text-sm text-muted mt-1">Selected ID: {{ countrySelect() || 'None' }}</p>
         </div>
       </section>
 
       <section class="section">
-        <h2>Multi-Select with Tags</h2>
+        <h2>Multi-Select with Tags (Skills)</h2>
         <div class="field">
-          <label>Choose Skills</label>
+          <label>Select Skills</label>
           <prism-select 
-            mode="custom" 
             [multiple]="true"
             [searchable]="true"
             [options]="skillOptions" 
-            placeholder="Select multiple..."
+            placeholder="Select multiple skills..."
             [(value)]="multiSelect" />
-          <p class="text-sm text-muted mt-1">Selected Count: {{ multiSelect().length }}</p>
+          <p class="text-sm text-muted mt-1">Items Selected: {{ multiSelect().length }}</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Native Option</h2>
+        <p>Use the browser's native select element while maintaining the Prism look.</p>
+        <div class="field">
+          <prism-select 
+            mode="native" 
+            [options]="cityOptions" 
+            [(value)]="citySelect" />
         </div>
       </section>
 

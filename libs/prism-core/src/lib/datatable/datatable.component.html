@@ -43,6 +43,12 @@
           </td>
         }
       </tr>
+    } @empty {
+      <tr>
+        <td [attr.colspan]="columns().length + (selectionMode() ? 1 : 0)">
+          <prism-empty />
+        </td>
+      </tr>
     }
   </tbody>
 </table>

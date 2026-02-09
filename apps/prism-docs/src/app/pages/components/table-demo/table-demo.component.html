@@ -37,9 +37,11 @@
     
     <div class="example-section">
       <h3>1. Financial Ledger (Gridlines & Conditional Styling)</h3>
-      
-      <prism-table [data]="financeData" [columns]="financeCols" size="sm" [gridlines]="true" [striped]="true">
-      </prism-table>
+     
+      <div class="demo-row">
+        <prism-table [data]="financeData" [columns]="financeCols" size="sm" [gridlines]="true" [striped]="true">
+        </prism-table>
+      </div>
 
       <prism-code-block [html]="financeHTML" [ts]="financeTS"></prism-code-block>
     </div>
@@ -47,8 +49,10 @@
     <div class="example-section">
       <h3>2. Team Roster (Avatars & Rich Content)</h3>
       
-      <prism-table [data]="teamData" [columns]="teamCols" size="lg">
-      </prism-table>
+      <div class="demo-row">
+        <prism-table [data]="teamData" [columns]="teamCols" size="lg">
+        </prism-table>
+      </div>
 
       <prism-code-block [html]="teamHTML" [ts]="teamTS"></prism-code-block>
     </div>
@@ -56,61 +60,69 @@
     <div class="example-section">
       <h3>3. Inventory (Images, Sorting & Pagination)</h3>
       
-      <prism-table [data]="inventoryData" [columns]="inventoryCols" [paginator]="true" [rows]="3">
-      </prism-table>
+      <div class="demo-row">
+        <prism-table [data]="inventoryData" [columns]="inventoryCols" [paginator]="true" [rows]="3">
+        </prism-table>
+      </div>
 
       <prism-code-block [html]="inventoryHTML" [ts]="inventoryTS"></prism-code-block>
     </div>
 
     <div class="example-section">
       <h3>4. Single Row Selection</h3>
-      @if (singleSelection()) {
-        <p class="mt-2 mb-2 text-info">
-          Selected: <strong>{{ singleSelection().name }}</strong> ({{ singleSelection().role }})
-        </p>
-      } @else {
-        <p class="mt-2 mb-2 text-muted">No row selected. Click a row to select.</p>
-      }
+      <div class="flex items-center gap-2 mb-2 min-h-[32px]">
+        <span class="text-sm text-muted">Selected:</span>
+        @if (singleSelection()) {
+          <prism-tag [label]="singleSelection().name" (onRemove)="singleSelection.set(null)" [removable]="true" />
+        } @else {
+          <span class="text-xs italic text-muted">None</span>
+        }
+      </div>
       
-      <prism-table 
-        [data]="userSelectionData" 
-        [columns]="userCols"
-        selectionMode="single"
-        dataKey="id"
-        [(selection)]="singleSelection">
-      </prism-table>
+      <div class="demo-row">
+        <prism-table 
+          [data]="userSelectionData" 
+          [columns]="userCols"
+          selectionMode="single"
+          dataKey="id"
+          [(selection)]="singleSelection">
+        </prism-table>
+      </div>
     </div>
 
     <div class="example-section">
       <h3>5. Multiple Row Selection</h3>
-      <p class="mt-2 mb-2">
-        Selected Count: <strong>{{ multipleSelection().length }}</strong>
-      </p>
+      <div class="flex items-center gap-2 mb-2 min-h-[32px]">
+        <span class="text-sm text-muted">Selection Count:</span>
+        <prism-badge [label]="multipleSelection().length.toString()" variant="info" />
+      </div>
       
-      <prism-table 
-        [data]="userSelectionData" 
-        [columns]="userCols"
-        selectionMode="multiple"
-        dataKey="id"
-        [(selection)]="multipleSelection">
-      </prism-table>
+      <div class="demo-row">
+        <prism-table 
+          [data]="userSelectionData" 
+          [columns]="userCols"
+          selectionMode="multiple"
+          dataKey="id"
+          [(selection)]="multipleSelection">
+        </prism-table>
+      </div>
     </div>
 
     <div class="example-section">
-      <h3>6. Empty State</h3>
+      <div class="flex justify-between items-center mb-4">
+        <h3>6. Automatic Empty State</h3>
+        <div class="flex gap-2">
+          <prism-button label="Clear Data" variant="outline" size="sm" icon="ri-delete-bin-line" (click)="clearData()" />
+          <prism-button label="Reset Data" variant="text" size="sm" (click)="resetData()" />
+        </div>
+      </div>
       
-      @if (emptyTableData().length === 0) {
-        <prism-empty 
-          icon="ri-inbox-2-line"
-          title="No Data Available"
-          description="This table is empty. Try adding some data to see it in action.">
-        </prism-empty>
-      } @else {
+      <div class="demo-row">
         <prism-table 
           [data]="emptyTableData()" 
           [columns]="userCols">
         </prism-table>
-      }
+      </div>
     </div>
 
   } @else {

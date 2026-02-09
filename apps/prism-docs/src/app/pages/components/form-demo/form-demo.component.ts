@@ -37,25 +37,31 @@ export class FormDemoComponent {
   radioValue = signal('option1');
 
   // Select state
-  simpleSelect = signal(null);
-  customSelect = signal(null);
-  searchableSelect = signal(null);
+  citySelect = signal(null);
+  countrySelect = signal(null);
   multiSelect = signal<any[]>([]);
 
   // Select options
-  readonly colorOptions: SelectOption[] = [
-    { label: 'Red', value: 'red' },
-    { label: 'Blue', value: 'blue' },
-    { label: 'Green', value: 'green' },
+  readonly cityOptions: SelectOption[] = [
+    { label: 'New York', value: 'nyc' },
+    { label: 'London', value: 'ldn' },
+    { label: 'Tokyo', value: 'tyo' },
+    { label: 'Paris', value: 'par' },
+  ];
+
+  readonly countryOptions: SelectOption[] = [
+    { label: 'United States', value: 'usa' },
+    { label: 'United Kingdom', value: 'uk' },
+    { label: 'Germany', value: 'ger' },
+    { label: 'France', value: 'fra' },
+    { label: 'Canada', value: 'can' },
   ];
 
   readonly skillOptions: SelectOption[] = [
     { label: 'Angular', value: 'angular' },
     { label: 'React', value: 'react' },
     { label: 'Vue', value: 'vue' },
-    { label: 'Svelte', value: 'svelte' },
     { label: 'TypeScript', value: 'typescript' },
-    { label: 'JavaScript', value: 'javascript' },
   ];
 
   buttonUsage = `<!-- Variants -->

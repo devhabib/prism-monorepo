@@ -8,7 +8,10 @@ import {
   PrismAvatarComponent, 
   ApiTableComponent, 
   ApiDoc,
-  PrismEmptyComponent
+  PrismEmptyComponent,
+  PrismTagComponent,
+  PrismBadgeComponent,
+  PrismButtonComponent
 } from '@prism-monorepo/prism-core';
 
 type Finance = { id: string; date: string; amount: number; status: string; }
@@ -25,7 +28,10 @@ type Product = { sku: string; name: string; category: string; stock: number; pri
     PrismAvatarComponent, 
     ReactiveFormsModule, 
     ApiTableComponent,
-    PrismEmptyComponent
+    PrismEmptyComponent,
+    PrismTagComponent,
+    PrismBadgeComponent,
+    PrismButtonComponent
   ],
   templateUrl: './table-demo.component.html',
   styleUrl: './table-demo.component.scss',
@@ -81,7 +87,19 @@ export class TableDemoComponent {
   multipleSelection = signal<any[]>([]);
 
   // Empty state data
-  emptyTableData = signal<any[]>([]);
+  emptyTableData = signal<any[]>([
+    { id: '1', name: 'Temporary Data', role: 'Tester' }
+  ]);
+
+  clearData(): void {
+    this.emptyTableData.set([]);
+  }
+
+  resetData(): void {
+    this.emptyTableData.set([
+      { id: '1', name: 'Temporary Data', role: 'Tester' }
+    ]);
+  }
 
   constructor() {
     // Initialize columns after templates are available using effect

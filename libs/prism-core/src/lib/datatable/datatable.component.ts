@@ -13,11 +13,12 @@ import { PrismColumn, SortConfig } from './datatable.types';
 import { PrismPaginatorComponent } from '../paginator/paginator.component';
 import { PageEvent } from '../paginator/paginator.types';
 import { PrismCheckboxComponent } from '../checkbox/checkbox.component';
+import { PrismEmptyComponent } from '../empty/empty.component';
 
 @Component({
   selector: 'prism-table',
   standalone: true,
-  imports: [CommonModule, PrismPaginatorComponent, PrismCheckboxComponent],
+  imports: [CommonModule, PrismPaginatorComponent, PrismCheckboxComponent, PrismEmptyComponent],
   templateUrl: './datatable.component.html',
   styleUrl: './datatable.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
