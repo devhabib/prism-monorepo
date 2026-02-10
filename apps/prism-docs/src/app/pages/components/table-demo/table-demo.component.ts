@@ -8,10 +8,13 @@ import {
   PrismAvatarComponent, 
   ApiTableComponent, 
   ApiDoc,
-  PrismEmptyComponent,
   PrismTagComponent,
   PrismBadgeComponent,
-  PrismButtonComponent
+  PrismButtonComponent,
+  PrismTabGroupComponent,
+  PrismTabComponent,
+  PrismDialogComponent,
+  PrismCardComponent
 } from '@prism-monorepo/prism-core';
 
 type Finance = { id: string; date: string; amount: number; status: string; }
@@ -28,10 +31,13 @@ type Product = { sku: string; name: string; category: string; stock: number; pri
     PrismAvatarComponent, 
     ReactiveFormsModule, 
     ApiTableComponent,
-    PrismEmptyComponent,
     PrismTagComponent,
     PrismBadgeComponent,
-    PrismButtonComponent
+    PrismButtonComponent,
+    PrismTabGroupComponent,
+    PrismTabComponent,
+    PrismDialogComponent,
+    PrismCardComponent
   ],
   templateUrl: './table-demo.component.html',
   styleUrl: './table-demo.component.scss',
@@ -43,8 +49,11 @@ export class TableDemoComponent {
   readonly nameTemplate = viewChild<TemplateRef<Employee>>('nameCell');
   readonly statusTemplate = viewChild<TemplateRef<Finance | Employee>>('statusCell');
   readonly imageTemplate = viewChild<TemplateRef<Product>>('imageCell');
+  readonly actionsTemplate = viewChild<TemplateRef<Employee>>('actionsCell');
 
-  readonly activeTab = signal<'examples' | 'api'>('examples');
+  // Dialog state
+  showDetailsDialog = signal(false);
+  selectedRow = signal<Employee | null>(null);
 
   // --- 1. Finance Data & Config ---
   financeData: Finance[] = [
@@ -83,12 +92,12 @@ export class TableDemoComponent {
     { key: 'role', header: 'Role' },
     { key: 'status', header: 'Status' },
   ];
-  singleSelection = signal<any>(null);
-  multipleSelection = signal<any[]>([]);
+  singleSelection = signal<Employee | null>(null);
+  multipleSelection = signal<Employee[]>([]);
 
   // Empty state data
-  emptyTableData = signal<any[]>([
-    { id: '1', name: 'Temporary Data', role: 'Tester' }
+  emptyTableData = signal<Employee[]>([
+    { id: '1', name: 'Temporary Data', role: 'Tester', status: 'Active', avatar: '' }
   ]);
 
   clearData(): void {
@@ -97,8 +106,13 @@ export class TableDemoComponent {
 
   resetData(): void {
     this.emptyTableData.set([
-      { id: '1', name: 'Temporary Data', role: 'Tester' }
+      { id: '1', name: 'Temporary Data', role: 'Tester', status: 'Active', avatar: '' }
     ]);
+  }
+
+  viewDetails(row: Employee): void {
+    this.selectedRow.set(row);
+    this.showDetailsDialog.set(true);
   }
 
   constructor() {
@@ -108,6 +122,7 @@ export class TableDemoComponent {
       const nameTpl = this.nameTemplate();
       const statusTpl = this.statusTemplate();
       const imageTpl = this.imageTemplate();
+      const actionsTpl = this.actionsTemplate();
 
       if (amountTpl && statusTpl) {
         this.financeCols = [
@@ -118,11 +133,12 @@ export class TableDemoComponent {
         ];
       }
 
-      if (nameTpl && statusTpl) {
+      if (nameTpl && statusTpl && actionsTpl) {
         this.teamCols = [
           { key: 'name', header: 'Employee', cellTemplate: nameTpl },
           { key: 'role', header: 'Role' },
-          { key: 'status', header: 'Status', cellTemplate: statusTpl }
+          { key: 'status', header: 'Status', cellTemplate: statusTpl },
+          { key: 'actions' as any, header: 'Actions', cellTemplate: actionsTpl }
         ];
       }
 

@@ -45,6 +45,13 @@ export const appRoutes: Route[] = [
           import('./pages/components/empty-demo/empty-demo.component').then(
             (m) => m.EmptyDemoComponent
           ),
+      },
+      {
+        path: 'components/overlays',
+        loadComponent: () =>
+          import('./pages/components/overlay-demo/overlay-demo.component').then(
+            (m) => m.OverlayDemoComponent
+          ),
       }
     ],
   },

@@ -20,3 +20,9 @@ export * from './lib/select/select.component';
 export * from './lib/badge/badge.component';
 export * from './lib/tag/tag.component';
 export * from './lib/empty/empty.component';
+
+// Structural Components
+export * from './lib/card/card.component';
+export * from './lib/tabs/tab-group.component';
+export * from './lib/tabs/tab.component';
+export * from './lib/dialog/dialog.component';

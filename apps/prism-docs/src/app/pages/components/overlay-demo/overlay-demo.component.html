@@ -1,0 +1,169 @@
+<div class="demo-container">
+  <div class="demo-header">
+    <h1>Dialogs & Overlays</h1>
+    <p>Modal components for focused interactions and user confirmations.</p>
+  </div>
+
+  <prism-tab-group>
+    <!-- Examples Tab -->
+    <prism-tab label="Examples">
+      <!-- Basic Dialog -->
+      <div class="example-section">
+        <h3>1. Basic Dialog</h3>
+        <p class="mb-4">Simple dialog with header, content, and footer actions.</p>
+
+        <div class="demo-row">
+          <prism-button label="Open Basic Dialog" (click)="basicDialog.set(true)" />
+        </div>
+
+        <prism-code-block [html]="basicHTML" [ts]="basicTS"></prism-code-block>
+      </div>
+
+      <!-- Dialog with Card -->
+      <div class="example-section">
+        <h3>2. Dialog with Card Content</h3>
+        <p class="mb-4">Nested card inside dialog for structured information display.</p>
+
+        <div class="demo-row">
+          <prism-button label="View User Profile" variant="secondary" (click)="cardDialog.set(true)" />
+        </div>
+
+        <prism-code-block [html]="cardHTML"></prism-code-block>
+      </div>
+
+      <!-- Form Dialog -->
+      <div class="example-section">
+        <h3>3. Form Dialog</h3>
+        <p class="mb-4">Dialog containing a reactive form with validation.</p>
+
+        <div class="demo-row">
+          <prism-button label="Contact Form" variant="outline" icon="ri-mail-line" (click)="formDialog.set(true)" />
+          @if (formSubmitted()) {
+            <span class="text-success ml-4">✓ Form submitted successfully!</span>
+          }
+        </div>
+
+        <prism-code-block [html]="formHTML"></prism-code-block>
+      </div>
+
+      <!-- Confirmation Dialog -->
+      <div class="example-section">
+        <h3>4. Confirmation Dialog</h3>
+        <p class="mb-4">Dangerous action with cancel/confirm pattern.</p>
+
+        <div class="demo-row">
+          <prism-button label="Delete Item" variant="danger" icon="ri-delete-bin-line" (click)="confirmDialog.set(true)" />
+        </div>
+
+        <prism-code-block [html]="confirmHTML"></prism-code-block>
+      </div>
+
+      <!-- Position Variants -->
+      <div class="example-section">
+        <h3>5. Position & Animation Variants</h3>
+        <p class="mb-4">Dialogs can slide in from different directions with smooth animations.</p>
+
+        <div class="demo-row">
+          <prism-button label="Center (Scale)" (click)="openPositionDialog('center')" />
+          <prism-button label="Top (Slide Down)" variant="secondary" (click)="openPositionDialog('top')" />
+          <prism-button label="Bottom (Slide Up)" variant="secondary" (click)="openPositionDialog('bottom')" />
+          <prism-button label="Left (Sidebar)" variant="outline" (click)="openPositionDialog('left')" />
+          <prism-button label="Right (Sidebar)" variant="outline" (click)="openPositionDialog('right')" />
+        </div>
+      </div>
+    </prism-tab>
+
+    <!-- API Tab -->
+    <prism-tab label="API">
+      <section class="api-section">
+        <h2>Component API</h2>
+        <prism-api-table [data]="apiData" />
+      </section>
+    </prism-tab>
+  </prism-tab-group>
+</div>
+
+<!-- Dialog Instances -->
+<!-- Basic Dialog -->
+<prism-dialog [(visible)]="basicDialog" header="Welcome">
+  <p>This is a signal-driven dialog with two-way binding!</p>
+  <p class="mt-2">Click the backdrop or close button to dismiss.</p>
+  <div footer>
+    <prism-button label="Close" variant="outline" (click)="basicDialog.set(false)" />
+  </div>
+</prism-dialog>
+
+<!-- Card Dialog -->
+<prism-dialog [(visible)]="cardDialog" header="User Profile" width="600px">
+  <prism-card header="Sarah Connor" subheader="Frontend Lead">
+    <div class="space-y-2">
+      <p><strong class="text-sm">Email:</strong> <span class="text-sm text-muted">sarah@example.com</span></p>
+      <p><strong class="text-sm">Status:</strong> <span class="text-sm text-success">Active</span></p>
+      <p><strong class="text-sm">Joined:</strong> <span class="text-sm text-muted">January 2024</span></p>
+      <p><strong class="text-sm">Team:</strong> <span class="text-sm text-muted">Design System</span></p>
+    </div>
+  </prism-card>
+  <div footer>
+    <prism-button label="Edit Profile" variant="outline" />
+    <prism-button label="Close" variant="text" (click)="cardDialog.set(false)" />
+  </div>
+</prism-dialog>
+
+<!-- Form Dialog -->
+<prism-dialog [(visible)]="formDialog" header="Contact Us" width="500px">
+  <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
+    <div class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium mb-1">Name</label>
+        <input prismInput formControlName="name" placeholder="Your name" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Email</label>
+        <input prismInput formControlName="email" type="email" placeholder="your@email.com" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Message</label>
+        <textarea prismInput formControlName="message" placeholder="Your message" rows="4"></textarea>
+      </div>
+    </div>
+  </form>
+  <div footer>
+    <prism-button label="Cancel" variant="text" (click)="formDialog.set(false)" />
+    <prism-button 
+      label="Send Message" 
+      icon="ri-send-plane-line"
+      [disabled]="!contactForm.valid"
+      (click)="submitForm()" />
+  </div>
+</prism-dialog>
+
+<!-- Confirmation Dialog -->
+<prism-dialog [(visible)]="confirmDialog" header="Confirm Delete" width="400px">
+  <p>Are you sure you want to delete this item?</p>
+  <p class="mt-2 text-sm text-muted">This action cannot be undone.</p>
+  <div footer>
+    <prism-button label="Cancel" variant="outline" (click)="confirmDialog.set(false)" />
+    <prism-button label="Delete" variant="danger" icon="ri-delete-bin-line" (click)="deleteItem()" />
+  </div>
+</prism-dialog>
+
+<!-- Position Variants Dialog -->
+<prism-dialog 
+  [(visible)]="positionDialog" 
+  [header]="'Position: ' + currentPosition()" 
+  [position]="currentPosition()"
+  width="450px">
+  <p>This dialog animates smoothly from the <strong>{{ currentPosition() }}</strong> position.</p>
+  <p class="mt-2 text-sm text-muted">
+    @if (currentPosition() === 'center') {
+      The dialog scales in from the center with a fade effect.
+    } @else if (currentPosition() === 'left' || currentPosition() === 'right') {
+      Sidebar dialogs slide in from the edge and span the full height.
+    } @else {
+      The dialog slides in from the {{ currentPosition() }} without any jumping.
+    }
+  </p>
+  <div footer>
+    <prism-button label="Close" variant="outline" (click)="positionDialog.set(false)" />
+  </div>
+</prism-dialog>

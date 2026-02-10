@@ -1,0 +1,28 @@
+@if (visible()) {
+  <div class="prism-dialog-mask"
+       [class]="'position-' + position()"
+       (click)="onBackdropClick($event)"
+       [@backdropAnimation]>
+    
+    <div class="prism-dialog-panel"
+         [style.width]="width()"
+         (click)="$event.stopPropagation()"
+         [@dialogAnimation]="position()">
+      
+      <div class="dialog-header">
+        <span class="dialog-title">{{ header() }}</span>
+        <button class="dialog-close" (click)="close()" aria-label="Close dialog">
+          <i class="ri-close-line"></i>
+        </button>
+      </div>
+
+      <div class="dialog-content">
+        <ng-content />
+      </div>
+
+      <div class="dialog-footer">
+        <ng-content select="[footer]" />
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,136 @@
+:host {
+  display: block;
+}
+
+.prism-tab-group {
+  width: 100%;
+}
+
+// Tab Navigation
+.tab-nav {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 2px solid var(--surface-200);
+  margin-bottom: 1.5rem;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--surface-600);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+
+  &:hover {
+    color: var(--surface-900);
+    background: var(--surface-50);
+  }
+
+  &.active {
+    color: var(--primary-main);
+  }
+}
+
+// Line Variant (default)
+.variant-line {
+  .tab-button.active {
+    border-bottom-color: var(--primary-main);
+  }
+}
+
+// Pill Variant
+.variant-pill {
+  .tab-nav {
+    border-bottom: none;
+    background: var(--surface-100);
+    padding: 0.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+  }
+
+  .tab-button {
+    border-radius: 6px;
+    margin-bottom: 0;
+    border-bottom: none;
+
+    &.active {
+      background: var(--surface-0);
+      color: var(--primary-main);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    &:hover {
+      background: var(--surface-50);
+    }
+
+    &.active:hover {
+      background: var(--surface-0);
+    }
+  }
+}
+
+// Tab Panels
+.tab-panels {
+  position: relative;
+}
+
+.tab-panel {
+  display: none;
+
+  &.active {
+    display: block;
+    animation: fadeIn 0.25s ease-in;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Dark Mode
+:host-context([data-theme='dark']) {
+  .tab-nav {
+    border-bottom-color: var(--surface-700);
+  }
+
+  .tab-button {
+    color: var(--surface-400);
+
+    &:hover {
+      color: var(--surface-100);
+      background: var(--surface-800);
+    }
+
+    &.active {
+      color: var(--primary-400);
+    }
+  }
+
+  .variant-pill {
+    .tab-nav {
+      background: var(--surface-800);
+    }
+
+    .tab-button.active {
+      background: var(--surface-700);
+      color: var(--primary-400);
+    }
+
+    .tab-button:hover {
+      background: var(--surface-700);
+    }
+  }
+}

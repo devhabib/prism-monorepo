@@ -8,7 +8,9 @@ import {
   ApiDoc,
   PrismCheckboxComponent,
   PrismSelectComponent,
-  SelectOption
+  SelectOption,
+  PrismTabGroupComponent,
+  PrismTabComponent
 } from '@prism-monorepo/prism-core';
 
 @Component({
@@ -21,14 +23,16 @@ import {
     PrismCodeBlockComponent, 
     ApiTableComponent,
     PrismCheckboxComponent,
-    PrismSelectComponent
+    PrismSelectComponent,
+    PrismTabGroupComponent,
+    PrismTabComponent
   ],
   templateUrl: './form-demo.component.html',
   styleUrl: './form-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormDemoComponent {
-  readonly activeTab = signal<'buttons' | 'inputs' | 'checks' | 'selects' | 'api'>('buttons');
+  // Manual tab state removed - now handled by PrismTabGroup
 
   // Checkbox/Radio state
   checkbox1 = signal(false);
@@ -39,7 +43,7 @@ export class FormDemoComponent {
   // Select state
   citySelect = signal(null);
   countrySelect = signal(null);
-  multiSelect = signal<any[]>([]);
+  multiSelect = signal<string[]>([]);
 
   // Select options
   readonly cityOptions: SelectOption[] = [
@@ -120,9 +124,7 @@ export class FormDemoComponent {
   [multiple]="true"
   [(value)]="values" />`;
 
-  setTab(tab: 'buttons' | 'inputs' | 'checks' | 'selects' | 'api'): void {
-    this.activeTab.set(tab);
-  }
+  // setTab method removed - tab switching handled by PrismTabGroup
 
   readonly buttonApiData: ApiDoc[] = [
     { name: 'label', type: 'string', default: "''", description: 'Text to display inside the button.' },

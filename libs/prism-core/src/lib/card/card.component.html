@@ -1,0 +1,20 @@
+<div class="prism-card">
+  @if (header() || subheader()) {
+    <div class="card-header">
+      @if (header()) {
+        <h3 class="card-title">{{ header() }}</h3>
+      }
+      @if (subheader()) {
+        <p class="card-subtitle">{{ subheader() }}</p>
+      }
+    </div>
+  }
+  
+  <div class="card-content">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="card-footer">
+    <ng-content select="[footer]"></ng-content>
+  </div>
+</div>

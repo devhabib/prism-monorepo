@@ -8,11 +8,12 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageEvent } from './paginator.types';
+import { PrismButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'prism-paginator',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PrismButtonComponent],
   templateUrl: './paginator.component.html',
   styleUrl: './paginator.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,6 +24,7 @@ export class PrismPaginatorComponent {
   totalRecords = input.required<number>();
   rows = input.required<number>();
   first = input<number>(0);
+  size = input<'sm' | 'md'>('sm');
 
   // Outputs
   onPageChange = output<PageEvent>();

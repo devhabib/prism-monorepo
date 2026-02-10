@@ -1,0 +1,19 @@
+<div class="prism-tab-group" [class]="'variant-' + variant()">
+  <!-- Tab Navigation -->
+  <div class="tab-nav">
+    @for (tab of tabs(); track $index) {
+      <button 
+        class="tab-button"
+        [class.active]="isTabActive($index)"
+        (click)="selectTab($index)"
+        type="button">
+        {{ tab.label() }}
+      </button>
+    }
+  </div>
+
+  <!-- Tab Content -->
+  <div class="tab-panels">
+    <ng-content></ng-content>
+  </div>
+</div>
