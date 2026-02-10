@@ -8,24 +8,27 @@
       </div>
       
       <div class="tabs">
-        @if (html() || code()) {
+        @if (html()) {
           <button 
-            (click)="activeTab.set('html')" 
-            [class.active]="activeTab() === 'html'">
+            class="tab-button" 
+            [class.active]="currentTab() === 'html'"
+            (click)="selectedTab.set('html')">
             HTML
           </button>
         }
         @if (ts()) {
           <button 
-            (click)="activeTab.set('ts')" 
-            [class.active]="activeTab() === 'ts'">
+            class="tab-button" 
+            [class.active]="currentTab() === 'ts'"
+            (click)="selectedTab.set('ts')">
             TypeScript
           </button>
         }
         @if (scss()) {
           <button 
-            (click)="activeTab.set('scss')" 
-            [class.active]="activeTab() === 'scss'">
+            class="tab-button" 
+            [class.active]="currentTab() === 'scss'"
+            (click)="selectedTab.set('scss')">
             SCSS
           </button>
         }

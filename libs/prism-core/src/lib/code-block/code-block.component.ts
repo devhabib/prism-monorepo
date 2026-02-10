@@ -19,12 +19,23 @@ export class PrismCodeBlockComponent {
   ts = input<string | null>(null);
   scss = input<string | null>(null);
   
+  
   language = input<string>('html');
 
-  activeTab = signal<'html' | 'ts' | 'scss'>('html');
+  // Intelligently set initial active tab based on which content is provided
+  activeTab = computed(() => {
+    if (this.ts()) return 'ts';
+    if (this.scss()) return 'scss';
+    return 'html';
+  });
+  
+  // Track user-selected tab (overrides auto-detection)
+  selectedTab = signal<'html' | 'ts' | 'scss' | null>(null);
+  
+  currentTab = computed(() => this.selectedTab() ?? this.activeTab());
   
   currentCode = computed(() => {
-    switch (this.activeTab()) {
+    switch (this.currentTab()) {
       case 'html': return this.html() ?? this.code() ?? '';
       case 'ts': return this.ts() ?? '';
       case 'scss': return this.scss() ?? '';

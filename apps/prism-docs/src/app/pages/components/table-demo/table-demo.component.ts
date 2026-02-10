@@ -138,7 +138,7 @@ export class TableDemoComponent {
           { key: 'name', header: 'Employee', cellTemplate: nameTpl },
           { key: 'role', header: 'Role' },
           { key: 'status', header: 'Status', cellTemplate: statusTpl },
-          { key: 'actions' as any, header: 'Actions', cellTemplate: actionsTpl }
+          { key: 'actions' as keyof Employee, header: 'Actions', cellTemplate: actionsTpl }
         ];
       }
 

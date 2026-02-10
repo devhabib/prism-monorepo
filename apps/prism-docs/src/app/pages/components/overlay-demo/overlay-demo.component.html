@@ -58,9 +58,24 @@
         <prism-code-block [html]="confirmHTML"></prism-code-block>
       </div>
 
+      <!-- Service-Based Dialog (Programmatic) -->
+      <div class="example-section">
+        <h3>5. Service-Based Dialog (Programmatic API)</h3>
+        <p class="mb-4">Open dialogs dynamically using <code>PrismDialogService</code> without template selectors. Perfect for complex workflows and dynamic content.</p>
+
+        <div class="demo-row mb-6">
+          <prism-button 
+            label="Open via Service" 
+            icon="ri-code-line" 
+            (click)="openServiceDialog()" />
+        </div>
+
+        <prism-code-block [ts]="serviceHTML"></prism-code-block>
+      </div>
+
       <!-- Position Variants -->
       <div class="example-section">
-        <h3>5. Position & Animation Variants</h3>
+        <h3>6. Position & Animation Variants</h3>
         <p class="mb-4">Dialogs can slide in from different directions with smooth animations.</p>
 
         <div class="demo-row">
@@ -76,8 +91,52 @@
     <!-- API Tab -->
     <prism-tab label="API">
       <section class="api-section">
-        <h2>Component API</h2>
+        <h2>PrismDialogComponent API</h2>
+        <p class="mb-4">Inputs and outputs for the template-based dialog component.</p>
         <prism-api-table [data]="apiData" />
+      </section>
+
+      <section class="api-section mt-8">
+        <h2>PrismDialogService API</h2>
+        <p class="mb-4">Programmatic dialog service for dynamic component injection.</p>
+        <prism-api-table [data]="serviceApiData" />
+        
+        <div class="mt-4 p-4 bg-surface-100 dark:bg-surface-800 rounded-lg">
+          <h4 class="font-semibold mb-2">Usage Example:</h4>
+          <pre class="text-sm"><code>const ref = this.dialog.open(MyComponent, &#123;
+  header: 'Title',
+  data: &#123; userId: 123 &#125;,
+  width: '600px'
+&#125;);
+
+ref.afterClosed$.subscribe(result => &#123;
+  // Handle result
+&#125;);</code></pre>
+        </div>
+      </section>
+
+      <section class="api-section mt-8">
+        <h2>PrismDialogRef API</h2>
+        <p class="mb-4">Methods and observables available on the dialog reference returned by the service.</p>
+        <prism-api-table [data]="dialogRefApiData" />
+      </section>
+
+      <section class="api-section mt-8">
+        <h2>Injection Tokens</h2>
+        <p class="mb-4">Tokens for injecting data and dialog control into dynamically created components.</p>
+        <prism-api-table [data]="tokensApiData" />
+        
+        <div class="mt-4 p-4 bg-surface-100 dark:bg-surface-800 rounded-lg">
+          <h4 class="font-semibold mb-2">Component Usage:</h4>
+          <pre class="text-sm"><code>export class MyDialogComponent &#123;
+  ref = inject(PrismDialogRef);
+  data = inject(DIALOG_DATA);
+
+  save() &#123;
+    this.ref.close(&#123; saved: true &#125;);
+  &#125;
+&#125;</code></pre>
+        </div>
       </section>
     </prism-tab>
   </prism-tab-group>

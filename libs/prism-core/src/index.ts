@@ -26,3 +26,9 @@ export * from './lib/card/card.component';
 export * from './lib/tabs/tab-group.component';
 export * from './lib/tabs/tab.component';
 export * from './lib/dialog/dialog.component';
+
+// Dialog Service (Programmatic API)
+export * from './lib/dialog/dialog.service';
+export * from './lib/dialog/dialog-ref';
+export * from './lib/dialog/dialog.types';
+export * from './lib/dialog/dialog.tokens';
