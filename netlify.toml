@@ -1,21 +1,25 @@
 # Netlify Configuration File
 
 [build]
-  # 1. The command to build your app
+  # Build command
   command = "npx nx build prism-docs --configuration=production"
+  
+  # FIX: Update publish path to include '/browser' as requested by the error
+  publish = "dist/apps/prism-docs/browser"
 
-  # 2. The directory where the build output lives (The path you found)
-  # IMPORTANT: If your build uses Angular 17+, the index.html might actually be 
-  # inside "dist/apps/prism-docs/browser". If deployment shows 404, change this line to:
-  # publish = "dist/apps/prism-docs/browser"
-  publish = "dist/apps/prism-docs"
-
-# 3. Fix for Angular Routing (Prevents 404s on refresh)
+# Fix for Angular Routing (Prevents 404s on refresh)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# 4. Cache build artifacts to make deployments faster
-[[plugins]]
-  package = "@netlify/plugin-nextjs" # Standard plugin often used for caching support
+# Cache static assets for performance
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
