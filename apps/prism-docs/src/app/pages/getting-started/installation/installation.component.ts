@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrismCardComponent, PrismCodeBlockComponent } from '@prism-monorepo/prism-core';
 
@@ -40,7 +40,8 @@ import { PrismCardComponent, PrismCodeBlockComponent } from '@prism-monorepo/pri
     .mb-4 { margin-bottom: 1rem; }
     .mb-8 { margin-bottom: 2rem; }
     .h-8 { height: 2rem; }
-  `]
+  `],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InstallationComponent {
   styleSnippet = `@use '@devynelogic/prism-theme/core' as prism;

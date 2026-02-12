@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrismCardComponent } from '@prism-monorepo/prism-core';
 
@@ -45,6 +45,9 @@ import { PrismCardComponent } from '@prism-monorepo/prism-core';
     .space-y-2 > :not([hidden]) ~ :not([hidden]) { --tw-space-y-reverse: 0; margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse))); margin-bottom: calc(0.5rem * var(--tw-space-y-reverse)); }
     .mb-4 { margin-bottom: 1rem; }
     .mt-2 { margin-top: 0.5rem; }
-  `]
+  `],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AccessibilityComponent {}
+export class AccessibilityComponent {
+  protected readonly title = 'Accessibility';
+}
