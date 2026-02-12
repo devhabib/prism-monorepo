@@ -223,7 +223,6 @@ ngAfterViewInit() {
     </prism-avatar>
     <div>
       <span class="font-bold block">{{ row.name }}</span>
-      <span class="text-sm text-muted">{{ row.role }}</span>
     </div>
   </div>
 </ng-template>`,
@@ -232,8 +231,7 @@ ngAfterViewInit() {
 
 ngAfterViewInit() {
   this.teamCols = [
-    { key: 'name', header: 'Employee', cellTemplate: this.nameTemplate },
-    { key: 'role', header: 'Role' }
+    { key: 'name', header: 'Employee', cellTemplate: this.nameTemplate }
   ];
 }`,
 

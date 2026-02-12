@@ -3,9 +3,9 @@
 }
 
 .prism-card {
-  background: var(--surface-0);
+  background: var(--bg-card);
   border-radius: 12px;
-  border: 1px solid var(--surface-200);
+  border: 1px solid var(--border);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   overflow: hidden;
   transition: box-shadow 0.2s ease;
@@ -17,20 +17,20 @@
 
 .card-header {
   padding: 1.5rem 1.5rem 0.75rem;
-  border-bottom: 1px solid var(--surface-100);
+  border-bottom: 1px solid var(--border);
 }
 
 .card-title {
   margin: 0;
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--surface-900);
+  color: var(--text-main);
 }
 
 .card-subtitle {
   margin: 0.5rem 0 0;
   font-size: 0.875rem;
-  color: var(--surface-500);
+  color: var(--text-muted);
 }
 
 .card-content {
@@ -39,40 +39,10 @@
 
 .card-footer {
   padding: 0.75rem 1.5rem;
-  background: var(--surface-50);
-  border-top: 1px solid var(--surface-100);
+  background: var(--bg-app);
+  border-top: 1px solid var(--border);
 
   &:empty {
     display: none;
-  }
-}
-
-// Dark mode support
-:host-context([data-theme='dark']) {
-  .prism-card {
-    background: var(--surface-800);
-    border-color: var(--surface-700);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-
-    &:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-  }
-
-  .card-header {
-    border-bottom-color: var(--surface-700);
-  }
-
-  .card-title {
-    color: var(--surface-50);
-  }
-
-  .card-subtitle {
-    color: var(--surface-400);
-  }
-
-  .card-footer {
-    background: var(--surface-900);
-    border-top-color: var(--surface-700);
   }
 }

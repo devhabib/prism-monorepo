@@ -53,7 +53,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   `,
   styles: [`
     .prism-collapse-panel {
-      border-bottom: 1px solid var(--surface-200);
+      border-bottom: 1px solid var(--border);
 
       &:last-child {
         border-bottom: none;
@@ -82,7 +82,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     .prism-collapse-header__arrow {
       margin-right: 12px;
       font-size: 14px;
-      color: var(--surface-500);
+      color: var(--text-muted);
       display: flex;
       align-items: center;
       transition: transform 0.3s;
@@ -91,49 +91,25 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     .prism-collapse-header__title {
       flex: 1;
       font-weight: 500;
-      color: var(--surface-900);
+      color: var(--text-main);
     }
 
     .prism-collapse-header__extra {
       margin-left: auto;
-      color: var(--surface-500);
+      color: var(--text-muted);
       font-size: 13px;
     }
 
     .prism-collapse-content {
       overflow: hidden;
-      background-color: var(--surface-0);
+      background-color: var(--bg-card);
     }
 
     .prism-collapse-content__box {
       padding: 16px;
-      color: var(--surface-700);
+      color: var(--text-main);
       font-size: 14px;
       line-height: 1.5;
-    }
-
-    :host-context([data-theme='dark']) {
-      .prism-collapse-panel {
-        border-color: var(--surface-800);
-      }
-
-      .prism-collapse-header {
-        &:hover:not(.disabled) {
-          background-color: var(--surface-800);
-        }
-      }
-
-      .prism-collapse-header__title {
-        color: var(--surface-50);
-      }
-
-      .prism-collapse-content {
-        background-color: var(--surface-900);
-      }
-
-      .prism-collapse-content__box {
-        color: var(--surface-300);
-      }
     }
   `],
   animations: [
