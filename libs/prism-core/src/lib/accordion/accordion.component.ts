@@ -21,20 +21,12 @@ import { PrismAccordionPanelComponent } from './accordion-panel.component';
     .prism-accordion {
       display: flex;
       flex-direction: column;
-      background-color: var(--surface-0);
+      background-color: var(--bg-card);
       border-radius: 8px;
       overflow: hidden;
 
       &--bordered {
-        border: 1px solid var(--surface-200);
-      }
-    }
-
-    :host-context([data-theme='dark']) .prism-accordion {
-      background-color: var(--surface-900);
-      
-      &--bordered {
-        border-color: var(--surface-800);
+        border: 1px solid var(--border);
       }
     }
   `],

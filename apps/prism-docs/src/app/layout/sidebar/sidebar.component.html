@@ -3,13 +3,14 @@
 </div>
 
 <nav class="sidebar-menu">
-  @for (group of menu; track group.label) {
-    <div class="menu-group">
-      <div class="group-label">{{ group.label }}</div>
+  @for (section of menuSections; track section.title) {
+    <div class="menu-section">
+      <div class="section-title">{{ section.title }}</div>
       <ul>
-        @for (item of group.items; track item.label) {
+        @for (item of section.items; track item.label) {
           <li>
             <a [routerLink]="item.route" routerLinkActive="active">
+              @if (item.icon) { <i [class]="item.icon"></i> }
               {{ item.label }}
             </a>
           </li>

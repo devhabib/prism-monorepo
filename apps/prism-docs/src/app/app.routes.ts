@@ -12,6 +12,20 @@ export const appRoutes: Route[] = [
         pathMatch: 'full',
       },
       {
+        path: 'getting-started/installation',
+        loadComponent: () =>
+          import('./pages/getting-started/installation/installation.component').then(
+            (m) => m.InstallationComponent
+          ),
+      },
+      {
+        path: 'getting-started/accessibility',
+        loadComponent: () =>
+          import('./pages/getting-started/accessibility/accessibility.component').then(
+            (m) => m.AccessibilityComponent
+          ),
+      },
+      {
         path: 'components/table',
         loadComponent: () =>
           import('./pages/components/table-demo/table-demo.component').then(
