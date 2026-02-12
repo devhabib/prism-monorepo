@@ -29,6 +29,9 @@ export class SidebarComponent {
         { label: 'Empty', route: '/components/empty' },
         { label: 'Modal', route: '/components/modal' },
         { label: 'Drawer', route: '/components/drawer' },
+        { label: 'Switch', route: '/components/switch' },
+        { label: 'Tooltip', route: '/components/tooltip' },
+        { label: 'Accordion', route: '/components/accordion' },
       ],
     },
   ];

@@ -19,17 +19,22 @@ export * from './lib/api-table/api-table.component';
 
 // Form Primitives
 export * from './lib/checkbox/checkbox.component';
+export * from './lib/switch/switch.component';
 export * from './lib/select/select.component';
 
 // Visual Helpers
 export * from './lib/badge/badge.component';
 export * from './lib/tag/tag.component';
 export * from './lib/empty/empty.component';
+export * from './lib/tooltip/tooltip.directive';
+export * from './lib/tooltip/tooltip.component';
 
 // Structural Components
 export * from './lib/card/card.component';
 export * from './lib/tabs/tab-group.component';
 export * from './lib/tabs/tab.component';
+export * from './lib/accordion/accordion.component';
+export * from './lib/accordion/accordion-panel.component';
 export * from './lib/dialog/dialog.component';
 
 // Dialog Service (Programmatic API)

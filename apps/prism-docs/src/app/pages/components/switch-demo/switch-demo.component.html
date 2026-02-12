@@ -1,0 +1,58 @@
+<div class="demo-container">
+  <header class="demo-header">
+    <h1 class="demo-title">Switch</h1>
+    <p class="demo-subtitle">Switching selector between on and off.</p>
+  </header>
+
+  <prism-tab-group>
+    <prism-tab label="Examples">
+      <div class="demo-section">
+        <h2 class="section-title">Basic Usage</h2>
+        <div class="demo-card">
+          <div class="demo-preview">
+            <prism-switch [(checked)]="checked1" />
+          </div>
+          <prism-code-block [code]="basicTS" language="typescript" />
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <h2 class="section-title">Sizes</h2>
+        <div class="demo-card">
+          <div class="demo-preview flex gap-4 items-center">
+            <prism-switch [(checked)]="checked2" />
+            <prism-switch [(checked)]="checked2" size="small" />
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <h2 class="section-title">Text & Icons</h2>
+        <div class="demo-card">
+          <div class="demo-preview flex gap-4 items-center">
+            <prism-switch [(checked)]="checked3" checkedChildren="ON" unCheckedChildren="OFF" />
+            <prism-switch [(checked)]="checked3" [checkedChildren]="checkIcon" [unCheckedChildren]="closeIcon" />
+
+            <ng-template #checkIcon><i class="ri-check-line"></i></ng-template>
+            <ng-template #closeIcon><i class="ri-close-line"></i></ng-template>
+          </div>
+          <prism-code-block [code]="childrenHTML" language="html" />
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <h2 class="section-title">Loading & Disabled</h2>
+        <div class="demo-card">
+          <div class="demo-preview flex gap-4 items-center">
+            <prism-switch [loading]="true" [checked]="true" />
+            <prism-switch [disabled]="true" [checked]="false" />
+          </div>
+        </div>
+      </div>
+    </prism-tab>
+
+    <prism-tab label="API">
+      <prism-api-table [data]="apiDocs" />
+    </prism-tab>
+  </prism-tab-group>
+</div>

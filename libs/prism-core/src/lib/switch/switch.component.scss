@@ -1,0 +1,96 @@
+.prism-switch {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  min-width: 44px;
+  height: 22px;
+  line-height: 22px;
+  vertical-align: middle;
+  background: var(--surface-400); // Default Off Color
+  border: 0;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+
+  // --- CHECKED STATE ---
+  &.checked {
+    background: var(--primary-500); // PRIMARY COLOR ON
+    
+    .prism-switch-handle {
+      left: calc(100% - 18px - 2px); // Move circle to right
+    }
+    
+    .prism-switch-inner {
+      left: 7px; 
+      right: auto;
+    }
+  }
+
+  // --- HANDLE ---
+  .prism-switch-handle {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border-radius: 50%;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px 0 rgba(0,35,11,0.2);
+    z-index: 1; // Above text
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .animate-spin { animation: spin 1s linear infinite; font-size: 12px; color: var(--text-main); }
+  }
+
+  // --- TEXT (INNER) ---
+  .prism-switch-inner {
+    display: block;
+    margin: 0 7px 0 24px; // Spacing for "OFF" text
+    color: #fff;
+    font-size: 12px;
+    transition: margin 0.2s;
+    pointer-events: none;
+  }
+  
+  // Only adjust margin for checked state via the &.checked block above logic
+  &.checked .prism-switch-inner { margin: 0 24px 0 7px; }
+
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  // --- SMALL SIZE ---
+  &.size-small {
+    min-width: 28px;
+    height: 16px;
+    line-height: 16px;
+
+    .prism-switch-handle {
+      width: 12px;
+      height: 12px;
+    }
+
+    &.checked .prism-switch-handle {
+      left: calc(100% - 12px - 2px);
+    }
+
+    .prism-switch-inner {
+      display: none; // No text in small size
+    }
+  }
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+// Dark Mode
+:host-context([data-theme='dark']) {
+  .prism-switch {
+    background-color: var(--surface-700);
+
+    &--checked {
+      background-color: var(--primary);
+    }
+  }
+}

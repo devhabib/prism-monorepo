@@ -1,0 +1,22 @@
+<button type="button" 
+        role="switch" 
+        [attr.aria-checked]="checked()" 
+        [disabled]="disabled()"
+        class="prism-switch"
+        [class.checked]="checked()"
+        [class.size-small]="size() === 'small'">
+  
+  <div class="prism-switch-handle">
+    @if (loading()) { <i class="ri-loader-4-line animate-spin"></i> }
+  </div>
+
+  <div class="prism-switch-inner">
+    @if (checked()) {
+      @if (isTemplate(checkedChildren())) { <ng-container *ngTemplateOutlet="$any(checkedChildren())" /> }
+      @else { <span>{{ checkedChildren() }}</span> }
+    } @else {
+      @if (isTemplate(unCheckedChildren())) { <ng-container *ngTemplateOutlet="$any(unCheckedChildren())" /> }
+      @else { <span>{{ unCheckedChildren() }}</span> }
+    }
+  </div>
+</button>

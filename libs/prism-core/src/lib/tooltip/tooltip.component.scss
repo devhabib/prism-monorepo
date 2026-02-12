@@ -1,0 +1,88 @@
+.prism-tooltip {
+  position: absolute;
+  z-index: 1070;
+  display: block;
+  visibility: visible;
+  font-size: 14px;
+  line-height: 1.5715;
+  color: #fff;
+  text-align: left;
+  text-decoration: none;
+  word-wrap: break-word;
+  pointer-events: none;
+
+  &__content {
+    min-width: 32px;
+    min-height: 32px;
+    padding: 6px 8px;
+    background-color: rgba(0, 0, 0, 0.85);
+    border-radius: 6px;
+    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 
+                0 6px 16px 0 rgba(0, 0, 0, 0.08), 
+                0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  &__arrow {
+    position: absolute;
+    display: block;
+    width: 8.48528137px;
+    height: 8.48528137px;
+    background: transparent;
+    border-style: solid;
+    border-width: 4.24264069px;
+    transform: rotate(45deg);
+  }
+
+  &--top {
+    padding-bottom: 8px;
+    .prism-tooltip__arrow {
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      border-color: transparent rgba(0, 0, 0, 0.85) rgba(0, 0, 0, 0.85) transparent;
+    }
+  }
+
+  &--bottom {
+    padding-top: 8px;
+    .prism-tooltip__arrow {
+      top: 4px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      border-color: rgba(0, 0, 0, 0.85) transparent transparent rgba(0, 0, 0, 0.85);
+    }
+  }
+
+  &--left {
+    padding-right: 8px;
+    .prism-tooltip__arrow {
+      right: 4px;
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+      border-color: rgba(0, 0, 0, 0.85) rgba(0, 0, 0, 0.85) transparent transparent;
+    }
+  }
+
+  &--right {
+    padding-left: 8px;
+    .prism-tooltip__arrow {
+      left: 4px;
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+      border-color: transparent transparent rgba(0, 0, 0, 0.85) rgba(0, 0, 0, 0.85);
+    }
+  }
+}
+
+// Dark Mode
+:host-context([data-theme='dark']) {
+  .prism-tooltip__content {
+    background-color: var(--surface-200);
+    color: var(--surface-900);
+  }
+
+  .prism-tooltip--top .prism-tooltip__arrow { border-color: transparent var(--surface-200) var(--surface-200) transparent; }
+  .prism-tooltip--bottom .prism-tooltip__arrow { border-color: var(--surface-200) transparent transparent var(--surface-200); }
+  .prism-tooltip--left .prism-tooltip__arrow { border-color: var(--surface-200) var(--surface-200) transparent transparent; }
+  .prism-tooltip--right .prism-tooltip__arrow { border-color: transparent transparent var(--surface-200) var(--surface-200); }
+}

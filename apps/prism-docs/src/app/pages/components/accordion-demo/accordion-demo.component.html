@@ -1,0 +1,96 @@
+<div class="demo-container">
+  <header class="demo-header">
+    <h1 class="demo-title">Accordion</h1>
+    <p class="demo-subtitle">A content area which can be collapsed and expanded.</p>
+  </header>
+
+  <prism-tab-group>
+    <prism-tab label="Examples">
+      <div class="demo-section">
+        <h2 class="section-title">Basic Usage</h2>
+        <div class="demo-card">
+          <div class="demo-preview">
+            <prism-accordion>
+              <prism-accordion-panel header="This is panel header 1" [active]="true">
+                <p>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p>
+              </prism-accordion-panel>
+              <prism-accordion-panel header="This is panel header 2">
+                <p>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p>
+              </prism-accordion-panel>
+              <prism-accordion-panel header="This is panel header 3" [disabled]="true">
+                <p>A dog is a type of domesticated animal.</p>
+              </prism-accordion-panel>
+            </prism-accordion>
+          </div>
+          <prism-code-block [code]="basicHTML" language="html" />
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <h2 class="section-title">Accordion Mode</h2>
+        <p class="section-description">Only one panel can be open at a time.</p>
+        <div class="demo-card">
+          <div class="demo-preview">
+            <prism-accordion [accordion]="true">
+              <prism-accordion-panel header="This is panel header 1" [active]="true">
+                <p>Content 1</p>
+              </prism-accordion-panel>
+              <prism-accordion-panel header="This is panel header 2">
+                <p>Content 2</p>
+              </prism-accordion-panel>
+              <prism-accordion-panel header="This is panel header 3">
+                <p>Content 3</p>
+              </prism-accordion-panel>
+            </prism-accordion>
+          </div>
+          <prism-code-block [code]="accordionModeHTML" language="html" />
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <h2 class="section-title">Custom Header & Extra</h2>
+        <div class="demo-card">
+          <div class="demo-preview">
+            <prism-accordion>
+              <prism-accordion-panel [header]="customHeader" [extra]="extraContent">
+                <p>You can put anything in the header or the right-side "extra" area using Templates.</p>
+              </prism-accordion-panel>
+
+              <ng-template #customHeader>
+                <span class="flex items-center gap-2">
+                  <i class="ri-customer-service-2-line"></i>
+                  Support Tickets
+                </span>
+              </ng-template>
+
+              <ng-template #extraContent>
+                <prism-badge variant="info" label="4 Pending" />
+              </ng-template>
+            </prism-accordion>
+          </div>
+          <prism-code-block [code]="customHeaderHTML" language="html" />
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <h2 class="section-title">Borderless</h2>
+        <div class="demo-card">
+          <div class="demo-preview">
+            <prism-accordion [bordered]="false">
+              <prism-accordion-panel header="Borderless Panel 1" [active]="true">
+                <p>Content of panel 1</p>
+              </prism-accordion-panel>
+              <prism-accordion-panel header="Borderless Panel 2">
+                <p>Content of panel 2</p>
+              </prism-accordion-panel>
+            </prism-accordion>
+          </div>
+        </div>
+      </div>
+    </prism-tab>
+
+    <prism-tab label="API">
+      <prism-api-table [data]="apiDocs" />
+    </prism-tab>
+  </prism-tab-group>
+</div>

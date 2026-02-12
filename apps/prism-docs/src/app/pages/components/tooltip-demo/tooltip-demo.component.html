@@ -1,0 +1,64 @@
+<div class="demo-container">
+  <header class="demo-header">
+    <h1 class="demo-title">Tooltip</h1>
+    <p class="demo-subtitle">A simple text popup tip.</p>
+  </header>
+
+  <prism-tab-group>
+    <prism-tab label="Examples">
+      <div class="demo-section">
+        <h2 class="section-title">Basic Usage</h2>
+        <div class="demo-card">
+          <div class="demo-preview">
+            <prism-button prismTooltip="Prompt Text" label="Hover me" />
+          </div>
+          <prism-code-block [code]="basicHTML" language="html" />
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <h2 class="section-title">Placement</h2>
+        <div class="demo-card">
+          <div class="demo-preview flex flex-wrap gap-4 items-center">
+            <prism-button variant="outline" prismTooltip="Top Tooltip" tooltipPosition="top" label="Top" />
+            <prism-button variant="outline" prismTooltip="Bottom Tooltip" tooltipPosition="bottom" label="Bottom" />
+            <prism-button variant="outline" prismTooltip="Left Tooltip" tooltipPosition="left" label="Left" />
+            <prism-button variant="outline" prismTooltip="Right Tooltip" tooltipPosition="right" label="Right" />
+          </div>
+          <prism-code-block [code]="positionHTML" language="html" />
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <h2 class="section-title">Custom Content (Template)</h2>
+        <div class="demo-card">
+          <div class="demo-preview">
+            <prism-button variant="secondary" [prismTooltip]="customTpl" label="Template Content" />
+            
+            <ng-template #customTpl>
+              <div class="flex items-center gap-2">
+                <i class="ri-user-smile-line"></i>
+                <span>You can use <b>HTML</b> and <b>Icons</b></span>
+              </div>
+            </ng-template>
+          </div>
+          <prism-code-block [code]="templateHTML" language="html" />
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <h2 class="section-title">Triggers</h2>
+        <div class="demo-card">
+          <div class="demo-preview flex gap-4">
+            <prism-button prismTooltip="Click me!" tooltipTrigger="click" label="Click Trigger" />
+            <prism-button prismTooltip="Focus me!" tooltipTrigger="focus" label="Focus Trigger" />
+          </div>
+        </div>
+      </div>
+    </prism-tab>
+
+    <prism-tab label="API">
+      <prism-api-table [data]="apiDocs" />
+    </prism-tab>
+  </prism-tab-group>
+</div>

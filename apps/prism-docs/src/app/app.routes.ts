@@ -26,6 +26,27 @@ export const appRoutes: Route[] = [
           ),
       },
       {
+        path: 'components/switch',
+        loadComponent: () =>
+          import('./pages/components/switch-demo/switch-demo.component').then(
+            (m) => m.SwitchDemoComponent
+          ),
+      },
+      {
+        path: 'components/tooltip',
+        loadComponent: () =>
+          import('./pages/components/tooltip-demo/tooltip-demo.component').then(
+            (m) => m.TooltipDemoComponent
+          ),
+      },
+      {
+        path: 'components/accordion',
+        loadComponent: () =>
+          import('./pages/components/accordion-demo/accordion-demo.component').then(
+            (m) => m.AccordionDemoComponent
+          ),
+      },
+      {
         path: 'components/toast',
         loadComponent: () =>
           import('./pages/components/toast-demo/toast-demo.component').then(
