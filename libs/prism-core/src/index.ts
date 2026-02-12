@@ -17,6 +17,11 @@ export * from './lib/button/button.component';
 export * from './lib/input/input.directive';
 export * from './lib/api-table/api-table.component';
 
+// Documentation UI
+export * from './lib/docs-ui/demo-page-header.component';
+export * from './lib/docs-ui/demo-section.component';
+export * from './lib/docs-ui/demo-card.component';
+
 // Form Primitives
 export * from './lib/checkbox/checkbox.component';
 export * from './lib/switch/switch.component';

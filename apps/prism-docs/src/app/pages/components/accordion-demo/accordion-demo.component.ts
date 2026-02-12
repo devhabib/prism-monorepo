@@ -1,4 +1,4 @@
-import { Component, signal, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { 
   PrismAccordionComponent, 
@@ -6,8 +6,11 @@ import {
   PrismCodeBlockComponent,
   PrismTabGroupComponent,
   PrismTabComponent,
-  PrismBadgeComponent,
-  ApiTableComponent
+  ApiTableComponent,
+  PrismDemoPageHeaderComponent,
+  PrismDemoSectionComponent,
+  PrismDemoCardComponent,
+  PrismBadgeComponent
 } from '@prism-monorepo/prism-core';
 
 @Component({
@@ -20,8 +23,11 @@ import {
     PrismCodeBlockComponent,
     PrismTabGroupComponent,
     PrismTabComponent,
-    PrismBadgeComponent,
-    ApiTableComponent
+    ApiTableComponent,
+    PrismDemoPageHeaderComponent,
+    PrismDemoSectionComponent,
+    PrismDemoCardComponent,
+    PrismBadgeComponent
   ],
   templateUrl: './accordion-demo.component.html',
   styleUrls: ['./accordion-demo.component.scss'],

@@ -1,11 +1,14 @@
-import { Component, signal, ChangeDetectionStrategy, TemplateRef, ViewChild } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { 
   PrismSwitchComponent, 
   PrismCodeBlockComponent,
   PrismTabGroupComponent,
   PrismTabComponent,
-  ApiTableComponent
+  ApiTableComponent,
+  PrismDemoPageHeaderComponent,
+  PrismDemoSectionComponent,
+  PrismDemoCardComponent
 } from '@prism-monorepo/prism-core';
 
 @Component({
@@ -17,7 +20,10 @@ import {
     PrismCodeBlockComponent,
     PrismTabGroupComponent,
     PrismTabComponent,
-    ApiTableComponent
+    ApiTableComponent,
+    PrismDemoPageHeaderComponent,
+    PrismDemoSectionComponent,
+    PrismDemoCardComponent
   ],
   templateUrl: './switch-demo.component.html',
   styleUrls: ['./switch-demo.component.scss'],
@@ -27,13 +33,22 @@ export class SwitchDemoComponent {
   // Basic states
   checked1 = signal(false);
   checked2 = signal(true);
-  
-  // Custom children
   checked3 = signal(true);
   
-  // Loading
-  loading = signal(true);
+  // Interactive Loading
+  isLoading = signal(false);
+  isAccountActive = signal(false);
 
+  onAccountToggle(): void {
+    this.isLoading.set(true);
+    // Simulate API call
+    setTimeout(() => {
+      this.isAccountActive.update(v => !v);
+      this.isLoading.set(false);
+    }, 2000);
+  }
+
+  // API Docs
   apiDocs = [
     { name: 'checked', type: 'model<boolean>', default: 'false', description: 'Two-way binding for state.' },
     { name: 'checkedChildren', type: 'string | TemplateRef', default: 'null', description: 'Content when ON.' },
@@ -43,7 +58,7 @@ export class SwitchDemoComponent {
     { name: 'size', type: "'default' | 'small'", default: "'default'", description: 'Size of the switch.' }
   ];
 
-  // Template examples
+  // Code Examples
   basicTS = `import { Component, signal } from '@angular/core';
 import { PrismSwitchComponent } from '@prism-monorepo/prism-core';
 
@@ -56,6 +71,9 @@ import { PrismSwitchComponent } from '@prism-monorepo/prism-core';
 export class SwitchExampleComponent {
   checked = signal(false);
 }`;
+
+  sizesHTML = `<prism-switch [(checked)]="checked" />
+<prism-switch [(checked)]="checked" size="small" />`;
 
   childrenHTML = `<prism-switch 
   [(checked)]="checked" 
@@ -71,4 +89,21 @@ export class SwitchExampleComponent {
 
 <ng-template #checkIcon><i class="ri-check-line"></i></ng-template>
 <ng-template #closeIcon><i class="ri-close-line"></i></ng-template>`;
+
+  interactiveTS = `export class MyComponent {
+  isLoading = signal(false);
+  isAccountActive = signal(false);
+
+  onAccountToggle() {
+    this.isLoading.set(true);
+    // Simulate API call
+    setTimeout(() => {
+      this.isAccountActive.update(v => !v);
+      this.isLoading.set(false);
+    }, 2000);
+  }
+}`;
+
+  statesHTML = `<prism-switch [loading]="true" [checked]="true" />
+<prism-switch [disabled]="true" [checked]="false" />`;
 }

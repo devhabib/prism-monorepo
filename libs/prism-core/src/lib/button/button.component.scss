@@ -49,20 +49,14 @@ button {
   }
 
   &.variant-secondary {
-    background: linear-gradient(180deg, #ffffff 0%, var(--surface-50) 100%);
+    background: linear-gradient(180deg, var(--surface-0) 0%, var(--surface-50) 100%);
     color: var(--text-main);
     border-color: var(--border);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-
-    [data-theme="dark"] & {
-      background: linear-gradient(180deg, var(--surface-800) 0%, var(--surface-900) 100%);
-      border-color: var(--surface-700);
-    }
     
     &:hover:not(:disabled) { 
       background: var(--surface-50); 
       border-color: var(--surface-300);
-      [data-theme="dark"] & { background: var(--surface-800); }
     }
   }
 

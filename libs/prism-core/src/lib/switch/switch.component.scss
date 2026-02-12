@@ -6,13 +6,25 @@
   height: 22px;
   line-height: 22px;
   vertical-align: middle;
-  background-color: rgba(0, 0, 0, 0.25); // Default Off (Greyish)
+  background-color: var(--surface-300);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  cursor: pointer;
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+
+  &:active {
+    transform: scale(0.96);
+  }
   
   &.checked {
-    background-color: var(--primary-500); // Primary On
+    background-color: var(--primary-500);
+    border-color: var(--primary-600);
     
     .prism-switch-handle {
-      left: calc(100% - 18px - 2px); // Move circle to right
+      left: calc(100% - 18px - 2px); 
     }
     
     .prism-switch-inner {
@@ -24,20 +36,30 @@
   // --- HANDLE ---
   .prism-switch-handle {
     position: absolute;
-    top: 2px;
+    top: 1px;
     left: 2px;
     width: 18px;
     height: 18px;
     background: #fff;
     border-radius: 50%;
-    transition: all 0.2s;
-    box-shadow: 0 2px 4px 0 rgba(0,35,11,0.2);
-    z-index: 1; // Above text
+    transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.2s ease;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     
-    .animate-spin { animation: spin 1s linear infinite; font-size: 12px; color: var(--text-main); }
+    .ri-loader-4-line { 
+      font-size: 10px; 
+      color: var(--primary-500);
+      line-height: 1;
+      display: block; // Ensure it centers correctly
+    }
+  }
+
+  .animate-spin {
+    animation: spin 1s linear infinite;
   }
 
   // --- TEXT (INNER) ---
@@ -50,8 +72,10 @@
     pointer-events: none;
   }
   
-  // Only adjust margin for checked state via the &.checked block above logic
-  &.checked .prism-switch-inner { margin: 0 24px 0 7px; }
+  // Only adjust margin for checked state
+  &.checked .prism-switch-inner { 
+    margin: 0 24px 0 7px;
+  }
 
   &:disabled { opacity: 0.5; cursor: not-allowed; }
 
@@ -83,8 +107,9 @@
   .prism-switch {
     background-color: var(--surface-700);
 
-    &--checked {
-      background-color: var(--primary);
+    &.checked {
+      background-color: var(--primary-600);
+      border-color: var(--primary-700);
     }
   }
 }

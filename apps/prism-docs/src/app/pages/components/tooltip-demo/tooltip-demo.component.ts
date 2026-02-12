@@ -1,4 +1,4 @@
-import { Component, signal, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { 
   PrismTooltipDirective, 
@@ -6,7 +6,10 @@ import {
   PrismCodeBlockComponent,
   PrismTabGroupComponent,
   PrismTabComponent,
-  ApiTableComponent
+  ApiTableComponent,
+  PrismDemoPageHeaderComponent,
+  PrismDemoSectionComponent,
+  PrismDemoCardComponent
 } from '@prism-monorepo/prism-core';
 
 @Component({
@@ -19,7 +22,10 @@ import {
     PrismCodeBlockComponent,
     PrismTabGroupComponent,
     PrismTabComponent,
-    ApiTableComponent
+    ApiTableComponent,
+    PrismDemoPageHeaderComponent,
+    PrismDemoSectionComponent,
+    PrismDemoCardComponent
   ],
   templateUrl: './tooltip-demo.component.html',
   styleUrls: ['./tooltip-demo.component.scss'],
@@ -50,4 +56,7 @@ export class TooltipDemoComponent {
     <span>Supports <b>Templates</b> too!</span>
   </div>
 </ng-template>`;
+
+  triggerHTML = `<prism-button prismTooltip="Click me!" tooltipTrigger="click" label="Click Trigger" />
+<prism-button prismTooltip="Focus me!" tooltipTrigger="focus" label="Focus Trigger" />`;
 }

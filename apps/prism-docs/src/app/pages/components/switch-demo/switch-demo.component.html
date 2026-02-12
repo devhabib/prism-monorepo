@@ -1,58 +1,74 @@
-<div class="demo-container">
-  <header class="demo-header">
-    <h1 class="demo-title">Switch</h1>
-    <p class="demo-subtitle">Switching selector between on and off.</p>
-  </header>
+<prism-demo-page-header 
+  title="Switch" 
+  subtitle="A selector component for switching between two states (On/Off)." 
+/>
 
-  <prism-tab-group>
-    <prism-tab label="Examples">
-      <div class="demo-section">
-        <h2 class="section-title">Basic Usage</h2>
-        <div class="demo-card">
-          <div class="demo-preview">
-            <prism-switch [(checked)]="checked1" />
-          </div>
-          <prism-code-block [code]="basicTS" language="typescript" />
+<prism-tab-group>
+  <prism-tab label="Examples">
+    
+    <prism-demo-section title="Basic Usage" description="The most basic switch implementation.">
+      <prism-demo-card>
+        <div preview>
+          <prism-switch [(checked)]="checked1" />
         </div>
-      </div>
+        <prism-code-block [code]="basicTS" language="typescript" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-      <div class="demo-section">
-        <h2 class="section-title">Sizes</h2>
-        <div class="demo-card">
-          <div class="demo-preview flex gap-4 items-center">
-            <prism-switch [(checked)]="checked2" />
-            <prism-switch [(checked)]="checked2" size="small" />
-          </div>
+    <prism-demo-section title="Sizes" description="Two sizes are available: <code>default</code> and <code>small</code>.">
+      <prism-demo-card>
+        <div preview class="flex gap-4 items-center">
+          <prism-switch [(checked)]="checked2" />
+          <prism-switch [(checked)]="checked2" size="small" />
         </div>
-      </div>
+        <prism-code-block [code]="sizesHTML" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-      <div class="demo-section">
-        <h2 class="section-title">Text & Icons</h2>
-        <div class="demo-card">
-          <div class="demo-preview flex gap-4 items-center">
-            <prism-switch [(checked)]="checked3" checkedChildren="ON" unCheckedChildren="OFF" />
-            <prism-switch [(checked)]="checked3" [checkedChildren]="checkIcon" [unCheckedChildren]="closeIcon" />
+    <prism-demo-section title="Text & Icons" description="Custom content can be placed inside the switch handle.">
+      <prism-demo-card>
+        <div preview class="flex gap-4 items-center">
+          <prism-switch [(checked)]="checked3" checkedChildren="ON" unCheckedChildren="OFF" />
+          <prism-switch [(checked)]="checked3" [checkedChildren]="checkIcon" [unCheckedChildren]="closeIcon" />
 
-            <ng-template #checkIcon><i class="ri-check-line"></i></ng-template>
-            <ng-template #closeIcon><i class="ri-close-line"></i></ng-template>
-          </div>
-          <prism-code-block [code]="childrenHTML" language="html" />
+          <ng-template #checkIcon><i class="ri-check-line"></i></ng-template>
+          <ng-template #closeIcon><i class="ri-close-line"></i></ng-template>
         </div>
-      </div>
+        <prism-code-block [code]="childrenHTML" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-      <div class="demo-section">
-        <h2 class="section-title">Loading & Disabled</h2>
-        <div class="demo-card">
-          <div class="demo-preview flex gap-4 items-center">
-            <prism-switch [loading]="true" [checked]="true" />
-            <prism-switch [disabled]="true" [checked]="false" />
+    <prism-demo-section title="Interactive Loading" description="In real scenarios, switches often trigger asynchronous actions. Use <code>loading</code> state to disable interaction while waiting.">
+      <prism-demo-card>
+        <div preview class="flex flex-col gap-4 items-center w-full">
+          <div class="flex items-center gap-4 bg-surface-50 p-4 rounded-lg border border-border w-full max-w-md justify-between">
+            <span class="font-medium">User Status: {{ isAccountActive() ? 'Active' : 'Deactivated' }}</span>
+            <prism-switch 
+              [checked]="isAccountActive()" 
+              [loading]="isLoading()"
+              [disabled]="isLoading()"
+              (click)="onAccountToggle()" 
+            />
           </div>
+          <p class="text-xs text-muted">Click the switch to simulate a 2s API call.</p>
         </div>
-      </div>
-    </prism-tab>
+        <prism-code-block [code]="interactiveTS" language="typescript" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-    <prism-tab label="API">
-      <prism-api-table [data]="apiDocs" />
-    </prism-tab>
-  </prism-tab-group>
-</div>
+    <prism-demo-section title="States" description="Disabled and loading states.">
+      <prism-demo-card>
+        <div preview class="flex gap-4 items-center">
+          <prism-switch [loading]="true" [checked]="true" />
+          <prism-switch [disabled]="true" [checked]="false" />
+        </div>
+        <prism-code-block [code]="statesHTML" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+  </prism-tab>
+
+  <prism-tab label="API">
+    <prism-api-table [data]="apiDocs" />
+  </prism-tab>
+</prism-tab-group>

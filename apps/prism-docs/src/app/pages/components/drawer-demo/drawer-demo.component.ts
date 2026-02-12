@@ -1,4 +1,4 @@
-import { Component, signal, TemplateRef, ViewChild, inject } from '@angular/core';
+import { Component, signal, TemplateRef, viewChild, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { 
   PrismButtonComponent, 
@@ -28,7 +28,8 @@ import { UserProfileDialogComponent } from '../modal-demo/user-profile-dialog.co
     PrismCodeBlockComponent
   ],
   templateUrl: './drawer-demo.component.html',
-  styleUrl: './drawer-demo.component.scss'
+  styleUrl: './drawer-demo.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DrawerDemoComponent {
   private drawerService = inject(PrismDrawerService);
@@ -38,7 +39,7 @@ export class DrawerDemoComponent {
   width = signal('300px');
   showFooter = signal(false);
 
-  @ViewChild('footerTpl', { static: true }) footerTpl!: TemplateRef<any>;
+  footerTpl = viewChild<TemplateRef<void>>('footerTpl');
 
   open(position: DrawerPosition): void {
     this.placement.set(position);
