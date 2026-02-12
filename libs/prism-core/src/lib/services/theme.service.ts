@@ -28,8 +28,8 @@ export class ThemeService {
     if (savedTheme) {
       this.currentTheme.set(savedTheme);
     } else {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      this.currentTheme.set(prefersDark ? 'dark' : 'light');
+      // Force default to light mode as per user request
+      this.currentTheme.set('light');
     }
   }
 
