@@ -1,0 +1,95 @@
+<div class="demo-container">
+  <div class="demo-header">
+    <h1>Drawer</h1>
+    <p>Flexible side panels for mobile menus, details views, and navigation.</p>
+  </div>
+
+  <prism-tab-group>
+    <prism-tab label="Examples">
+      <div class="example-section">
+        <h3>1. Positioning</h3>
+        <p class="mb-4">Drawers can slide in from any of the four edges.</p>
+        <div class="flex gap-4 flex-wrap mb-4">
+          <prism-button label="Right (Default)" (click)="open('right')" />
+          <prism-button label="Left" variant="secondary" (click)="open('left')" />
+          <prism-button label="Top" variant="outline" (click)="open('top')" />
+          <prism-button label="Bottom" variant="outline" (click)="open('bottom')" />
+        </div>
+        <prism-code-block [html]="basicUsageHTML" [ts]="basicUsageTS" />
+      </div>
+
+      <div class="example-section">
+        <h3>2. Customization</h3>
+        <p class="mb-4">Control dimensions and handle custom content via templates.</p>
+        <div class="flex gap-4 flex-wrap mb-4">
+          <prism-button label="Custom Width (50%)" variant="secondary" (click)="openCustom()" />
+          <prism-button label="Open via Service" icon="ri-service-line" (click)="openService()" />
+        </div>
+        <prism-code-block [ts]="serviceUsageTS" />
+      </div>
+
+      <ng-template #footerTpl>
+        <div class="flex justify-end gap-2">
+          <prism-button label="Cancel" variant="text" (click)="close()" />
+          <prism-button label="Confirm Action" (click)="close()" />
+        </div>
+      </ng-template>
+    </prism-tab>
+
+    <prism-tab label="API">
+      <section class="api-section">
+        <h2>PrismDrawerComponent API</h2>
+        <p>Inputs and outputs for the template-directive usage.</p>
+        <prism-api-table [data]="apiDocs" />
+      </section>
+
+      <section class="api-section mt-8">
+        <h2>PrismDrawerService API</h2>
+        <p>Options for opening drawers programmatically.</p>
+        <prism-api-table [data]="serviceApiDocs" />
+      </section>
+
+      <section class="api-section mt-8">
+        <h2>PrismDrawerRef & Tokens</h2>
+        <p>Handling lifecycle and data injection within dynamic components.</p>
+        <div class="space-y-6">
+          <div>
+            <h4 class="text-sm font-semibold mb-2">PrismDrawerRef</h4>
+            <prism-api-table [data]="refApiDocs" />
+            <div class="mt-4">
+              <prism-code-block [ts]="refUsageTS" />
+            </div>
+          </div>
+          <div>
+            <h4 class="text-sm font-semibold mb-2">DRAWER_DATA</h4>
+            <prism-api-table [data]="tokenApiDocs" />
+            <div class="mt-4">
+              <prism-code-block [ts]="tokenUsageTS" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </prism-tab>
+  </prism-tab-group>
+</div>
+
+<prism-drawer 
+  [(visible)]="isVisible" 
+  [position]="placement()" 
+  [title]="'Basic Drawer'"
+  [width]="width()"
+  [footer]="showFooter() ? footerTpl : null">
+  <div class="space-y-4">
+    <p>This is dynamic drawer content. You can place any component or HTML here.</p>
+    
+    <prism-card header="Drawer Details" subheader="Contextual Info">
+      <p class="text-sm text-muted">Drawers are perfect for:</p>
+      <ul class="text-sm list-disc pl-4 mt-2 space-y-1">
+        <li>Mobile navigation menus</li>
+        <li>Details view for table rows</li>
+        <li>Contextual filtering options</li>
+        <li>Quick actions sidebar</li>
+      </ul>
+    </prism-card>
+  </div>
+</prism-drawer>

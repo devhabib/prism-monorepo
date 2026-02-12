@@ -1,0 +1,41 @@
+@if (visible()) {
+  <div class="prism-drawer-mask" (click)="maskClosable() ? close() : null" @backdropState></div>
+
+  <div class="prism-drawer-panel"
+       [class]="'pos-' + position()"
+       [style.width]="(position() === 'left' || position() === 'right') ? width() : '100%'"
+       [style.height]="(position() === 'top' || position() === 'bottom') ? height() : '100%'"
+       [@panelState]="position()">
+    
+    <div class="drawer-header">
+      <div class="title">
+        @if (isTemplate(displayTitle)) { 
+          <ng-container *ngTemplateOutlet="$any(displayTitle)" /> 
+        }
+        @else { 
+          {{ displayTitle }} 
+        }
+      </div>
+      @if (showClose()) {
+        <button class="close-btn" (click)="close()">
+          <i class="ri-close-line"></i>
+        </button>
+      }
+    </div>
+
+    <div class="drawer-body">
+      <ng-content />
+    </div>
+
+    @if (footer()) {
+      <div class="drawer-footer">
+        @if (isTemplate(footer())) { 
+          <ng-container *ngTemplateOutlet="$any(footer())" /> 
+        }
+        @else { 
+          {{ footer() }} 
+        }
+      </div>
+    }
+  </div>
+}

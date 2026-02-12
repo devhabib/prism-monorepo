@@ -9,14 +9,14 @@ import {
   PrismTabComponent,
   PrismInputDirective,
   PrismCodeBlockComponent,
-  ApiTableComponent,
   ApiDoc,
+  ApiTableComponent,
   PrismDialogService
 } from '@prism-monorepo/prism-core';
 import { UserProfileDialogComponent } from './user-profile-dialog.component';
 
 @Component({
-  selector: 'prism-overlay-demo',
+  selector: 'prism-modal-demo',
   standalone: true,
   imports: [
     CommonModule,
@@ -30,11 +30,11 @@ import { UserProfileDialogComponent } from './user-profile-dialog.component';
     PrismCodeBlockComponent,
     ApiTableComponent
   ],
-  templateUrl: './overlay-demo.component.html',
-  styleUrl: './overlay-demo.component.scss',
+  templateUrl: './modal-demo.component.html',
+  styleUrl: './modal-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OverlayDemoComponent {
+export class ModalDemoComponent {
   // Services
   private dialog = inject(PrismDialogService);
   private fb = inject(FormBuilder);
@@ -92,7 +92,7 @@ export class OverlayDemoComponent {
     });
 
     dialogRef.afterClosed$.subscribe(() => {
-      // Result handling - can be logged or processed here
+      // Result handling
     });
   }
 
@@ -317,5 +317,23 @@ export class UserProfileDialogComponent {
     this.ref.close({ saved: true });
   }
 }`;
-}
 
+  readonly programmaticUsageTS = `const ref = this.dialog.open(MyComponent, {
+  header: 'Title',
+  data: { userId: 123 },
+  width: '600px'
+});
+
+ref.afterClosed$.subscribe(result => {
+  // Handle result
+});`;
+
+  readonly componentUsageTS = `export class MyDialogComponent {
+  ref = inject(PrismDialogRef);
+  data = inject(DIALOG_DATA);
+
+  save() {
+    this.ref.close({ saved: true });
+  }
+}`;
+}

@@ -47,10 +47,17 @@ export const appRoutes: Route[] = [
           ),
       },
       {
-        path: 'components/overlays',
+        path: 'components/modal',
         loadComponent: () =>
-          import('./pages/components/overlay-demo/overlay-demo.component').then(
-            (m) => m.OverlayDemoComponent
+          import('./pages/components/modal-demo/modal-demo.component').then(
+            (m) => m.ModalDemoComponent
+          ),
+      },
+      {
+        path: 'components/drawer',
+        loadComponent: () =>
+          import('./pages/components/drawer-demo/drawer-demo.component').then(
+            (m) => m.DrawerDemoComponent
           ),
       }
     ],
