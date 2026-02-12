@@ -1,159 +1,129 @@
-<div class="demo-container">
-  <div class="demo-header">
-    <h1>Dialogs & Modals</h1>
-    <p>Modal components for focused interactions and user confirmations.</p>
-  </div>
+<prism-demo-page-header 
+  title="Dialogs & Modals" 
+  subtitle="Modal components for focused interactions and user confirmations." 
+/>
 
-  <prism-tab-group>
-    <!-- Examples Tab -->
-    <prism-tab label="Examples">
-      <!-- Basic Dialog -->
-      <div class="example-section">
-        <h3>1. Basic Dialog</h3>
-        <p class="mb-4">Simple dialog with header, content, and footer actions.</p>
-
-        <div class="demo-row">
+<prism-tab-group>
+  <prism-tab label="Examples">
+    
+    <prism-demo-section title="Basic Dialog" description="Simple dialog with header, content, and footer actions.">
+      <prism-demo-card>
+        <div preview>
           <prism-button label="Open Basic Dialog" (click)="basicDialog.set(true)" />
         </div>
+        <prism-code-block [html]="snippets.basicHTML" [ts]="snippets.basicTS" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-        <prism-code-block [html]="basicHTML" [ts]="basicTS"></prism-code-block>
-      </div>
-
-      <!-- Dialog with Card -->
-      <div class="example-section">
-        <h3>2. Dialog with Card Content</h3>
-        <p class="mb-4">Nested card inside dialog for structured information display.</p>
-
-        <div class="demo-row">
+    <prism-demo-section title="Dialog with Card Content" description="Nested card inside dialog for structured information display.">
+      <prism-demo-card>
+        <div preview>
           <prism-button label="View User Profile" variant="secondary" (click)="cardDialog.set(true)" />
         </div>
+        <prism-code-block [html]="snippets.cardHTML" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-        <prism-code-block [html]="cardHTML"></prism-code-block>
-      </div>
-
-      <!-- Form Dialog -->
-      <div class="example-section">
-        <h3>3. Form Dialog</h3>
-        <p class="mb-4">Dialog containing a reactive form with validation.</p>
-
-        <div class="demo-row">
+    <prism-demo-section title="Form Dialog" description="Dialog containing a reactive form with validation.">
+      <prism-demo-card>
+        <div preview class="flex items-center gap-4">
           <prism-button label="Contact Form" variant="outline" icon="ri-mail-line" (click)="formDialog.set(true)" />
           @if (formSubmitted()) {
-            <span class="text-success ml-4">✓ Form submitted successfully!</span>
+            <span class="text-green-600 dark:text-green-400 text-sm font-medium flex items-center gap-1">
+              <i class="ri-check-circle-line"></i> Form submitted successfully!
+            </span>
           }
         </div>
+        <prism-code-block [html]="snippets.formHTML" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-        <prism-code-block [html]="formHTML"></prism-code-block>
-      </div>
-
-      <!-- Confirmation Dialog -->
-      <div class="example-section">
-        <h3>4. Confirmation Dialog</h3>
-        <p class="mb-4">Dangerous action with cancel/confirm pattern.</p>
-
-        <div class="demo-row">
+    <prism-demo-section title="Confirmation Dialog" description="Dangerous action with cancel/confirm pattern.">
+      <prism-demo-card>
+        <div preview>
           <prism-button label="Delete Item" variant="danger" icon="ri-delete-bin-line" (click)="confirmDialog.set(true)" />
         </div>
+        <prism-code-block [html]="snippets.confirmHTML" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-        <prism-code-block [html]="confirmHTML"></prism-code-block>
-      </div>
-
-      <!-- Service-Based Dialog (Programmatic) -->
-      <div class="example-section">
-        <h3>5. Service-Based Dialog (Programmatic API)</h3>
-        <p class="mb-4">Open dialogs dynamically using <code>PrismDialogService</code> without template selectors. Perfect for complex workflows and dynamic content.</p>
-
-        <div class="demo-row mb-6">
-          <prism-button 
-            label="Open via Service" 
-            icon="ri-code-line" 
-            (click)="openServiceDialog()" />
+    <prism-demo-section title="Service-Based Dialog" description="Open dialogs dynamically using PrismDialogService.">
+      <prism-demo-card>
+        <div preview>
+          <prism-button label="Open via Service" icon="ri-code-line" (click)="openServiceDialog()" />
         </div>
+        <prism-code-block [ts]="snippets.serviceHTML" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-        <prism-code-block [ts]="serviceHTML"></prism-code-block>
-      </div>
-
-      <!-- Position Variants -->
-      <div class="example-section">
-        <h3>6. Position & Animation Variants</h3>
-        <p class="mb-4">Dialogs can slide in from different directions with smooth animations.</p>
-
-        <div class="demo-row">
+    <prism-demo-section title="Position & Animation Variants" description="Dialogs can slide in from different directions with smooth animations.">
+      <prism-demo-card>
+        <div preview class="flex gap-4 flex-wrap">
           <prism-button label="Center (Scale)" (click)="openPositionDialog('center')" />
           <prism-button label="Top (Slide Down)" variant="secondary" (click)="openPositionDialog('top')" />
           <prism-button label="Bottom (Slide Up)" variant="secondary" (click)="openPositionDialog('bottom')" />
           <prism-button label="Left (Sidebar)" variant="outline" (click)="openPositionDialog('left')" />
           <prism-button label="Right (Sidebar)" variant="outline" (click)="openPositionDialog('right')" />
         </div>
+        <!-- No code block needed for this simple preview, or could add one showing [position] input -->
+      </prism-demo-card>
+    </prism-demo-section>
+
+  </prism-tab>
+
+  <prism-tab label="API">
+    
+    <prism-demo-section title="PrismDialogComponent API" description="Inputs and outputs for the template-based dialog component.">
+      <prism-api-table [data]="apiData" />
+    </prism-demo-section>
+
+    <prism-demo-section title="PrismDialogService API" description="Programmatic dialog service for dynamic component injection.">
+      <prism-api-table [data]="serviceApiData" />
+      <div class="mt-4">
+        <h4 class="text-sm font-semibold mb-2">Usage Example:</h4>
+        <prism-code-block [ts]="snippets.programmaticUsageTS" />
       </div>
-    </prism-tab>
+    </prism-demo-section>
 
-    <!-- API Tab -->
-    <prism-tab label="API">
-      <section class="api-section">
-        <h2>PrismDialogComponent API</h2>
-        <p class="mb-4">Inputs and outputs for the template-based dialog component.</p>
-        <prism-api-table [data]="apiData" />
-      </section>
+    <prism-demo-section title="PrismDialogRef API" description="Methods and observables available on the dialog reference returned by the service.">
+      <prism-api-table [data]="dialogRefApiData" />
+    </prism-demo-section>
 
-      <section class="api-section mt-8">
-        <h2>PrismDialogService API</h2>
-        <p class="mb-4">Programmatic dialog service for dynamic component injection.</p>
-        <prism-api-table [data]="serviceApiData" />
-        
-        <div class="mt-4">
-          <h4 class="font-semibold mb-2">Usage Example:</h4>
-          <prism-code-block [ts]="programmaticUsageTS"></prism-code-block>
-        </div>
-      </section>
+    <prism-demo-section title="Injection Tokens" description="Tokens for injecting data and dialog control into dynamically created components.">
+      <prism-api-table [data]="tokensApiData" />
+      <div class="mt-4">
+        <h4 class="text-sm font-semibold mb-2">Component Usage:</h4>
+        <prism-code-block [ts]="snippets.componentUsageTS" />
+      </div>
+    </prism-demo-section>
 
-      <section class="api-section mt-8">
-        <h2>PrismDialogRef API</h2>
-        <p class="mb-4">Methods and observables available on the dialog reference returned by the service.</p>
-        <prism-api-table [data]="dialogRefApiData" />
-      </section>
+  </prism-tab>
+</prism-tab-group>
 
-      <section class="api-section mt-8">
-        <h2>Injection Tokens</h2>
-        <p class="mb-4">Tokens for injecting data and dialog control into dynamically created components.</p>
-        <prism-api-table [data]="tokensApiData" />
-        
-        <div class="mt-4">
-          <h4 class="font-semibold mb-2">Component Usage:</h4>
-          <prism-code-block [ts]="componentUsageTS"></prism-code-block>
-        </div>
-      </section>
-    </prism-tab>
-  </prism-tab-group>
-</div>
-
-<!-- Dialog Instances -->
-<!-- Basic Dialog -->
+<!-- Dialog Instances (Must be present in template) -->
 <prism-dialog [(visible)]="basicDialog" header="Welcome">
   <p>This is a signal-driven dialog with two-way binding!</p>
-  <p class="mt-2">Click the backdrop or close button to dismiss.</p>
+  <p class="mt-2 text-muted text-sm">Click the backdrop or close button to dismiss.</p>
   <div footer>
     <prism-button label="Close" variant="outline" (click)="basicDialog.set(false)" />
   </div>
 </prism-dialog>
 
-<!-- Card Dialog -->
 <prism-dialog [(visible)]="cardDialog" header="User Profile" width="600px">
   <prism-card header="Sarah Connor" subheader="Frontend Lead">
     <div class="space-y-2">
       <p><strong class="text-sm">Email:</strong> <span class="text-sm text-muted">sarah@example.com</span></p>
-      <p><strong class="text-sm">Status:</strong> <span class="text-sm text-success">Active</span></p>
+      <p><strong class="text-sm">Status:</strong> <span class="text-sm text-green-600 dark:text-green-400">Active</span></p>
       <p><strong class="text-sm">Joined:</strong> <span class="text-sm text-muted">January 2024</span></p>
       <p><strong class="text-sm">Team:</strong> <span class="text-sm text-muted">Design System</span></p>
     </div>
   </prism-card>
-  <div footer>
+  <div footer class="flex justify-end gap-2">
     <prism-button label="Edit Profile" variant="outline" />
     <prism-button label="Close" variant="text" (click)="cardDialog.set(false)" />
   </div>
 </prism-dialog>
 
-<!-- Form Dialog -->
 <prism-dialog [(visible)]="formDialog" header="Contact Us" width="500px">
   <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
     <div class="space-y-4">
@@ -171,7 +141,7 @@
       </div>
     </div>
   </form>
-  <div footer>
+  <div footer class="flex justify-end gap-2">
     <prism-button label="Cancel" variant="text" (click)="formDialog.set(false)" />
     <prism-button 
       label="Send Message" 
@@ -181,17 +151,15 @@
   </div>
 </prism-dialog>
 
-<!-- Confirmation Dialog -->
 <prism-dialog [(visible)]="confirmDialog" header="Confirm Delete" width="400px">
   <p>Are you sure you want to delete this item?</p>
   <p class="mt-2 text-sm text-muted">This action cannot be undone.</p>
-  <div footer>
+  <div footer class="flex justify-end gap-2">
     <prism-button label="Cancel" variant="outline" (click)="confirmDialog.set(false)" />
     <prism-button label="Delete" variant="danger" icon="ri-delete-bin-line" (click)="deleteItem()" />
   </div>
 </prism-dialog>
 
-<!-- Position Variants Dialog -->
 <prism-dialog 
   [(visible)]="positionDialog" 
   [header]="'Position: ' + currentPosition()" 

@@ -1,155 +1,83 @@
-<div class="demo-container">
-  <div class="demo-header">
-    <h1>Empty State</h1>
-    <p>Display placeholders for empty data sets with icons, illustrations, and call-to-actions.</p>
-  </div>
+<prism-demo-page-header 
+  title="Empty State" 
+  subtitle="Display placeholders for empty data sets with icons, illustrations, and call-to-actions." 
+/>
 
-  <!-- Tab Navigation -->
-  <div class="demo-tabs mb-4">
-    <button 
-      class="tab-btn" 
-      [class.active]="activeTab() === 'overview'" 
-      (click)="setActiveTab('overview')">
-      Overview
-    </button>
-    <button 
-      class="tab-btn" 
-      [class.active]="activeTab() === 'variations'" 
-      (click)="setActiveTab('variations')">
-      Variations
-    </button>
-    <button 
-      class="tab-btn" 
-      [class.active]="activeTab() === 'api'" 
-      (click)="setActiveTab('api')">
-      API
-    </button>
-  </div>
-
-  <!-- Content -->
-  @if (activeTab() === 'overview') {
-    <div class="fade-in">
-      <section class="demo-section">
-        <h2>Default State</h2>
-        <p>The standard combination of a descriptive icon, title, and optional description.</p>
-        <div class="demo-preview">
+<prism-tab-group>
+  <prism-tab label="Examples">
+    
+    <prism-demo-section title="Default State" description="The standard combination of a descriptive icon, title, and optional description.">
+      <prism-demo-card>
+        <div preview class="p-8 border border-dashed rounded-lg bg-gray-50 dark:bg-gray-800/50">
           <prism-empty 
             title="No Records Found" 
             description="We couldn't find any items matching your current view." 
           />
         </div>
-      </section>
-    </div>
-  }
+        <prism-code-block [code]="snippets.default" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-  @if (activeTab() === 'variations') {
-    <div class="fade-in">
-      <section class="demo-section">
-        <h2>Icon Variations</h2>
-        <div class="demo-grid">
-          <prism-empty 
-            title="Inbox Zero" 
-            description="You have no new messages." 
-          />
-          <prism-empty 
-            icon="ri-folder-open-line"
-            title="No Files" 
-            description="Upload your first document to get started." 
-          />
-          <prism-empty 
-            icon="ri-search-line"
-            title="No Results" 
-            description="Try adjusting your filters or search term." 
-          />
-        </div>
-      </section>
+    <prism-demo-section title="Variations" description="Use different icons to convey specific contexts.">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <prism-demo-card>
+          <div preview class="h-64 flex items-center justify-center p-4">
+            <prism-empty 
+              icon="ri-inbox-archive-line"
+              title="Inbox Zero" 
+              description="You have no new messages." 
+            />
+          </div>
+          <prism-code-block [code]="snippets.inbox" language="html" />
+        </prism-demo-card>
 
-      <section class="demo-section">
-        <h2>Actions Integration</h2>
-        <p>Project custom buttons into the empty state to guide user next steps.</p>
-        <div class="demo-preview">
+        <prism-demo-card>
+          <div preview class="h-64 flex items-center justify-center p-4">
+            <prism-empty 
+              icon="ri-file-search-line"
+              title="No Results" 
+              description="Try adjusting your search terms." 
+            />
+          </div>
+          <prism-code-block [code]="snippets.search" language="html" />
+        </prism-demo-card>
+      </div>
+    </prism-demo-section>
+
+    <prism-demo-section title="Actions Integration" description="Project custom buttons into the empty state to guide user next steps.">
+      <prism-demo-card>
+        <div preview class="p-8">
           <prism-empty 
             icon="ri-add-circle-line"
             title="First Step" 
             description="Create your first project to start tracking your progress.">
-            <prism-button label="Create Project" icon="ri-add-line" />
-            <prism-button label="Import Data" variant="outline" />
+            <div class="flex gap-3 justify-center mt-4">
+              <prism-button label="Create Project" icon="ri-add-line" />
+              <prism-button label="Import Data" variant="outline" />
+            </div>
           </prism-empty>
         </div>
-      </section>
+        <prism-code-block [code]="snippets.actions" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-      <section class="demo-section">
-        <h2>Custom Illustrations</h2>
-        <p>Use images for a more vibrant empty state experience.</p>
-        <div class="demo-preview">
+    <prism-demo-section title="Custom Illustrations" description="Use images for a more vibrant empty state experience.">
+      <prism-demo-card>
+        <div preview class="p-8">
           <prism-empty 
             image="https://illustrations.popsy.co/gray/crashed-error.svg" 
             title="Something Went Wrong" 
             description="We're having trouble connecting to the server.">
-            <prism-button label="Retry Now" />
+            <prism-button label="Retry Now" class="mt-4" />
           </prism-empty>
         </div>
-      </section>
-    </div>
-  }
+        <prism-code-block [code]="snippets.illustration" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-  @if (activeTab() === 'api') {
-    <div class="fade-in">
-      <section class="demo-section">
-        <h2>Component API</h2>
-        
-        <div class="api-table">
-          <h3>Inputs</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>icon</code></td>
-                <td><code>string</code></td>
-                <td><code>'ri-inbox-2-line'</code></td>
-                <td>RemixIcon class. Hidden if <code>image</code> is set.</td>
-              </tr>
-              <tr>
-                <td><code>image</code></td>
-                <td><code>string</code></td>
-                <td><code>''</code></td>
-                <td>Custom illustration URL. Precedes <code>icon</code>.</td>
-              </tr>
-              <tr>
-                <td><code>title</code></td>
-                <td><code>string</code></td>
-                <td><code>'No Data'</code></td>
-                <td>Main bold heading.</td>
-              </tr>
-              <tr>
-                <td><code>description</code></td>
-                <td><code>string</code></td>
-                <td><code>''</code></td>
-                <td>Sub-text below the title.</td>
-              </tr>
-            </tbody>
-          </table>
-          
-          <h3 class="mt-4">Content Projection</h3>
-          <p>The <code>prism-empty</code> component supports projecting buttons or other components into its actions area.</p>
-        </div>
+  </prism-tab>
 
-        <div class="usage-example">
-          <h3>Usage Example</h3>
-          <pre><code>&lt;prism-empty 
-  icon="ri-search-line"
-  title="No Results"&gt;
-  &lt;prism-button label="Reset" /&gt;
-&lt;/prism-empty&gt;</code></pre>
-        </div>
-      </section>
-    </div>
-  }
-</div>
+  <prism-tab label="API">
+    <prism-api-table [data]="apiData" />
+  </prism-tab>
+</prism-tab-group>

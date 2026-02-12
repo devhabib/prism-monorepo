@@ -10,7 +10,10 @@ import {
   PrismSelectComponent,
   SelectOption,
   PrismTabGroupComponent,
-  PrismTabComponent
+  PrismTabComponent,
+  PrismDemoPageHeaderComponent,
+  PrismDemoSectionComponent,
+  PrismDemoCardComponent
 } from '@prism-monorepo/prism-core';
 
 @Component({
@@ -25,15 +28,16 @@ import {
     PrismCheckboxComponent,
     PrismSelectComponent,
     PrismTabGroupComponent,
-    PrismTabComponent
+    PrismTabComponent,
+    PrismDemoPageHeaderComponent,
+    PrismDemoSectionComponent,
+    PrismDemoCardComponent
   ],
   templateUrl: './form-demo.component.html',
   styleUrl: './form-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormDemoComponent {
-  // Manual tab state removed - now handled by PrismTabGroup
-
   // Checkbox/Radio state
   checkbox1 = signal(false);
   checkbox2 = signal(true);
@@ -68,63 +72,106 @@ export class FormDemoComponent {
     { label: 'TypeScript', value: 'typescript' },
   ];
 
-  buttonUsage = `<!-- Variants -->
-<prism-button label="Primary" variant="primary"></prism-button>
+  readonly snippets = {
+    buttonVariants: `<prism-button label="Primary"></prism-button>
+<prism-button label="Secondary" variant="secondary"></prism-button>
+<prism-button label="Outline" variant="outline"></prism-button>
 <prism-button label="Danger" variant="danger"></prism-button>
+<prism-button label="Text Only" variant="text"></prism-button>`,
+    
+    buttonSizes: `<prism-button label="Small" size="sm"></prism-button>
+<prism-button label="Medium" size="md"></prism-button>
+<prism-button label="Large" size="lg"></prism-button>
+<prism-button label="Settings" icon="ri-settings-line"></prism-button>
+<prism-button label="Send Message" icon="ri-send-plane-fill" iconPos="right"></prism-button>
+<prism-button icon="ri-notification-3-line" variant="secondary"></prism-button>`,
+    
+    buttonStates: `<prism-button label="Loading" [loading]="true"></prism-button>
+<prism-button label="Disabled" [disabled]="true"></prism-button>
+<prism-button label="Destructive Disabled" variant="danger" [disabled]="true" icon="ri-delete-bin-line"></prism-button>`,
 
-<!-- Sizes & Icons -->
-<prism-button label="Small" size="sm" icon="ri-add-line"></prism-button>
-<prism-button label="Send" icon="ri-send-plane-fill" iconPos="right"></prism-button>
+    inputsBase: `<!-- Standard -->
+<input prismInput placeholder="Enter placeholder..." />
 
-<!-- States -->
-<prism-button label="Loading" [loading]="true"></prism-button>
-<prism-button label="Disabled" [disabled]="true"></prism-button>`;
+<!-- Small -->
+<input prismInput size="sm" placeholder="Search data..." />
 
-  inputUsage = `<!-- Standard Inputs -->
-<input prismInput placeholder="Default" />
-<input prismInput error="true" placeholder="Error state" />
+<!-- Success -->
+<input prismInput [success]="true" value="valid.email@prism.com" />
 
-<!-- Icon Overlays -->
+<!-- Error -->
+<input prismInput [error]="true" placeholder="Incorrect password" />`,
+
+    inputsIcons: `<!-- Prefix Icon -->
 <div class="prism-input-icon-wrapper icon-left">
-  <i class="ri-user-line"></i>
-  <input prismInput placeholder="Username" />
+  <i class="ri-mail-line"></i>
+  <input prismInput placeholder="Email Address" />
 </div>
 
-<!-- Input Groups -->
+<!-- Suffix Icon -->
+<div class="prism-input-icon-wrapper icon-right">
+  <i class="ri-eye-off-line"></i>
+  <input prismInput type="password" placeholder="Password" />
+</div>`,
+
+    inputsGroups: `<!-- Prefix Addon -->
 <div class="prism-input-group">
-  <span class="prism-input-addon">@</span>
-  <input prismInput placeholder="handle" />
+  <span class="prism-input-addon">https://</span>
+  <input prismInput placeholder="prism.design" />
 </div>
 
-<!-- Integrated Prefix Button -->
+<!-- Mixed Group -->
+<div class="prism-input-group">
+  <span class="prism-input-addon">$</span>
+  <input prismInput placeholder="0.00" />
+  <span class="prism-input-addon">.00</span>
+</div>
+
+<!-- Prefix Button -->
 <div class="prism-input-group">
   <prism-button icon="ri-search-line" variant="primary"></prism-button>
-  <input prismInput placeholder="Search everything..." />
-</div>`;
+  <input prismInput placeholder="Search components..." />
+</div>
 
-  checkboxUsage = `<prism-checkbox label="Subscribe" [(checked)]="checked" />
-<prism-checkbox label="Disabled" [disabled]="true" />`;
+<!-- Action Suffix -->
+<div class="prism-input-group">
+  <input prismInput placeholder="Voucher Code" />
+  <prism-button label="Apply"></prism-button>
+</div>`,
 
-  radioUsage = `<prism-checkbox 
+    checkbox: `<prism-checkbox label="Unchecked" [(checked)]="checkbox1" />
+<prism-checkbox label="Checked" [(checked)]="checkbox2" />
+<prism-checkbox label="Disabled" [disabled]="true" [(checked)]="checkboxDisabled" />`,
+
+    radio: `<prism-checkbox 
   type="radio" 
   label="Option 1" 
-  [checked]="selected === '1'"
-  (checkedChange)="selected = '1'" />`;
+  [checked]="radioValue() === 'option1'"
+  (checkedChange)="radioValue.set('option1')" />`,
 
-  selectUsage = `<!-- Single Select -->
-<prism-select 
-  [options]="options" 
-  placeholder="Choose one"
-  [(value)]="value" />
+    selectSingle: `<prism-select 
+  [options]="cityOptions" 
+  placeholder="Select a city..."
+  [(value)]="citySelect" />`,
 
-<!-- Searchable Multi-Select -->
-<prism-select 
-  [options]="options" 
+    selectSearchable: `<prism-select 
   [searchable]="true"
-  [multiple]="true"
-  [(value)]="values" />`;
+  [options]="countryOptions" 
+  placeholder="Search countries..."
+  [(value)]="countrySelect" />`,
 
-  // setTab method removed - tab switching handled by PrismTabGroup
+    selectMulti: `<prism-select 
+  [multiple]="true"
+  [searchable]="true"
+  [options]="skillOptions" 
+  placeholder="Select multiple skills..."
+  [(value)]="multiSelect" />`,
+
+    selectNative: `<prism-select 
+  mode="native" 
+  [options]="cityOptions" 
+  [(value)]="citySelect" />`
+  };
 
   readonly buttonApiData: ApiDoc[] = [
     { name: 'label', type: 'string', default: "''", description: 'Text to display inside the button.' },

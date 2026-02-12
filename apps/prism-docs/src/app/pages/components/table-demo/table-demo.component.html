@@ -1,146 +1,140 @@
+<!-- Row Templates (Must be defined for ViewChild to find them) -->
 <ng-template #amountCell let-row="row">
-  <span [class]="row.amount < 0 ? 'text-danger' : 'text-success'">
+  <span [class]="row.amount < 0 ? 'text-red-500 font-medium' : 'text-green-600 dark:text-green-400 font-medium'">
     {{ row.amount | currency }}
   </span>
 </ng-template>
 
 <ng-template #statusCell let-row="row">
-  <span class="badge" [class]="row.status.toLowerCase()">{{ row.status }}</span>
+  <prism-badge [label]="row.status" [variant]="getStatusVariant(row.status)" />
 </ng-template>
 
 <ng-template #nameCell let-row="row">
-  <div class="user-cell">
+  <div class="flex items-center gap-3">
     <prism-avatar [image]="row.avatar" [label]="row.name.charAt(0)" shape="circle" size="md"></prism-avatar>
-    <div class="user-info">
-      <span class="font-bold block">{{ row.name }}</span>
-      <span class="text-sm text-muted">{{ row.role }}</span>
+    <div>
+      <span class="font-medium block text-slate-900 dark:text-white">{{ row.name }}</span>
+      <span class="text-xs text-slate-500 dark:text-slate-400">{{ row.role }}</span>
     </div>
   </div>
 </ng-template>
 
 <ng-template #imageCell let-row="row">
-  <img [src]="row.image" class="product-image" alt="Product" />
+  <img [src]="row.image" class="w-10 h-10 rounded object-cover border border-slate-200 dark:border-slate-700" alt="Product" />
 </ng-template>
 
 <ng-template #actionsCell let-row="row">
   <prism-button 
-    label="View Details" 
+    label="View" 
     size="sm" 
     variant="outline"
     icon="ri-eye-line"
     (click)="viewDetails(row)" />
 </ng-template>
 
-<div class="demo-container">
-  <div class="demo-header">
-    <h1>Data Table</h1>
-    <p>Displays data in rows and columns with sorting, pagination, and custom templates.</p>
-  </div>
+<prism-demo-page-header 
+  title="Data Table" 
+  subtitle="Displays data in rows and columns with sorting, pagination, and custom templates." 
+/>
 
-  <!-- Tab System with PrismTabGroup -->
-  <prism-tab-group>
-    <!-- Examples Tab -->
-    <prism-tab label="Examples">
-      <div class="example-section">
-        <h3>1. Financial Ledger (Gridlines & Conditional Styling)</h3>
-       
-        <div class="demo-row">
-          <prism-table [data]="financeData" [columns]="financeCols" size="sm" [gridlines]="true" [striped]="true">
-          </prism-table>
+<prism-tab-group>
+  <prism-tab label="Examples">
+    
+    <prism-demo-section title="Financial Ledger" description="Gridlines and conditional styling for financial data.">
+      <prism-demo-card>
+        <div preview class="w-full">
+          <prism-table [data]="financeData" [columns]="financeCols" size="sm" [gridlines]="true" [striped]="true" [width]="'100%'" />
         </div>
+        <prism-code-block [html]="snippets.financeHTML" [ts]="snippets.financeTS" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-        <prism-code-block [html]="financeHTML" [ts]="financeTS"></prism-code-block>
-      </div>
-
-      <div class="example-section">
-        <h3>2. Team Roster (Avatars & Rich Content with Actions)</h3>
-        
-        <div class="demo-row">
-          <prism-table [data]="teamData" [columns]="teamCols" size="lg">
-          </prism-table>
+    <prism-demo-section title="Team Roster" description="Rich content with avatars and action buttons.">
+      <prism-demo-card>
+        <div preview class="w-full">
+          <prism-table [data]="teamData" [columns]="teamCols" size="lg" [width]="'100%'" />
         </div>
+        <prism-code-block [html]="snippets.teamHTML" [ts]="snippets.teamTS" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-        <prism-code-block [html]="teamHTML" [ts]="teamTS"></prism-code-block>
-      </div>
-
-      <div class="example-section">
-        <h3>3. Inventory (Images, Sorting & Pagination)</h3>
-        
-        <div class="demo-row">
-          <prism-table [data]="inventoryData" [columns]="inventoryCols" [paginator]="true" [rows]="3">
-          </prism-table>
+    <prism-demo-section title="Inventory" description="Sorting, pagination, and image previews.">
+      <prism-demo-card>
+        <div preview class="w-full">
+          <prism-table [data]="inventoryData" [columns]="inventoryCols" [paginator]="true" [rows]="3" [width]="'100%'" />
         </div>
+        <prism-code-block [html]="snippets.inventoryHTML" [ts]="snippets.inventoryTS" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-        <prism-code-block [html]="inventoryHTML" [ts]="inventoryTS"></prism-code-block>
-      </div>
-
-      <div class="example-section">
-        <h3>4. Single Row Selection</h3>
-        <div class="flex items-center gap-2 mb-2 min-h-[32px]">
-          <span class="text-sm text-muted">Selected:</span>
-          @if (singleSelection()) {
-            <prism-tag [label]="singleSelection()!.name" (onRemove)="singleSelection.set(null)" [removable]="true" />
-          } @else {
-            <span class="text-xs italic text-muted">None</span>
-          }
-        </div>
-        
-        <div class="demo-row">
+    <prism-demo-section title="Single Selection" description="Select a single row from the table.">
+      <prism-demo-card>
+        <div preview class="w-full">
+          <div class="flex items-center gap-2 mb-4 min-h-[32px] p-2 bg-slate-50 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+            <span class="text-sm text-muted">Selected:</span>
+            @if (singleSelection()) {
+              <prism-tag [label]="singleSelection()!.name" (onRemove)="singleSelection.set(null)" [removable]="true" />
+            } @else {
+              <span class="text-xs italic text-muted">None</span>
+            }
+          </div>
+          
           <prism-table 
             [data]="userSelectionData" 
             [columns]="userCols"
             selectionMode="single"
             dataKey="id"
-            [(selection)]="singleSelection">
-          </prism-table>
+            [(selection)]="singleSelection"
+            [width]="'100%'" />
         </div>
-      </div>
+        <!-- Snippet for selection could be added here -->
+      </prism-demo-card>
+    </prism-demo-section>
 
-      <div class="example-section">
-        <h3>5. Multiple Row Selection</h3>
-        <div class="flex items-center gap-2 mb-2 min-h-[32px]">
-          <span class="text-sm text-muted">Selection Count:</span>
-          <prism-badge [label]="multipleSelection().length.toString()" variant="info" />
-        </div>
-        
-        <div class="demo-row">
+    <prism-demo-section title="Multiple Selection" description="Select multiple rows using checkboxes.">
+      <prism-demo-card>
+        <div preview class="w-full">
+          <div class="flex items-center gap-2 mb-4 min-h-[32px] p-2 bg-slate-50 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+            <span class="text-sm text-muted">Selection Count:</span>
+            <prism-badge [label]="multipleSelection().length.toString()" variant="info" />
+          </div>
+          
           <prism-table 
             [data]="userSelectionData" 
             [columns]="userCols"
             selectionMode="multiple"
             dataKey="id"
-            [(selection)]="multipleSelection">
-          </prism-table>
+            [(selection)]="multipleSelection"
+            [width]="'100%'" />
         </div>
-      </div>
+         <!-- Snippet for selection could be added here -->
+      </prism-demo-card>
+    </prism-demo-section>
 
-      <div class="example-section">
-        <div class="flex justify-between items-center mb-4">
-          <h3>6. Automatic Empty State</h3>
-          <div class="flex gap-2">
+    <prism-demo-section title="Empty State" description="Automatic empty state when no data is provided.">
+      <prism-demo-card>
+        <div preview class="w-full">
+          <div class="flex justify-end gap-2 mb-4">
             <prism-button label="Clear Data" variant="outline" size="sm" icon="ri-delete-bin-line" (click)="clearData()" />
             <prism-button label="Reset Data" variant="text" size="sm" (click)="resetData()" />
           </div>
-        </div>
-        
-        <div class="demo-row">
+          
           <prism-table 
             [data]="emptyTableData()" 
-            [columns]="userCols">
-          </prism-table>
+            [columns]="userCols" 
+            [width]="'100%'" />
         </div>
-      </div>
-    </prism-tab>
+      </prism-demo-card>
+    </prism-demo-section>
 
-    <!-- API Tab -->
-    <prism-tab label="API">
-      <section class="api-section">
-        <h2>Component API</h2>
+  </prism-tab>
+
+  <prism-tab label="API">
+    <prism-demo-section title="Component API">
         <prism-api-table [data]="apiData" />
-      </section>
-    </prism-tab>
-  </prism-tab-group>
-</div>
+    </prism-demo-section>
+  </prism-tab>
+</prism-tab-group>
 
 <!-- Details Dialog -->
 <prism-dialog 
@@ -150,17 +144,17 @@
   @if (selectedRow()) {
     <prism-card [header]="selectedRow()!.name" [subheader]="selectedRow()!.role">
       <div class="space-y-3">
-        <div class="detail-row">
+        <div class="flex justify-between border-b border-slate-100 dark:border-slate-700 pb-2">
           <strong class="text-sm">ID:</strong>
           <span class="text-sm text-muted">{{ selectedRow()!.id }}</span>
         </div>
-        <div class="detail-row">
+        <div class="flex justify-between border-b border-slate-100 dark:border-slate-700 pb-2">
           <strong class="text-sm">Status:</strong>
-          <span class="badge" [class]="selectedRow()!.status.toLowerCase()">{{ selectedRow()!.status }}</span>
+          <prism-badge [label]="selectedRow()!.status" [variant]="getStatusVariant(selectedRow()!.status)" />
         </div>
-        <div class="detail-row">
+        <div class="flex justify-between pt-2">
           <strong class="text-sm">Avatar URL:</strong>
-          <span class="text-sm text-muted">{{ selectedRow()!.avatar || 'N/A' }}</span>
+          <span class="text-sm text-muted truncate max-w-[300px]">{{ selectedRow()!.avatar || 'N/A' }}</span>
         </div>
       </div>
     </prism-card>

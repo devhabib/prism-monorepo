@@ -1,156 +1,160 @@
-<div class="demo-container">
-  <div class="demo-header">
-    <h1>Form Primitives</h1>
-    <p>Foundational interaction blocks for the Prism Design System.</p>
-  </div>
+<prism-demo-page-header 
+  title="Form Primitives" 
+  subtitle="Foundational interaction blocks for the Prism Design System." 
+/>
 
-  <!-- Tab System with PrismTabGroup -->
-  <prism-tab-group>
-    <!-- Buttons Tab -->
-    <prism-tab label="Buttons">
-      <div class="fade-in">
-        <section class="section">
-          <h2>Button Variants</h2>
-          <div class="demo-grid">
-            <prism-button label="Primary"></prism-button>
-            <prism-button label="Secondary" variant="secondary"></prism-button>
-            <prism-button label="Outline" variant="outline"></prism-button>
-            <prism-button label="Danger" variant="danger"></prism-button>
-            <prism-button label="Text Only" variant="text"></prism-button>
+<prism-tab-group>
+  
+  <!-- Buttons Tab -->
+  <prism-tab label="Buttons">
+    
+    <prism-demo-section title="Button Variants" description="Different visual styles for various actions.">
+      <prism-demo-card>
+        <div preview class="flex gap-4 flex-wrap">
+          <prism-button label="Primary"></prism-button>
+          <prism-button label="Secondary" variant="secondary"></prism-button>
+          <prism-button label="Outline" variant="outline"></prism-button>
+          <prism-button label="Danger" variant="danger"></prism-button>
+          <prism-button label="Text Only" variant="text"></prism-button>
+        </div>
+        <prism-code-block [html]="snippets.buttonVariants" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+    <prism-demo-section title="Sizes & Icons" description="Buttons support different sizes and icon placements.">
+      <prism-demo-card>
+        <div preview class="flex gap-4 flex-wrap items-center">
+          <prism-button label="Small" size="sm"></prism-button>
+          <prism-button label="Medium" size="md"></prism-button>
+          <prism-button label="Large" size="lg"></prism-button>
+          <prism-button label="Settings" icon="ri-settings-line"></prism-button>
+          <prism-button label="Send Message" icon="ri-send-plane-fill" iconPos="right"></prism-button>
+          <prism-button icon="ri-notification-3-line" variant="secondary"></prism-button>
+        </div>
+        <prism-code-block [html]="snippets.buttonSizes" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+    <prism-demo-section title="Functional States" description="Loading and disabled states for feedback and control.">
+      <prism-demo-card>
+        <div preview class="flex gap-4 flex-wrap">
+          <prism-button label="Loading" [loading]="true"></prism-button>
+          <prism-button label="Disabled" [disabled]="true"></prism-button>
+          <prism-button label="Destructive Disabled" variant="danger" [disabled]="true" icon="ri-delete-bin-line"></prism-button>
+        </div>
+        <prism-code-block [html]="snippets.buttonStates" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+  </prism-tab>
+
+  <!-- Inputs Tab -->
+  <prism-tab label="Inputs & Groups">
+    
+    <prism-demo-section title="Base Input Controls" description="Standard text inputs with validation states.">
+      <prism-demo-card>
+        <div preview class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+          <div class="field">
+            <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Standard</label>
+            <input prismInput placeholder="Enter placeholder..." />
           </div>
-        </section>
-
-        <section class="section">
-          <h2>Sizes & Icon Layouts</h2>
-          <div class="demo-grid">
-            <prism-button label="Small" size="sm"></prism-button>
-            <prism-button label="Medium" size="md"></prism-button>
-            <prism-button label="Large" size="lg"></prism-button>
-            <prism-button label="Settings" icon="ri-settings-line"></prism-button>
-            <prism-button label="Send Message" icon="ri-send-plane-fill" iconPos="right"></prism-button>
-            <prism-button icon="ri-notification-3-line" variant="secondary"></prism-button>
+          <div class="field">
+            <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Small Variant</label>
+            <input prismInput size="sm" placeholder="Search data..." />
           </div>
-        </section>
-
-        <section class="section">
-          <h2>Functional States</h2>
-          <div class="demo-grid">
-            <prism-button label="Loading" [loading]="true"></prism-button>
-            <prism-button label="Disabled" [disabled]="true"></prism-button>
-            <prism-button label="Destructive Disabled" variant="danger" [disabled]="true" icon="ri-delete-bin-line"></prism-button>
+          <div class="field">
+            <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Validation: Success</label>
+            <input prismInput [success]="true" value="valid.email@prism.com" />
           </div>
-        </section>
-
-        <section class="mt-4">
-          <h3>Usage Guide</h3>
-          <prism-code-block [html]="buttonUsage"></prism-code-block>
-        </section>
-      </div>
-    </prism-tab>
-
-    <!-- Inputs Tab -->
-    <prism-tab label="Inputs & Groups">
-      <div class="fade-in">
-        <section class="section">
-          <h2>Base Input Controls</h2>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="field">
-              <label>Standard</label>
-              <input prismInput placeholder="Enter placeholder..." />
-            </div>
-            <div class="field">
-              <label>Small Variant</label>
-              <input prismInput size="sm" placeholder="Search data..." />
-            </div>
-            <div class="field">
-              <label>Validation: Success</label>
-              <input prismInput [success]="true" value="valid.email@prism.com" />
-            </div>
-            <div class="field">
-              <label>Validation: Error</label>
-              <input prismInput [error]="true" placeholder="Incorrect password" />
-            </div>
+          <div class="field">
+            <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Validation: Error</label>
+            <input prismInput [error]="true" placeholder="Incorrect password" />
           </div>
-        </section>
+        </div>
+        <prism-code-block [html]="snippets.inputsBase" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-        <section class="section">
-          <h2>Icon Decorators</h2>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="field">
-              <label>Prefix Icon</label>
-              <div class="prism-input-icon-wrapper icon-left">
-                <i class="ri-mail-line"></i>
-                <input prismInput placeholder="Email Address" />
-              </div>
-            </div>
-            <div class="field">
-              <label>Suffix Icon</label>
-              <div class="prism-input-icon-wrapper icon-right">
-                <i class="ri-eye-off-line"></i>
-                <input prismInput type="password" placeholder="Password" />
-              </div>
+    <prism-demo-section title="Icon Decorators" description="Inputs with leading or trailing icons.">
+      <prism-demo-card>
+        <div preview class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+          <div class="field">
+            <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Prefix Icon</label>
+            <div class="prism-input-icon-wrapper icon-left">
+              <i class="ri-mail-line"></i>
+              <input prismInput placeholder="Email Address" />
             </div>
           </div>
-        </section>
-
-        <section class="section">
-          <h2>Input Grouping (Addons & Mixed)</h2>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="field">
-              <label>Prefix Addon</label>
-              <div class="prism-input-group">
-                <span class="prism-input-addon">https://</span>
-                <input prismInput placeholder="prism.design" />
-              </div>
-            </div>
-            <div class="field">
-              <label>Mixed Group</label>
-              <div class="prism-input-group">
-                <span class="prism-input-addon">$</span>
-                <input prismInput placeholder="0.00" />
-                <span class="prism-input-addon">.00</span>
-              </div>
-            </div>
-            <div class="field">
-               <label>Prefix Button (Integrated Search)</label>
-               <div class="prism-input-group">
-                 <prism-button icon="ri-search-line" variant="primary"></prism-button>
-                 <input prismInput placeholder="Search components..." />
-               </div>
-            </div>
-            <div class="field">
-              <label>Action Suffix</label>
-              <div class="prism-input-group">
-                <input prismInput placeholder="Voucher Code" />
-                <prism-button label="Apply"></prism-button>
-              </div>
+          <div class="field">
+            <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Suffix Icon</label>
+            <div class="prism-input-icon-wrapper icon-right">
+              <i class="ri-eye-off-line"></i>
+              <input prismInput type="password" placeholder="Password" />
             </div>
           </div>
-        </section>
+        </div>
+        <prism-code-block [html]="snippets.inputsIcons" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-        <section class="mt-4">
-          <h3>Usage Guide</h3>
-          <prism-code-block [html]="inputUsage"></prism-code-block>
-        </section>
-      </div>
-    </prism-tab>
-
-    <!-- Checks Tab -->
-    <prism-tab label="Checks">
-      <div class="fade-in">
-        <section class="section">
-          <h2>Checkboxes</h2>
-          <div class="demo-grid">
-            <prism-checkbox label="Unchecked" [(checked)]="checkbox1" />
-            <prism-checkbox label="Checked" [(checked)]="checkbox2" />
-            <prism-checkbox label="Disabled" [disabled]="true" [(checked)]="checkboxDisabled" />
+    <prism-demo-section title="Input Grouping" description="Addons and buttons integrated with inputs.">
+      <prism-demo-card>
+        <div preview class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+          <div class="field">
+            <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Prefix Addon</label>
+            <div class="prism-input-group">
+              <span class="prism-input-addon">https://</span>
+              <input prismInput placeholder="prism.design" />
+            </div>
           </div>
-        </section>
+          <div class="field">
+            <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Mixed Group</label>
+            <div class="prism-input-group">
+              <span class="prism-input-addon">$</span>
+              <input prismInput placeholder="0.00" />
+              <span class="prism-input-addon">.00</span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Prefix Button</label>
+            <div class="prism-input-group">
+              <prism-button icon="ri-search-line" variant="primary"></prism-button>
+              <input prismInput placeholder="Search components..." />
+            </div>
+          </div>
+          <div class="field">
+            <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Action Suffix</label>
+            <div class="prism-input-group">
+              <input prismInput placeholder="Voucher Code" />
+              <prism-button label="Apply"></prism-button>
+            </div>
+          </div>
+        </div>
+        <prism-code-block [html]="snippets.inputsGroups" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-        <section class="section">
-          <h2>Radio Buttons</h2>
-          <p class="mb-2 text-muted">Selected: {{ radioValue() }}</p>
-          <div class="demo-grid">
+  </prism-tab>
+
+  <!-- Checks Tab -->
+  <prism-tab label="Checks">
+    
+    <prism-demo-section title="Checkboxes" description="Binary selection controls.">
+      <prism-demo-card>
+        <div preview class="flex gap-6 flex-wrap">
+          <prism-checkbox label="Unchecked" [(checked)]="checkbox1" />
+          <prism-checkbox label="Checked" [(checked)]="checkbox2" />
+          <prism-checkbox label="Disabled" [disabled]="true" [(checked)]="checkboxDisabled" />
+        </div>
+        <prism-code-block [html]="snippets.checkbox" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+    <prism-demo-section title="Radio Buttons" description="Mutually exclusive selection.">
+      <prism-demo-card>
+        <div preview class="flex flex-col gap-2">
+          <p class="mb-2 text-sm text-muted">Selected: {{ radioValue() }}</p>
+          <div class="flex gap-6 flex-wrap">
             <prism-checkbox 
               type="radio" 
               label="Option 1" 
@@ -167,107 +171,94 @@
               [checked]="radioValue() === 'option3'"
               (checkedChange)="radioValue.set('option3')" />
           </div>
-        </section>
+        </div>
+        <prism-code-block [html]="snippets.radio" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-        <section class="mt-4">
-          <h3>Usage Guide</h3>
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <h4>Checkbox</h4>
-              <prism-code-block [html]="checkboxUsage"></prism-code-block>
-            </div>
-            <div>
-              <h4>Radio</h4>
-              <prism-code-block [html]="radioUsage"></prism-code-block>
-            </div>
-          </div>
-        </section>
-      </div>
-    </prism-tab>
+  </prism-tab>
 
-    <!-- Selects Tab -->
-    <prism-tab label="Selects">
-      <div class="fade-in">
-        <section class="section">
-          <h2>Single Select (Standard)</h2>
-          <div class="field">
-            <label>Choose a City</label>
-            <prism-select 
-              [options]="cityOptions" 
-              placeholder="Select a city..."
-              [(value)]="citySelect" />
-            <p class="text-sm text-muted mt-1">Selected ID: {{ citySelect() || 'None' }}</p>
-          </div>
-        </section>
+  <!-- Selects Tab -->
+  <prism-tab label="Selects">
+    
+    <prism-demo-section title="Single Select" description="Standard dropdown selection.">
+      <prism-demo-card>
+        <div preview class="w-full max-w-sm">
+          <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Choose a City</label>
+          <prism-select 
+            [options]="cityOptions" 
+            placeholder="Select a city..."
+            [(value)]="citySelect" />
+          <p class="text-sm text-muted mt-1">Selected ID: {{ citySelect() || 'None' }}</p>
+        </div>
+        <prism-code-block [html]="snippets.selectSingle" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-        <section class="section">
-          <h2>Searchable Select (Countries)</h2>
-          <div class="field">
-            <label>Filter Countries</label>
-            <prism-select 
-              [searchable]="true"
-              [options]="countryOptions" 
-              placeholder="Search countries..."
-              [(value)]="countrySelect" />
-            <p class="text-sm text-muted mt-1">Selected ID: {{ countrySelect() || 'None' }}</p>
-          </div>
-        </section>
+    <prism-demo-section title="Searchable Select" description="Dropdown with internal filtering.">
+      <prism-demo-card>
+        <div preview class="w-full max-w-sm">
+          <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Filter Countries</label>
+          <prism-select 
+            [searchable]="true"
+            [options]="countryOptions" 
+            placeholder="Search countries..."
+            [(value)]="countrySelect" />
+          <p class="text-sm text-muted mt-1">Selected ID: {{ countrySelect() || 'None' }}</p>
+        </div>
+        <prism-code-block [html]="snippets.selectSearchable" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-        <section class="section">
-          <h2>Multi-Select with Tags (Skills)</h2>
-          <div class="field">
-            <label>Select Skills</label>
-            <prism-select 
-              [multiple]="true"
-              [searchable]="true"
-              [options]="skillOptions" 
-              placeholder="Select multiple skills..."
-              [(value)]="multiSelect" />
-            <p class="text-sm text-muted mt-1">Items Selected: {{ multiSelect().length }}</p>
-          </div>
-        </section>
+    <prism-demo-section title="Multi-Select" description="Tag-based multiple selection.">
+      <prism-demo-card>
+        <div preview class="w-full max-w-sm">
+          <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Select Skills</label>
+          <prism-select 
+            [multiple]="true"
+            [searchable]="true"
+            [options]="skillOptions" 
+            placeholder="Select multiple skills..."
+            [(value)]="multiSelect" />
+          <p class="text-sm text-muted mt-1">Items Selected: {{ multiSelect().length }}</p>
+        </div>
+        <prism-code-block [html]="snippets.selectMulti" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-        <section class="section">
-          <h2>Native Option</h2>
-          <p>Use the browser's native select element while maintaining the Prism look.</p>
-          <div class="field">
-            <prism-select 
-              mode="native" 
-              [options]="cityOptions" 
-              [(value)]="citySelect" />
-          </div>
-        </section>
+    <prism-demo-section title="Native Option" description="Browser native select element with Prism styling.">
+      <prism-demo-card>
+        <div preview class="w-full max-w-sm">
+          <prism-select 
+            mode="native" 
+            [options]="cityOptions" 
+            [(value)]="citySelect" />
+        </div>
+        <prism-code-block [html]="snippets.selectNative" />
+      </prism-demo-card>
+    </prism-demo-section>
 
-        <section class="mt-4">
-          <h3>Usage Guide</h3>
-          <prism-code-block [html]="selectUsage"></prism-code-block>
-        </section>
-      </div>
-    </prism-tab>
+  </prism-tab>
 
-    <!-- API Tab -->
-    <prism-tab label="API">
-      <div class="fade-in">
-        <section class="section">
-          <h2>Button Component API</h2>
-          <prism-api-table [data]="buttonApiData" />
-        </section>
+  <!-- API Tab -->
+  <prism-tab label="API">
+    
+    <prism-demo-section title="Button API">
+      <prism-api-table [data]="buttonApiData" />
+    </prism-demo-section>
 
-        <section class="section mt-6">
-          <h2>Input Directive API</h2>
-          <prism-api-table [data]="inputApiData" />
-        </section>
+    <prism-demo-section title="Input API">
+      <prism-api-table [data]="inputApiData" />
+    </prism-demo-section>
 
-        <section class="section mt-6">
-          <h2>Checkbox & Radio API</h2>
-          <prism-api-table [data]="checkboxApiData" />
-        </section>
+    <prism-demo-section title="Checkbox & Radio API">
+      <prism-api-table [data]="checkboxApiData" />
+    </prism-demo-section>
 
-        <section class="section mt-6">
-          <h2>Select Component API</h2>
-          <prism-api-table [data]="selectApiData" />
-        </section>
-      </div>
-    </prism-tab>
-  </prism-tab-group>
-</div>
+    <prism-demo-section title="Select API">
+      <prism-api-table [data]="selectApiData" />
+    </prism-demo-section>
+
+  </prism-tab>
+
+</prism-tab-group>

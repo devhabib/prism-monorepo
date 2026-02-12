@@ -23,6 +23,9 @@ import { PrismEmptyComponent } from '../empty/empty.component';
   styleUrl: './datatable.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  host: {
+    '[style.width]': 'width()'
+  }
 })
 export class PrismTableComponent<T> {
   // Inputs
@@ -31,6 +34,7 @@ export class PrismTableComponent<T> {
   striped = input(false);
   gridlines = input(false);
   size = input<'sm' | 'md' | 'lg'>('md');
+  width = input<string>('100%');
   
   // New Inputs
   globalFilter = input<string>('');

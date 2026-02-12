@@ -1,0 +1,47 @@
+<prism-demo-page-header 
+  title="Avatar" 
+  subtitle="Displays a user's profile image or initials in various sizes and shapes." 
+/>
+
+<prism-tab-group>
+  <prism-tab label="Examples">
+    
+    <prism-demo-section title="Shapes" description="Avatars can be circular or square.">
+      <prism-demo-card>
+        <div preview class="flex gap-4 items-center">
+          <prism-avatar label="C" shape="circle" size="lg"></prism-avatar>
+          <prism-avatar label="S" shape="square" size="lg"></prism-avatar>
+        </div>
+        <prism-code-block [code]="snippets.shapes" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+    <prism-demo-section title="Sizes" description="Available in 4 sizes: sm, md, lg, xl.">
+      <prism-demo-card>
+        <div preview class="flex gap-4 items-end">
+          <prism-avatar label="S" size="sm"></prism-avatar>
+          <prism-avatar label="M" size="md"></prism-avatar>
+          <prism-avatar label="L" size="lg"></prism-avatar>
+          <prism-avatar label="XL" size="xl"></prism-avatar>
+        </div>
+        <prism-code-block [code]="snippets.sizes" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+    <prism-demo-section title="Images & Fallbacks" description="Displays initials if the image is missing or fails to load.">
+      <prism-demo-card>
+        <div preview class="flex gap-4 items-center">
+          <prism-avatar image="https://i.pravatar.cc/150?u=1" size="lg"></prism-avatar>
+          <prism-avatar label="AB" size="lg" style="background-color: #3b82f6; color: white"></prism-avatar>
+          <prism-avatar label="CD" size="lg" style="background-color: #ef4444; color: white"></prism-avatar>
+        </div>
+        <prism-code-block [code]="snippets.fallbacks" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+  </prism-tab>
+
+  <prism-tab label="API">
+    <prism-api-table [data]="apiData" />
+  </prism-tab>
+</prism-tab-group>

@@ -11,7 +11,10 @@ import {
   PrismCodeBlockComponent,
   ApiDoc,
   ApiTableComponent,
-  PrismDialogService
+  PrismDialogService,
+  PrismDemoPageHeaderComponent,
+  PrismDemoSectionComponent,
+  PrismDemoCardComponent
 } from '@prism-monorepo/prism-core';
 import { UserProfileDialogComponent } from './user-profile-dialog.component';
 
@@ -28,7 +31,10 @@ import { UserProfileDialogComponent } from './user-profile-dialog.component';
     PrismTabComponent,
     PrismInputDirective,
     PrismCodeBlockComponent,
-    ApiTableComponent
+    ApiTableComponent,
+    PrismDemoPageHeaderComponent,
+    PrismDemoSectionComponent,
+    PrismDemoCardComponent
   ],
   templateUrl: './modal-demo.component.html',
   styleUrl: './modal-demo.component.scss',
@@ -205,8 +211,8 @@ export class ModalDemoComponent {
     }
   ];
 
-  // Code examples
-  readonly basicHTML = `<prism-button 
+  readonly snippets = {
+    basicHTML: `<prism-button 
   label="Open Dialog" 
   (click)="basicDialog.set(true)" />
 
@@ -220,13 +226,13 @@ export class ModalDemoComponent {
       variant="outline" 
       (click)="basicDialog.set(false)" />
   </div>
-</prism-dialog>`;
+</prism-dialog>`,
 
-  readonly basicTS = `export class MyComponent {
+    basicTS: `export class MyComponent {
   basicDialog = signal(false);
-}`;
+}`,
 
-  readonly cardHTML = `<prism-dialog 
+    cardHTML: `<prism-dialog 
   [(visible)]="cardDialog" 
   header="User Profile"
   width="600px">
@@ -239,9 +245,9 @@ export class ModalDemoComponent {
       <p><strong>Joined:</strong> Jan 2024</p>
     </div>
   </prism-card>
-</prism-dialog>`;
+</prism-dialog>`,
 
-  readonly formHTML = `<prism-dialog 
+    formHTML: `<prism-dialog 
   [(visible)]="formDialog" 
   header="Contact Us"
   width="500px">
@@ -272,9 +278,9 @@ export class ModalDemoComponent {
       label="Send Message" 
       (click)="submitForm()" />
   </div>
-</prism-dialog>`;
+</prism-dialog>`,
 
-  readonly confirmHTML = `<prism-dialog 
+    confirmHTML: `<prism-dialog 
   [(visible)]="confirmDialog" 
   header="Confirm Delete"
   width="400px">
@@ -289,9 +295,9 @@ export class ModalDemoComponent {
       variant="danger" 
       (click)="deleteItem()" />
   </div>
-</prism-dialog>`;
+</prism-dialog>`,
 
-  readonly serviceHTML = `// Component TypeScript
+    serviceHTML: `// Component TypeScript
 export class MyComponent {
   dialog = inject(PrismDialogService);
   
@@ -316,9 +322,9 @@ export class UserProfileDialogComponent {
   save() {
     this.ref.close({ saved: true });
   }
-}`;
+}`,
 
-  readonly programmaticUsageTS = `const ref = this.dialog.open(MyComponent, {
+    programmaticUsageTS: `const ref = this.dialog.open(MyComponent, {
   header: 'Title',
   data: { userId: 123 },
   width: '600px'
@@ -326,14 +332,15 @@ export class UserProfileDialogComponent {
 
 ref.afterClosed$.subscribe(result => {
   // Handle result
-});`;
+});`,
 
-  readonly componentUsageTS = `export class MyDialogComponent {
+    componentUsageTS: `export class MyDialogComponent {
   ref = inject(PrismDialogRef);
   data = inject(DIALOG_DATA);
 
   save() {
     this.ref.close({ saved: true });
   }
-}`;
+}`
+  };
 }

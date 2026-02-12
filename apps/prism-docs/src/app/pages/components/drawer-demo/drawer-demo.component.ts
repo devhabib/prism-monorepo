@@ -10,7 +10,10 @@ import {
   DrawerPosition,
   ApiDoc,
   ApiTableComponent,
-  PrismCodeBlockComponent
+  PrismCodeBlockComponent,
+  PrismDemoPageHeaderComponent,
+  PrismDemoSectionComponent,
+  PrismDemoCardComponent
 } from '@prism-monorepo/prism-core';
 import { UserProfileDialogComponent } from '../modal-demo/user-profile-dialog.component';
 
@@ -25,7 +28,10 @@ import { UserProfileDialogComponent } from '../modal-demo/user-profile-dialog.co
     PrismTabGroupComponent, 
     PrismTabComponent,
     ApiTableComponent,
-    PrismCodeBlockComponent
+    PrismCodeBlockComponent,
+    PrismDemoPageHeaderComponent,
+    PrismDemoSectionComponent,
+    PrismDemoCardComponent
   ],
   templateUrl: './drawer-demo.component.html',
   styleUrl: './drawer-demo.component.scss',

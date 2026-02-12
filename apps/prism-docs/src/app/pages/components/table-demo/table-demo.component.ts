@@ -14,7 +14,10 @@ import {
   PrismTabGroupComponent,
   PrismTabComponent,
   PrismDialogComponent,
-  PrismCardComponent
+  PrismCardComponent,
+  PrismDemoPageHeaderComponent,
+  PrismDemoSectionComponent,
+  PrismDemoCardComponent
 } from '@prism-monorepo/prism-core';
 
 type Finance = { id: string; date: string; amount: number; status: string; }
@@ -37,7 +40,10 @@ type Product = { sku: string; name: string; category: string; stock: number; pri
     PrismTabGroupComponent,
     PrismTabComponent,
     PrismDialogComponent,
-    PrismCardComponent
+    PrismCardComponent,
+    PrismDemoPageHeaderComponent,
+    PrismDemoSectionComponent,
+    PrismDemoCardComponent
   ],
   templateUrl: './table-demo.component.html',
   styleUrl: './table-demo.component.scss',
@@ -86,12 +92,12 @@ export class TableDemoComponent {
     { id: '1', name: 'Alice Johnson', role: 'Engineer', status: 'Active', avatar: 'https://i.pravatar.cc/150?u=alice' },
     { id: '2', name: 'Bob Williams', role: 'Designer', status: 'Active', avatar: 'https://i.pravatar.cc/150?u=bob' },
     { id: '3', name: 'Charlie Brown', role: 'Manager', status: 'Offline', avatar: 'https://i.pravatar.cc/150?u=charlie' },
+    { id: '4', name: 'David Smith', role: 'Developer', status: 'Active', avatar: 'https://i.pravatar.cc/150?u=david' },
+    { id: '5', name: 'Eve White', role: 'Product Owner', status: 'Active', avatar: 'https://i.pravatar.cc/150?u=eve' },
   ];
-  userCols: PrismColumn<Employee>[] = [
-    { key: 'name', header: 'Name' },
-    { key: 'role', header: 'Role' },
-    { key: 'status', header: 'Status' },
-  ];
+  
+  userCols: PrismColumn<Employee>[] = [];
+  
   singleSelection = signal<Employee | null>(null);
   multipleSelection = signal<Employee[]>([]);
 
@@ -113,6 +119,20 @@ export class TableDemoComponent {
   viewDetails(row: Employee): void {
     this.selectedRow.set(row);
     this.showDetailsDialog.set(true);
+  }
+
+  getStatusVariant(status: string): 'success' | 'warning' | 'danger' | 'info' {
+    switch (status) {
+      case 'Active':
+      case 'Completed':
+        return 'success';
+      case 'Refund':
+        return 'warning';
+      case 'Offline':
+        return 'danger';
+      default:
+        return 'info';
+    }
   }
 
   constructor() {
@@ -140,6 +160,13 @@ export class TableDemoComponent {
           { key: 'status', header: 'Status', cellTemplate: statusTpl },
           { key: 'actions' as keyof Employee, header: 'Actions', cellTemplate: actionsTpl }
         ];
+        
+        // Config for selection tables (simplified columns)
+        this.userCols = [
+          { key: 'name', header: 'Name' },
+          { key: 'role', header: 'Role' },
+          { key: 'status', header: 'Status', cellTemplate: statusTpl },
+        ];
       }
 
       if (imageTpl) {
@@ -155,21 +182,21 @@ export class TableDemoComponent {
   }
 
   // --- CODE SNIPPETS (For the Docs) ---
-  
-  financeHTML = `<prism-table [data]="financeData" [columns]="financeCols" size="sm" [gridlines]="true" [striped]="true">
+  readonly snippets = {
+    financeHTML: `<prism-table [data]="financeData" [columns]="financeCols" size="sm" [gridlines]="true" [striped]="true">
 </prism-table>
 
 <ng-template #amountCell let-row="row">
-  <span [class]="row.amount < 0 ? 'text-danger' : 'text-success'">
+  <span [class]="row.amount < 0 ? 'text-red-500' : 'text-green-600'">
     {{ row.amount | currency }}
   </span>
 </ng-template>
 
 <ng-template #statusCell let-row="row">
-  <span class="badge" [class]="row.status.toLowerCase()">{{ row.status }}</span>
-</ng-template>`;
+  <prism-badge [label]="row.status" [variant]="row.status === 'Refund' ? 'warning' : 'success'" />
+</ng-template>`,
 
-  financeTS = `// 1. Define Columns & Link Template
+    financeTS: `// 1. Define Columns & Link Template
 @ViewChild('amountCell') amountTemplate!: TemplateRef<any>;
 @ViewChild('statusCell') statusTemplate!: TemplateRef<any>;
 
@@ -181,63 +208,52 @@ ngAfterViewInit() {
       { key: 'status', header: 'Status', cellTemplate: this.statusTemplate }
     ];
   });
-}`;
+}`,
 
-  teamHTML = `<prism-table [data]="teamData" [columns]="teamCols" size="lg">
+    teamHTML: `<prism-table [data]="teamData" [columns]="teamCols" size="lg">
 </prism-table>
 
 <ng-template #nameCell let-row="row">
-  <div class="user-cell">
+  <div class="flex items-center gap-3">
     <prism-avatar 
       [image]="row.avatar" 
       [label]="row.name.charAt(0)" 
       shape="circle" 
       size="md">
     </prism-avatar>
-    <div class="user-info">
+    <div>
       <span class="font-bold block">{{ row.name }}</span>
       <span class="text-sm text-muted">{{ row.role }}</span>
     </div>
   </div>
-</ng-template>
+</ng-template>`,
 
-<ng-template #statusCell let-row="row">
-  <span class="badge" [class]="row.status.toLowerCase()">
-    {{ row.status }}
-  </span>
-</ng-template>`;
-
-  teamTS = `@ViewChild('nameCell') nameTemplate!: TemplateRef<any>;
-@ViewChild('statusCell') statusTemplate!: TemplateRef<any>;
+    teamTS: `@ViewChild('nameCell') nameTemplate!: TemplateRef<any>;
 
 ngAfterViewInit() {
-  setTimeout(() => {
-    this.teamCols = [
-      { key: 'name', header: 'Employee', cellTemplate: this.nameTemplate },
-      { key: 'role', header: 'Role' },
-      { key: 'status', header: 'Status', cellTemplate: this.statusTemplate }
-    ];
-  });
-}`;
+  this.teamCols = [
+    { key: 'name', header: 'Employee', cellTemplate: this.nameTemplate },
+    { key: 'role', header: 'Role' }
+  ];
+}`,
 
-  inventoryHTML = `<prism-table [data]="inventoryData" [columns]="inventoryCols" [paginator]="true" [rows]="5">
+    inventoryHTML: `<prism-table [data]="inventoryData" [columns]="inventoryCols" [paginator]="true" [rows]="5">
 </prism-table>
 
 <ng-template #imageCell let-row="row">
-  <img [src]="row.image" class="product-image" alt="Product" />
-</ng-template>`;
+  <img [src]="row.image" class="w-10 h-10 rounded" alt="Product" />
+</ng-template>`,
 
-  inventoryTS = `@ViewChild('imageCell') imageTemplate!: TemplateRef<any>;
+    inventoryTS: `@ViewChild('imageCell') imageTemplate!: TemplateRef<any>;
 
 ngAfterViewInit() {
-  setTimeout(() => {
-    this.inventoryCols = [
-      { key: 'image', header: 'Preview', cellTemplate: this.imageTemplate },
-      { key: 'name', header: 'Product', sortable: true },
-      { key: 'stock', header: 'Stock', sortable: true }
-    ];
-  });
-}`;
+  this.inventoryCols = [
+    { key: 'image', header: 'Preview', cellTemplate: this.imageTemplate },
+    { key: 'name', header: 'Product', sortable: true },
+    { key: 'stock', header: 'Stock', sortable: true }
+  ];
+}`
+  };
 
   readonly apiData: ApiDoc[] = [
     { name: 'data', type: 'T[]', default: '[]', description: 'Array of data to display in the table.' },
@@ -245,7 +261,11 @@ ngAfterViewInit() {
     { name: 'striped', type: 'boolean', default: 'false', description: 'Enable alternating row background colors.' },
     { name: 'gridlines', type: 'boolean', default: 'false', description: 'Show borders between cells.' },
     { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Size of the table rows and padding.' },
+    { name: 'width', type: 'string', default: "'100%'", description: 'Width of the table container (e.g., "100%", "500px").' },
     { name: 'paginator', type: 'boolean', default: 'false', description: 'Enable pagination controls.' },
     { name: 'rows', type: 'number', default: '10', description: 'Number of rows per page when paginator is enabled.' },
+    { name: 'selectionMode', type: "'single' | 'multiple'", default: 'null', description: 'Enable row selection.' },
+    { name: 'selection', type: 'T | T[]', default: 'null', description: 'Two-way binding for selected row(s).' },
+    { name: 'dataKey', type: 'string', default: 'null', description: 'Property to uniquely identify a row (required for selection).' },
   ];
 }
