@@ -18,7 +18,6 @@ import { CommonModule } from '@angular/common';
   encapsulation: ViewEncapsulation.None,
   host: {
     'class': 'prism-switch-wrapper',
-    '[class.disabled]': 'disabled()',
     '(click)': 'toggle()'
   }
 })
@@ -26,11 +25,9 @@ export class PrismSwitchComponent {
   readonly checked = model<boolean>(false);
   readonly disabled = input<boolean>(false);
   readonly loading = input<boolean>(false);
-  readonly size = input<'default' | 'small'>('default');
   
-  // Inputs can be string OR template
-  readonly checkedChildren = input<string | TemplateRef<void> | null>(null);
-  readonly unCheckedChildren = input<string | TemplateRef<void> | null>(null);
+  readonly checkedChildren = input<string | TemplateRef<any> | null>(null);
+  readonly unCheckedChildren = input<string | TemplateRef<any> | null>(null);
 
   toggle() {
     if (!this.disabled() && !this.loading()) {

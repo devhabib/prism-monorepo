@@ -6,16 +6,10 @@
   height: 22px;
   line-height: 22px;
   vertical-align: middle;
-  background: var(--surface-400); // Default Off Color
-  border: 0;
-  border-radius: 100px;
-  cursor: pointer;
-  transition: all 0.2s;
-  user-select: none;
-
-  // --- CHECKED STATE ---
+  background-color: rgba(0, 0, 0, 0.25); // Default Off (Greyish)
+  
   &.checked {
-    background: var(--primary-500); // PRIMARY COLOR ON
+    background-color: var(--primary-500); // Primary On
     
     .prism-switch-handle {
       left: calc(100% - 18px - 2px); // Move circle to right

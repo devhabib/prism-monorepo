@@ -1,88 +1,65 @@
-.prism-tooltip {
-  position: absolute;
-  z-index: 1070;
-  display: block;
-  visibility: visible;
-  font-size: 14px;
-  line-height: 1.5715;
+prism-tooltip {
+  position: fixed; // Must be fixed to float over everything
+  z-index: 9999;
+  pointer-events: none; // Let clicks pass through
+  opacity: 0;
+  transition: opacity 0.15s ease-in-out;
+  &.visible { opacity: 1; }
+}
+
+.tooltip-container {
+  position: relative;
+  background: rgba(0, 0, 0, 0.85);
   color: #fff;
-  text-align: left;
-  text-decoration: none;
-  word-wrap: break-word;
-  pointer-events: none;
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-size: 12px;
+  max-width: 250px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+  line-height: 1.2;
+}
 
-  &__content {
-    min-width: 32px;
-    min-height: 32px;
-    padding: 6px 8px;
-    background-color: rgba(0, 0, 0, 0.85);
-    border-radius: 6px;
-    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 
-                0 6px 16px 0 rgba(0, 0, 0, 0.08), 
-                0 9px 28px 8px rgba(0, 0, 0, 0.05);
-  }
+// --- ARROW LOGIC ---
+.tooltip-arrow {
+  position: absolute;
+  width: 0; 
+  height: 0; 
+  border-style: solid;
+}
 
-  &__arrow {
-    position: absolute;
-    display: block;
-    width: 8.48528137px;
-    height: 8.48528137px;
-    background: transparent;
-    border-style: solid;
-    border-width: 4.24264069px;
-    transform: rotate(45deg);
-  }
-
-  &--top {
-    padding-bottom: 8px;
-    .prism-tooltip__arrow {
-      bottom: 4px;
-      left: 50%;
-      transform: translateX(-50%) rotate(45deg);
-      border-color: transparent rgba(0, 0, 0, 0.85) rgba(0, 0, 0, 0.85) transparent;
-    }
-  }
-
-  &--bottom {
-    padding-top: 8px;
-    .prism-tooltip__arrow {
-      top: 4px;
-      left: 50%;
-      transform: translateX(-50%) rotate(45deg);
-      border-color: rgba(0, 0, 0, 0.85) transparent transparent rgba(0, 0, 0, 0.85);
-    }
-  }
-
-  &--left {
-    padding-right: 8px;
-    .prism-tooltip__arrow {
-      right: 4px;
-      top: 50%;
-      transform: translateY(-50%) rotate(45deg);
-      border-color: rgba(0, 0, 0, 0.85) rgba(0, 0, 0, 0.85) transparent transparent;
-    }
-  }
-
-  &--right {
-    padding-left: 8px;
-    .prism-tooltip__arrow {
-      left: 4px;
-      top: 50%;
-      transform: translateY(-50%) rotate(45deg);
-      border-color: transparent transparent rgba(0, 0, 0, 0.85) rgba(0, 0, 0, 0.85);
-    }
+// Arrow Directions
+.tooltip-container.top {
+  margin-bottom: 6px;
+  .tooltip-arrow {
+    bottom: -5px; left: 50%; transform: translateX(-50%);
+    border-width: 6px 6px 0 6px;
+    border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
   }
 }
 
-// Dark Mode
-:host-context([data-theme='dark']) {
-  .prism-tooltip__content {
-    background-color: var(--surface-200);
-    color: var(--surface-900);
+.tooltip-container.bottom {
+  margin-top: 6px;
+  .tooltip-arrow {
+    top: -5px; left: 50%; transform: translateX(-50%);
+    border-width: 0 6px 6px 6px;
+    border-color: transparent transparent rgba(0, 0, 0, 0.85) transparent;
   }
+}
 
-  .prism-tooltip--top .prism-tooltip__arrow { border-color: transparent var(--surface-200) var(--surface-200) transparent; }
-  .prism-tooltip--bottom .prism-tooltip__arrow { border-color: var(--surface-200) transparent transparent var(--surface-200); }
-  .prism-tooltip--left .prism-tooltip__arrow { border-color: var(--surface-200) var(--surface-200) transparent transparent; }
-  .prism-tooltip--right .prism-tooltip__arrow { border-color: transparent transparent var(--surface-200) var(--surface-200); }
+.tooltip-container.left {
+  margin-right: 6px;
+  .tooltip-arrow {
+    right: -5px; top: 50%; transform: translateY(-50%);
+    border-width: 6px 0 6px 6px;
+    border-color: transparent transparent transparent rgba(0, 0, 0, 0.85);
+  }
+}
+
+.tooltip-container.right {
+  margin-left: 6px;
+  .tooltip-arrow {
+    left: -5px; top: 50%; transform: translateY(-50%);
+    border-width: 6px 6px 6px 0;
+    border-color: transparent rgba(0, 0, 0, 0.85) transparent transparent;
+  }
 }

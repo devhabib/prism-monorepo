@@ -13,26 +13,26 @@ import { animate, style, transition, trigger } from '@angular/animations';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="prism-tooltip-content" [class]="position()">
-      {{ text() }}
+    <div class="tooltip-container" [class]="position()">
+      <div class="tooltip-content">
+        @if (isTemplate(content())) {
+          <ng-container *ngTemplateOutlet="$any(content())" />
+        } @else {
+          {{ content() }}
+        }
+      </div>
+      <div class="tooltip-arrow"></div>
     </div>
   `,
-  styles: [`
-    :host { position: fixed; z-index: 2000; pointer-events: none; }
-    .prism-tooltip-content {
-      background: rgba(0,0,0,0.85);
-      color: #fff;
-      padding: 6px 8px;
-      border-radius: 4px;
-      font-size: 12px;
-      max-width: 250px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-  `],
+  styleUrl: './tooltip.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
 export class PrismTooltipComponent {
-  readonly text = input<string>('');
-  readonly position = input<string>('top'); // Ensure this is a signal
+  readonly content = input<string | TemplateRef<any>>('');
+  readonly position = input<'top' | 'bottom' | 'left' | 'right'>('top');
+
+  isTemplate(val: any): val is TemplateRef<any> {
+    return val instanceof TemplateRef;
+  }
 }

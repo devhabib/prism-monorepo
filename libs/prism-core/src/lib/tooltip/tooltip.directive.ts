@@ -1,164 +1,177 @@
 import { 
   Directive, 
   ElementRef, 
-  HostListener, 
+  inject, 
   input, 
-  Renderer2, 
-  inject,
-  OnDestroy,
-  TemplateRef,
-  ViewContainerRef,
-  ComponentRef,
-  PLATFORM_ID,
+  ComponentRef, 
+  createComponent, 
+  EnvironmentInjector, 
+  ApplicationRef, 
+  OnDestroy, 
+  HostListener,
   NgZone
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 import { PrismTooltipComponent } from './tooltip.component';
 
 @Directive({
   selector: '[prismTooltip]',
-  standalone: true,
+  standalone: true
 })
 export class PrismTooltipDirective implements OnDestroy {
-  private el = inject(ElementRef);
-  private renderer = inject(Renderer2);
-  private viewContainerRef = inject(ViewContainerRef);
-  private platformId = inject(PLATFORM_ID);
-  private ngZone = inject(NgZone);
-  
-  /** The content to display in the tooltip */
-  text = input.required<string | TemplateRef<void>>({ alias: 'prismTooltip' });
-  
-  /** Preferred position of the tooltip */
-  position = input<'top' | 'bottom' | 'left' | 'right'>('top', { alias: 'tooltipPosition' });
+  readonly prismTooltip = input.required<string | any>();
+  readonly tooltipPosition = input<'top' | 'bottom' | 'left' | 'right'>('top');
+  readonly tooltipTrigger = input<'hover' | 'click' | 'focus'>('hover');
 
-  /** Trigger type */
-  trigger = input<'hover' | 'focus' | 'click'>('hover', { alias: 'tooltipTrigger' });
+  private _componentRef: ComponentRef<PrismTooltipComponent> | null = null;
+  private _el = inject(ElementRef);
+  private _appRef = inject(ApplicationRef);
+  private _injector = inject(EnvironmentInjector);
+  private _ngZone = inject(NgZone);
 
-  private componentRef: ComponentRef<PrismTooltipComponent> | null = null;
-  private isVisible = false;
-
-  @HostListener('mouseenter')
-  onMouseEnter(): void {
-    if (this.trigger() === 'hover') this.show();
+  @HostListener('mouseenter') onMouseEnter() { 
+    if (this.tooltipTrigger() === 'hover') this.show(); 
   }
-
-  @HostListener('mouseleave')
-  onMouseLeave(): void {
-    if (this.trigger() === 'hover') this.hide();
+  @HostListener('mouseleave') onMouseLeave() { 
+    if (this.tooltipTrigger() === 'hover') this.hide(); 
   }
-
-  @HostListener('focusin')
-  onFocus(): void {
-    if (this.trigger() === 'focus') this.show();
+  @HostListener('focusin') onFocus() { 
+    if (this.tooltipTrigger() === 'focus') this.show(); 
   }
-
-  @HostListener('focusout')
-  onBlur(): void {
-    if (this.trigger() === 'focus') this.hide();
+  @HostListener('focusout') onBlur() { 
+    if (this.tooltipTrigger() === 'focus') this.hide(); 
   }
-
-  @HostListener('click', ['$event'])
-  onClick(event: MouseEvent): void {
-    if (this.trigger() === 'click') {
-      event.stopPropagation();
-      this.toggle();
+  @HostListener('click') onClick() {
+    if (this.tooltipTrigger() === 'click') {
+      this._componentRef ? this.hide() : this.show();
     }
   }
 
-  @HostListener('document:click')
-  onDocumentClick(): void {
-    if (this.trigger() === 'click' && this.isVisible) {
-      this.hide();
+  show() {
+    if (this._componentRef || !this.prismTooltip()) return;
+
+    // 1. Create Component
+    this._componentRef = createComponent(PrismTooltipComponent, {
+      environmentInjector: this._injector
+    });
+
+    // 2. Set Inputs
+    this._componentRef.setInput('content', this.prismTooltip());
+    this._componentRef.setInput('position', this.tooltipPosition());
+
+    // 3. Attach to Body (Floating)
+    document.body.appendChild(this._componentRef.location.nativeElement);
+    this._appRef.attachView(this._componentRef.hostView);
+
+    // 4. Calculate Position after a frame to ensure dimensions are ready
+    requestAnimationFrame(() => {
+      this.updatePosition();
+      if (this._componentRef) {
+        this._componentRef.location.nativeElement.classList.add('visible');
+      }
+    });
+
+    // 5. Listen to window changes
+    this._ngZone.runOutsideAngular(() => {
+      window.addEventListener('scroll', this._onRefresh, true);
+      window.addEventListener('resize', this._onRefresh);
+    });
+  }
+
+  hide() {
+    if (!this._componentRef) return;
+    
+    const ref = this._componentRef;
+    ref.location.nativeElement.classList.remove('visible');
+    
+    // Destroy after transition
+    setTimeout(() => {
+      try {
+        this._appRef.detachView(ref.hostView);
+      } catch (e) { /* ignore */ }
+      ref.destroy();
+    }, 150);
+    
+    this._componentRef = null;
+
+    window.removeEventListener('scroll', this._onRefresh, true);
+    window.removeEventListener('resize', this._onRefresh);
+  }
+
+  private _onRefresh = () => {
+    if (this._componentRef) {
+      this.updatePosition();
     }
   }
 
-  ngOnDestroy(): void {
-    this.destroy();
-  }
+  updatePosition() {
+    if (!this._componentRef) return;
+    
+    const hostRect = this._el.nativeElement.getBoundingClientRect();
+    const tooltipEl = this._componentRef.location.nativeElement;
+    
+    const tooltipWidth = tooltipEl.offsetWidth || 120;
+    const tooltipHeight = tooltipEl.offsetHeight || 32;
+    const padding = 8;
+    const gap = 6;
 
-  private toggle(): void {
-    this.isVisible ? this.hide() : this.show();
-  }
-
-  private show(): void {
-    if (this.isVisible || !this.text()) return;
-    
-    this.isVisible = true;
-    this.componentRef = this.viewContainerRef.createComponent(PrismTooltipComponent);
-    
-    // BETTER POSITIONING LOGIC
-    const hostRect = this.el.nativeElement.getBoundingClientRect();
-    const tooltipRect = this.componentRef.location.nativeElement.getBoundingClientRect();
-    
     let top = 0;
     let left = 0;
-    const gap = 8;
+    let pos = this.tooltipPosition();
 
-    switch (this.position()) {
-      case 'top':
-        top = hostRect.top - tooltipRect.height - gap;
-        left = hostRect.left + (hostRect.width - tooltipRect.width) / 2;
-        break;
-      case 'bottom':
-        top = hostRect.bottom + gap;
-        left = hostRect.left + (hostRect.width - tooltipRect.width) / 2;
-        break;
-      case 'left':
-        top = hostRect.top + (hostRect.height - tooltipRect.height) / 2;
-        left = hostRect.left - tooltipRect.width - gap;
-        break;
-      case 'right':
-        top = hostRect.top + (hostRect.height - tooltipRect.height) / 2;
-        left = hostRect.right + gap;
-        break;
+    const calculate = (p: string) => {
+      switch (p) {
+        case 'top':
+          top = hostRect.top - tooltipHeight - gap;
+          left = hostRect.left + (hostRect.width - tooltipWidth) / 2;
+          break;
+        case 'bottom':
+          top = hostRect.bottom + gap;
+          left = hostRect.left + (hostRect.width - tooltipWidth) / 2;
+          break;
+        case 'left':
+          top = hostRect.top + (hostRect.height - tooltipHeight) / 2;
+          left = hostRect.left - tooltipWidth - gap;
+          break;
+        case 'right':
+          top = hostRect.top + (hostRect.height - tooltipHeight) / 2;
+          left = hostRect.right + gap;
+          break;
+      }
+    };
+
+    calculate(pos);
+
+    // Auto-Flip (Vertical)
+    if (pos === 'top' && top < padding) {
+      pos = 'bottom';
+      calculate(pos);
+      this._componentRef.setInput('position', 'bottom');
+    } else if (pos === 'bottom' && top + tooltipHeight > window.innerHeight - padding) {
+      pos = 'top';
+      calculate(pos);
+      this._componentRef.setInput('position', 'top');
     }
 
-    // --- VIEWPORT BOUNDARY CHECK (Simple) ---
-    if (left < 0) left = 10;
-    if (top < 0) top = 10;
-
-    this.componentRef.setInput('text', this.text());
-    this.componentRef.setInput('position', this.position());
-    
-    this.renderer.setStyle(this.componentRef.location.nativeElement, 'top', `${top}px`);
-    this.renderer.setStyle(this.componentRef.location.nativeElement, 'left', `${left}px`);
-
-    if (isPlatformBrowser(this.platformId)) {
-      this.ngZone.runOutsideAngular(() => {
-        window.addEventListener('resize', this.onResize);
-        window.addEventListener('scroll', this.onResize, true);
-      });
+    // Auto-Flip (Horizontal)
+    if (pos === 'left' && left < padding) {
+      pos = 'right';
+      calculate(pos);
+      this._componentRef.setInput('position', 'right');
+    } else if (pos === 'right' && left + tooltipWidth > window.innerWidth - padding) {
+      pos = 'left';
+      calculate(pos);
+      this._componentRef.setInput('position', 'left');
     }
+
+    // Clamping
+    left = Math.max(padding, Math.min(left, window.innerWidth - tooltipWidth - padding));
+    top = Math.max(padding, Math.min(top, window.innerHeight - tooltipHeight - padding));
+
+    tooltipEl.style.top = `${top}px`;
+    tooltipEl.style.left = `${left}px`;
   }
 
-  private hide(): void {
-    if (!this.isVisible) return;
-    this.isVisible = false;
-    
-    if (this.componentRef) {
-      this.componentRef.destroy();
-      this.componentRef = null;
-    }
-
-    if (isPlatformBrowser(this.platformId)) {
-      window.removeEventListener('resize', this.onResize);
-      window.removeEventListener('scroll', this.onResize, true);
-    }
-  }
-
-  private onResize = (): void => {
-    if (this.isVisible) {
-      this.show(); // Re-calculate
-    }
-  };
-
-  private updatePosition(): void {
-    // Logic merged into show for simplicity or kept if needed. 
-    // The prompt suggested refining showTooltip/show logic.
-  }
-
-  private destroy(): void {
+  ngOnDestroy() {
     this.hide();
   }
 }
