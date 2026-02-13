@@ -1,9 +1,20 @@
 {
   "name": "@devynelogic/prism-theme",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Global styles, theming system, and SCSS utilities for Prism Design System.",
   "author": "DevyneLogic",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devynelogic/prism-monorepo"
+  },
+  "keywords": [
+    "angular",
+    "scss",
+    "theme",
+    "design-system",
+    "styles"
+  ],
   "publishConfig": {
     "access": "public"
   },

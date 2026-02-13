@@ -1,6 +1,19 @@
 {
   "name": "@devynelogic/prism-core",
-  "version": "0.0.3",
+  "version": "0.0.4",
+  "author": "DevyneLogic",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devynelogic/prism-monorepo"
+  },
+  "keywords": [
+    "angular",
+    "components",
+    "prism",
+    "design-system",
+    "ui-library"
+  ],
   "peerDependencies": {
     "@angular/animations": "^21.1.0",
     "@angular/common": "^21.1.0",
