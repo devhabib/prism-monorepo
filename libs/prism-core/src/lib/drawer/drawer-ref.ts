@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
  * Reference to a drawer opened via the PrismDrawerService.
  * Provides methods to close the drawer and observe the result.
  */
-export class PrismDrawerRef<R = any> {
+export class PrismDrawerRef<R = unknown> {
   private readonly _afterClosed = new Subject<R | undefined>();
   
   /**

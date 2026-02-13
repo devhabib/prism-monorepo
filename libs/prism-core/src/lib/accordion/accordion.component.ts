@@ -25,7 +25,7 @@ import { PrismAccordionPanelComponent } from './accordion-panel.component';
       border-radius: 8px;
       overflow: hidden;
 
-      &--bordered {
+      &.prism-accordion--bordered {
         border: 1px solid var(--border);
       }
     }

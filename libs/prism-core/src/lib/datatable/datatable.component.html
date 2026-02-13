@@ -33,10 +33,10 @@
               (checkedChange)="toggleRowSelection(row)" />
           </td>
         }
-        @for (col of columns(); track col) {
+        @for (col of columns(); track $index) {
           <td>
             @if (col.cellTemplate) {
-              <ng-container *ngTemplateOutlet="col.cellTemplate; context: { $implicit: row[col.key], row: row }"></ng-container>
+              <ng-container [ngTemplateOutlet]="col.cellTemplate" [ngTemplateOutletContext]="{ $implicit: row[col.key], row: row }"></ng-container>
             } @else {
               {{ row[col.key] }}
             }
@@ -58,6 +58,6 @@
     [totalRecords]="filteredData().length" 
     [rows]="rows()" 
     [first]="first()"
-    (onPageChange)="onPageChange($event)">
+    (pageChange)="onPageChange($event)">
   </prism-paginator>
 }

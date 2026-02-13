@@ -27,7 +27,7 @@ export class PrismPaginatorComponent {
   size = input<'sm' | 'md'>('sm');
 
   // Outputs
-  onPageChange = output<PageEvent>();
+  pageChange = output<PageEvent>();
 
   // State
   // We track 'first' internally if we want to support controlled/uncontrolled, 
@@ -49,33 +49,33 @@ export class PrismPaginatorComponent {
   isLast = computed(() => this.currentPage() === this.totalPages() - 1);
 
   // Methods
-  changePage(newPage: number) {
+  changePage(newPage: number): void {
     if (newPage < 0 || newPage >= this.totalPages()) {
       return;
     }
 
     const newFirst = newPage * this.rows();
     
-    this.onPageChange.emit({
+    this.pageChange.emit({
       page: newPage,
       first: newFirst,
       rows: this.rows(),
     });
   }
 
-  next() {
+  next(): void {
     this.changePage(this.currentPage() + 1);
   }
 
-  prev() {
+  prev(): void {
     this.changePage(this.currentPage() - 1);
   }
   
-  toFirst() {
+  toFirst(): void {
     this.changePage(0);
   }
   
-  toLast() {
+  toLast(): void {
     this.changePage(this.totalPages() - 1);
   }
 }

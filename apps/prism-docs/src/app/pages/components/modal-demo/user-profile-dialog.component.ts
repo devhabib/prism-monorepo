@@ -81,5 +81,5 @@ type UserProfileData = {
 })
 export class UserProfileDialogComponent {
   ref = inject(PrismDialogRef);
-  data: UserProfileData = inject(DIALOG_DATA);
+  data: UserProfileData = inject(DIALOG_DATA) as UserProfileData;
 }

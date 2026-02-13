@@ -11,10 +11,10 @@
 
   <div class="prism-switch-inner">
     @if (checked()) {
-      @if (isTemplate(checkedChildren())) { <ng-container *ngTemplateOutlet="$any(checkedChildren())" /> }
+      @if (isTemplate(checkedChildren())) { <ng-container *ngTemplateOutlet="asTemplate(checkedChildren())" /> }
       @else { {{ checkedChildren() }} }
     } @else {
-      @if (isTemplate(unCheckedChildren())) { <ng-container *ngTemplateOutlet="$any(unCheckedChildren())" /> }
+      @if (isTemplate(unCheckedChildren())) { <ng-container *ngTemplateOutlet="asTemplate(unCheckedChildren())" /> }
       @else { {{ unCheckedChildren() }} }
     }
   </div>

@@ -1,22 +1,28 @@
 @if (visible()) {
   <div class="prism-dialog-mask"
        [class]="'position-' + position()"
-       (click)="onBackdropClick($event)"
+       (click)="onBackdropClick()"
+       (keydown.escape)="onBackdropClick()"
+       tabindex="-1"
        [@backdropAnimation]>
     
     <div class="prism-dialog-panel"
+         role="dialog"
+         aria-modal="true"
+         [attr.aria-labelledby]="header() ? 'prism-dialog-title' : null"
          [style.width]="width()"
          (click)="$event.stopPropagation()"
+         (keydown)="$event.stopPropagation()"
          [@dialogAnimation]="position()">
       
       <div class="dialog-header">
-        <span class="dialog-title">{{ header() }}</span>
+        <span id="prism-dialog-title" class="dialog-title">{{ header() }}</span>
         <button class="dialog-close" (click)="close()" aria-label="Close dialog">
           <i class="ri-close-line"></i>
         </button>
       </div>
 
-      <div class="dialog-content">
+      <div class="dialog-content" tabindex="0">
         <ng-content />
       </div>
 

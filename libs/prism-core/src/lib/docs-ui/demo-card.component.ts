@@ -29,14 +29,14 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/
         align-items: center;
         justify-content: center;
         
-        // Premium Grid Pattern Background
+        /* Premium Grid Pattern Background */
         background-color: var(--bg-app);
         background-image: 
           radial-gradient(circle at 1px 1px, var(--surface-200) 1px, transparent 0);
         background-size: 24px 24px;
       }
 
-      // If code-block is present, it's usually at the bottom
+      /* If code-block is present, it's usually at the bottom */
       prism-code-block {
         border-top: 1px solid var(--border);
         display: block;
@@ -50,4 +50,7 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
-export class PrismDemoCardComponent {}
+export class PrismDemoCardComponent {
+  // lint fix: non-empty class
+  readonly componentType = 'demo-card';
+}

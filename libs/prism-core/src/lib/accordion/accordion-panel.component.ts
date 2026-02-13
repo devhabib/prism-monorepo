@@ -2,24 +2,25 @@ import {
   Component, 
   ChangeDetectionStrategy, 
   input, 
-  signal, 
-  EventEmitter, 
-  Output,
+  output,
   TemplateRef,
   model
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'prism-accordion-panel',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgTemplateOutlet],
   template: `
     <div class="prism-collapse-panel" [class.prism-collapse-panel--active]="active()">
-      <div 
+      <button 
+        type="button"
         class="prism-collapse-header" 
         [class.disabled]="disabled()"
+        [attr.disabled]="disabled() ? true : null"
+        [attr.aria-expanded]="active()"
         (click)="onHeaderClick()"
       >
         <span class="prism-collapse-header__arrow" [@rotateIcon]="active()">
@@ -27,23 +28,28 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
         </span>
         
         <div class="prism-collapse-header__title">
-          <ng-container *ngIf="isTemplate(header()); else textHeader">
+          @if (isTemplate(header())) {
             <ng-container *ngTemplateOutlet="asTemplate(header())"></ng-container>
-          </ng-container>
-          <ng-template #textHeader>{{ header() }}</ng-template>
+          } @else {
+            {{ header() }}
+          }
         </div>
 
-        <div class="prism-collapse-header__extra" *ngIf="extra()">
-          <ng-container *ngIf="isTemplate(extra()); else textExtra">
-            <ng-container *ngTemplateOutlet="asTemplate(extra())"></ng-container>
-          </ng-container>
-          <ng-template #textExtra>{{ extra() }}</ng-template>
-        </div>
-      </div>
+        @if (extra()) {
+          <div class="prism-collapse-header__extra">
+            @if (isTemplate(extra())) {
+              <ng-container *ngTemplateOutlet="asTemplate(extra())"></ng-container>
+            } @else {
+              {{ extra() }}
+            }
+          </div>
+        }
+      </button>
       
       <div 
         class="prism-collapse-content"
         [@expandContent]="active()"
+        [attr.aria-hidden]="!active()"
       >
         <div class="prism-collapse-content__box">
           <ng-content></ng-content>
@@ -61,6 +67,11 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     }
 
     .prism-collapse-header {
+      width: 100%;
+      border: none;
+      text-align: left;
+      font: inherit;
+      color: inherit;
       display: flex;
       align-items: center;
       padding: 12px 16px;
@@ -68,9 +79,15 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
       cursor: pointer;
       user-select: none;
       transition: all 0.3s;
+      outline: none;
 
       &:hover:not(.disabled) {
         background-color: var(--surface-50);
+      }
+
+      &:focus-visible:not(.disabled) {
+        background-color: var(--surface-50);
+        box-shadow: inset 0 0 0 2px var(--primary);
       }
 
       &.disabled {
@@ -140,18 +157,18 @@ export class PrismAccordionPanelComponent {
   extra = input<string | TemplateRef<void> | null>(null);
 
   /** Internal event for the parent accordion to listen to */
-  @Output() toggleEvent = new EventEmitter<void>();
+  toggleEvent = output<undefined>();
 
-  isTemplate(value: any): value is TemplateRef<any> {
+  isTemplate(value: string | TemplateRef<unknown> | null): value is TemplateRef<unknown> {
     return value instanceof TemplateRef;
   }
 
-  asTemplate(value: any): TemplateRef<any> {
-    return value as TemplateRef<any>;
+  asTemplate(value: string | TemplateRef<unknown> | null): TemplateRef<unknown> {
+    return value as TemplateRef<unknown>;
   }
 
   onHeaderClick(): void {
     if (this.disabled()) return;
-    this.toggleEvent.emit();
+    this.toggleEvent.emit(undefined);
   }
 }

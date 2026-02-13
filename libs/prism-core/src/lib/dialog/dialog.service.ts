@@ -1,7 +1,6 @@
 import { 
-  Injectable, 
+  Injectable,
   Injector, 
-  ComponentRef, 
   createComponent, 
   EnvironmentInjector, 
   ApplicationRef, 
@@ -16,23 +15,6 @@ import { DIALOG_DATA } from './dialog.tokens';
 
 /**
  * Service for programmatically opening dialogs with custom components.
- * 
- * @example
- * ```typescript
- * constructor(private dialog: PrismDialogService) {}
- * 
- * openDialog() {
- *   const ref = this.dialog.open(MyComponent, {
- *     header: 'User Profile',
- *     data: { userId: 123 },
- *     width: '600px'
- *   });
- *   
- *   ref.afterClosed$.subscribe(result => {
- *     console.log('Dialog closed with result:', result);
- *   });
- * }
- * ```
  */
 @Injectable({ providedIn: 'root' })
 export class PrismDialogService {
@@ -47,7 +29,7 @@ export class PrismDialogService {
    * @param config Optional configuration for the dialog
    * @returns A reference to the opened dialog
    */
-  open<T, D = any, R = any>(
+  open<T, D = unknown, R = unknown>(
     component: Type<T>, 
     config: PrismDialogConfig<D> = {}
   ): PrismDialogRef<R> {
@@ -63,7 +45,7 @@ export class PrismDialogService {
     dialogRef.setInput('dismissableMask', config.dismissableMask ?? true);
     
     // 3. Create the DialogRef (Controller)
-    const prismDialogRef = new PrismDialogRef<R>((result) => {
+    const prismDialogRef = new PrismDialogRef<R>(() => {
       // Cleanup logic when closed
       dialogRef.instance.visible.set(false);
       
@@ -111,7 +93,7 @@ export class PrismDialogService {
     }
 
     // 9. Handle Close from the Dialog Shell (clicking X or backdrop)
-    const sub = dialogRef.instance.onHide.subscribe(() => {
+    const sub = dialogRef.instance.hide.subscribe(() => {
       prismDialogRef.close();
       sub.unsubscribe();
     });

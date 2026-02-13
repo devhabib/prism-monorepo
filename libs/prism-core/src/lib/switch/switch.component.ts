@@ -26,16 +26,20 @@ export class PrismSwitchComponent {
   readonly disabled = input<boolean>(false);
   readonly loading = input<boolean>(false);
   
-  readonly checkedChildren = input<string | TemplateRef<any> | null>(null);
-  readonly unCheckedChildren = input<string | TemplateRef<any> | null>(null);
+  readonly checkedChildren = input<string | TemplateRef<unknown> | null>(null);
+  readonly unCheckedChildren = input<string | TemplateRef<unknown> | null>(null);
 
-  toggle() {
+  toggle(): void {
     if (!this.disabled() && !this.loading()) {
       this.checked.update(v => !v);
     }
   }
 
-  isTemplate(val: any): val is TemplateRef<any> {
+  isTemplate(val: string | TemplateRef<unknown> | null): val is TemplateRef<unknown> {
     return val instanceof TemplateRef;
+  }
+
+  asTemplate(val: string | TemplateRef<unknown> | null): TemplateRef<unknown> {
+    return val as TemplateRef<unknown>;
   }
 }

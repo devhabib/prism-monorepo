@@ -8,7 +8,7 @@ import {
   model,
   ViewEncapsulation,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import { PrismColumn, SortConfig } from './datatable.types';
 import { PrismPaginatorComponent } from '../paginator/paginator.component';
 import { PageEvent } from '../paginator/paginator.types';
@@ -18,7 +18,7 @@ import { PrismEmptyComponent } from '../empty/empty.component';
 @Component({
   selector: 'prism-table',
   standalone: true,
-  imports: [CommonModule, PrismPaginatorComponent, PrismCheckboxComponent, PrismEmptyComponent],
+  imports: [CommonModule, NgTemplateOutlet, PrismPaginatorComponent, PrismCheckboxComponent, PrismEmptyComponent],
   templateUrl: './datatable.component.html',
   styleUrl: './datatable.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -50,7 +50,7 @@ export class PrismTableComponent<T> {
   readonly first = signal(0); // Pagination state
   
   // Selection Model
-  selection = model<any[] | any>(null);
+  selection = model<T[] | T | null>(null);
   
   // Outputs
   readonly page = output<PageEvent>();
@@ -75,12 +75,12 @@ export class PrismTableComponent<T> {
     const sort = this.sortConfig();
     if (sort) {
        processed = [...processed].sort((a, b) => {
-        const aValue = a[sort.key];
-        const bValue = b[sort.key];
+        const aValue = (a as Record<string, unknown>)[sort.key as string];
+        const bValue = (b as Record<string, unknown>)[sort.key as string];
 
         if (aValue === bValue) return 0;
 
-        const comparison = aValue > bValue ? 1 : -1;
+        const comparison = String(aValue) > String(bValue) ? 1 : -1;
         return sort.direction === 'asc' ? comparison : -comparison;
       });
     }
@@ -102,7 +102,7 @@ export class PrismTableComponent<T> {
   });
 
   // Methods
-  toggleSort(key: keyof T) {
+  toggleSort(key: keyof T): void {
     const currentSort = this.sortConfig();
 
     if (currentSort?.key === key) {
@@ -116,7 +116,7 @@ export class PrismTableComponent<T> {
     }
   }
 
-  onPageChange(event: PageEvent) {
+  onPageChange(event: PageEvent): void {
     this.first.set(event.first);
     this.page.emit(event);
   }
@@ -130,9 +130,9 @@ export class PrismTableComponent<T> {
     if (!mode || !current) return false;
     
     if (mode === 'single') {
-      return current[key] === row[key];
+      return (current as T)[key] === row[key];
     } else {
-      return Array.isArray(current) && current.some(item => item[key] === row[key]);
+      return Array.isArray(current) && (current as T[]).some((item: T) => item[key] === row[key]);
     }
   }
 
@@ -145,8 +145,8 @@ export class PrismTableComponent<T> {
     if (mode === 'single') {
       this.selection.set(row);
     } else {
-      const current = Array.isArray(this.selection()) ? [...this.selection()] : [];
-      const index = current.findIndex(item => item[key] === row[key]);
+      const current = Array.isArray(this.selection()) ? [...(this.selection() as T[])] : [];
+      const index = current.findIndex((item: T) => item[key] === row[key]);
       
       if (index > -1) {
         current.splice(index, 1);
@@ -154,7 +154,7 @@ export class PrismTableComponent<T> {
         current.push(row);
       }
       
-      this.selection.set(current);
+      this.selection.set(current as T[]);
     }
   }
 
@@ -162,12 +162,12 @@ export class PrismTableComponent<T> {
     if (this.selectionMode() !== 'multiple') return;
     
     const allData = this.filteredData();
-    const current = Array.isArray(this.selection()) ? this.selection() : [];
+    const current = Array.isArray(this.selection()) ? (this.selection() as T[]) : [];
     
-    if (current.length === allData.length) {
-      this.selection.set([]);
+    if (current && current.length === allData.length) {
+      this.selection.set([] as T[]);
     } else {
-      this.selection.set([...allData]);
+      this.selection.set([...allData] as T[]);
     }
   }
 
@@ -175,8 +175,8 @@ export class PrismTableComponent<T> {
     if (this.selectionMode() !== 'multiple') return false;
     
     const allData = this.filteredData();
-    const current = Array.isArray(this.selection()) ? this.selection() : [];
+    const current = Array.isArray(this.selection()) ? (this.selection() as T[]) : [];
     
-    return allData.length > 0 && current.length === allData.length;
+    return allData.length > 0 && current && current.length === allData.length;
   }
 }

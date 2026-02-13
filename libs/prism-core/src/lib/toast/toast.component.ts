@@ -10,22 +10,23 @@ import { ToastService, Toast } from '../services/toast.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="toast-container">
-      <div 
-        *ngFor="let toast of toastService.toasts(); trackBy: trackById"
-        class="toast-item"
-        [class]="toast.severity"
-        [@slideIn]
-      >
-        <div class="toast-icon">
-          <i [class]="getIcon(toast.severity)"></i>
+      @for (toast of toastService.toasts(); track toast.id) {
+        <div 
+          class="toast-item"
+          [class]="toast.severity"
+          [@slideIn]
+        >
+          <div class="toast-icon">
+            <i [class]="getIcon(toast.severity)"></i>
+          </div>
+          <div class="toast-content">
+            {{ toast.message }}
+          </div>
+          <button class="toast-close" (click)="toastService.remove(toast.id)">
+            <i class="ri-close-line"></i>
+          </button>
         </div>
-        <div class="toast-content">
-          {{ toast.message }}
-        </div>
-        <button class="toast-close" (click)="toastService.remove(toast.id)">
-          <i class="ri-close-line"></i>
-        </button>
-      </div>
+      }
     </div>
   `,
   styles: [`

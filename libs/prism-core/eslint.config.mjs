@@ -13,6 +13,9 @@ export default [
         },
       ],
     },
+    plugins: {
+      '@nx': nx,
+    },
     languageOptions: {
       parser: await import('jsonc-eslint-parser'),
     },
@@ -26,7 +29,7 @@ export default [
         'error',
         {
           type: 'attribute',
-          prefix: 'lib',
+          prefix: 'prism',
           style: 'camelCase',
         },
       ],
@@ -34,7 +37,7 @@ export default [
         'error',
         {
           type: 'element',
-          prefix: 'lib',
+          prefix: 'prism',
           style: 'kebab-case',
         },
       ],
