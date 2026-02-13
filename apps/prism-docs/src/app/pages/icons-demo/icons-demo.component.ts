@@ -115,7 +115,7 @@ export class IconsDemoComponent {
   // Dynamic Sizing Demo
   demoSize = signal('2rem');
   
-  updateDemoSize(event: Event) {
+  updateDemoSize(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
     this.demoSize.set(value);
   }

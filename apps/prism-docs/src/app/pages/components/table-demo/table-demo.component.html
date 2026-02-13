@@ -41,7 +41,7 @@
     
     <prism-demo-section title="Financial Ledger" description="Gridlines and conditional styling for financial data.">
       <prism-demo-card>
-        <div preview class="w-full">
+        <div preview class="w-full overflow-x-auto">
           <prism-table [data]="financeData" [columns]="financeCols" size="sm" [gridlines]="true" [striped]="true" [width]="'100%'" />
         </div>
         <prism-code-block [html]="snippets.financeHTML" [ts]="snippets.financeTS" />
@@ -50,7 +50,7 @@
 
     <prism-demo-section title="Team Roster" description="Rich content with avatars and action buttons.">
       <prism-demo-card>
-        <div preview class="w-full">
+        <div preview class="w-full overflow-x-auto">
           <prism-table [data]="teamData" [columns]="teamCols" size="lg" [width]="'100%'" />
         </div>
         <prism-code-block [html]="snippets.teamHTML" [ts]="snippets.teamTS" />
@@ -59,7 +59,7 @@
 
     <prism-demo-section title="Inventory" description="Sorting, pagination, and image previews.">
       <prism-demo-card>
-        <div preview class="w-full">
+        <div preview class="w-full overflow-x-auto">
           <prism-table [data]="inventoryData" [columns]="inventoryCols" [paginator]="true" [rows]="3" [width]="'100%'" />
         </div>
         <prism-code-block [html]="snippets.inventoryHTML" [ts]="snippets.inventoryTS" />
@@ -68,7 +68,7 @@
 
     <prism-demo-section title="Single Selection" description="Select a single row from the table.">
       <prism-demo-card>
-        <div preview class="w-full">
+        <div preview class="w-full overflow-x-auto">
           <div class="flex items-center gap-2 mb-4 min-h-[32px] p-2 bg-slate-50 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
             <span class="text-sm text-muted">Selected:</span>
             @if (singleSelection()) {
@@ -92,7 +92,7 @@
 
     <prism-demo-section title="Multiple Selection" description="Select multiple rows using checkboxes.">
       <prism-demo-card>
-        <div preview class="w-full">
+        <div preview class="w-full overflow-x-auto">
           <div class="flex items-center gap-2 mb-4 min-h-[32px] p-2 bg-slate-50 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
             <span class="text-sm text-muted">Selection Count:</span>
             <prism-badge [label]="multipleSelection().length.toString()" variant="info" />
@@ -112,7 +112,7 @@
 
     <prism-demo-section title="Empty State" description="Automatic empty state when no data is provided.">
       <prism-demo-card>
-        <div preview class="w-full">
+        <div preview class="w-full overflow-x-auto">
           <div class="flex justify-end gap-2 mb-4">
             <prism-button label="Clear Data" variant="outline" size="sm" icon="delete-bin-line" (click)="clearData()" />
             <prism-button label="Reset Data" variant="text" size="sm" (click)="resetData()" />

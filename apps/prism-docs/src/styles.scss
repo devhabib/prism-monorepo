@@ -2,8 +2,20 @@
 @use 'sass:map';
 @use '../../../libs/prism-theme/src/lib/index' as *;
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   background-color: var(--bg-app);
   color: var(--text-main);
   font-family: 'Inter', sans-serif;
+}
+
+h1 {
+  @apply text-2xl md:text-4xl font-bold mb-4;
+}
+
+h2 {
+  @apply text-xl md:text-3xl font-semibold mb-3;
 }

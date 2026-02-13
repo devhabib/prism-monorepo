@@ -45,7 +45,7 @@
 
       @if (filteredIcons().length > 0) {
         <!-- Adjusted grid for a more spacious, "bigger" look -->
-        <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-6">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 w-full">
           @for (icon of displayedIcons(); track icon.key) {
             <button 
               (click)="copyIcon(icon.name)"

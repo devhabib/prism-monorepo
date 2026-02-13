@@ -1,57 +1,59 @@
-<table [class.p-striped]="striped()" [class.p-gridlines]="gridlines()" [class.p-sm]="size() === 'sm'" [class.p-lg]="size() === 'lg'">
-  <thead>
-    <tr>
-      @if (selectionMode()) {
-        <th class="prism-table__selection-cell">
-          @if (selectionMode() === 'multiple') {
-            <prism-checkbox 
-              [checked]="isAllSelected()"
-              (checkedChange)="toggleSelectAll()" />
-          }
-        </th>
-      }
-      @for (col of columns(); track col) {
-        <th (click)="toggleSort(col.key)" [class.sortable]="col.sortable">
-          {{ col.header }}
-          @if (sortConfig()?.key === col.key) {
-            <span>
-              <i [class]="sortConfig()?.direction === 'asc' ? 'ri-arrow-up-s-fill' : 'ri-arrow-down-s-fill'"></i>
-            </span>
-          }
-        </th>
-      }
-    </tr>
-  </thead>
-  <tbody>
-    @for (row of processedData(); track $index) {
-      <tr [class.prism-table__row--selected]="isSelected(row)" (click)="toggleRowSelection(row)">
-        @if (selectionMode()) {
-          <td class="prism-table__selection-cell">
-            <prism-checkbox 
-              [type]="selectionMode() === 'single' ? 'radio' : 'checkbox'"
-              [checked]="isSelected(row)"
-              (checkedChange)="toggleRowSelection(row)" />
-          </td>
-        }
-        @for (col of columns(); track $index) {
-          <td>
-            @if (col.cellTemplate) {
-              <ng-container [ngTemplateOutlet]="col.cellTemplate" [ngTemplateOutletContext]="{ $implicit: row[col.key], row: row }"></ng-container>
-            } @else {
-              {{ row[col.key] }}
-            }
-          </td>
-        }
-      </tr>
-    } @empty {
+<div class="overflow-x-auto w-full">
+  <table [class.p-striped]="striped()" [class.p-gridlines]="gridlines()" [class.p-sm]="size() === 'sm'" [class.p-lg]="size() === 'lg'">
+    <thead>
       <tr>
-        <td [attr.colspan]="columns().length + (selectionMode() ? 1 : 0)">
-          <prism-empty />
-        </td>
+        @if (selectionMode()) {
+          <th class="prism-table__selection-cell">
+            @if (selectionMode() === 'multiple') {
+              <prism-checkbox 
+                [checked]="isAllSelected()"
+                (checkedChange)="toggleSelectAll()" />
+            }
+          </th>
+        }
+        @for (col of columns(); track col) {
+          <th (click)="toggleSort(col.key)" [class.sortable]="col.sortable">
+            {{ col.header }}
+            @if (sortConfig()?.key === col.key) {
+              <span>
+                <i [class]="sortConfig()?.direction === 'asc' ? 'ri-arrow-up-s-fill' : 'ri-arrow-down-s-fill'"></i>
+              </span>
+            }
+          </th>
+        }
       </tr>
-    }
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      @for (row of processedData(); track $index) {
+        <tr [class.prism-table__row--selected]="isSelected(row)" (click)="toggleRowSelection(row)">
+          @if (selectionMode()) {
+            <td class="prism-table__selection-cell">
+              <prism-checkbox 
+                [type]="selectionMode() === 'single' ? 'radio' : 'checkbox'"
+                [checked]="isSelected(row)"
+                (checkedChange)="toggleRowSelection(row)" />
+            </td>
+          }
+          @for (col of columns(); track $index) {
+            <td>
+              @if (col.cellTemplate) {
+                <ng-container [ngTemplateOutlet]="col.cellTemplate" [ngTemplateOutletContext]="{ $implicit: row[col.key], row: row }"></ng-container>
+              } @else {
+                {{ row[col.key] }}
+              }
+            </td>
+          }
+        </tr>
+      } @empty {
+        <tr>
+          <td [attr.colspan]="columns().length + (selectionMode() ? 1 : 0)">
+            <prism-empty />
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
 
 @if (paginator()) {
   <prism-paginator 
