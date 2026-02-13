@@ -15,8 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@prism-monorepo/prism-core": ["libs/prism-core/src/index.ts"],
-      "@prism-monorepo/prism-theme": ["libs/prism-theme/src/index.ts"]
+      "@devynelogic/prism-core": ["libs/prism-core/src/index.ts"],
+      "@devynelogic/prism-theme": ["libs/prism-theme/src/index.ts"],
+      "@devynelogic/prism-icons": ["libs/prism-icons/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

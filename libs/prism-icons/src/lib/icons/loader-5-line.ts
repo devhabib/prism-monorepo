@@ -1,0 +1,6 @@
+import { PrismIconDef } from '../types';
+
+export const piLoader5Line: PrismIconDef = {
+  name: 'loader-5-line',
+  data: `<path d="M12 3C16.9706 3 21 7.02944 21 12H19C19 8.13401 15.866 5 12 5V3Z"/>`
+};

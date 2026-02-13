@@ -39,18 +39,8 @@
     }
   },
   "plugins": [
-    {
-      "plugin": "@nx/playwright/plugin",
-      "options": {
-        "targetName": "e2e"
-      }
-    },
-    {
-      "plugin": "@nx/eslint/plugin",
-      "options": {
-        "targetName": "lint"
-      }
-    }
+    { "plugin": "@nx/playwright/plugin", "options": { "targetName": "e2e" } },
+    { "plugin": "@nx/eslint/plugin", "options": { "targetName": "lint" } }
   ],
   "generators": {
     "@nx/angular:application": {
@@ -65,6 +55,16 @@
     },
     "@nx/angular:component": {
       "style": "scss"
+    }
+  },
+  "release": {
+    "projects": [
+      "prism-core",
+      "prism-theme",
+      "prism-icons"
+    ],
+    "changelog": {
+      "projectChangelogs": true
     }
   }
 }

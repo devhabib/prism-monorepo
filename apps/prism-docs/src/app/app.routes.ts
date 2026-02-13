@@ -8,8 +8,15 @@ export const appRoutes: Route[] = [
     children: [
       {
         path: '',
-        redirectTo: 'components/table',
+        redirectTo: 'getting-started/installation',
         pathMatch: 'full',
+      },
+      {
+        path: 'icons',
+        loadComponent: () =>
+          import('./pages/icons-demo/icons-demo.component').then(
+            (m) => m.IconsDemoComponent
+          ),
       },
       {
         path: 'getting-started/installation',

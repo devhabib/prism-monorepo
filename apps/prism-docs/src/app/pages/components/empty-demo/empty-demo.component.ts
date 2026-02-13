@@ -11,7 +11,7 @@ import {
   ApiDoc,
   PrismTabGroupComponent,
   PrismTabComponent
-} from '@prism-monorepo/prism-core';
+} from '@devynelogic/prism-core';
 
 @Component({
   selector: 'app-empty-demo',

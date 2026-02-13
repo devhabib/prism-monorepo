@@ -1,5 +1,5 @@
 import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
-import { PrismDialogRef, DIALOG_DATA, PrismButtonComponent } from '@prism-monorepo/prism-core';
+import { PrismDialogRef, DIALOG_DATA, PrismButtonComponent } from '@devynelogic/prism-core';
 
 type UserProfileData = {
   name: string;

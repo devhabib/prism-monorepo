@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PrismCardComponent } from '@prism-monorepo/prism-core';
+import { PrismCardComponent } from '@devynelogic/prism-core';
 
 @Component({
   selector: 'prism-accessibility',
