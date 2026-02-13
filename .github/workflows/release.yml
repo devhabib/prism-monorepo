@@ -1,0 +1,48 @@
+name: Release to NPM
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'libs/**'
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Prism Core
+        run: npx nx build prism-core --configuration=production
+
+      - name: Build Prism Theme
+        run: npx nx build prism-theme --configuration=production
+
+      - name: Publish Prism Core
+        run: |
+          cd dist/libs/prism-core
+          npm publish --access public || echo "Version already exists, skipping."
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish Prism Theme
+        run: |
+          cd dist/libs/prism-theme
+          npm publish --access public || echo "Version already exists, skipping."
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
