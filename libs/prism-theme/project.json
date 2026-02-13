@@ -5,5 +5,23 @@
   "projectType": "library",
   "tags": ["type:lib", "scope:theme"],
   "// targets": "to see all targets run: nx show project prism-theme --web",
-  "targets": {}
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "outputPath": "dist/libs/prism-theme",
+        "main": "libs/prism-theme/src/index.ts",
+        "tsConfig": "libs/prism-theme/tsconfig.lib.json",
+        "assets": [
+          "libs/prism-theme/*.md",
+          {
+            "input": "libs/prism-theme/src/lib",
+            "glob": "**/*.scss",
+            "output": "lib"
+          }
+        ]
+      }
+    }
+  }
 }

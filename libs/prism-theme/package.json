@@ -8,8 +8,8 @@
     "access": "public"
   },
   "exports": {
-    "./*": "./src/lib/*.scss",
-    ".": "./src/index.ts"
+    "./*": "./lib/*.scss",
+    ".": "./index.js"
   },
   "peerDependencies": {
     "@angular/common": ">=18.0.0",
