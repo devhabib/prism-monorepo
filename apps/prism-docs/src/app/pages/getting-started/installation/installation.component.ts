@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PrismCardComponent, PrismCodeBlockComponent } from '@prism-monorepo/prism-core';
+import { PrismCardComponent, PrismCodeBlockComponent } from '@devynelogic/prism-core';
 
 @Component({
   selector: 'prism-installation',
@@ -11,8 +11,8 @@ import { PrismCardComponent, PrismCodeBlockComponent } from '@prism-monorepo/pri
     <p class="text-xl text-muted mb-8">Get started with Prism Design System in your Angular application.</p>
 
     <prism-card header="1. Install Packages">
-      <p class="mb-4">Run the following command to install the core library and themes:</p>
-      <prism-code-block code="npm install @devynelogic/prism-core @devynelogic/prism-theme" language="bash"></prism-code-block>
+      <p class="mb-4">Run the following command to install the core library, themes, and icons:</p>
+      <prism-code-block code="npm install @devynelogic/prism-core @devynelogic/prism-theme @devynelogic/prism-icons" language="bash"></prism-code-block>
     </prism-card>
 
     <div class="h-8"></div>
@@ -24,8 +24,8 @@ import { PrismCardComponent, PrismCodeBlockComponent } from '@prism-monorepo/pri
 
     <div class="h-8"></div>
 
-    <prism-card header="3. Enable Animations">
-      <p class="mb-4">Prism components require Angular Animations. Ensure they are enabled in your <code>app.config.ts</code>:</p>
+    <prism-card header="3. Setup Core & Icons">
+      <p class="mb-4">Prism components require Angular Animations and icon registration. Configure them in your <code>app.config.ts</code>:</p>
       <prism-code-block [code]="animSnippet" language="typescript"></prism-code-block>
     </prism-card>
   `,
@@ -50,12 +50,22 @@ export class InstallationComponent {
   $primary: #2563EB
 );`;
 
-  animSnippet = `import { ApplicationConfig } from '@angular/core';
+  animSnippet = `import { ApplicationConfig, APP_INITIALIZER } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { PrismIconRegistry } from '@devynelogic/prism-core';
+import * as PrismIcons from '@devynelogic/prism-icons';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAnimations()
+    provideAnimations(),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (registry: PrismIconRegistry) => () => {
+        registry.addIcons(Object.values(PrismIcons));
+      },
+      deps: [PrismIconRegistry],
+      multi: true
+    }
   ]
 };`;
 }

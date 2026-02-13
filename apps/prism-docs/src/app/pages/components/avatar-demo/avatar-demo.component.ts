@@ -10,7 +10,7 @@ import {
   PrismDemoCardComponent,
   PrismTabGroupComponent,
   PrismTabComponent
-} from '@prism-monorepo/prism-core';
+} from '@devynelogic/prism-core';
 
 @Component({
   selector: 'app-avatar-demo',

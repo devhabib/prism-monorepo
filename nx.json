@@ -53,7 +53,18 @@
       "linter": "eslint",
       "unitTestRunner": "vitest-angular"
     },
-    "@nx/angular:component": { "style": "scss" }
+    "@nx/angular:component": {
+      "style": "scss"
+    }
   },
-  "nxCloudId": "698effd6a409ab2c262f195b"
+  "release": {
+    "projects": [
+      "prism-core",
+      "prism-theme",
+      "prism-icons"
+    ],
+    "changelog": {
+      "projectChangelogs": true
+    }
+  }
 }

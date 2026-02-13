@@ -1,0 +1,90 @@
+<div class="min-h-screen flex flex-col space-y-6">
+  
+  <prism-demo-page-header 
+    title="Iconography" 
+    [subtitle]="'A collection of ' + allIcons.length + ' icons ready for your application. Click any icon to copy its code.'" 
+  />
+
+  <prism-tab-group>
+    <prism-tab label="Gallery">
+      
+      <!-- Dynamic Sizing Demo -->
+      <prism-demo-section title="Dynamic Sizing" description="Icons can be sized using pixels, rems, or percentages.">
+        <prism-demo-card>
+          <div preview class="flex items-center gap-8 flex-wrap">
+            <div class="flex flex-col gap-2">
+               <label class="text-sm font-medium text-slate-700 dark:text-slate-300">Size Value</label>
+               <input 
+                 prismInput 
+                 type="text" 
+                 [value]="demoSize()" 
+                 (input)="updateDemoSize($event)"
+                 placeholder="e.g. 2rem, 48px"
+                 class="w-40"
+               />
+            </div>
+          </div>
+        </prism-demo-card>
+      </prism-demo-section>
+
+      <!-- Search & Grid -->
+      <div class="space-y-4 pb-6 mt-8 mb-4">
+        <div class="relative max-w-xl">
+          <div class="prism-input-icon-wrapper icon-left w-full">
+            <prism-icon name="search-line" />
+            <input 
+              prismInput 
+              size="lg"
+              [formControl]="searchControl" 
+              placeholder="Search icons (e.g. user, arrow, settings)..." 
+              class="w-full"
+            />
+          </div>
+        </div>
+      </div>
+
+      @if (filteredIcons().length > 0) {
+        <!-- Adjusted grid for a more spacious, "bigger" look -->
+        <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-6">
+          @for (icon of displayedIcons(); track icon.key) {
+            <button 
+              (click)="copyIcon(icon.name)"
+              class="group flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200 focus:outline-none hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer h-full min-h-[100px]">
+              
+              <!-- Increased icon size and simplified transition -->
+              <prism-icon 
+                [name]="icon.name" 
+                [size]="demoSize()"
+                class="text-4xl mb-3 text-slate-600 dark:text-slate-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 group-hover:scale-110 transition-transform duration-200" />
+              
+              <span class="text-xs text-center text-wrap text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors break-words w-full px-1 line-clamp-2">
+                {{ icon.name }}
+              </span>
+              
+            </button>
+          }
+        </div>
+
+        @if (hasMore()) {
+          <div class="flex justify-center pt-8 pb-12">
+            <prism-button 
+              [label]="'Load More Icons (Showing ' + displayedIcons().length + ' of ' + filteredIcons().length + ')'"
+              variant="outline"
+              (click)="loadMore()" />
+          </div>
+        }
+      } @else {
+        <div class="text-center py-20 text-muted">
+          <p class="text-xl">No icons found for "{{ searchTerm() }}"</p>
+        </div>
+      }
+    </prism-tab>
+
+    <prism-tab label="API">
+      <prism-demo-section title="Component API">
+        <prism-api-table [data]="apiData" />
+      </prism-demo-section>
+    </prism-tab>
+  </prism-tab-group>
+
+</div>

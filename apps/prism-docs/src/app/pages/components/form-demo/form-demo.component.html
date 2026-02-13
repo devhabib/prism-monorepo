@@ -27,9 +27,9 @@
           <prism-button label="Small" size="sm"></prism-button>
           <prism-button label="Medium" size="md"></prism-button>
           <prism-button label="Large" size="lg"></prism-button>
-          <prism-button label="Settings" icon="ri-settings-line"></prism-button>
-          <prism-button label="Send Message" icon="ri-send-plane-fill" iconPos="right"></prism-button>
-          <prism-button icon="ri-notification-3-line" variant="secondary"></prism-button>
+          <prism-button label="Settings" icon="settings-line"></prism-button>
+          <prism-button label="Send Message" icon="send-plane-fill" iconPos="right"></prism-button>
+          <prism-button icon="notification-3-line" variant="secondary"></prism-button>
         </div>
         <prism-code-block [html]="snippets.buttonSizes" />
       </prism-demo-card>
@@ -40,7 +40,7 @@
         <div preview class="flex gap-4 flex-wrap">
           <prism-button label="Loading" [loading]="true"></prism-button>
           <prism-button label="Disabled" [disabled]="true"></prism-button>
-          <prism-button label="Destructive Disabled" variant="danger" [disabled]="true" icon="ri-delete-bin-line"></prism-button>
+          <prism-button label="Destructive Disabled" variant="danger" [disabled]="true" icon="delete-bin-line"></prism-button>
         </div>
         <prism-code-block [html]="snippets.buttonStates" />
       </prism-demo-card>
@@ -81,14 +81,14 @@
           <div class="field">
             <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Prefix Icon</label>
             <div class="prism-input-icon-wrapper icon-left">
-              <i class="ri-mail-line"></i>
+              <prism-icon name="mail-line" />
               <input prismInput placeholder="Email Address" />
             </div>
           </div>
           <div class="field">
             <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Suffix Icon</label>
             <div class="prism-input-icon-wrapper icon-right">
-              <i class="ri-eye-off-line"></i>
+              <prism-icon name="eye-off-line" />
               <input prismInput type="password" placeholder="Password" />
             </div>
           </div>
@@ -118,7 +118,7 @@
           <div class="field">
             <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Prefix Button</label>
             <div class="prism-input-group">
-              <prism-button icon="ri-search-line" variant="primary"></prism-button>
+              <prism-button icon="search-line" variant="primary"></prism-button>
               <input prismInput placeholder="Search components..." />
             </div>
           </div>

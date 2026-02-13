@@ -11,7 +11,7 @@ import {
   PrismDemoPageHeaderComponent,
   PrismDemoSectionComponent,
   PrismDemoCardComponent
-} from '@prism-monorepo/prism-core';
+} from '@devynelogic/prism-core';
 
 @Component({
   selector: 'prism-toast-demo',
@@ -41,7 +41,7 @@ export class ToastDemoComponent {
 
   readonly snippets = {
     usageTS: `import { inject } from '@angular/core';
-import { ToastService } from '@prism-monorepo/prism-core';
+import { ToastService } from '@devynelogic/prism-core';
 
 @Component({ ... })
 export class MyComponent {

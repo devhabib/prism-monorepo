@@ -10,7 +10,7 @@ import {
   PrismDemoPageHeaderComponent,
   PrismDemoSectionComponent,
   PrismDemoCardComponent
-} from '@prism-monorepo/prism-core';
+} from '@devynelogic/prism-core';
 
 @Component({
   selector: 'prism-tooltip-demo',

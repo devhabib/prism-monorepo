@@ -53,21 +53,24 @@
   align-items: center;
   width: 100%;
 
-  i {
+  i, prism-icon {
     position: absolute;
     color: var(--text-muted);
     font-size: 1.1rem;
     pointer-events: none;
     z-index: 3;
+    display: flex; /* Ensure it behaves like an icon container */
+    align-items: center;
+    justify-content: center;
   }
 
   &.icon-left {
-    i { left: 0.75rem; }
+    i, prism-icon { left: 0.75rem; }
     .prism-input { padding-left: 2.5rem; }
   }
 
   &.icon-right {
-    i { right: 0.75rem; }
+    i, prism-icon { right: 0.75rem; }
     .prism-input { padding-right: 2.5rem; }
   }
 }

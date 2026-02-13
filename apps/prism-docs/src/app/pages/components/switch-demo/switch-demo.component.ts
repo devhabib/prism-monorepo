@@ -9,7 +9,7 @@ import {
   PrismDemoPageHeaderComponent,
   PrismDemoSectionComponent,
   PrismDemoCardComponent
-} from '@prism-monorepo/prism-core';
+} from '@devynelogic/prism-core';
 
 @Component({
   selector: 'prism-switch-demo',
@@ -60,7 +60,7 @@ export class SwitchDemoComponent {
 
   // Code Examples
   basicTS = `import { Component, signal } from '@angular/core';
-import { PrismSwitchComponent } from '@prism-monorepo/prism-core';
+import { PrismSwitchComponent } from '@devynelogic/prism-core';
 
 @Component({
   selector: 'app-switch-example',

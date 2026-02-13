@@ -14,7 +14,7 @@ import {
   PrismDemoPageHeaderComponent,
   PrismDemoSectionComponent,
   PrismDemoCardComponent
-} from '@prism-monorepo/prism-core';
+} from '@devynelogic/prism-core';
 import { UserProfileDialogComponent } from '../modal-demo/user-profile-dialog.component';
 
 @Component({

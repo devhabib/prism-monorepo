@@ -3,14 +3,16 @@
 </div>
 
 <nav class="sidebar-menu">
-  @for (section of menuSections; track section.title) {
+  @for (section of menu(); track section.group) {
     <div class="menu-section">
-      <div class="section-title">{{ section.title }}</div>
+      <div class="section-title">{{ section.group }}</div>
       <ul>
         @for (item of section.items; track item.label) {
           <li>
-            <a [routerLink]="item.route" routerLinkActive="active">
-              @if (item.icon) { <i [class]="item.icon"></i> }
+            <a [routerLink]="item.route" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+              @if (item.icon) { 
+                <prism-icon [name]="item.icon" class="sidebar-icon" /> 
+              }
               {{ item.label }}
             </a>
           </li>
