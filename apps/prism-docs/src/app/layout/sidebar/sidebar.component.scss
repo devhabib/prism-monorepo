@@ -61,6 +61,18 @@
       background-color: var(--primary-50, #eff6ff);
       color: var(--primary-600, #2563eb);
     }
+
+    .sidebar-icon {
+      margin-right: 0.75rem;
+      font-size: 1.25rem;
+      vertical-align: middle;
+      opacity: 0.8;
+    }
+    
+    &:hover .sidebar-icon,
+    &.active .sidebar-icon {
+      opacity: 1;
+    }
   }
 }
 

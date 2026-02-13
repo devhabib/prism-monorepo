@@ -11,7 +11,7 @@ import {
   PrismDemoSectionComponent,
   PrismDemoCardComponent,
   PrismBadgeComponent
-} from '@prism-monorepo/prism-core';
+} from '@devynelogic/prism-core';
 
 @Component({
   selector: 'prism-accordion-demo',

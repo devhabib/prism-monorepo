@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from '../sidebar/sidebar.component';
-import { ToastComponent } from '@prism-monorepo/prism-core';
+import { ToastComponent } from '@devynelogic/prism-core';
 
 @Component({
   selector: 'app-main-layout',

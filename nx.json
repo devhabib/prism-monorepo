@@ -66,5 +66,15 @@
     "@nx/angular:component": {
       "style": "scss"
     }
+  },
+  "release": {
+    "projects": [
+      "prism-core",
+      "prism-theme",
+      "prism-icons"
+    ],
+    "changelog": {
+      "projectChangelogs": true
+    }
   }
 }

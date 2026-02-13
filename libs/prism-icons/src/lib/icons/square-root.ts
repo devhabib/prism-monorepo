@@ -1,0 +1,6 @@
+import { PrismIconDef } from '../types';
+
+export const piSquareRoot: PrismIconDef = {
+  name: 'square-root',
+  data: `<path d="M15.382 4H22V6H16.618L9 21.2361L5.38197 14H2V12H6.61803L9 16.7639L15.382 4Z"/>`
+};

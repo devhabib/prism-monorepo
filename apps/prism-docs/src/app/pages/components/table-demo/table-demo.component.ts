@@ -18,7 +18,7 @@ import {
   PrismDemoPageHeaderComponent,
   PrismDemoSectionComponent,
   PrismDemoCardComponent
-} from '@prism-monorepo/prism-core';
+} from '@devynelogic/prism-core';
 
 type Finance = { id: string; date: string; amount: number; status: string; }
 type Employee = { id: string; name: string; role: string; status: string; avatar: string; }

@@ -2,7 +2,9 @@
   "name": "@prism-monorepo/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "generate:icons": "node tools/scripts/generate-icons.js"
+  },
   "private": true,
   "dependencies": {
     "@angular-devkit/build-angular": "~21.1.0",
@@ -49,6 +51,7 @@
     "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-playwright": "^1.6.2",
     "eslint-plugin-unused-imports": "^4.3.0",
+    "glob": "^13.0.3",
     "jsdom": "^27.1.0",
     "jsonc-eslint-parser": "^2.1.0",
     "ng-packagr": "~21.1.0",
@@ -56,6 +59,8 @@
     "postcss": "^8.4.5",
     "postcss-url": "~10.1.3",
     "prettier": "~3.6.2",
+    "remixicon": "^4.9.1",
+    "svgo": "^4.0.0",
     "tslib": "^2.3.0",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.54.0",

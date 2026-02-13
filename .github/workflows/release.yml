@@ -36,13 +36,26 @@ jobs:
       - name: Publish Prism Core
         run: |
           cd dist/libs/prism-core
-          npm publish --access public || echo "Version already exists, skipping."
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          # Check if version exists silently
+          if npm view @devynelogic/prism-core@$PACKAGE_VERSION > /dev/null 2>&1; then
+            echo "✅ Version $PACKAGE_VERSION exists. Skipping."
+          else
+            echo "🚀 Publishing $PACKAGE_VERSION..."
+            npm publish --access public
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish Prism Theme
         run: |
           cd dist/libs/prism-theme
-          npm publish --access public || echo "Version already exists, skipping."
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          if npm view @devynelogic/prism-theme@$PACKAGE_VERSION > /dev/null 2>&1; then
+            echo "✅ Version $PACKAGE_VERSION exists. Skipping."
+          else
+            echo "🚀 Publishing $PACKAGE_VERSION..."
+            npm publish --access public
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

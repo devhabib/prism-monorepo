@@ -13,8 +13,9 @@ import {
   PrismTabComponent,
   PrismDemoPageHeaderComponent,
   PrismDemoSectionComponent,
-  PrismDemoCardComponent
-} from '@prism-monorepo/prism-core';
+  PrismDemoCardComponent,
+  PrismIconComponent
+} from '@devynelogic/prism-core';
 
 @Component({
   selector: 'prism-form-demo',
@@ -31,7 +32,8 @@ import {
     PrismTabComponent,
     PrismDemoPageHeaderComponent,
     PrismDemoSectionComponent,
-    PrismDemoCardComponent
+    PrismDemoCardComponent,
+    PrismIconComponent
   ],
   templateUrl: './form-demo.component.html',
   styleUrl: './form-demo.component.scss',
@@ -82,13 +84,13 @@ export class FormDemoComponent {
     buttonSizes: `<prism-button label="Small" size="sm"></prism-button>
 <prism-button label="Medium" size="md"></prism-button>
 <prism-button label="Large" size="lg"></prism-button>
-<prism-button label="Settings" icon="ri-settings-line"></prism-button>
-<prism-button label="Send Message" icon="ri-send-plane-fill" iconPos="right"></prism-button>
-<prism-button icon="ri-notification-3-line" variant="secondary"></prism-button>`,
+<prism-button label="Settings" icon="settings-line"></prism-button>
+<prism-button label="Send Message" icon="send-plane-fill" iconPos="right"></prism-button>
+<prism-button icon="notification-3-line" variant="secondary"></prism-button>`,
     
     buttonStates: `<prism-button label="Loading" [loading]="true"></prism-button>
 <prism-button label="Disabled" [disabled]="true"></prism-button>
-<prism-button label="Destructive Disabled" variant="danger" [disabled]="true" icon="ri-delete-bin-line"></prism-button>`,
+<prism-button label="Destructive Disabled" variant="danger" [disabled]="true" icon="delete-bin-line"></prism-button>`,
 
     inputsBase: `<!-- Standard -->
 <input prismInput placeholder="Enter placeholder..." />
@@ -104,13 +106,13 @@ export class FormDemoComponent {
 
     inputsIcons: `<!-- Prefix Icon -->
 <div class="prism-input-icon-wrapper icon-left">
-  <i class="ri-mail-line"></i>
+  <prism-icon name="mail-line" />
   <input prismInput placeholder="Email Address" />
 </div>
 
 <!-- Suffix Icon -->
 <div class="prism-input-icon-wrapper icon-right">
-  <i class="ri-eye-off-line"></i>
+  <prism-icon name="eye-off-line" />
   <input prismInput type="password" placeholder="Password" />
 </div>`,
 
@@ -129,7 +131,7 @@ export class FormDemoComponent {
 
 <!-- Prefix Button -->
 <div class="prism-input-group">
-  <prism-button icon="ri-search-line" variant="primary"></prism-button>
+  <prism-button icon="search-line" variant="primary"></prism-button>
   <input prismInput placeholder="Search components..." />
 </div>
 

@@ -47,3 +47,7 @@ export * from './lib/dialog/dialog.service';
 export * from './lib/dialog/dialog-ref';
 export * from './lib/dialog/dialog.types';
 export * from './lib/dialog/dialog.tokens';
+
+// Icons
+export * from './lib/icon/icon.component';
+export * from './lib/icon/icon-registry.service';
