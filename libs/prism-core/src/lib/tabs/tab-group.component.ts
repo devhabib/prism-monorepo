@@ -33,7 +33,7 @@ export class PrismTabGroupComponent {
       // Update each tab's visibility based on active index
       allTabs.forEach((tab, index) => {
         // Access the internal writable signal to update it
-        const isActiveSignal = (tab as any)._isActive as WritableSignal<boolean>;
+        const isActiveSignal = (tab as unknown as { _isActive: WritableSignal<boolean> })._isActive;
         if (isActiveSignal) {
           isActiveSignal.set(index === currentActive);
         }

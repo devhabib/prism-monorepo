@@ -69,7 +69,7 @@ export default tseslint.config(
           message: '❌ LEGACY DETECTED: Use the "host" property in @Component metadata (e.g. "(click)": "...") instead of @HostListener.',
         },
         {
-          selector: 'MethodDefinition[kind="constructor"][value.params.length > 0]',
+          selector: 'ClassDeclaration:has(Decorator[expression.callee.name=/^(Component|Directive|Injectable)$/]) MethodDefinition[kind="constructor"][value.params.length > 0]',
           message: '❌ LEGACY DETECTED: Do not inject dependencies via constructor. Use "inject()" instead.',
         },
       ],

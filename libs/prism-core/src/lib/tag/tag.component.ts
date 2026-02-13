@@ -28,9 +28,9 @@ export class PrismTagComponent {
   label = input.required<string>();
   removable = input<boolean>(false);
   
-  onRemove = output<void>();
+  remove = output<undefined>();
 
   handleRemove(): void {
-    this.onRemove.emit();
+    this.remove.emit(undefined);
   }
 }

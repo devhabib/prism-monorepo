@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
  * Reference to a dialog opened via the PrismDialogService.
  * Provides methods to close the dialog and observe the result.
  */
-export class PrismDialogRef<R = any> {
+export class PrismDialogRef<R = unknown> {
   private readonly _afterClosed = new Subject<R | undefined>();
   
   /**

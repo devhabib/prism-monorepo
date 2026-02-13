@@ -31,7 +31,7 @@ export class PrismDrawerService {
    * @param config Optional configuration for the drawer
    * @returns A reference to the opened drawer
    */
-  open<T, D = any, R = any>(
+  open<T, D = unknown, R = unknown>(
     component: Type<T>, 
     config: PrismDrawerConfig<D> = {}
   ): PrismDrawerRef<R> {
@@ -51,7 +51,7 @@ export class PrismDrawerService {
     drawerRef.setInput('showClose', config.showClose ?? true);
     
     // 3. Create the DrawerRef (Controller)
-    const prismDrawerRef = new PrismDrawerRef<R>((result) => {
+    const prismDrawerRef = new PrismDrawerRef<R>(() => {
       // Cleanup logic when closed
       drawerRef.instance.visible.set(false);
       
@@ -102,7 +102,7 @@ export class PrismDrawerService {
     }
 
     // 9. Handle Close from the Drawer Shell
-    const sub = drawerRef.instance.onClose.subscribe(() => {
+    const sub = drawerRef.instance.closed.subscribe(() => {
       prismDrawerRef.close();
       sub.unsubscribe();
     });

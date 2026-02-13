@@ -1,14 +1,12 @@
-import { InjectionToken } from '@angular/core';
-
 import { TemplateRef } from '@angular/core';
 
 export type DrawerPosition = 'left' | 'right' | 'top' | 'bottom';
 
-export interface PrismDrawerConfig<D = any> {
+export type PrismDrawerConfig<D = unknown> = {
   data?: D;
-  title?: string | TemplateRef<any>;
-  header?: string | TemplateRef<any>; // Support both naming conventions
-  footer?: string | TemplateRef<any> | null;
+  title?: string | TemplateRef<unknown>;
+  header?: string | TemplateRef<unknown>; // Support both naming conventions
+  footer?: string | TemplateRef<unknown> | null;
   width?: string;
   height?: string;
   position?: DrawerPosition;
@@ -16,4 +14,4 @@ export interface PrismDrawerConfig<D = any> {
   maskClosable?: boolean; // Complementary name
   closeOnEscape?: boolean;
   showClose?: boolean;
-}
+};

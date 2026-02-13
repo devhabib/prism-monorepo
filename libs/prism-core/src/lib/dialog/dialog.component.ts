@@ -75,15 +75,15 @@ export class PrismDialogComponent {
   readonly position = input<'center' | 'top' | 'bottom' | 'left' | 'right'>('center');
   readonly dismissableMask = input<boolean>(true);
   
-  readonly onShow = output<void>();
-  readonly onHide = output<void>();
+  readonly show = output<undefined>();
+  readonly hide = output<undefined>();
 
   close(): void {
     this.visible.set(false);
-    this.onHide.emit();
+    this.hide.emit(undefined);
   }
 
-  onBackdropClick(event: MouseEvent): void {
+  onBackdropClick(): void {
     if (this.dismissableMask()) {
       this.close();
     }

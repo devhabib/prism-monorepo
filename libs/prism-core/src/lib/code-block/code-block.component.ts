@@ -1,4 +1,4 @@
-import { Component, input, signal, computed, ChangeDetectionStrategy, ViewEncapsulation, effect } from '@angular/core';
+import { Component, input, signal, computed, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -45,7 +45,7 @@ export class PrismCodeBlockComponent {
 
   copied = signal(false);
 
-  copyToClipboard() {
+  copyToClipboard(): void {
     const textToCopy = this.currentCode();
     if (textToCopy) {
       navigator.clipboard.writeText(textToCopy);

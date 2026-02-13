@@ -1,12 +1,12 @@
 import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-export interface ApiDoc {
+export type ApiDoc = {
   name: string;
   type: string;
   default: string;
   description: string;
-}
+};
 
 @Component({
   selector: 'prism-api-table',

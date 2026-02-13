@@ -184,7 +184,7 @@ export class DrawerDemoComponent {
   readonly tokenApiDocs: ApiDoc[] = [
     {
       name: 'DRAWER_DATA',
-      type: 'InjectionToken<any>',
+      type: 'InjectionToken<unknown>',
       default: '-',
       description: 'Token to access data passed via config.data'
     }
@@ -221,6 +221,6 @@ open() {
 }`;
 
   readonly tokenUsageTS = `export class MyDrawerContent {
-  data = inject(DRAWER_DATA);
+  data = inject(DRAWER_DATA) as MyDataType;
 }`;
 }

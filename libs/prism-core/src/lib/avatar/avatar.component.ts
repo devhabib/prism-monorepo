@@ -28,7 +28,7 @@ export class PrismAvatarComponent {
 
   imageError = signal(false);
 
-  onImageError() {
+  onImageError(): void {
     this.imageError.set(true);
   }
 }

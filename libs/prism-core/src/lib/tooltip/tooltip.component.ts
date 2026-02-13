@@ -6,7 +6,6 @@ import {
   ViewEncapsulation 
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'prism-tooltip',
@@ -16,7 +15,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
     <div class="tooltip-container" [class]="position()">
       <div class="tooltip-content">
         @if (isTemplate(content())) {
-          <ng-container *ngTemplateOutlet="$any(content())" />
+          <ng-container *ngTemplateOutlet="asTemplate(content())" />
         } @else {
           {{ content() }}
         }
@@ -29,10 +28,14 @@ import { animate, style, transition, trigger } from '@angular/animations';
   encapsulation: ViewEncapsulation.None
 })
 export class PrismTooltipComponent {
-  readonly content = input<string | TemplateRef<any>>('');
+  readonly content = input<string | TemplateRef<unknown>>('');
   readonly position = input<'top' | 'bottom' | 'left' | 'right'>('top');
 
-  isTemplate(val: any): val is TemplateRef<any> {
+  isTemplate(val: string | TemplateRef<unknown> | null): val is TemplateRef<unknown> {
     return val instanceof TemplateRef;
+  }
+
+  asTemplate(val: string | TemplateRef<unknown> | null): TemplateRef<unknown> {
+    return val as TemplateRef<unknown>;
   }
 }

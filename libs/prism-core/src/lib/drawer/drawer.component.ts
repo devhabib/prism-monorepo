@@ -1,7 +1,6 @@
 import { Component, input, model, output, TemplateRef, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { PrismButtonComponent } from '../button/button.component';
 import { DrawerPosition } from './drawer.types';
 
 @Component({
@@ -57,28 +56,32 @@ import { DrawerPosition } from './drawer.types';
 export class PrismDrawerComponent {
   readonly visible = model<boolean>(false);
   readonly position = input<DrawerPosition>('right');
-  readonly title = input<string | TemplateRef<any>>('');
-  readonly header = input<string | TemplateRef<any>>(''); // Alias for title compatibility
-  readonly footer = input<string | TemplateRef<any> | null>(null);
+  readonly title = input<string | TemplateRef<unknown>>('');
+  readonly header = input<string | TemplateRef<unknown>>(''); // Alias for title compatibility
+  readonly footer = input<string | TemplateRef<unknown> | null>(null);
   readonly width = input<string>('300px'); // For Left/Right
   readonly height = input<string>('300px'); // For Top/Bottom
   readonly closeOnEscape = input<boolean>(true);
   readonly maskClosable = input<boolean>(true);
   readonly showClose = input<boolean>(true);
 
-  readonly onClose = output<void>();
+  readonly closed = output<undefined>();
 
   // Helper getters to handle title/header naming
-  get displayTitle(): string | TemplateRef<any> {
+  get displayTitle(): string | TemplateRef<unknown> {
     return this.title() || this.header();
   }
 
   close(): void {
     this.visible.set(false);
-    this.onClose.emit();
+    this.closed.emit(undefined);
   }
 
-  isTemplate(val: any): val is TemplateRef<any> {
+  isTemplate(val: string | TemplateRef<unknown> | null): val is TemplateRef<unknown> {
     return val instanceof TemplateRef;
+  }
+
+  asTemplate(val: string | TemplateRef<unknown> | null): TemplateRef<unknown> {
+    return val as TemplateRef<unknown>;
   }
 }

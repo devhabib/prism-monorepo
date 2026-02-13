@@ -21,7 +21,7 @@ export class ThemeService {
     });
   }
 
-  private initializeTheme() {
+  private initializeTheme(): void {
     if (!this.isBrowser) return;
 
     const savedTheme = localStorage.getItem(this.THEME_KEY) as 'light' | 'dark' | null;
@@ -33,7 +33,7 @@ export class ThemeService {
     }
   }
 
-  toggle() {
+  toggle(): void {
     const nextTheme = this.currentTheme() === 'light' ? 'dark' : 'light';
     this.currentTheme.set(nextTheme);
     
@@ -42,7 +42,7 @@ export class ThemeService {
     }
   }
 
-  private applyTheme(theme: 'light' | 'dark') {
+  private applyTheme(theme: 'light' | 'dark'): void {
     if (this.isBrowser) {
       const html = document.documentElement;
       if (theme === 'dark') {

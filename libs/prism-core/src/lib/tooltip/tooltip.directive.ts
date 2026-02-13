@@ -8,17 +8,23 @@ import {
   EnvironmentInjector, 
   ApplicationRef, 
   OnDestroy, 
-  HostListener,
   NgZone
 } from '@angular/core';
 import { PrismTooltipComponent } from './tooltip.component';
 
 @Directive({
   selector: '[prismTooltip]',
-  standalone: true
+  standalone: true,
+  host: {
+    '(mouseenter)': 'onMouseEnter()',
+    '(mouseleave)': 'onMouseLeave()',
+    '(focusin)': 'onFocus()',
+    '(focusout)': 'onBlur()',
+    '(click)': 'onClick()'
+  }
 })
 export class PrismTooltipDirective implements OnDestroy {
-  readonly prismTooltip = input.required<string | any>();
+  readonly prismTooltip = input.required<string | unknown>();
   readonly tooltipPosition = input<'top' | 'bottom' | 'left' | 'right'>('top');
   readonly tooltipTrigger = input<'hover' | 'click' | 'focus'>('hover');
 
@@ -28,25 +34,29 @@ export class PrismTooltipDirective implements OnDestroy {
   private _injector = inject(EnvironmentInjector);
   private _ngZone = inject(NgZone);
 
-  @HostListener('mouseenter') onMouseEnter() { 
+  onMouseEnter(): void { 
     if (this.tooltipTrigger() === 'hover') this.show(); 
   }
-  @HostListener('mouseleave') onMouseLeave() { 
+  onMouseLeave(): void { 
     if (this.tooltipTrigger() === 'hover') this.hide(); 
   }
-  @HostListener('focusin') onFocus() { 
+  onFocus(): void { 
     if (this.tooltipTrigger() === 'focus') this.show(); 
   }
-  @HostListener('focusout') onBlur() { 
+  onBlur(): void { 
     if (this.tooltipTrigger() === 'focus') this.hide(); 
   }
-  @HostListener('click') onClick() {
+  onClick(): void {
     if (this.tooltipTrigger() === 'click') {
-      this._componentRef ? this.hide() : this.show();
+      if (this._componentRef) {
+        this.hide();
+      } else {
+        this.show();
+      }
     }
   }
 
-  show() {
+  show(): void {
     if (this._componentRef || !this.prismTooltip()) return;
 
     // 1. Create Component
@@ -77,7 +87,7 @@ export class PrismTooltipDirective implements OnDestroy {
     });
   }
 
-  hide() {
+  hide(): void {
     if (!this._componentRef) return;
     
     const ref = this._componentRef;
@@ -87,7 +97,7 @@ export class PrismTooltipDirective implements OnDestroy {
     setTimeout(() => {
       try {
         this._appRef.detachView(ref.hostView);
-      } catch (e) { /* ignore */ }
+      } catch { /* ignore */ }
       ref.destroy();
     }, 150);
     
@@ -97,13 +107,13 @@ export class PrismTooltipDirective implements OnDestroy {
     window.removeEventListener('resize', this._onRefresh);
   }
 
-  private _onRefresh = () => {
+  private _onRefresh = (): void => {
     if (this._componentRef) {
       this.updatePosition();
     }
   }
 
-  updatePosition() {
+  updatePosition(): void {
     if (!this._componentRef) return;
     
     const hostRect = this._el.nativeElement.getBoundingClientRect();
@@ -118,7 +128,7 @@ export class PrismTooltipDirective implements OnDestroy {
     let left = 0;
     let pos = this.tooltipPosition();
 
-    const calculate = (p: string) => {
+    const calculate = (p: string): void => {
       switch (p) {
         case 'top':
           top = hostRect.top - tooltipHeight - gap;
@@ -171,7 +181,7 @@ export class PrismTooltipDirective implements OnDestroy {
     tooltipEl.style.left = `${left}px`;
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.hide();
   }
 }

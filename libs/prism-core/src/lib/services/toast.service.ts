@@ -16,7 +16,7 @@ export class ToastService {
   private nextId = 0;
   readonly toasts = signal<Toast[]>([]);
 
-  show(message: string, severity: ToastSeverity = 'info', duration: number = 3000) {
+  show(message: string, severity: ToastSeverity = 'info', duration: number = 3000): void {
     const id = this.nextId++;
     const toast: Toast = { id, message, severity, duration };
     
@@ -27,23 +27,23 @@ export class ToastService {
     }
   }
 
-  success(message: string, duration?: number) {
+  success(message: string, duration?: number): void {
     this.show(message, 'success', duration);
   }
 
-  warning(message: string, duration?: number) {
+  warning(message: string, duration?: number): void {
     this.show(message, 'warning', duration);
   }
 
-  danger(message: string, duration?: number) {
+  danger(message: string, duration?: number): void {
     this.show(message, 'danger', duration);
   }
 
-  info(message: string, duration?: number) {
+  info(message: string, duration?: number): void {
     this.show(message, 'info', duration);
   }
 
-  remove(id: number) {
+  remove(id: number): void {
     this.toasts.update(current => current.filter(t => t.id !== id));
   }
 }

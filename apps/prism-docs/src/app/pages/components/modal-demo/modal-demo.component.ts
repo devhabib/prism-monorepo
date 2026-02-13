@@ -199,7 +199,7 @@ export class ModalDemoComponent {
   readonly tokensApiData: ApiDoc[] = [
     {
       name: 'DIALOG_DATA',
-      type: 'InjectionToken<any>',
+      type: 'InjectionToken<unknown>',
       default: '-',
       description: 'Token for injecting data into dynamically created dialog components. Use inject(DIALOG_DATA) in your component'
     },

@@ -37,7 +37,7 @@ export class PrismCheckboxComponent {
   label = input<string>('');
   type = input<'checkbox' | 'radio'>('checkbox');
   disabled = input<boolean>(false);
-  value = input<any>(null);
+  value = input<unknown>(null);
   
   checked = model<boolean>(false);
 
