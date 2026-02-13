@@ -33,8 +33,22 @@ jobs:
 
       - name: Build Libraries
         run: |
+          npx nx build prism-icons --configuration=production
           npx nx build prism-core --configuration=production
           npx nx build prism-theme --configuration=production
+
+      - name: Publish Prism Icons
+        run: |
+          cd dist/libs/prism-icons
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          if npm view @devynelogic/prism-icons@$PACKAGE_VERSION > /dev/null 2>&1; then
+            echo "✅ Version $PACKAGE_VERSION exists. Skipping."
+          else
+            echo "🚀 Publishing $PACKAGE_VERSION..."
+            npm publish --access public
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish Prism Core
         run: |
