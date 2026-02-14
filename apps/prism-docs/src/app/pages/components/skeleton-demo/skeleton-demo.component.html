@@ -5,12 +5,42 @@
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-skeleton />
+        <div class="p-4 space-y-4">
+          <prism-skeleton width="100%" />
+          <prism-skeleton width="60%" />
+          <prism-skeleton width="80%" />
         </div>
       </prism-tab>
       <prism-tab label="Code">
         <prism-code-block [ts]="snippets.usage"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Variants">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 flex items-center space-x-8">
+          <div class="text-center">
+            <prism-skeleton variant="circle" width="64px" height="64px" class="mb-2" />
+            <span class="text-xs text-gray-500">Circle</span>
+          </div>
+          <div class="flex-1">
+            <prism-skeleton variant="text" width="100%" class="mb-2" />
+            <prism-skeleton variant="text" width="100%" class="mb-2" />
+            <prism-skeleton variant="text" width="60%" />
+            <span class="text-xs text-gray-500 block mt-2 text-center">Text</span>
+          </div>
+          <div class="text-center">
+            <prism-skeleton variant="rect" width="120px" height="80px" class="mb-2" />
+            <span class="text-xs text-gray-500">Rect</span>
+          </div>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.variants"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>

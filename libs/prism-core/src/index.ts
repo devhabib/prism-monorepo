@@ -67,6 +67,7 @@ export * from './lib/splitter/splitter.component';
 // Navigation
 export * from './lib/anchor/anchor.component';
 export * from './lib/breadcrumb/breadcrumb.component';
+export * from './lib/breadcrumb/breadcrumb-item.component';
 export * from './lib/dropdown/dropdown.component';
 export * from './lib/menu/menu.component';
 export * from './lib/steps/steps.component';
@@ -78,6 +79,7 @@ export * from './lib/date-picker/date-picker.component';
 export * from './lib/form/form.component';
 export * from './lib/input-number/input-number.component';
 export * from './lib/radio/radio.component';
+export * from './lib/radio/radio-group.component';
 export * from './lib/rate/rate.component';
 export * from './lib/slider/slider.component';
 export * from './lib/time-picker/time-picker.component';

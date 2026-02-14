@@ -1,0 +1,38 @@
+@use 'prism-theme' as *;
+
+.prism-result {
+  padding: $space-xxl $space-md;
+  text-align: center;
+
+  .result-icon {
+    margin-bottom: $space-lg;
+
+    &.status-success { color: #10b981; }
+    &.status-error { color: #ef4444; }
+    &.status-info { color: #3b82f6; }
+    &.status-warning { color: #f59e0b; }
+    &.status-404, &.status-403 { color: $primary-main; }
+  }
+
+  .result-title {
+    color: var(--text-main);
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.8;
+    margin-bottom: $space-xs;
+  }
+
+  .result-subtitle {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: $space-xl;
+  }
+
+  .result-extra {
+    margin-top: $space-lg;
+    display: flex;
+    justify-content: center;
+    gap: $space-sm;
+  }
+}

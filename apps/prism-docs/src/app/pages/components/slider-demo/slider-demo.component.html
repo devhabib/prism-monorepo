@@ -6,11 +6,28 @@
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
         <div class="p-4">
-          <prism-slider />
+          <div class="mb-4">Value: {{ sliderValue() }}</div>
+          <prism-slider [(value)]="sliderValue" />
         </div>
       </prism-tab>
       <prism-tab label="Code">
         <prism-code-block [ts]="snippets.usage"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Advanced Configuration">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4">
+          <div class="mb-2 text-sm text-gray-500">Range: 0-200, Step: 10</div>
+          <prism-slider [min]="0" [max]="200" [step]="10" />
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.advanced"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>

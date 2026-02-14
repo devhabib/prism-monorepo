@@ -10,6 +10,8 @@ import {
   PrismTabComponent
 } from '@devynelogic/prism-core';
 
+import { signal } from '@angular/core';
+
 @Component({
   selector: 'app-slider-demo',
   standalone: true,
@@ -27,7 +29,16 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SliderDemoComponent {
+  sliderValue = signal(30);
+
   readonly snippets = {
-    usage: `<prism-slider></prism-slider>`
+    usage: `<prism-slider [(value)]="sliderValue"></prism-slider>
+<p>Value: {{ sliderValue() }}</p>`,
+    advanced: `<prism-slider 
+  [min]="0" 
+  [max]="200" 
+  [step]="10" 
+  [(value)]="advancedValue">
+</prism-slider>`
   };
 }

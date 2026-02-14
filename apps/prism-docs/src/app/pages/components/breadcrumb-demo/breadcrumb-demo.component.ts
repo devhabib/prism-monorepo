@@ -1,7 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { 
-  PrismBreadcrumbComponent, 
+  PrismBreadcrumbComponent,
+  PrismBreadcrumbItemComponent,
   PrismCodeBlockComponent, 
   PrismDemoPageHeaderComponent,
   PrismDemoSectionComponent,
@@ -21,13 +22,23 @@ import {
     PrismDemoSectionComponent,
     PrismDemoCardComponent,
     PrismTabGroupComponent,
-    PrismTabComponent
+    PrismTabComponent,
+    PrismBreadcrumbItemComponent
   ],
   templateUrl: './breadcrumb-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbDemoComponent {
   readonly snippets = {
-    usage: `<prism-breadcrumb></prism-breadcrumb>`
+    usage: `<prism-breadcrumb>
+  <prism-breadcrumb-item>Home</prism-breadcrumb-item>
+  <prism-breadcrumb-item>Components</prism-breadcrumb-item>
+  <prism-breadcrumb-item>Navigation</prism-breadcrumb-item>
+  <prism-breadcrumb-item>Breadcrumb</prism-breadcrumb-item>
+</prism-breadcrumb>`,
+    separator: `<prism-breadcrumb separator=">">
+  <prism-breadcrumb-item>Home</prism-breadcrumb-item>
+  <prism-breadcrumb-item>Navigation</prism-breadcrumb-item>
+</prism-breadcrumb>`
   };
 }

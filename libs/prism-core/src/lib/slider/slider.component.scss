@@ -1,0 +1,62 @@
+@use 'prism-theme' as *;
+
+.prism-slider-container {
+  width: 100%;
+  padding: $space-xs 0;
+}
+
+.prism-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: #e2e8f0;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  // Thumb styling for Chrome/Safari/Edge/Opera
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: $primary-main;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 0 5px rgba($primary-600, 0.1);
+    }
+
+    &:active {
+      transform: scale(1.2);
+    }
+  }
+
+  // Thumb styling for Firefox
+  &::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: $primary-main;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 0 5px rgba($primary-600, 0.1);
+    }
+  }
+}

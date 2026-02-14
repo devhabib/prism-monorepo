@@ -6,11 +6,41 @@
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
         <div class="p-4">
-          <prism-result />
+          <prism-result 
+            status="success" 
+            title="Successfully Purchased Cloud Server" 
+            subtitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait.">
+            <div extra>
+              <button class="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors">Go Console</button>
+              <button class="ml-3 px-4 py-2 border border-gray-300 rounded-md text-sm font-medium hover:bg-gray-50 transition-colors">Buy Again</button>
+            </div>
+          </prism-result>
         </div>
       </prism-tab>
       <prism-tab label="Code">
         <prism-code-block [ts]="snippets.usage"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Error 404">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4">
+          <prism-result 
+            status="404" 
+            title="404" 
+            subtitle="Sorry, the page you visited does not exist.">
+            <div extra>
+              <button class="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm font-medium">Back Home</button>
+            </div>
+          </prism-result>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.error404"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>

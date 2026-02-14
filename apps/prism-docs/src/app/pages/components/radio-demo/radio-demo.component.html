@@ -6,11 +6,36 @@
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
         <div class="p-4">
-          <prism-radio />
+          <div class="mb-4 font-medium">Selected: {{ selectedValue() | titlecase }}</div>
+          <prism-radio-group [(value)]="selectedValue">
+            <prism-radio value="apple">Apple</prism-radio>
+            <prism-radio value="banana">Banana</prism-radio>
+            <prism-radio value="cherry">Cherry</prism-radio>
+            <prism-radio value="disabled" [disabled]="true">Disabled</prism-radio>
+          </prism-radio-group>
         </div>
       </prism-tab>
       <prism-tab label="Code">
         <prism-code-block [ts]="snippets.usage"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Vertical Layout">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4">
+          <prism-radio-group direction="vertical" [(value)]="selectedValue">
+            <prism-radio value="apple">Apple</prism-radio>
+            <prism-radio value="banana">Banana</prism-radio>
+            <prism-radio value="cherry">Cherry</prism-radio>
+          </prism-radio-group>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.vertical"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>

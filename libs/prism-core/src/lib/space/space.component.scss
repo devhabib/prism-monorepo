@@ -1,37 +1,18 @@
+@use 'prism-theme' as *;
+
 .prism-space {
   display: inline-flex;
 
-  &.prism-space-horizontal {
+  &.space-horizontal {
     flex-direction: row;
   }
 
-  &.prism-space-vertical {
+  &.space-vertical {
     flex-direction: column;
   }
 
-  &.prism-space-wrap {
-    flex-wrap: wrap;
-  }
-
-  // Alignments
-  &.prism-space-align-start {
-    align-items: flex-start;
-  }
-  &.prism-space-align-end {
-    align-items: flex-end;
-  }
-  &.prism-space-align-center {
-    align-items: center;
-  }
-  &.prism-space-align-baseline {
-    align-items: baseline;
-  }
-
-  // Sizes (handled via inline-style for flexibility, but we can have presets)
-}
-
-.prism-space-item {
-  &:empty {
-    display: none;
+  // Handle nested items if they aren't using the gap property directly
+  ::ng-deep > * {
+    flex-shrink: 0;
   }
 }

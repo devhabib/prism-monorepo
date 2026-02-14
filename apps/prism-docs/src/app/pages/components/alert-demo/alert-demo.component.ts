@@ -28,6 +28,21 @@ import {
 })
 export class AlertDemoComponent {
   readonly snippets = {
-    usage: `<prism-alert></prism-alert>`
+    usage: `<prism-alert 
+  type="success" 
+  title="Success" 
+  description="Action completed successfully."
+  [showIcon]="true">
+</prism-alert>`,
+    types: `<prism-alert type="info" title="Informational" description="This is an info alert."></prism-alert>
+<prism-alert type="warning" title="Warning" description="This is a warning alert."></prism-alert>
+<prism-alert type="error" title="Error" description="This is an error alert."></prism-alert>`,
+    closeable: `<prism-alert 
+  type="info" 
+  title="Closeable" 
+  description="You can close this alert."
+  [closeable]="true"
+  (onClose)="handleClose()">
+</prism-alert>`
   };
 }

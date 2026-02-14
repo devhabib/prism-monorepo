@@ -5,12 +5,38 @@
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-spin />
+        <div class="p-4 space-y-4">
+          <button (click)="isSpinning.set(!isSpinning())" class="px-4 py-2 bg-blue-500 text-white rounded mb-4">
+            Toggle Spinning: {{ isSpinning() }}
+          </button>
+          
+          <prism-spin [spinning]="isSpinning()">
+            <div class="p-8 border border-gray-100 rounded-lg bg-white">
+              <h3 class="text-lg font-semibold mb-2">Sample Content</h3>
+              <p class="text-gray-600">This content is wrapped inside the prism-spin component. When the spinning input is true, the content becomes blurred and an overlay with a loader is shown.</p>
+            </div>
+          </prism-spin>
         </div>
       </prism-tab>
       <prism-tab label="Code">
         <prism-code-block [ts]="snippets.usage"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Sizes">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 flex items-center space-x-8">
+          <prism-spin size="sm"></prism-spin>
+          <prism-spin size="md"></prism-spin>
+          <prism-spin size="lg"></prism-spin>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.sizes"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>

@@ -1,0 +1,71 @@
+@use 'prism-theme' as *;
+
+.prism-spin-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  .prism-spin-content {
+    transition: filter 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), opacity 0.3s;
+    
+    &.spinning {
+      opacity: 0.5;
+      filter: blur(4px);
+      user-select: none;
+      pointer-events: none;
+    }
+  }
+
+  .prism-spin-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.prism-spin-loader {
+  display: inline-block;
+  color: $primary-main;
+  vertical-align: middle;
+
+  &.spin-sm { font-size: 14px; }
+  &.spin-md { font-size: 20px; }
+  &.spin-lg { font-size: 32px; }
+
+  svg {
+    animation: rotate 1s linear infinite;
+    width: 1em;
+    height: 1em;
+  }
+
+  circle {
+    stroke: currentColor;
+    stroke-linecap: round;
+    animation: dash 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes rotate {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}

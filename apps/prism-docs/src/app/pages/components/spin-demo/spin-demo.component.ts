@@ -10,6 +10,8 @@ import {
   PrismTabComponent
 } from '@devynelogic/prism-core';
 
+import { signal } from '@angular/core';
+
 @Component({
   selector: 'app-spin-demo',
   standalone: true,
@@ -27,7 +29,16 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpinDemoComponent {
+  isSpinning = signal(true);
+
   readonly snippets = {
-    usage: `<prism-spin></prism-spin>`
+    usage: `<prism-spin [spinning]="isSpinning()">
+  <div style="padding: 30px; border: 1px solid #eee;">
+    This content will be blurred when spinning is true.
+  </div>
+</prism-spin>`,
+    sizes: `<prism-spin size="sm"></prism-spin>
+<prism-spin size="md"></prism-spin>
+<prism-spin size="lg"></prism-spin>`
   };
 }

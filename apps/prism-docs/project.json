@@ -20,6 +20,9 @@
           }
         ],
         "styles": ["apps/prism-docs/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/prism-theme/src/lib"]
+        },
         "server": "apps/prism-docs/src/main.server.ts",
         "ssr": {
           "entry": "apps/prism-docs/src/server.ts"

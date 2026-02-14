@@ -5,12 +5,29 @@
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-input-number />
+        <div class="p-4 flex items-center space-x-4">
+          <div class="text-sm font-medium">Quantity (1-10):</div>
+          <prism-input-number [(value)]="quantity" [min]="1" [max]="10" />
+          <div class="text-sm text-gray-500">Current Value: {{ quantity() }}</div>
         </div>
       </prism-tab>
       <prism-tab label="Code">
         <prism-code-block [ts]="snippets.usage"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Disabled State">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4">
+          <prism-input-number [disabled]="true" [value]="5" />
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.disabled"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>

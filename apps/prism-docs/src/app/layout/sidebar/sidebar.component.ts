@@ -79,7 +79,7 @@ export class SidebarComponent {
         { label: 'Popover', route: '/components/popover', icon: 'chat-3-line' },
         { label: 'Statistic', route: '/components/statistic', icon: 'bar-chart-line' },
         { label: 'Table', route: '/components/table', icon: 'table-line' },
-        { label: 'Tag', route: '/components/tag', icon: 'tag-line' },
+        { label: 'Tag', route: '/components/tag', icon: 'price-tag-line' },
         { label: 'Timeline', route: '/components/timeline', icon: 'pulse-line' },
         { label: 'Tooltip', route: '/components/tooltip', icon: 'question-line' },
         { label: 'Tree', route: '/components/tree', icon: 'share-line' }

@@ -28,6 +28,11 @@ import {
 })
 export class SkeletonDemoComponent {
   readonly snippets = {
-    usage: `<prism-skeleton></prism-skeleton>`
+    usage: `<prism-skeleton></prism-skeleton>
+<prism-skeleton width="300px"></prism-skeleton>
+<prism-skeleton variant="circle" width="80px" height="80px"></prism-skeleton>`,
+    variants: `<prism-skeleton variant="text" width="100%"></prism-skeleton>
+<prism-skeleton variant="rect" width="100%" height="200px"></prism-skeleton>
+<prism-skeleton variant="circle" width="60px" height="60px"></prism-skeleton>`
   };
 }

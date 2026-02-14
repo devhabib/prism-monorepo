@@ -1,7 +1,8 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { 
-  PrismRadioComponent, 
+  PrismRadioComponent,
+  PrismRadioGroupComponent,
   PrismCodeBlockComponent, 
   PrismDemoPageHeaderComponent,
   PrismDemoSectionComponent,
@@ -21,13 +22,24 @@ import {
     PrismDemoSectionComponent,
     PrismDemoCardComponent,
     PrismTabGroupComponent,
-    PrismTabComponent
+    PrismTabComponent,
+    PrismRadioGroupComponent
   ],
   templateUrl: './radio-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioDemoComponent {
+  selectedValue = signal('apple');
+
   readonly snippets = {
-    usage: `<prism-radio></prism-radio>`
+    usage: `<prism-radio-group [(value)]="selectedValue">
+  <prism-radio value="apple">Apple</prism-radio>
+  <prism-radio value="banana">Banana</prism-radio>
+  <prism-radio value="cherry">Cherry</prism-radio>
+</prism-radio-group>`,
+    vertical: `<prism-radio-group direction="vertical" [(value)]="selectedValue">
+  <prism-radio value="apple">Apple</prism-radio>
+  <prism-radio value="banana">Banana</prism-radio>
+</prism-radio-group>`
   };
 }
