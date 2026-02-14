@@ -6,26 +6,26 @@
 <prism-tab-group>
   <prism-tab label="Examples">
     
-    <prism-demo-section title="Default State" description="The standard combination of a descriptive icon, title, and optional description.">
+    <prism-demo-section title="Default State" subtitle="The standard combination of a descriptive icon, title, and optional description.">
       <prism-demo-card>
         <div preview class="p-8 border border-dashed rounded-lg bg-gray-50 dark:bg-gray-800/50">
           <prism-empty 
             title="No Records Found" 
-            description="We couldn't find any items matching your current view." 
+            subtitle="We couldn't find any items matching your current view." 
           />
         </div>
         <prism-code-block [code]="snippets.default" language="html" />
       </prism-demo-card>
     </prism-demo-section>
 
-    <prism-demo-section title="Variations" description="Use different icons to convey specific contexts.">
+    <prism-demo-section title="Variations" subtitle="Use different icons to convey specific contexts.">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <prism-demo-card>
           <div preview class="h-64 flex items-center justify-center p-4">
             <prism-empty 
               icon="ri-inbox-archive-line"
               title="Inbox Zero" 
-              description="You have no new messages." 
+              subtitle="You have no new messages." 
             />
           </div>
           <prism-code-block [code]="snippets.inbox" language="html" />
@@ -36,7 +36,7 @@
             <prism-empty 
               icon="ri-file-search-line"
               title="No Results" 
-              description="Try adjusting your search terms." 
+              subtitle="Try adjusting your search terms." 
             />
           </div>
           <prism-code-block [code]="snippets.search" language="html" />
@@ -44,13 +44,13 @@
       </div>
     </prism-demo-section>
 
-    <prism-demo-section title="Actions Integration" description="Project custom buttons into the empty state to guide user next steps.">
+    <prism-demo-section title="Actions Integration" subtitle="Project custom buttons into the empty state to guide user next steps.">
       <prism-demo-card>
         <div preview class="p-8">
           <prism-empty 
             icon="ri-add-circle-line"
             title="First Step" 
-            description="Create your first project to start tracking your progress.">
+            subtitle="Create your first project to start tracking your progress.">
             <div class="flex gap-3 justify-center mt-4">
               <prism-button label="Create Project" icon="ri-add-line" />
               <prism-button label="Import Data" variant="outline" />
@@ -61,13 +61,13 @@
       </prism-demo-card>
     </prism-demo-section>
 
-    <prism-demo-section title="Custom Illustrations" description="Use images for a more vibrant empty state experience.">
+    <prism-demo-section title="Custom Illustrations" subtitle="Use images for a more vibrant empty state experience.">
       <prism-demo-card>
         <div preview class="p-8">
           <prism-empty 
             image="https://illustrations.popsy.co/gray/crashed-error.svg" 
             title="Something Went Wrong" 
-            description="We're having trouble connecting to the server.">
+            subtitle="We're having trouble connecting to the server.">
             <prism-button label="Retry Now" class="mt-4" />
           </prism-empty>
         </div>

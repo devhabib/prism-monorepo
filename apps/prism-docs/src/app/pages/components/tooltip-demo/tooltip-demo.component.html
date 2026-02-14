@@ -6,7 +6,7 @@
 <prism-tab-group>
   <prism-tab label="Examples">
     
-    <prism-demo-section title="Basic Usage" description="The most basic tooltip implementation.">
+    <prism-demo-section title="Basic Usage" subtitle="The most basic tooltip implementation.">
       <prism-demo-card>
         <div preview>
           <prism-button prismTooltip="Prompt Text" label="Hover me" />
@@ -15,7 +15,7 @@
       </prism-demo-card>
     </prism-demo-section>
 
-    <prism-demo-section title="Placement" description="Tooltips can be positioned in four primary directions.">
+    <prism-demo-section title="Placement" subtitle="Tooltips can be positioned in four primary directions.">
       <prism-demo-card>
         <div preview class="flex flex-wrap gap-4 items-center">
           <prism-button variant="outline" prismTooltip="Top Tooltip" tooltipPosition="top" label="Top" />
@@ -27,7 +27,7 @@
       </prism-demo-card>
     </prism-demo-section>
 
-    <prism-demo-section title="Custom Content (Template)" description="Complex content including icons and bold text can be passed via <code>ng-template</code>.">
+    <prism-demo-section title="Custom Content (Template)" subtitle="Complex content including icons and bold text can be passed via <code>ng-template</code>.">
       <prism-demo-card>
         <div preview>
           <prism-button variant="secondary" [prismTooltip]="customTpl" label="Template Content" />
@@ -43,7 +43,7 @@
       </prism-demo-card>
     </prism-demo-section>
 
-    <prism-demo-section title="Triggers" description="Tooltips can be triggered by <code>hover</code>, <code>click</code>, or <code>focus</code>.">
+    <prism-demo-section title="Triggers" subtitle="Tooltips can be triggered by <code>hover</code>, <code>click</code>, or <code>focus</code>.">
       <prism-demo-card>
         <div preview class="flex gap-4">
           <prism-button prismTooltip="Click me!" tooltipTrigger="click" label="Click Trigger" />

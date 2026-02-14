@@ -6,7 +6,9 @@ import { Component, input, ChangeDetectionStrategy, ViewEncapsulation } from '@a
   template: `
     <header class="demo-header">
       <h1 class="demo-title">{{ title() }}</h1>
-      <p class="demo-subtitle">{{ subtitle() }}</p>
+      @if (subtitle()) {
+        <p class="demo-subtitle">{{ subtitle() }}</p>
+      }
     </header>
   `,
   styles: [`
@@ -32,5 +34,5 @@ import { Component, input, ChangeDetectionStrategy, ViewEncapsulation } from '@a
 })
 export class PrismDemoPageHeaderComponent {
   title = input.required<string>();
-  subtitle = input.required<string>();
+  subtitle = input<string>();
 }

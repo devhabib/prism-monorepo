@@ -6,7 +6,7 @@
 <prism-tab-group>
   <prism-tab label="Examples">
     
-    <prism-demo-section title="Basic Usage" description="The most basic switch implementation.">
+    <prism-demo-section title="Basic Usage" subtitle="The most basic switch implementation.">
       <prism-demo-card>
         <div preview>
           <prism-switch [(checked)]="checked1" />
@@ -15,7 +15,7 @@
       </prism-demo-card>
     </prism-demo-section>
 
-    <prism-demo-section title="Sizes" description="Two sizes are available: <code>default</code> and <code>small</code>.">
+    <prism-demo-section title="Sizes" subtitle="Two sizes are available: <code>default</code> and <code>small</code>.">
       <prism-demo-card>
         <div preview class="flex gap-4 items-center">
           <prism-switch [(checked)]="checked2" />
@@ -25,7 +25,7 @@
       </prism-demo-card>
     </prism-demo-section>
 
-    <prism-demo-section title="Text & Icons" description="Custom content can be placed inside the switch handle.">
+    <prism-demo-section title="Text & Icons" subtitle="Custom content can be placed inside the switch handle.">
       <prism-demo-card>
         <div preview class="flex gap-4 items-center">
           <prism-switch [(checked)]="checked3" checkedChildren="ON" unCheckedChildren="OFF" />
@@ -38,7 +38,7 @@
       </prism-demo-card>
     </prism-demo-section>
 
-    <prism-demo-section title="Interactive Loading" description="In real scenarios, switches often trigger asynchronous actions. Use <code>loading</code> state to disable interaction while waiting.">
+    <prism-demo-section title="Interactive Loading" subtitle="In real scenarios, switches often trigger asynchronous actions. Use <code>loading</code> state to disable interaction while waiting.">
       <prism-demo-card>
         <div preview class="flex flex-col gap-4 items-center w-full">
           <div class="flex items-center gap-4 bg-surface-50 p-4 rounded-lg border border-border w-full max-w-md justify-between">
@@ -56,7 +56,7 @@
       </prism-demo-card>
     </prism-demo-section>
 
-    <prism-demo-section title="States" description="Disabled and loading states.">
+    <prism-demo-section title="States" subtitle="Disabled and loading states.">
       <prism-demo-card>
         <div preview class="flex gap-4 items-center">
           <prism-switch [loading]="true" [checked]="true" />

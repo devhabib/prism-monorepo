@@ -6,7 +6,7 @@
 <prism-tab-group>
   <prism-tab label="Examples">
     
-    <prism-demo-section title="Basic Dialog" description="Simple dialog with header, content, and footer actions.">
+    <prism-demo-section title="Basic Dialog" subtitle="Simple dialog with header, content, and footer actions.">
       <prism-demo-card>
         <div preview>
           <prism-button label="Open Basic Dialog" (click)="basicDialog.set(true)" />
@@ -15,7 +15,7 @@
       </prism-demo-card>
     </prism-demo-section>
 
-    <prism-demo-section title="Dialog with Card Content" description="Nested card inside dialog for structured information display.">
+    <prism-demo-section title="Dialog with Card Content" subtitle="Nested card inside dialog for structured information display.">
       <prism-demo-card>
         <div preview>
           <prism-button label="View User Profile" variant="secondary" (click)="cardDialog.set(true)" />
@@ -24,7 +24,7 @@
       </prism-demo-card>
     </prism-demo-section>
 
-    <prism-demo-section title="Form Dialog" description="Dialog containing a reactive form with validation.">
+    <prism-demo-section title="Form Dialog" subtitle="Dialog containing a reactive form with validation.">
       <prism-demo-card>
         <div preview class="flex items-center gap-4">
           <prism-button label="Contact Form" variant="outline" icon="ri-mail-line" (click)="formDialog.set(true)" />
@@ -38,7 +38,7 @@
       </prism-demo-card>
     </prism-demo-section>
 
-    <prism-demo-section title="Confirmation Dialog" description="Dangerous action with cancel/confirm pattern.">
+    <prism-demo-section title="Confirmation Dialog" subtitle="Dangerous action with cancel/confirm pattern.">
       <prism-demo-card>
         <div preview>
           <prism-button label="Delete Item" variant="danger" icon="ri-delete-bin-line" (click)="confirmDialog.set(true)" />
@@ -47,7 +47,7 @@
       </prism-demo-card>
     </prism-demo-section>
 
-    <prism-demo-section title="Service-Based Dialog" description="Open dialogs dynamically using PrismDialogService.">
+    <prism-demo-section title="Service-Based Dialog" subtitle="Open dialogs dynamically using PrismDialogService.">
       <prism-demo-card>
         <div preview>
           <prism-button label="Open via Service" icon="ri-code-line" (click)="openServiceDialog()" />
@@ -56,7 +56,7 @@
       </prism-demo-card>
     </prism-demo-section>
 
-    <prism-demo-section title="Position & Animation Variants" description="Dialogs can slide in from different directions with smooth animations.">
+    <prism-demo-section title="Position & Animation Variants" subtitle="Dialogs can slide in from different directions with smooth animations.">
       <prism-demo-card>
         <div preview class="flex gap-4 flex-wrap">
           <prism-button label="Center (Scale)" (click)="openPositionDialog('center')" />
@@ -73,11 +73,11 @@
 
   <prism-tab label="API">
     
-    <prism-demo-section title="PrismDialogComponent API" description="Inputs and outputs for the template-based dialog component.">
+    <prism-demo-section title="PrismDialogComponent API" subtitle="Inputs and outputs for the template-based dialog component.">
       <prism-api-table [data]="apiData" />
     </prism-demo-section>
 
-    <prism-demo-section title="PrismDialogService API" description="Programmatic dialog service for dynamic component injection.">
+    <prism-demo-section title="PrismDialogService API" subtitle="Programmatic dialog service for dynamic component injection.">
       <prism-api-table [data]="serviceApiData" />
       <div class="mt-4">
         <h4 class="text-sm font-semibold mb-2">Usage Example:</h4>
@@ -85,11 +85,11 @@
       </div>
     </prism-demo-section>
 
-    <prism-demo-section title="PrismDialogRef API" description="Methods and observables available on the dialog reference returned by the service.">
+    <prism-demo-section title="PrismDialogRef API" subtitle="Methods and observables available on the dialog reference returned by the service.">
       <prism-api-table [data]="dialogRefApiData" />
     </prism-demo-section>
 
-    <prism-demo-section title="Injection Tokens" description="Tokens for injecting data and dialog control into dynamically created components.">
+    <prism-demo-section title="Injection Tokens" subtitle="Tokens for injecting data and dialog control into dynamically created components.">
       <prism-api-table [data]="tokensApiData" />
       <div class="mt-4">
         <h4 class="text-sm font-semibold mb-2">Component Usage:</h4>

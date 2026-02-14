@@ -1,0 +1,21 @@
+<prism-demo-page-header title="Flex" subtitle="A flexible layout primitive.">
+</prism-demo-page-header>
+
+<prism-demo-section title="Basic Usage">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg">
+          <prism-flex justify="between" align="center" gap="16">
+            <div class="p-4 bg-primary-500 text-white rounded">Item 1</div>
+            <div class="p-4 bg-primary-500 text-white rounded">Item 2</div>
+            <div class="p-4 bg-primary-500 text-white rounded">Item 3</div>
+          </prism-flex>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.usage"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>

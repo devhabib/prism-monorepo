@@ -1,0 +1,76 @@
+
+.prism-divider {
+  display: block;
+  clear: both;
+  width: 100%;
+  min-width: 100%;
+  margin: 24px 0;
+  border-top: 1px solid var(--p-divider-color, var(--p-border-color, #f0f0f0));
+
+  &.prism-divider-vertical {
+    position: relative;
+    top: -0.06em;
+    display: inline-block;
+    width: 1px;
+    height: 0.9em;
+    margin: 0 8px;
+    vertical-align: middle;
+    border-top: 0;
+    border-left: 1px solid var(--p-divider-color, var(--p-border-color, #f0f0f0));
+  }
+
+  &.prism-divider-dashed {
+    background: none;
+    border-top-style: dashed;
+    border-left-style: dashed;
+  }
+
+  &.prism-divider-with-text {
+    display: flex;
+    margin: 16px 0;
+    color: var(--p-text-color, #000);
+    font-weight: 500;
+    font-size: 16px;
+    white-space: nowrap;
+    text-align: center;
+    border-top: 0 !important;
+
+    &::before,
+    &::after {
+      content: '';
+      position: relative;
+      top: 50%;
+      width: 50%;
+      border-top: 1px solid var(--p-divider-color, var(--p-border-color, #f0f0f0));
+      transform: translateY(50%);
+    }
+
+    &.prism-divider-dashed::before,
+    &.prism-divider-dashed::after {
+      border-top-style: dashed;
+    }
+
+    .prism-divider-inner-text {
+      display: inline-block;
+      padding: 0 1em;
+    }
+  }
+
+  &.prism-divider-with-text-left {
+    &::before {
+      width: 5%;
+    }
+    &::after {
+      width: 95%;
+    }
+  }
+
+  &.prism-divider-with-text-right {
+    &::before {
+      width: 95%;
+    }
+    &::after {
+      width: 5%;
+    }
+  }
+}

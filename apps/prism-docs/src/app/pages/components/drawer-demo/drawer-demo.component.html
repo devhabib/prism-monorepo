@@ -6,7 +6,7 @@
 <prism-tab-group>
   <prism-tab label="Examples">
     
-    <prism-demo-section title="Positioning" description="Drawers can slide in from any of the four edges.">
+    <prism-demo-section title="Positioning" subtitle="Drawers can slide in from any of the four edges.">
       <prism-demo-card>
         <div preview class="flex gap-4 flex-wrap">
           <prism-button label="Right (Default)" (click)="open('right')" />
@@ -18,7 +18,7 @@
       </prism-demo-card>
     </prism-demo-section>
 
-    <prism-demo-section title="Customization" description="Control dimensions and handle custom content via templates.">
+    <prism-demo-section title="Customization" subtitle="Control dimensions and handle custom content via templates.">
       <prism-demo-card>
         <div preview class="flex gap-4 flex-wrap">
           <prism-button label="Custom Width (50%)" variant="secondary" (click)="openCustom()" />
@@ -61,15 +61,15 @@
 
   <prism-tab label="API">
     
-    <prism-demo-section title="PrismDrawerComponent API" description="Inputs and outputs for the template-directive usage.">
+    <prism-demo-section title="PrismDrawerComponent API" subtitle="Inputs and outputs for the template-directive usage.">
       <prism-api-table [data]="apiDocs" />
     </prism-demo-section>
 
-    <prism-demo-section title="PrismDrawerService API" description="Options for opening drawers programmatically.">
+    <prism-demo-section title="PrismDrawerService API" subtitle="Options for opening drawers programmatically.">
       <prism-api-table [data]="serviceApiDocs" />
     </prism-demo-section>
 
-    <prism-demo-section title="PrismDrawerRef & Tokens" description="Handling lifecycle and data injection within dynamic components.">
+    <prism-demo-section title="PrismDrawerRef & Tokens" subtitle="Handling lifecycle and data injection within dynamic components.">
       <div class="space-y-8">
         <div>
           <h4 class="text-sm font-semibold mb-2">PrismDrawerRef</h4>

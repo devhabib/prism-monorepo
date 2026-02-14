@@ -1,0 +1,21 @@
+<prism-demo-page-header title="Grid" subtitle="Layout primitive based on CSS Grid.">
+</prism-demo-page-header>
+
+<prism-demo-section title="Basic Usage">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 bg-slate-50 dark:bg-slate-900 border border-dashed border-slate-200 dark:border-slate-700 rounded-lg">
+          <prism-row [gutter]="16">
+            <prism-col [span]="8"><div class="p-4 bg-primary-100 dark:bg-primary-900/30 text-center rounded">col-8</div></prism-col>
+            <prism-col [span]="8"><div class="p-4 bg-primary-200 dark:bg-primary-800/30 text-center rounded">col-8</div></prism-col>
+            <prism-col [span]="8"><div class="p-4 bg-primary-100 dark:bg-primary-900/30 text-center rounded">col-8</div></prism-col>
+          </prism-row>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.usage"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>

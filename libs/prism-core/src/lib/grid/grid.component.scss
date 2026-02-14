@@ -1,0 +1,57 @@
+
+.prism-row {
+  display: flex;
+  flex-flow: row wrap;
+  min-width: 0;
+
+  &::before,
+  &::after {
+    display: flex;
+  }
+}
+
+.prism-col {
+  position: relative;
+  max-width: 100%;
+  min-height: 1px;
+}
+
+// Grid generator for 24 columns
+@for $i from 1 through 24 {
+  .prism-col-#{$i} {
+    flex: 0 0 calc(100% / 24 * #{$i});
+    max-width: calc(100% / 24 * #{$i});
+  }
+  .prism-col-offset-#{$i} {
+    margin-left: calc(100% / 24 * #{$i});
+  }
+  .prism-col-order-#{$i} {
+    order: #{$i};
+  }
+}
+
+// Responsive breakpoints
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1600px
+);
+
+@each $key, $val in $breakpoints {
+  @media (min-width: #{$val}) {
+    @for $i from 1 through 24 {
+      .prism-col-#{$key}-#{$i} {
+        flex: 0 0 calc(100% / 24 * #{$i});
+        max-width: calc(100% / 24 * #{$i});
+      }
+      .prism-col-#{$key}-offset-#{$i} {
+        margin-left: calc(100% / 24 * #{$i});
+      }
+      .prism-col-#{$key}-order-#{$i} {
+        order: #{$i};
+      }
+    }
+  }
+}
