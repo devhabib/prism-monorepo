@@ -1,9 +1,13 @@
-<div class="prism-tab-group" [class]="'variant-' + variant()">
+<div class="prism-tab-group" 
+     [class]="'variant-' + variant()"
+     [class.orientation-vertical]="orientation() === 'vertical'">
   <!-- Tab Navigation -->
-  <div class="tab-nav">
+  <div class="tab-nav" role="tablist">
     @for (tab of tabs(); track $index) {
       <button 
         class="tab-button"
+        role="tab"
+        [attr.aria-selected]="isTabActive($index)"
         [class.active]="isTabActive($index)"
         (click)="selectTab($index)"
         type="button">

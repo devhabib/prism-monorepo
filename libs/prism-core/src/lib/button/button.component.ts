@@ -21,6 +21,7 @@ export class PrismButtonComponent {
 
   buttonClasses = computed(() => {
     return {
+      'button': true,
       [`variant-${this.variant()}`]: true,
       [`size-${this.size()}`]: true,
       'is-loading': this.loading(),

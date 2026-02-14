@@ -22,7 +22,7 @@ import { ToastService, Toast } from '../services/toast.service';
           <div class="toast-content">
             {{ toast.message }}
           </div>
-          <button class="toast-close" (click)="toastService.remove(toast.id)">
+          <button class="button toast-close" (click)="toastService.remove(toast.id)">
             <i class="ri-close-line"></i>
           </button>
         </div>

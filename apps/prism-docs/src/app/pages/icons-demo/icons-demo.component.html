@@ -6,7 +6,7 @@
   />
 
   <prism-tab-group>
-    <prism-tab label="Gallery">
+    <prism-tab label="Gallery" >
       
       <!-- Dynamic Sizing Demo -->
       <prism-demo-section title="Dynamic Sizing" description="Icons can be sized using pixels, rems, or percentages.">
@@ -49,7 +49,7 @@
           @for (icon of displayedIcons(); track icon.key) {
             <button 
               (click)="copyIcon(icon.name)"
-              class="group flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200 focus:outline-none hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer h-full min-h-[100px]">
+              class="button group flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200 focus:outline-none hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer h-full min-h-[100px]">
               
               <!-- Increased icon size and simplified transition -->
               <prism-icon 

@@ -32,7 +32,7 @@ export type SelectOption = {
         @if (!multiple()) {
           <button 
             type="button"
-            class="prism-select__trigger"
+            class="button prism-select__trigger"
             (click)="toggleDropdown()"
             [attr.aria-expanded]="isOpen()">
             <div class="prism-select__value">
@@ -76,7 +76,7 @@ export type SelectOption = {
             @if (searchQuery()) {
               <button 
                 type="button"
-                class="prism-select__clear"
+                class="button prism-select__clear"
                 (click)="clearSearch(); $event.stopPropagation()"
                 aria-label="Clear search">
                 <i class="ri-close-line"></i>
@@ -103,7 +103,7 @@ export type SelectOption = {
                 @if (searchQuery()) {
                   <button 
                     type="button"
-                    class="prism-select__clear prism-select__clear--search"
+                    class="button prism-select__clear prism-select__clear--search"
                     (click)="clearSearch(); $event.stopPropagation()"
                     aria-label="Clear search">
                     <i class="ri-close-line"></i>

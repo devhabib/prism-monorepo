@@ -52,18 +52,20 @@ export class IconsDemoComponent {
   searchControl = new FormControl('', { nonNullable: true });
   
   // Get all icon definitions
-  allIcons: any[] = [];
+  allIcons: { key: string; name: string }[] = [];
 
   constructor() {
     // 1. Extract all icon definitions from the module import
     const icons = Object.values(PrismIcons)
-      .filter((icon: any) => icon && icon.name && icon.data);
+      .filter((icon): icon is { name: string; data: string } => {
+        return !!(icon && typeof icon === 'object' && 'name' in icon && 'data' in icon);
+      });
       
     // 2. Register them with the registry so <prism-icon> can find them
     this.registry.addIcons(icons);
 
     // 3. Populate local array for the grid display
-    this.allIcons = icons.map((icon: any) => ({
+    this.allIcons = icons.map((icon) => ({
       key: icon.name,
       name: icon.name
     }));

@@ -9,7 +9,7 @@ import { ThemeService } from '../services/theme.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <button 
-      class="theme-toggle" 
+      class="button theme-toggle" 
       (click)="themeService.toggle()" 
       [attr.aria-label]="'Switch to ' + (themeService.currentTheme() === 'light' ? 'dark' : 'light') + ' mode'"
     >

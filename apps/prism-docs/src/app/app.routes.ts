@@ -101,6 +101,20 @@ export const appRoutes: Route[] = [
           import('./pages/components/drawer-demo/drawer-demo.component').then(
             (m) => m.DrawerDemoComponent
           ),
+      },
+      {
+        path: 'components/card',
+        loadComponent: () =>
+          import('./pages/components/card-demo/card-demo.component').then(
+            (m) => m.CardDemoComponent
+          ),
+      },
+      {
+        path: 'components/tabs',
+        loadComponent: () =>
+          import('./pages/components/tabs-demo/tabs-demo.component').then(
+            (m) => m.TabsDemoComponent
+          ),
       }
     ],
   },

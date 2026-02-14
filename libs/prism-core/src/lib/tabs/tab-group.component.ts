@@ -1,11 +1,11 @@
 import { 
   Component, 
   input, 
-  signal, 
   contentChildren, 
   effect,
   ChangeDetectionStrategy,
-  WritableSignal
+  WritableSignal,
+  model
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrismTabComponent } from './tab.component';
@@ -19,16 +19,17 @@ import { PrismTabComponent } from './tab.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrismTabGroupComponent {
-  variant = input<'line' | 'pill'>('line');
+  variant = input<'line' | 'pill' | 'enclosed'>('line');
+  orientation = input<'horizontal' | 'vertical'>('horizontal');
   
   tabs = contentChildren(PrismTabComponent);
-  activeIndex = signal<number>(0);
+  selectedIndex = model<number>(0);
 
   constructor() {
     // Sync active state with child tabs
     effect(() => {
       const allTabs = this.tabs();
-      const currentActive = this.activeIndex();
+      const currentActive = this.selectedIndex();
       
       // Update each tab's visibility based on active index
       allTabs.forEach((tab, index) => {
@@ -42,10 +43,10 @@ export class PrismTabGroupComponent {
   }
 
   selectTab(index: number): void {
-    this.activeIndex.set(index);
+    this.selectedIndex.set(index);
   }
 
   isTabActive(index: number): boolean {
-    return this.activeIndex() === index;
+    return this.selectedIndex() === index;
   }
 }

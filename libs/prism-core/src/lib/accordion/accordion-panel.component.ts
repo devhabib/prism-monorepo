@@ -17,7 +17,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     <div class="prism-collapse-panel" [class.prism-collapse-panel--active]="active()">
       <button 
         type="button"
-        class="prism-collapse-header" 
+        class="button prism-collapse-header"  
         [class.disabled]="disabled()"
         [attr.disabled]="disabled() ? true : null"
         [attr.aria-expanded]="active()"

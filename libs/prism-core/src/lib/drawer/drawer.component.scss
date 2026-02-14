@@ -92,3 +92,24 @@
     }
   }
 }
+// Responsive
+@media (max-width: 640px) {
+  .prism-drawer-panel {
+    &.pos-left, 
+    &.pos-right {
+      width: 100% !important;
+      max-width: 100vw;
+      border-left: none;
+      border-right: none;
+    }
+    
+    // Ensure content areas are padded correctly for mobile
+    .drawer-body {
+      padding: 1rem;
+    }
+    
+    .drawer-footer {
+      padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+    }
+  }
+}

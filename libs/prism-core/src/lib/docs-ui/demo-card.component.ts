@@ -1,56 +1,33 @@
 import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { PrismTabGroupComponent } from '../tabs/tab-group.component';
+import { PrismTabComponent } from '../tabs/tab.component';
 
 @Component({
   selector: 'prism-demo-card',
   standalone: true,
+  imports: [PrismTabGroupComponent, PrismTabComponent],
   template: `
-    <div class="demo-card">
-      <div class="demo-preview">
-        <ng-content select="[preview]" />
-      </div>
-      <div class="demo-code">
-        <ng-content />
+    <div class="border border-surface-200 dark:border-surface-700 rounded-xl overflow-hidden bg-surface-0 dark:bg-surface-900">
+      <div class="border-b border-surface-200 dark:border-surface-700 px-4 py-3 bg-surface-50 dark:bg-surface-800/50">
+        <prism-tab-group variant="pill">
+          <prism-tab label="Preview">
+            <div class="p-6 bg-surface-0 dark:bg-surface-900 overflow-x-auto">
+              <ng-content select="[preview]" />
+            </div>
+          </prism-tab>
+          <prism-tab label="Source Code">
+            <div class="bg-[#1e1e1e]">
+              <ng-content />
+            </div>
+          </prism-tab>
+        </prism-tab-group>
       </div>
     </div>
   `,
-  styles: [`
-    .demo-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-
-      .demo-preview {
-        padding: 2.5rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-        align-items: center;
-        justify-content: center;
-        
-        /* Premium Grid Pattern Background */
-        background-color: var(--bg-app);
-        background-image: 
-          radial-gradient(circle at 1px 1px, var(--surface-200) 1px, transparent 0);
-        background-size: 24px 24px;
-      }
-
-      /* If code-block is present, it's usually at the bottom */
-      prism-code-block {
-        border-top: 1px solid var(--border);
-        display: block;
-      }
-    }
-    
-    [data-theme="dark"] .demo-preview {
-      background-image: radial-gradient(circle at 1px 1px, var(--surface-700) 1px, transparent 0);
-    }
-  `],
+  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
 export class PrismDemoCardComponent {
-  // lint fix: non-empty class
   readonly componentType = 'demo-card';
 }

@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
       @if (removable()) {
         <button 
           type="button"
-          class="prism-tag__remove" 
+          class="button prism-tag__remove" 
           (click)="handleRemove()"
           aria-label="Remove tag">
           <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

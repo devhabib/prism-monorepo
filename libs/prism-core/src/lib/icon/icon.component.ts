@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, input, effect, ChangeDetectionStrategy, HostBinding } from '@angular/core';
+import { Component, ElementRef, inject, input, effect, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrismIconRegistry } from './icon-registry.service';
 
@@ -18,7 +18,10 @@ import { PrismIconRegistry } from './icon-registry.service';
       fill: currentColor;
     }
   `],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[style.fontSize]': 'size()'
+  }
 })
 export class PrismIconComponent {
   private element = inject(ElementRef);
@@ -26,10 +29,6 @@ export class PrismIconComponent {
 
   name = input.required<string>();
   size = input<string>();
-
-  @HostBinding('style.fontSize') get fontSize() {
-    return this.size();
-  }
 
   constructor() {
     effect(() => {

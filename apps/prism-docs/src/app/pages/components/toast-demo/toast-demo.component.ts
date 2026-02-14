@@ -53,7 +53,7 @@ export class MyComponent {
     this.toast.show('Custom message', 'info', 5000);
   }
 }`,
-    usageHTML: `<button (click)="notify()">Show Toast</button>`
+    usageHTML: `<button class="button" (click)="notify()">Show Toast</button>`
   };
 
   readonly apiData: ApiDoc[] = [

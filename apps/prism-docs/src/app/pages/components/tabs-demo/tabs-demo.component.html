@@ -1,0 +1,178 @@
+<prism-demo-page-header 
+  title="Tabs" 
+  subtitle="Organize content into separate views where only one view can be visible at a time.">
+</prism-demo-page-header>
+
+<prism-tab-group>
+  <!-- EXAMPLES TAB -->
+  <prism-tab label="Examples">
+    <div class="space-y-8">
+      <!-- Section 1: Basic (Line) Tabs -->
+      <prism-demo-section title="Basic Tabs">
+        <prism-demo-card>
+          <div preview>
+            <prism-tab-group>
+              <prism-tab label="Account">
+                <div class="p-4">
+                  <h3 class="text-lg font-medium">Account Settings</h3>
+                  <p class="text-secondary mt-2">Manage your account details here.</p>
+                </div>
+              </prism-tab>
+              <prism-tab label="Password">
+                <div class="p-4">
+                  <h3 class="text-lg font-medium">Password</h3>
+                  <p class="text-secondary mt-2">Change your password.</p>
+                </div>
+              </prism-tab>
+              <prism-tab label="Notifications">
+                <div class="p-4">
+                  <h3 class="text-lg font-medium">Notifications</h3>
+                  <p class="text-secondary mt-2">Configure email preferences.</p>
+                </div>
+              </prism-tab>
+            </prism-tab-group>
+          </div>
+          <prism-code-block language="html" [code]="basicSnippet"></prism-code-block>
+        </prism-demo-card>
+      </prism-demo-section>
+
+      <!-- Section 2: Pill Tabs -->
+      <prism-demo-section title="Pill Variants">
+        <prism-demo-card>
+          <div preview>
+            <prism-tab-group variant="pill">
+              <prism-tab label="Monthly">
+                <div class="p-4 text-center">
+                  <span class="text-2xl font-bold">$19</span>/mo
+                </div>
+              </prism-tab>
+              <prism-tab label="Yearly">
+                <div class="p-4 text-center">
+                   <span class="text-2xl font-bold">$190</span>/yr 
+                   <span class="text-sm text-success-500 block">(Save 20%)</span>
+                </div>
+              </prism-tab>
+            </prism-tab-group>
+          </div>
+          <prism-code-block language="html" [code]="pillSnippet"></prism-code-block>
+        </prism-demo-card>
+      </prism-demo-section>
+
+      <!-- Section 3: Icon Tabs -->
+      <prism-demo-section title="With Icons">
+        <prism-demo-card>
+          <div preview>
+            <prism-tab-group>
+              <!-- Since PrismTab label is string-only, we show icons in content for now or would need label template support -->
+              <!-- User request: Demonstrate using <prism-icon> inside the <prism-tab> content or label -->
+              <prism-tab label="Favorites">
+                <div class="p-4 flex items-center gap-3">
+                  <prism-icon name="heart-line" size="24px" class="text-danger-500"></prism-icon>
+                  <div>
+                    <h4 class="font-medium">Favorites</h4>
+                    <p class="text-sm text-secondary">Your saved items appear here.</p>
+                  </div>
+                </div>
+              </prism-tab>
+              <prism-tab label="Recent">
+                 <div class="p-4 flex items-center gap-3">
+                  <prism-icon name="time-line" size="24px" class="text-primary-500"></prism-icon>
+                  <div>
+                    <h4 class="font-medium">Recently Viewed</h4>
+                    <p class="text-sm text-secondary">History of viewed items.</p>
+                  </div>
+                </div>
+              </prism-tab>
+            </prism-tab-group>
+          </div>
+           <prism-code-block language="html" [code]="iconSnippet"></prism-code-block>
+        </prism-demo-card>
+      </prism-demo-section>
+
+      <!-- Section 4: Vertical Orientation -->
+      <prism-demo-section title="Vertical Orientation">
+        <prism-demo-card>
+          <div preview>
+            <div class="h-64 border border-surface-200 rounded-lg overflow-hidden flex">
+              <prism-tab-group orientation="vertical" class="h-full">
+                <prism-tab label="General">
+                  <div class="p-4">General Settings Content</div>
+                </prism-tab>
+                <prism-tab label="Profile">
+                   <div class="p-4">Profile Information</div>
+                </prism-tab>
+                <prism-tab label="Privacy">
+                   <div class="p-4">Privacy & Security</div>
+                </prism-tab>
+                <prism-tab label="Billing">
+                   <div class="p-4">Billing History</div>
+                </prism-tab>
+              </prism-tab-group>
+            </div>
+          </div>
+           <prism-code-block language="html" [code]="verticalSnippet"></prism-code-block>
+        </prism-demo-card>
+      </prism-demo-section>
+
+      <!-- Section 5: Playground -->
+      <prism-demo-section title="Playground">
+        <prism-demo-card>
+          
+          <div preview class="flex flex-col gap-6 w-full">
+            <!-- Controls -->
+            <div class="flex flex-wrap gap-4 p-4 bg-surface-50 rounded-lg border border-surface-200">
+              <div class="w-48">
+                <label class="text-sm font-medium mb-1 block">Variant</label>
+                <prism-select 
+                  [options]="variantOptions" 
+                  [(value)]="playgroundVariant"
+                  [searchable]="false">
+                </prism-select>
+              </div>
+              
+              <div class="w-48">
+                 <label class="text-sm font-medium mb-1 block">Orientation</label>
+                 <prism-select 
+                  [options]="orientationOptions" 
+                  [(value)]="playgroundOrientation"
+                  [searchable]="false">
+                </prism-select>
+              </div>
+            </div>
+
+            <!-- Result -->
+             <div class="border border-surface-200 rounded-lg overflow-hidden min-h-[200px]" [class.flex]="playgroundOrientation() === 'vertical'">
+              <prism-tab-group 
+                [variant]="playgroundVariant()" 
+                [orientation]="playgroundOrientation()">
+                <prism-tab label="First Tab">
+                  <div class="p-4">Content 1</div>
+                </prism-tab>
+                <prism-tab label="Second Tab">
+                  <div class="p-4">Content 2</div>
+                </prism-tab>
+                <prism-tab label="Third Tab">
+                  <div class="p-4">Content 3</div>
+                </prism-tab>
+              </prism-tab-group>
+            </div>
+          </div>
+          
+          <prism-code-block language="html" [code]="playgroundCode()"></prism-code-block>
+
+        </prism-demo-card>
+      </prism-demo-section>
+    </div>
+  </prism-tab>
+
+  <!-- API TAB -->
+  <prism-tab label="API">
+    <prism-demo-section title="PrismTabGroupComponent API">
+      <prism-api-table [data]="apiDocs" />
+    </prism-demo-section>
+
+    <prism-demo-section title="PrismTabComponent API">
+        <prism-api-table [data]="tabApiDocs" />
+    </prism-demo-section>
+  </prism-tab>
+</prism-tab-group>
