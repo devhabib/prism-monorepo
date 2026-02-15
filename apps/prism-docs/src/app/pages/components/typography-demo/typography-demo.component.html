@@ -1,17 +1,216 @@
-<prism-demo-page-header title="Typography" subtitle="Typography component for consistent text styling.">
-</prism-demo-page-header>
+<div class="pb-20">
+  <prism-demo-page-header 
+    title="Typography" 
+    description="The foundation of the Prism Design System, providing a cohesive set of text styles."
+    badge="Updated" />
 
-<prism-demo-section title="Basic Usage">
-  <prism-demo-card>
-    <prism-tab-group variant="pill">
-      <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-typography />
+  <prism-tab-group variant="line" class="mt-8">
+    
+    <prism-tab label="Examples">
+      
+      <!-- Headings -->
+      <section class="mt-8">
+        <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-50">Headings</h2>
+        <div class="border border-surface-200 dark:border-surface-700 rounded-xl overflow-hidden bg-surface-0 dark:bg-surface-900">
+          <prism-tab-group variant="pill">
+            <prism-tab label="Preview">
+              <div class="p-8 flex flex-col gap-6 bg-surface-50/50 dark:bg-surface-950/50">
+                 <div class="flex items-baseline justify-between border-b border-surface-200 dark:border-surface-700 pb-2">
+                    <h1 prism-title [level]="1" class="!m-0">Heading 1</h1>
+                    <span class="text-xs text-surface-400 font-mono">38px / 2.375rem</span>
+                  </div>
+                  <div class="flex items-baseline justify-between border-b border-surface-200 dark:border-surface-700 pb-2">
+                    <h2 prism-title [level]="2" class="!m-0">Heading 2</h2>
+                    <span class="text-xs text-surface-400 font-mono">30px / 1.875rem</span>
+                  </div>
+                  <div class="flex items-baseline justify-between border-b border-surface-200 dark:border-surface-700 pb-2">
+                    <h3 prism-title [level]="3" class="!m-0">Heading 3</h3>
+                    <span class="text-xs text-surface-400 font-mono">24px / 1.5rem</span>
+                  </div>
+                  <div class="flex items-baseline justify-between border-b border-surface-200 dark:border-surface-700 pb-2">
+                    <h4 prism-title [level]="4" class="!m-0">Heading 4</h4>
+                    <span class="text-xs text-surface-400 font-mono">20px / 1.25rem</span>
+                  </div>
+                  <div class="flex items-baseline justify-between border-b border-surface-200 dark:border-surface-700 pb-2">
+                    <h5 prism-title [level]="5" class="!m-0">Heading 5</h5>
+                    <span class="text-xs text-surface-400 font-mono">18px / 1.125rem</span>
+                  </div>
+                  <div class="flex items-baseline justify-between border-b border-surface-200 dark:border-surface-700 pb-2">
+                    <h6 prism-title [level]="6" class="!m-0">Heading 6</h6>
+                    <span class="text-xs text-surface-400 font-mono">16px / 1rem</span>
+                  </div>
+              </div>
+            </prism-tab>
+            <prism-tab label="Code">
+              <div class="p-4 bg-[#1e1e1e] text-white rounded-b-xl overflow-x-auto font-mono text-sm">
+                <pre><code>{{ snippets.headings }}</code></pre>
+              </div>
+            </prism-tab>
+          </prism-tab-group>
         </div>
-      </prism-tab>
-      <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
-      </prism-tab>
-    </prism-tab-group>
-  </prism-demo-card>
-</prism-demo-section>
+      </section>
+
+      <!-- Inline Styles -->
+      <section class="mt-10">
+        <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-50">Inline Styles</h2>
+        <div class="border border-surface-200 dark:border-surface-700 rounded-xl overflow-hidden bg-surface-0 dark:bg-surface-900">
+          <prism-tab-group variant="pill">
+            <prism-tab label="Preview">
+              <div class="p-8 flex flex-wrap gap-4 items-center bg-surface-50/50 dark:bg-surface-950/50">
+                 <span prism-text>Base Text</span>
+                 <span prism-text [strong]="true">Strong</span>
+                 <span prism-text [italic]="true">Italic</span>
+                 <span prism-text [underline]="true">Underline</span>
+                 <span prism-text [deleted]="true">Deleted</span>
+                 <span prism-text [mark]="true">Mark</span>
+                 <span prism-text [code]="true">Code</span>
+                 <span prism-text [keyboard]="true">Kbd</span>
+              </div>
+            </prism-tab>
+            <prism-tab label="Code">
+              <div class="p-4 bg-[#1e1e1e] text-white rounded-b-xl overflow-x-auto font-mono text-sm">
+                <pre><code>{{ snippets.inline }}</code></pre>
+              </div>
+            </prism-tab>
+          </prism-tab-group>
+        </div>
+      </section>
+
+      <!-- Variants -->
+      <section class="mt-10">
+        <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-50">Variants</h2>
+        <div class="border border-surface-200 dark:border-surface-700 rounded-xl overflow-hidden bg-surface-0 dark:bg-surface-900">
+          <prism-tab-group variant="pill">
+            <prism-tab label="Preview">
+              <div class="p-8 flex flex-col gap-4 max-w-md bg-surface-50/50 dark:bg-surface-950/50">
+                <div class="flex justify-between items-center">
+                  <span prism-text>Default</span>
+                  <span class="text-xs text-surface-400">Neutral text color</span>
+                </div>
+                <prism-divider></prism-divider>
+                <div class="flex justify-between items-center">
+                  <span prism-text type="secondary">Secondary</span>
+                  <span class="text-xs text-surface-400">Muted metadata</span>
+                </div>
+                <prism-divider></prism-divider>
+                <div class="flex justify-between items-center">
+                  <span prism-text type="success">Success</span>
+                  <span class="text-xs text-surface-400">Positive feedback</span>
+                </div>
+                <prism-divider></prism-divider>
+                <div class="flex justify-between items-center">
+                  <span prism-text type="warning">Warning</span>
+                  <span class="text-xs text-surface-400">Cautionary notes</span>
+                </div>
+                <prism-divider></prism-divider>
+                <div class="flex justify-between items-center">
+                  <span prism-text type="danger">Danger</span>
+                  <span class="text-xs text-surface-400">Critical errors</span>
+                </div>
+                <prism-divider></prism-divider>
+                <div class="flex justify-between items-center">
+                  <span prism-text [disabled]="true">Disabled</span>
+                  <span class="text-xs text-surface-400">Non-interactive</span>
+                </div>
+              </div>
+            </prism-tab>
+            <prism-tab label="Code">
+              <div class="p-4 bg-[#1e1e1e] text-white rounded-b-xl overflow-x-auto font-mono text-sm">
+                <pre><code>{{ snippets.variants }}</code></pre>
+              </div>
+            </prism-tab>
+          </prism-tab-group>
+        </div>
+      </section>
+
+      <!-- Interactive -->
+      <section class="mt-10">
+        <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-50">Interactive</h2>
+        <div class="border border-surface-200 dark:border-surface-700 rounded-xl overflow-hidden bg-surface-0 dark:bg-surface-900">
+          <prism-tab-group variant="pill">
+            <prism-tab label="Preview">
+               <div class="p-8 flex flex-col gap-6 max-w-lg bg-surface-50/50 dark:bg-surface-950/50">
+                  <div class="p-4 bg-white dark:bg-surface-800 rounded-lg border border-surface-200 dark:border-surface-700">
+                    <div class="text-xs font-semibold text-surface-500 mb-2 uppercase tracking-wide">Copyable</div>
+                    <span prism-text [copyable]="true" class="text-lg">Prism Design System 2024</span>
+                  </div>
+
+                  <div class="p-4 bg-white dark:bg-surface-800 rounded-lg border border-surface-200 dark:border-surface-700">
+                    <div class="text-xs font-semibold text-surface-500 mb-2 uppercase tracking-wide">Editable</div>
+                     <span prism-text [editable]="true" (contentChange)="onContentChange($event)">{{ editableStr() }}</span>
+                  </div>
+               </div>
+            </prism-tab>
+            <prism-tab label="Code">
+              <div class="p-4 bg-[#1e1e1e] text-white rounded-b-xl overflow-x-auto font-mono text-sm">
+                <pre><code>{{ snippets.interactive }}</code></pre>
+              </div>
+            </prism-tab>
+          </prism-tab-group>
+        </div>
+      </section>
+
+       <!-- Paragraphs -->
+      <section class="mt-10 mb-10">
+        <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-50">Paragraphs</h2>
+        <div class="border border-surface-200 dark:border-surface-700 rounded-xl overflow-hidden bg-surface-0 dark:bg-surface-900">
+          <prism-tab-group variant="pill">
+            <prism-tab label="Preview">
+               <div class="p-8 flex flex-col gap-4 bg-surface-50/50 dark:bg-surface-950/50">
+                  <prism-paragraph class="text-justify">
+                    <span prism-text [strong]="true" class="text-primary-500">Prism</span> (Default) is a comprehensive design system. 
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                  </prism-paragraph>
+                  <prism-divider></prism-divider>
+                  <prism-paragraph type="secondary" class="text-justify">
+                    <span prism-text [strong]="true">Secondary:</span> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  </prism-paragraph>
+                  <prism-paragraph type="success" class="text-justify">
+                    <span prism-text [strong]="true">Success:</span> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                  </prism-paragraph>
+                   <prism-paragraph type="warning" class="text-justify">
+                    <span prism-text [strong]="true">Warning:</span> Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  </prism-paragraph>
+                   <prism-paragraph type="danger" class="text-justify">
+                    <span prism-text [strong]="true">Danger:</span> Error occurred while processing the request. Please try again later.
+                  </prism-paragraph>
+               </div>
+            </prism-tab>
+            <prism-tab label="Code">
+              <div class="p-4 bg-[#1e1e1e] text-white rounded-b-xl overflow-x-auto font-mono text-sm">
+                <pre><code>{{ snippets.paragraphs }}</code></pre>
+              </div>
+            </prism-tab>
+          </prism-tab-group>
+        </div>
+      </section>
+
+    </prism-tab>
+
+    <prism-tab label="API">
+      <div class="mt-8 border border-surface-200 dark:border-surface-700 rounded-xl overflow-hidden overflow-x-auto">
+        <table class="w-full text-left border-collapse min-w-[600px]">
+          <thead>
+            <tr class="bg-surface-50 dark:bg-surface-900 border-b border-surface-200 dark:border-surface-700">
+              <th class="p-4 font-semibold text-surface-900 dark:text-surface-50">Name</th>
+              <th class="p-4 font-semibold text-surface-900 dark:text-surface-50">Type</th>
+              <th class="p-4 font-semibold text-surface-900 dark:text-surface-50">Default</th>
+              <th class="p-4 font-semibold text-surface-900 dark:text-surface-50">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (prop of apiProperties; track prop.name) {
+              <tr class="border-b border-surface-200 dark:border-surface-700 last:border-0 hover:bg-surface-50 dark:hover:bg-surface-900/50">
+                <td class="p-4 font-mono text-sm text-primary-600 dark:text-primary-400">{{ prop.name }}</td>
+                <td class="p-4 font-mono text-xs text-surface-600 dark:text-surface-400 break-words max-w-xs">{{ prop.type }}</td>
+                <td class="p-4 font-mono text-xs text-surface-600 dark:text-surface-400">{{ prop.default }}</td>
+                <td class="p-4 text-sm text-surface-700 dark:text-surface-300">{{ prop.description }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </prism-tab>
+
+  </prism-tab-group>
+</div>

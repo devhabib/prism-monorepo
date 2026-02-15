@@ -1,0 +1,266 @@
+@use '../../../../prism-theme/src/lib/core/variables' as *;
+
+.prism-typography {
+  color: var(--text-main, #334155); // Fallback to slate-700
+  word-break: break-word;
+  line-height: 1.5;
+
+  &.prism-typography-secondary {
+    color: var(--text-muted, #94a3b8); // Fallback to slate-400
+  }
+
+  &.prism-typography-success {
+    color: var(--success);
+  }
+
+  &.prism-typography-warning {
+    color: var(--warning);
+  }
+
+  &.prism-typography-danger {
+    color: var(--danger);
+
+    a {
+      color: var(--danger);
+
+      &:active,
+      &:hover {
+        color: var(--danger); // Or darker shade if available, e.g. calc(var(--danger) - 10%)
+      }
+    }
+  }
+
+  &.prism-typography-disabled {
+    color: var(--text-disabled, #cbd5e1); // Fallback to slate-300
+    cursor: not-allowed;
+    user-select: none;
+  }
+
+  /* 
+     Fixing "div&" syntax error by moving specific element selectors outside 
+     or using simple child/sibling adjustments if appropriate. 
+     Here we just targeting elements with the class explicitly.
+  */
+}
+
+div.prism-typography,
+p.prism-typography {
+  margin-bottom: 1em;
+}
+
+.prism-typography + h1.prism-typography,
+.prism-typography + h2.prism-typography,
+.prism-typography + h3.prism-typography,
+.prism-typography + h4.prism-typography,
+.prism-typography + h5.prism-typography,
+.prism-typography + h6.prism-typography {
+  margin-top: 1.2em;
+}
+
+div.prism-typography:last-child,
+p.prism-typography:last-child {
+  margin-bottom: 0;
+}
+
+h1.prism-typography,
+h2.prism-typography,
+h3.prism-typography,
+h4.prism-typography,
+h5.prism-typography,
+h6.prism-typography {
+  margin-bottom: 0.5em;
+  color: var(--text-main, #0f172a);
+  font-weight: 600;
+  line-height: 1.35;
+
+  & + h1.prism-typography,
+  & + h2.prism-typography,
+  & + h3.prism-typography,
+  & + h4.prism-typography,
+  & + h5.prism-typography,
+  & + h6.prism-typography {
+    margin-top: 0.5em;
+  }
+}
+
+h1.prism-typography {
+  margin-top: 0;
+  font-size: 2.375rem; // 38px
+}
+
+h2.prism-typography {
+  margin-top: 1.2em;
+  font-size: 1.875rem; // 30px
+}
+
+h3.prism-typography {
+  margin-top: 1.2em;
+  font-size: 1.5rem; // 24px
+}
+
+h4.prism-typography {
+  margin-top: 1.2em;
+  font-size: 1.25rem; // 20px
+}
+
+h5.prism-typography {
+  margin-top: 1.2em;
+  font-size: 1.125rem; // 18px
+}
+
+h6.prism-typography {
+  margin-top: 1.2em;
+  font-size: 1rem; // 16px
+  font-weight: 600;
+  color: var(--text-muted, #94a3b8);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+a.prism-typography {
+  color: var(--color-primary-500);
+  text-decoration: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  transition: color 0.3s;
+  text-decoration: none;
+
+  &:active,
+  &:hover {
+    color: var(--color-primary-400);
+    text-decoration: none;
+  }
+
+  &[disabled],
+  &.prism-typography-disabled {
+    color: var(--text-disabled);
+    cursor: not-allowed;
+    pointer-events: none;
+
+    &:active,
+    &:hover {
+      color: var(--text-disabled);
+    }
+  }
+}
+
+code.prism-typography,
+.prism-typography-code {
+  margin: 0 0.2em;
+  padding: 0.2em 0.4em 0.1em;
+  font-size: 85%;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background: rgba(150, 150, 150, 0.1);
+  border: 1px solid rgba(100, 100, 100, 0.2);
+  border-radius: 3px;
+}
+
+kbd.prism-typography,
+.prism-typography-kbd {
+  margin: 0 0.2em;
+  padding: 0.15em 0.4em 0.1em;
+  font-size: 90%;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background: rgba(150, 150, 150, 0.06);
+  border: 1px solid rgba(100, 100, 100, 0.2);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+}
+
+mark.prism-typography,
+.prism-typography-mark {
+  padding: 0 0.2em;
+  background-color: #fef08a; // Explicit yellow-200 for visibility
+  color: inherit;
+  border-radius: 2px;
+}
+
+u.prism-typography,
+.prism-typography-underline {
+  text-decoration: underline;
+  text-decoration-skip-ink: auto;
+}
+
+del.prism-typography,
+.prism-typography-deleted {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+strong.prism-typography,
+.prism-typography-strong {
+  font-weight: 600;
+}
+
+i.prism-typography,
+.prism-typography-italic {
+  font-style: italic;
+}
+.prism-typography-edit-content {
+  position: relative;
+  
+  textarea {
+    min-height: 60px;
+    width: 100%;
+    margin: 0;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background-color: var(--surface-card);
+    color: var(--text-primary);
+    outline: none;
+    resize: none;
+    
+    &:focus {
+      border-color: var(--color-primary-500);
+      box-shadow: 0 0 0 2px var(--color-primary-100);
+    }
+  }
+
+  .prism-typography-edit-content-confirm {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    
+    &:hover {
+      color: var(--color-primary-500);
+    }
+  }
+}
+
+.prism-typography-copy-success {
+    color: var(--success) !important;
+}
+
+// Icon Colors
+.prism-typography-copy {
+  display: inline-block;
+  margin-left: 8px;
+  color: var(--primary-main, #2563EB); // Blue for Copy
+  cursor: pointer;
+  transition: color 0.3s;
+  vertical-align: middle;
+  line-height: 1;
+
+  &:hover {
+    color: var(--primary-700, #1d4ed8);
+  }
+}
+
+.prism-typography-edit {
+  display: inline-block;
+  margin-left: 8px;
+  color: var(--text-muted, #94a3b8); // Gray for Edit
+  cursor: pointer;
+  transition: all 0.2s;
+  vertical-align: middle;
+  line-height: 1;
+
+  &:hover {
+    color: var(--text-main, #334155); // Darker on hover
+    transform: scale(1.1);
+  }
+}
