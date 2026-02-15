@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input, contentChildren, AfterContentInit, effect } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, contentChildren, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrismBreadcrumbItemComponent } from './breadcrumb-item.component';
 
@@ -20,7 +20,7 @@ import { PrismBreadcrumbItemComponent } from './breadcrumb-item.component';
   `],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PrismBreadcrumbComponent implements AfterContentInit {
+export class PrismBreadcrumbComponent {
   separator = input<string>('/');
   
   items = contentChildren(PrismBreadcrumbItemComponent);
@@ -35,9 +35,5 @@ export class PrismBreadcrumbComponent implements AfterContentInit {
         item.separator.set(sep);
       });
     });
-  }
-
-  ngAfterContentInit(): void {
-    // Initial sync handled by effect
   }
 }

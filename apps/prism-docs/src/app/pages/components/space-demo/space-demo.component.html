@@ -1,17 +1,51 @@
-<prism-demo-page-header title="Space" subtitle="A wrapper to provide consistent spacing between items.">
-</prism-demo-page-header>
+<prism-demo-page-header title="Space" subtitle="A wrapper to provide consistent spacing between items." />
 
-<prism-demo-section title="Basic Usage">
-  <prism-demo-card>
-    <prism-tab-group variant="pill">
-      <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-space />
+<prism-tab-group>
+  <prism-tab label="Examples">
+    <div class="space-y-8">
+      <prism-demo-section title="Horizontal Space" description="The default direction is horizontal.">
+        <div class="border border-surface-200 rounded-xl overflow-hidden bg-surface-0">
+          <prism-tab-group variant="pill">
+            <prism-tab label="Preview">
+              <div class="p-8 flex flex-col gap-4 bg-surface-50">
+                <prism-space gap="16px">
+                  <prism-button>Item 1</prism-button>
+                  <prism-button variant="secondary">Item 2</prism-button>
+                  <prism-button variant="outline">Item 3</prism-button>
+                </prism-space>
+              </div>
+            </prism-tab>
+            <prism-tab label="Code">
+              <prism-code-block language="html" [code]="snippets.horizontal"></prism-code-block>
+            </prism-tab>
+          </prism-tab-group>
         </div>
-      </prism-tab>
-      <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
-      </prism-tab>
-    </prism-tab-group>
-  </prism-demo-card>
-</prism-demo-section>
+      </prism-demo-section>
+
+      <prism-demo-section title="Vertical Space" description="Set direction to vertical for vertical spacing.">
+        <div class="border border-surface-200 rounded-xl overflow-hidden bg-surface-0">
+          <prism-tab-group variant="pill">
+            <prism-tab label="Preview">
+              <div class="p-8 flex flex-col gap-4 bg-surface-50">
+                <prism-space direction="vertical" gap="16px">
+                  <prism-button>Item 1</prism-button>
+                  <prism-button variant="secondary">Item 2</prism-button>
+                  <prism-button variant="outline">Item 3</prism-button>
+                </prism-space>
+              </div>
+            </prism-tab>
+            <prism-tab label="Code">
+              <prism-code-block language="html" [code]="snippets.vertical"></prism-code-block>
+            </prism-tab>
+          </prism-tab-group>
+        </div>
+      </prism-demo-section>
+    </div>
+  </prism-tab>
+
+  <prism-tab label="API">
+    <prism-demo-section title="Space API">
+      <prism-api-table [data]="apiData"></prism-api-table>
+    </prism-demo-section>
+  </prism-tab>
+</prism-tab-group>

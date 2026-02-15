@@ -14,6 +14,13 @@ import { PrismAvatarComponent, ThemeToggleComponent, PrismIconComponent } from '
 export class SidebarComponent {
   menu = signal([
     {
+      group: 'Getting Started',
+      items: [
+        { label: 'Installation', route: '/getting-started/installation', icon: 'download-line' },
+        { label: 'Accessibility', route: '/getting-started/accessibility', icon: 'accessibility-line' }
+      ]
+    },
+    {
       group: 'General',
       items: [
         { label: 'Button', route: '/components/button', icon: 'flashlight-line' },

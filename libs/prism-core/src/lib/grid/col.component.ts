@@ -6,13 +6,15 @@ import { PrismRowComponent } from './row.component';
   selector: 'prism-col',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div [class]="classes()" [style]="styles()">
-      <ng-content></ng-content>
-    </div>
-  `,
+  template: `<ng-content></ng-content>`,
   styleUrl: './grid.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class.prism-col]': 'true',
+    '[class]': 'classes()',
+    '[style.padding-left.px]': 'gutterValue() / 2',
+    '[style.padding-right.px]': 'gutterValue() / 2'
+  }
 })
 export class PrismColComponent {
   readonly span = input<number>();
@@ -29,33 +31,27 @@ export class PrismColComponent {
 
   private row = inject(PrismRowComponent, { optional: true });
 
-  readonly classes = computed(() => {
-    const classes: Record<string, boolean> = {
-      'prism-col': true,
-    };
+  readonly gutterValue = computed(() => {
+    if (!this.row) return 0;
+    const gutter = this.row.gutter();
+    return Array.isArray(gutter) ? gutter[0] : gutter;
+  });
 
-    if (this.span()) classes[`prism-col-${this.span()}`] = true;
-    if (this.offset()) classes[`prism-col-offset-${this.offset()}`] = true;
-    if (this.order()) classes[`prism-col-order-${this.order()}`] = true;
+  readonly classes = computed(() => {
+    const classList: string[] = [];
+    
+    if (this.span()) classList.push(`prism-col-${this.span()}`);
+    if (this.offset()) classList.push(`prism-col-offset-${this.offset()}`);
+    if (this.order()) classList.push(`prism-col-order-${this.order()}`);
 
     const breakpoints = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
     for (const bp of breakpoints) {
       const val = this[bp]();
       if (typeof val === 'number') {
-        classes[`prism-col-${bp}-${val}`] = true;
+        classList.push(`prism-col-${bp}-${val}`);
       }
     }
 
-    return classes;
-  });
-
-  readonly styles = computed(() => {
-    if (!this.row) return {};
-    const gutter = this.row.gutter();
-    const hGutter = Array.isArray(gutter) ? gutter[0] : gutter;
-    return {
-      'padding-left': `${hGutter / 2}px`,
-      'padding-right': `${hGutter / 2}px`,
-    };
+    return classList.join(' ');
   });
 }

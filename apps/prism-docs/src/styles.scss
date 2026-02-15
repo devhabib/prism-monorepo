@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @use 'sass:map';
-@use '../../../libs/prism-theme/src/lib/index' as *;
+@use 'prism-theme' as *;
 
 @tailwind base;
 @tailwind components;

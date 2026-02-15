@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input, output, model } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, model } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -31,7 +31,8 @@ export class PrismSliderComponent {
   
   value = model<number>(0);
   
-  onInput(event: any): void {
-    this.value.set(Number(event.target.value));
+  onInput(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.value.set(Number(target.value));
   }
 }

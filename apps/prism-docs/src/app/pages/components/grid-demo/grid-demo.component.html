@@ -1,21 +1,100 @@
-<prism-demo-page-header title="Grid" subtitle="Layout primitive based on CSS Grid.">
-</prism-demo-page-header>
+<prism-demo-page-header title="Grid" subtitle="A 24-column grid system for creating complex responsive layouts." />
 
-<prism-demo-section title="Basic Usage">
-  <prism-demo-card>
-    <prism-tab-group variant="pill">
-      <prism-tab label="Preview">
-        <div class="p-4 bg-slate-50 dark:bg-slate-900 border border-dashed border-slate-200 dark:border-slate-700 rounded-lg">
-          <prism-row [gutter]="16">
-            <prism-col [span]="8"><div class="p-4 bg-primary-100 dark:bg-primary-900/30 text-center rounded">col-8</div></prism-col>
-            <prism-col [span]="8"><div class="p-4 bg-primary-200 dark:bg-primary-800/30 text-center rounded">col-8</div></prism-col>
-            <prism-col [span]="8"><div class="p-4 bg-primary-100 dark:bg-primary-900/30 text-center rounded">col-8</div></prism-col>
-          </prism-row>
+<prism-tab-group>
+  <prism-tab label="Examples">
+    <div class="space-y-8">
+      <prism-demo-section title="Basic Grid" description="A simple grid with various spans.">
+        <div class="border border-surface-200 rounded-xl overflow-hidden bg-surface-0">
+          <prism-tab-group variant="pill">
+            <prism-tab label="Preview">
+              <div class="p-8 flex flex-col gap-4 bg-surface-50">
+                <prism-row>
+                  <prism-col [span]="24"><div class="grid-box">col-24</div></prism-col>
+                </prism-row>
+                <prism-row>
+                  <prism-col [span]="12"><div class="grid-box grid-box-light">col-12</div></prism-col>
+                  <prism-col [span]="12"><div class="grid-box">col-12</div></prism-col>
+                </prism-row>
+                <prism-row>
+                  <prism-col [span]="8"><div class="grid-box grid-box-light">col-8</div></prism-col>
+                  <prism-col [span]="8"><div class="grid-box">col-8</div></prism-col>
+                  <prism-col [span]="8"><div class="grid-box grid-box-light">col-8</div></prism-col>
+                </prism-row>
+              </div>
+            </prism-tab>
+            <prism-tab label="Code">
+              <prism-code-block language="html" [code]="snippets.basic"></prism-code-block>
+            </prism-tab>
+          </prism-tab-group>
         </div>
-      </prism-tab>
-      <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
-      </prism-tab>
-    </prism-tab-group>
-  </prism-demo-card>
-</prism-demo-section>
+      </prism-demo-section>
+
+      <prism-demo-section title="Column Spacing" description="Gutter spacing between columns.">
+        <div class="border border-surface-200 rounded-xl overflow-hidden bg-surface-0">
+          <prism-tab-group variant="pill">
+            <prism-tab label="Preview">
+              <div class="p-8 flex flex-col gap-4 bg-surface-50">
+                <prism-row [gutter]="16">
+                  <prism-col [span]="6"><div class="grid-box">col-6</div></prism-col>
+                  <prism-col [span]="6"><div class="grid-box">col-6</div></prism-col>
+                  <prism-col [span]="6"><div class="grid-box">col-6</div></prism-col>
+                  <prism-col [span]="6"><div class="grid-box">col-6</div></prism-col>
+                </prism-row>
+              </div>
+            </prism-tab>
+            <prism-tab label="Code">
+              <prism-code-block language="html" [code]="snippets.gutter"></prism-code-block>
+            </prism-tab>
+          </prism-tab-group>
+        </div>
+      </prism-demo-section>
+
+      <prism-demo-section title="Column Offset" description="Offset columns to create gaps.">
+        <div class="border border-surface-200 rounded-xl overflow-hidden bg-surface-0">
+          <prism-tab-group variant="pill">
+            <prism-tab label="Preview">
+              <div class="p-8 flex flex-col gap-4 bg-surface-50">
+                <prism-row>
+                  <prism-col [span]="8"><div class="grid-box">col-8</div></prism-col>
+                  <prism-col [span]="8" [offset]="8"><div class="grid-box">col-8 offset-8</div></prism-col>
+                </prism-row>
+              </div>
+            </prism-tab>
+            <prism-tab label="Code">
+              <prism-code-block language="html" [code]="snippets.offset"></prism-code-block>
+            </prism-tab>
+          </prism-tab-group>
+        </div>
+      </prism-demo-section>
+
+      <prism-demo-section title="Responsive" description="Responsive layout based on screen width.">
+        <div class="border border-surface-200 rounded-xl overflow-hidden bg-surface-0">
+          <prism-tab-group variant="pill">
+            <prism-tab label="Preview">
+              <div class="p-8 flex flex-col gap-4 bg-surface-50">
+                <prism-row [gutter]="16">
+                  <prism-col [xs]="24" [sm]="12" [md]="8" [lg]="6"><div class="grid-box">Col</div></prism-col>
+                  <prism-col [xs]="24" [sm]="12" [md]="8" [lg]="6"><div class="grid-box">Col</div></prism-col>
+                  <prism-col [xs]="24" [sm]="12" [md]="8" [lg]="6"><div class="grid-box">Col</div></prism-col>
+                  <prism-col [xs]="24" [sm]="12" [md]="8" [lg]="6"><div class="grid-box">Col</div></prism-col>
+                </prism-row>
+              </div>
+            </prism-tab>
+            <prism-tab label="Code">
+              <prism-code-block language="html" [code]="snippets.responsive"></prism-code-block>
+            </prism-tab>
+          </prism-tab-group>
+        </div>
+      </prism-demo-section>
+    </div>
+  </prism-tab>
+
+  <prism-tab label="API">
+    <prism-demo-section title="PrismRow API">
+      <prism-api-table [data]="rowApiData"></prism-api-table>
+    </prism-demo-section>
+    <prism-demo-section title="PrismCol API">
+      <prism-api-table [data]="colApiData"></prism-api-table>
+    </prism-demo-section>
+  </prism-tab>
+</prism-tab-group>

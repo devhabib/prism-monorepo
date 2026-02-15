@@ -32,7 +32,7 @@ import { PrismCardComponent, PrismCodeBlockComponent } from '@devynelogic/prism-
   styles: [`
     :host {
       display: block;
-      max-width: 800px;
+      // max-width: 800px;
     }
     
     .text-xl { font-size: 1.25rem; line-height: 1.75rem; }

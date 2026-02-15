@@ -71,6 +71,7 @@ export * from './lib/breadcrumb/breadcrumb-item.component';
 export * from './lib/dropdown/dropdown.component';
 export * from './lib/menu/menu.component';
 export * from './lib/steps/steps.component';
+export * from './lib/steps/step.component';
 
 // Data Entry
 export * from './lib/autocomplete/autocomplete.component';

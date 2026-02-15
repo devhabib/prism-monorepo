@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input, forwardRef, signal, model } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, forwardRef, model } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrismIconComponent } from '../icon/icon.component';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
@@ -51,8 +51,12 @@ export class PrismInputNumberComponent implements ControlValueAccessor {
   value = model<number>(0);
   
   // ControlValueAccessor methods
-  private onChange = (value: number) => {};
-  onTouched = () => {};
+  private onChange: (_value: number) => void = () => {
+    // Placeholder defined by ControlValueAccessor
+  };
+  onTouched: () => void = () => {
+    // Placeholder defined by ControlValueAccessor
+  };
 
   writeValue(value: number): void {
     this.value.set(value);
@@ -79,8 +83,11 @@ export class PrismInputNumberComponent implements ControlValueAccessor {
     }
 
     let next = val;
-    if (this.min() !== undefined && val < this.min()!) next = this.min()!;
-    if (this.max() !== undefined && val > this.max()!) next = this.max()!;
+    const minVal = this.min();
+    const maxVal = this.max();
+
+    if (minVal !== undefined && val < minVal) next = minVal;
+    if (maxVal !== undefined && val > maxVal) next = maxVal;
     
     this.value.set(next);
     this.onChange(next);
@@ -90,7 +97,8 @@ export class PrismInputNumberComponent implements ControlValueAccessor {
     if (this.disabled()) return;
     const val = this.value();
     const next = val + this.step();
-    if (this.max() === undefined || next <= this.max()!) {
+    const maxVal = this.max();
+    if (maxVal === undefined || next <= maxVal) {
       this.value.set(next);
     }
   }
@@ -99,7 +107,8 @@ export class PrismInputNumberComponent implements ControlValueAccessor {
     if (this.disabled()) return;
     const val = this.value();
     const next = val - this.step();
-    if (this.min() === undefined || next >= this.min()!) {
+    const minVal = this.min();
+    if (minVal === undefined || next >= minVal) {
       this.value.set(next);
     }
   }
@@ -107,8 +116,10 @@ export class PrismInputNumberComponent implements ControlValueAccessor {
   onModelChange(val: number): void {
     if (this.disabled()) return;
     let next = val;
-    if (this.min() !== undefined && val < this.min()!) next = this.min()!;
-    if (this.max() !== undefined && val > this.max()!) next = this.max()!;
+    const minVal = this.min();
+    const maxVal = this.max();
+    if (minVal !== undefined && val < minVal) next = minVal;
+    if (maxVal !== undefined && val > maxVal) next = maxVal;
     this.value.set(next);
   }
 }

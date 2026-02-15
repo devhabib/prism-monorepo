@@ -5,9 +5,11 @@ import {
   PrismCodeBlockComponent, 
   PrismDemoPageHeaderComponent,
   PrismDemoSectionComponent,
-  PrismDemoCardComponent,
   PrismTabGroupComponent,
-  PrismTabComponent
+  PrismTabComponent,
+  PrismButtonComponent,
+  ApiTableComponent,
+  ApiDoc
 } from '@devynelogic/prism-core';
 
 @Component({
@@ -19,15 +21,29 @@ import {
     PrismCodeBlockComponent,
     PrismDemoPageHeaderComponent,
     PrismDemoSectionComponent,
-    PrismDemoCardComponent,
     PrismTabGroupComponent,
-    PrismTabComponent
+    PrismTabComponent,
+    PrismButtonComponent,
+    ApiTableComponent
   ],
   templateUrl: './space-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpaceDemoComponent {
   readonly snippets = {
-    usage: `<prism-space></prism-space>`
+    horizontal: `<prism-space gap="16px">
+  <prism-button>Item 1</prism-button>
+  <prism-button>Item 2</prism-button>
+</prism-space>`,
+    vertical: `<prism-space direction="vertical" gap="24px">
+  <prism-button>Item 1</prism-button>
+  <prism-button>Item 2</prism-button>
+</prism-space>`
   };
+
+  readonly apiData: ApiDoc[] = [
+    { name: 'direction', type: `'horizontal' | 'vertical'`, default: `'horizontal'`, description: 'The spacing direction.' },
+    { name: 'gap', type: 'string | number', default: `'8px'`, description: 'The gap size.' },
+    { name: 'align', type: `'start' | 'end' | 'center' | 'baseline'`, default: '-', description: 'Alignment of items.' },
+  ];
 }

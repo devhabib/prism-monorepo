@@ -1,17 +1,59 @@
-<prism-demo-page-header title="Steps" subtitle="A navigation component that guides users through a multi-step process.">
-</prism-demo-page-header>
+<prism-demo-page-header title="Steps" subtitle="A navigation bar that guides users through the steps of a task." />
 
-<prism-demo-section title="Basic Usage">
-  <prism-demo-card>
-    <prism-tab-group variant="pill">
-      <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-steps />
+<prism-tab-group>
+  <prism-tab label="Examples">
+    <div class="space-y-8">
+      <prism-demo-section title="Basic Usage" description="The simplest use of steps.">
+        <div class="border border-surface-200 rounded-xl overflow-hidden bg-surface-0">
+          <prism-tab-group variant="pill">
+            <prism-tab label="Preview">
+              <div class="p-8 flex flex-col gap-8 bg-surface-50">
+                <prism-steps [current]="current()">
+                  <prism-step title="Step 1" description="This is a description."></prism-step>
+                  <prism-step title="Step 2" description="This is a description."></prism-step>
+                  <prism-step title="Step 3" description="This is a description."></prism-step>
+                </prism-steps>
+                
+                <div class="flex gap-2">
+                  <prism-button (click)="prev()" [disabled]="current() === 0">Previous</prism-button>
+                  <prism-button (click)="next()" [disabled]="current() === 2">Next</prism-button>
+                </div>
+              </div>
+            </prism-tab>
+            <prism-tab label="Code">
+              <prism-code-block language="html" [code]="snippets.basic"></prism-code-block>
+            </prism-tab>
+          </prism-tab-group>
         </div>
-      </prism-tab>
-      <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
-      </prism-tab>
-    </prism-tab-group>
-  </prism-demo-card>
-</prism-demo-section>
+      </prism-demo-section>
+
+      <prism-demo-section title="Vertical" description="Vertical steps are more suitable for thin containers.">
+        <div class="border border-surface-200 rounded-xl overflow-hidden bg-surface-0">
+          <prism-tab-group variant="pill">
+            <prism-tab label="Preview">
+              <div class="p-8 flex flex-col gap-4 bg-surface-50">
+                <prism-steps direction="vertical" [current]="1">
+                  <prism-step title="Finished" description="This is a description."></prism-step>
+                  <prism-step title="In Progress" description="This is a description."></prism-step>
+                  <prism-step title="Waiting" description="This is a description."></prism-step>
+                </prism-steps>
+              </div>
+            </prism-tab>
+            <prism-tab label="Code">
+              <prism-code-block language="html" [code]="snippets.vertical"></prism-code-block>
+            </prism-tab>
+          </prism-tab-group>
+        </div>
+      </prism-demo-section>
+    </div>
+  </prism-tab>
+
+  <prism-tab label="API">
+    <prism-demo-section title="PrismSteps API">
+      <prism-api-table [data]="apiData"></prism-api-table>
+    </prism-demo-section>
+    <prism-demo-section title="PrismStep API">
+      <prism-api-table [data]="stepApiData"></prism-api-table>
+    </prism-demo-section>
+  </prism-tab>
+</prism-tab-group>

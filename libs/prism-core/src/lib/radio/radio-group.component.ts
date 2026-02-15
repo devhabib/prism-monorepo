@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, input, forwardRef, signal, model } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor, FormsModule } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'prism-radio-group',
@@ -25,21 +25,25 @@ export class PrismRadioGroupComponent implements ControlValueAccessor {
   direction = input<'horizontal' | 'vertical'>('horizontal');
   name = input<string>(`prism-radio-group-${Math.random().toString(36).substring(2, 9)}`);
 
-  value = model<any>(null);
+  value = model<unknown>(null);
   disabled = signal<boolean>(false);
 
-  onChange: any = () => {};
-  onTouched: any = () => {};
+  private onChange: (_value: unknown) => void = () => {
+    // Placeholder for ControlValueAccessor
+  };
+  onTouched: () => void = () => {
+    // Placeholder for ControlValueAccessor
+  };
 
-  writeValue(value: any): void {
+  writeValue(value: unknown): void {
     this.value.set(value);
   }
 
-  registerOnChange(fn: any): void {
+  registerOnChange(fn: (_value: unknown) => void): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
@@ -47,7 +51,7 @@ export class PrismRadioGroupComponent implements ControlValueAccessor {
     this.disabled.set(isDisabled);
   }
 
-  selectValue(value: any): void {
+  selectValue(value: unknown): void {
     if (this.disabled()) return;
     this.value.set(value);
     this.onChange(value);

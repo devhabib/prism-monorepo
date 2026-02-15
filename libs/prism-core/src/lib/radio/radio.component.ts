@@ -32,7 +32,7 @@ import { PrismRadioGroupComponent } from './radio-group.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrismRadioComponent {
-  value = input<any>();
+  value = input<unknown>();
   disabled = input<boolean>(false);
 
   group = inject(PrismRadioGroupComponent, { optional: true });

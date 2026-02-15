@@ -37,7 +37,7 @@ export type PrismAlertType = 'success' | 'info' | 'warning' | 'error';
         </div>
 
         @if (closeable()) {
-          <button class="alert-close" (click)="close($event)">
+          <button class="alert-close" (click)="handleClose($event)">
             <prism-icon name="close-line" size="1.25rem"></prism-icon>
           </button>
         }
@@ -54,7 +54,7 @@ export class PrismAlertComponent {
   showIcon = input<boolean>(false);
   closeable = input<boolean>(false);
   
-  onClose = output<void>();
+  closeOutput = output();
 
   closed = signal(false);
 
@@ -68,9 +68,9 @@ export class PrismAlertComponent {
     }
   }
 
-  close(event: MouseEvent): void {
+  handleClose(event: MouseEvent): void {
     event.preventDefault();
     this.closed.set(true);
-    this.onClose.emit();
+    this.closeOutput.emit();
   }
 }
