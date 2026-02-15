@@ -25,13 +25,39 @@
           <prism-tab-group variant="pill">
             <prism-tab label="Preview">
               <div class="p-8 flex flex-col gap-4 bg-surface-50">
-                <prism-divider>Text</prism-divider>
-                <prism-divider orientation="left">Left Text</prism-divider>
-                <prism-divider orientation="right">Right Text</prism-divider>
+                <prism-divider content="Text"></prism-divider>
+                <prism-divider orientation="left" content="Left Text"></prism-divider>
+                <prism-divider orientation="right" content="Right Text"></prism-divider>
               </div>
             </prism-tab>
             <prism-tab label="Code">
               <prism-code-block language="html" [code]="snippets.text"></prism-code-block>
+            </prism-tab>
+          </prism-tab-group>
+        </div>
+      </prism-demo-section>
+
+      <prism-demo-section title="With Template" description="Dividers can use TemplateRef for complex content like icons.">
+        <div class="border border-surface-200 rounded-xl overflow-hidden bg-surface-0">
+          <prism-tab-group variant="pill">
+            <prism-tab label="Preview">
+              <div class="p-8 flex flex-col gap-4 bg-surface-50">
+                <ng-template #iconContent>
+                    <prism-icon name="star-fill" class="text-warning-500"></prism-icon>
+                </ng-template>
+                <prism-divider [content]="iconContent"></prism-divider>
+                
+                <ng-template #customContent>
+                    <div class="flex items-center gap-2 text-primary-600 font-medium">
+                        <prism-icon name="flashlight-fill"></prism-icon>
+                        <span>Power Up</span>
+                    </div>
+                </ng-template>
+                <prism-divider [content]="customContent" [dashed]="true"></prism-divider>
+              </div>
+            </prism-tab>
+            <prism-tab label="Code">
+              <prism-code-block language="html" [code]="snippets.template"></prism-code-block>
             </prism-tab>
           </prism-tab-group>
         </div>

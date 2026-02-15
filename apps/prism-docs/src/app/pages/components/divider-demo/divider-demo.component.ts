@@ -8,6 +8,7 @@ import {
   PrismTabGroupComponent,
   PrismTabComponent,
   ApiTableComponent,
+  PrismIconComponent,
   ApiDoc
 } from '@devynelogic/prism-core';
 
@@ -22,7 +23,8 @@ import {
     PrismDemoSectionComponent,
     PrismTabGroupComponent,
     PrismTabComponent,
-    ApiTableComponent
+    ApiTableComponent,
+    PrismIconComponent
   ],
   templateUrl: './divider-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,9 +32,23 @@ import {
 export class DividerDemoComponent {
   readonly snippets = {
     basic: `<prism-divider></prism-divider>`,
-    text: `<prism-divider>Text</prism-divider>
-<prism-divider orientation="left">Left Text</prism-divider>
-<prism-divider orientation="right">Right Text</prism-divider>`,
+    text: `<prism-divider content="Text"></prism-divider>
+<prism-divider orientation="left" content="Left Text"></prism-divider>
+<prism-divider orientation="right" content="Right Text"></prism-divider>`,
+    template: `<!-- Template Ref -->
+<ng-template #iconContent>
+    <prism-icon name="star-fill" class="text-warning-500"></prism-icon>
+</ng-template>
+<prism-divider [content]="iconContent"></prism-divider>
+
+<!-- Complex Template -->
+<ng-template #customContent>
+    <div class="flex items-center gap-2 text-primary-600 font-medium">
+        <prism-icon name="flashlight-fill"></prism-icon>
+        <span>Power Up</span>
+    </div>
+</ng-template>
+<prism-divider [content]="customContent" dashed="true"></prism-divider>`,
     vertical: `<span>Link 1</span>
 <prism-divider type="vertical"></prism-divider>
 <span>Link 2</span>`
@@ -42,5 +58,6 @@ export class DividerDemoComponent {
     { name: 'type', type: `'horizontal' | 'vertical'`, default: `'horizontal'`, description: 'The orientation of the divider.' },
     { name: 'orientation', type: `'left' | 'right' | 'center'`, default: `'center'`, description: 'The position of the text.' },
     { name: 'dashed', type: `boolean`, default: `false`, description: 'Whether the divider is dashed.' },
+    { name: 'content', type: `string | TemplateRef<unknown>`, default: `null`, description: 'Content to display within the divider line.' },
   ];
 }
