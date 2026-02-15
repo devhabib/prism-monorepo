@@ -1,18 +1,28 @@
-@use '../../../../../libs/prism-theme/src/lib/prism-theme' as *;
+@use 'sass:map';
+@use '../../../../prism-theme/src/lib/core/variables' as *;
 
 .prism-space {
   display: inline-flex;
 
-  &.space-horizontal {
+  &.prism-space-horizontal {
     flex-direction: row;
   }
 
-  &.space-vertical {
+  &.prism-space-vertical {
     flex-direction: column;
   }
 
-  // Handle nested items if they aren't using the gap property directly
-  ::ng-deep > * {
+  &.prism-space-wrap {
+    flex-wrap: wrap;
+  }
+
+  // Handle items
+  .prism-space-item {
     flex-shrink: 0;
+  }
+
+  .prism-space-split {
+    display: flex;
+    align-items: center;
   }
 }

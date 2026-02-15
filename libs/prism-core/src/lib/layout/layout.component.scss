@@ -1,0 +1,70 @@
+@use 'sass:map';
+@use '../../../../prism-theme/src/lib/core/variables' as *;
+
+.prism-layout {
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  min-height: 0;
+  background: map.get($surface, 50);
+  box-sizing: border-box;
+
+  &.prism-layout-has-sider {
+    flex-direction: row;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.prism-header {
+  flex: 0 0 auto;
+  height: 64px;
+  padding: 0 50px;
+  color: map.get($surface, 900);
+  line-height: 64px;
+  background: map.get($surface, 0);
+  border-bottom: 1px solid map.get($surface, 100);
+}
+
+.prism-footer {
+  flex: 0 0 auto;
+  padding: 24px 50px;
+  color: map.get($surface, 700);
+  font-size: 14px;
+  background: map.get($surface, 50);
+}
+
+.prism-content {
+  flex: auto;
+  min-height: 0;
+}
+
+.prism-sider {
+  position: relative;
+  min-width: 0;
+  background: #001529; // Classic Ant Design sider color or use a dark surface token
+  transition: all 0.2s;
+
+
+  .prism-sider-children {
+    height: 100%;
+    margin-top: -0.1px;
+    padding-top: 0.1px;
+  }
+
+  .prism-sider-trigger {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    width: 100%;
+    height: 48px;
+    color: #fff;
+    line-height: 48px;
+    text-align: center;
+    background: #002140;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+}

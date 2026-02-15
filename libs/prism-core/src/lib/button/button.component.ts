@@ -18,7 +18,7 @@ export class PrismButtonComponent {
   disabled = input<boolean>(false);
   variant = input<'primary' | 'secondary' | 'outline' | 'text' | 'danger'>('primary');
   size = input<'sm' | 'md' | 'lg'>('md');
-
+ 
   buttonClasses = computed(() => {
     return {
       'button': true,

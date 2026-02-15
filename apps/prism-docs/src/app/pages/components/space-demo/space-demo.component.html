@@ -1,51 +1,124 @@
-<prism-demo-page-header title="Space" subtitle="A wrapper to provide consistent spacing between items." />
+<prism-demo-page-header title="Space" subtitle="Set spacing between inline components."></prism-demo-page-header>
 
-<prism-tab-group>
-  <prism-tab label="Examples">
-    <div class="space-y-8">
-      <prism-demo-section title="Horizontal Space" description="The default direction is horizontal.">
-        <div class="border border-surface-200 rounded-xl overflow-hidden bg-surface-0">
-          <prism-tab-group variant="pill">
-            <prism-tab label="Preview">
-              <div class="p-8 flex flex-col gap-4 bg-surface-50">
-                <prism-space gap="16px">
-                  <prism-button>Item 1</prism-button>
-                  <prism-button variant="secondary">Item 2</prism-button>
-                  <prism-button variant="outline">Item 3</prism-button>
+<div class="mt-8">
+  <prism-tab-group>
+    <prism-tab label="Examples">
+      <div class="space-y-12 pt-6">
+        <prism-demo-section title="Basic Usage" description="Default horizontal spacing.">
+          <prism-demo-card>
+            <div preview>
+              <div class="p-4">
+                <prism-space size="middle">
+                  <prism-button variant="primary" label="Button 1"/>
+                  <prism-button variant="secondary" label="Button 2"/>
+                  <prism-button variant="primary" label="Button 3"/>
                 </prism-space>
               </div>
-            </prism-tab>
-            <prism-tab label="Code">
-              <prism-code-block language="html" [code]="snippets.horizontal"></prism-code-block>
-            </prism-tab>
-          </prism-tab-group>
-        </div>
-      </prism-demo-section>
+            </div>
+            <prism-code-block code [code]="snippets.horizontal" language="html"></prism-code-block>
+          </prism-demo-card>
+        </prism-demo-section>
 
-      <prism-demo-section title="Vertical Space" description="Set direction to vertical for vertical spacing.">
-        <div class="border border-surface-200 rounded-xl overflow-hidden bg-surface-0">
-          <prism-tab-group variant="pill">
-            <prism-tab label="Preview">
-              <div class="p-8 flex flex-col gap-4 bg-surface-50">
-                <prism-space direction="vertical" gap="16px">
-                  <prism-button>Item 1</prism-button>
-                  <prism-button variant="secondary">Item 2</prism-button>
-                  <prism-button variant="outline">Item 3</prism-button>
+        <prism-demo-section title="Vertical" description="Vertical spacing between elements.">
+          <prism-demo-card>
+            <div preview>
+              <div class="p-4">
+                <prism-space direction="vertical" size="large">
+                  <prism-button variant="primary" label="Button 1"/>
+                  <prism-button variant="secondary" label="Button 2"/>
                 </prism-space>
               </div>
-            </prism-tab>
-            <prism-tab label="Code">
-              <prism-code-block language="html" [code]="snippets.vertical"></prism-code-block>
-            </prism-tab>
-          </prism-tab-group>
-        </div>
-      </prism-demo-section>
-    </div>
-  </prism-tab>
+            </div>
+            <prism-code-block code [code]="snippets.vertical" language="html"></prism-code-block>
+          </prism-demo-card>
+        </prism-demo-section>
 
-  <prism-tab label="API">
-    <prism-demo-section title="Space API">
-      <prism-api-table [data]="apiData"></prism-api-table>
-    </prism-demo-section>
-  </prism-tab>
-</prism-tab-group>
+        <prism-demo-section title="Sizes" description="Toggle between small, middle, and large sizes.">
+          <prism-demo-card>
+            <div preview>
+              <div class="p-4 space-y-4">
+                <prism-radio-group [ngModel]="currentSize()" (ngModelChange)="currentSize.set($event)">
+                  <prism-radio value="small">Small</prism-radio>
+                  <prism-radio value="middle">Middle</prism-radio>
+                  <prism-radio value="large">Large</prism-radio>
+                </prism-radio-group>
+
+                <div class="pt-4">
+                  <prism-space [size]="currentSize()">
+                    <prism-button variant="primary" label="Button"/>
+                    <prism-button variant="secondary" label="Button"/>
+                    <prism-button variant="primary" label="Button"/>
+                  </prism-space>
+                </div>
+              </div>
+            </div>
+            <prism-code-block code [code]="snippets.sizes" language="html"></prism-code-block>
+          </prism-demo-card>
+        </prism-demo-section>
+
+        <prism-demo-section title="Alignment" description="Set vertical alignment of items.">
+          <prism-demo-card>
+            <div preview>
+              <div class="p-4">
+                <prism-space align="center" class="bg-slate-50 p-4 rounded">
+                  Center Align:
+                  <prism-button variant="primary" label="Button"/>
+                  <div class="h-16 w-16 bg-primary-500 rounded flex items-center justify-center text-white">Block</div>
+                </prism-space>
+              </div>
+            </div>
+            <prism-code-block code [code]="snippets.align" language="html"></prism-code-block>
+          </prism-demo-card>
+        </prism-demo-section>
+
+        <prism-demo-section title="Wrap" description="Automatic wrapping for multiple lines.">
+          <prism-demo-card>
+            <div preview>
+              <div class="p-4">
+                <prism-space [wrap]="true" size="middle">
+                  @for (i of [1,2,3,4,5,6,7,8,9,10]; track i) {
+                    <prism-button variant="primary" label="Button {{i}}"/>
+                  }
+                </prism-space>
+              </div>
+            </div>
+            <prism-code-block code [code]="snippets.wrap" language="html"></prism-code-block>
+          </prism-demo-card>
+        </prism-demo-section>
+
+        <prism-demo-section title="Split" description="Insert dividers between items using the split template.">
+          <prism-demo-card>
+            <div preview>
+              <div class="p-4">
+                <ng-template #divider>
+                  <prism-divider type="vertical"></prism-divider>
+                </ng-template>
+
+                <prism-space [split]="divider">
+                  <ng-template prismSpaceItem>
+                    <prism-button variant="text" label="Link 1"/>
+                  </ng-template>
+                  <ng-template prismSpaceItem>
+                    <prism-button variant="text" label="Link 2"/>
+                  </ng-template>
+                  <ng-template prismSpaceItem>
+                    <prism-button variant="text" label="Link 3"/>
+                  </ng-template>
+                </prism-space>
+              </div>
+            </div>
+            <prism-code-block code [code]="snippets.split" language="html"></prism-code-block>
+          </prism-demo-card>
+        </prism-demo-section>
+      </div>
+    </prism-tab>
+
+    <prism-tab label="API">
+      <div class="pt-6">
+        <prism-demo-section title="prism-space">
+          <prism-api-table [data]="apiData"></prism-api-table>
+        </prism-demo-section>
+      </div>
+    </prism-tab>
+  </prism-tab-group>
+</div>

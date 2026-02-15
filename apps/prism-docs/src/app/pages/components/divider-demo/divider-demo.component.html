@@ -20,9 +20,9 @@
         <prism-demo-card>
           <div preview>
             <div class="p-8 flex flex-col gap-4 bg-surface-50">
-              <prism-divider content="Text"></prism-divider>
-              <prism-divider orientation="left" content="Left Text"></prism-divider>
-              <prism-divider orientation="right" content="Right Text"></prism-divider>
+              <prism-divider text="Text"></prism-divider>
+              <prism-divider orientation="left" text="Left Text"></prism-divider>
+              <prism-divider orientation="right" text="Right Text"></prism-divider>
             </div>
           </div>
           <prism-code-block code [code]="snippets.text" language="html"></prism-code-block>
@@ -36,7 +36,7 @@
               <ng-template #iconContent>
                   <prism-icon name="star-fill" class="text-primary-800"></prism-icon>
               </ng-template>
-              <prism-divider [content]="iconContent"></prism-divider>
+              <prism-divider [text]="iconContent"></prism-divider>
               
               <ng-template #customContent>
                   <div class="flex items-center gap-2 text-primary-600 font-medium">
@@ -44,7 +44,7 @@
                       <span>Power Up</span>
                   </div>
               </ng-template>
-              <prism-divider [content]="customContent" [dashed]="true"></prism-divider>
+              <prism-divider [text]="customContent" [dashed]="true"></prism-divider>
             </div>
           </div>
           <prism-code-block code [code]="snippets.template" language="html"></prism-code-block>

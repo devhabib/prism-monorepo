@@ -1,3 +1,5 @@
+@use 'sass:map';
+@use '../../../../prism-theme/src/lib/core/variables' as *;
 
 .prism-divider {
   display: block;
@@ -5,7 +7,7 @@
   width: 100%;
   min-width: 100%;
   margin: 24px 0;
-  border-top: 1px solid var(--p-divider-color, var(--p-border-color, #f0f0f0));
+  border-top: 1px solid map.get($surface, 100);
 
   &.prism-divider-vertical {
     position: relative;
@@ -16,7 +18,7 @@
     margin: 0 8px;
     vertical-align: middle;
     border-top: 0;
-    border-left: 1px solid var(--p-divider-color, var(--p-border-color, #f0f0f0));
+    border-left: 1px solid map.get($surface, 100);
   }
 
   &.prism-divider-dashed {
@@ -28,7 +30,7 @@
   &.prism-divider-with-text {
     display: flex;
     margin: 16px 0;
-    color: var(--p-text-color, #000);
+    color: map.get($surface, 900);
     font-weight: 500;
     font-size: 16px;
     white-space: nowrap;
@@ -41,7 +43,7 @@
       position: relative;
       top: 50%;
       width: 50%;
-      border-top: 1px solid var(--p-divider-color, var(--p-border-color, #f0f0f0));
+      border-top: 1px solid map.get($surface, 100);
       transform: translateY(50%);
     }
 

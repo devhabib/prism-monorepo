@@ -1,17 +1,65 @@
 <prism-demo-page-header title="Layout" subtitle="Structural layout components for application shells.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
-  <prism-demo-card>
-    <prism-tab-group variant="pill">
-      <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-layout />
-        </div>
-      </prism-tab>
-      <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
-      </prism-tab>
-    </prism-tab-group>
-  </prism-demo-card>
-</prism-demo-section>
+<div class="mt-8">
+  <prism-tab-group>
+    <prism-tab label="Examples">
+      <div class="space-y-12 pt-6">
+        <prism-demo-section title="Basic Structure">
+          <p class="mb-4 text-slate-500">Typical layout with Header, Sider, Content and Footer.</p>
+          <prism-demo-card>
+            <div preview>
+              <prism-layout class="demo-layout">
+                <prism-header>Header</prism-header>
+                <prism-layout>
+                  <prism-sider [collapsible]="true">Sider</prism-sider>
+                  <prism-content>Content</prism-content>
+                </prism-layout>
+                <prism-footer>Footer ©2024 Prism Design</prism-footer>
+              </prism-layout>
+            </div>
+            <prism-code-block code [code]="snippets.classic" language="html"></prism-code-block>
+          </prism-demo-card>
+        </prism-demo-section>
+
+        <prism-demo-section title="Header-Content-Footer">
+          <p class="mb-4 text-slate-500">Typical layout with Header, Content and Footer.</p>
+          <prism-demo-card>
+            <div preview>
+              <prism-layout class="demo-layout">
+                <prism-header>Header</prism-header>
+                <prism-content>Content</prism-content>
+                <prism-footer>Footer</prism-footer>
+              </prism-layout>
+            </div>
+            <prism-code-block code [code]="snippets.hcf" language="html"></prism-code-block>
+          </prism-demo-card>
+        </prism-demo-section>
+      </div>
+    </prism-tab>
+
+    <prism-tab label="API">
+      <div class="space-y-12 pt-6">
+        <prism-demo-section title="prism-layout">
+          <prism-api-table [data]="layoutApi"></prism-api-table>
+        </prism-demo-section>
+
+        <prism-demo-section title="prism-header">
+          <prism-api-table [data]="headerApi"></prism-api-table>
+        </prism-demo-section>
+
+        <prism-demo-section title="prism-sider">
+          <prism-api-table [data]="siderApi"></prism-api-table>
+        </prism-demo-section>
+
+        <prism-demo-section title="prism-content">
+          <prism-api-table [data]="contentApi"></prism-api-table>
+        </prism-demo-section>
+
+        <prism-demo-section title="prism-footer">
+          <prism-api-table [data]="footerApi"></prism-api-table>
+        </prism-demo-section>
+      </div>
+    </prism-tab>
+  </prism-tab-group>
+</div>

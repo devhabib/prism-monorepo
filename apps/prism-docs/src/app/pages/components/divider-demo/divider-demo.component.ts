@@ -34,14 +34,14 @@ import {
 export class DividerDemoComponent {
   readonly snippets = {
     basic: `<prism-divider></prism-divider>`,
-    text: `<prism-divider content="Text"></prism-divider>
-<prism-divider orientation="left" content="Left Text"></prism-divider>
-<prism-divider orientation="right" content="Right Text"></prism-divider>`,
+    text: `<prism-divider text="Text"></prism-divider>
+<prism-divider orientation="left" text="Left Text"></prism-divider>
+<prism-divider orientation="right" text="Right Text"></prism-divider>`,
     template: `<!-- Template Ref -->
 <ng-template #iconContent>
     <prism-icon name="star-fill" class="text-warning-500"></prism-icon>
 </ng-template>
-<prism-divider [content]="iconContent"></prism-divider>
+<prism-divider [text]="iconContent"></prism-divider>
 
 <!-- Complex Template -->
 <ng-template #customContent>
@@ -50,7 +50,7 @@ export class DividerDemoComponent {
         <span>Power Up</span>
     </div>
 </ng-template>
-<prism-divider [content]="customContent" [dashed]="true"></prism-divider>`,
+<prism-divider [text]="customContent" [dashed]="true"></prism-divider>`,
     vertical: `<span>Link 1</span>
 <prism-divider type="vertical"></prism-divider>
 <span>Link 2</span>`
@@ -60,6 +60,7 @@ export class DividerDemoComponent {
     { name: 'type', type: `'horizontal' | 'vertical'`, default: `'horizontal'`, description: 'The orientation of the divider.' },
     { name: 'orientation', type: `'left' | 'right' | 'center'`, default: `'center'`, description: 'The position of the text.' },
     { name: 'dashed', type: `boolean`, default: `false`, description: 'Whether the divider is dashed.' },
-    { name: 'content', type: `string | TemplateRef<unknown>`, default: `null`, description: 'Content to display within the divider line.' },
+    { name: 'text', type: `string | TemplateRef<unknown>`, default: `null`, description: 'Text or content to display within the divider line.' },
+    { name: 'dashed', type: `boolean`, default: `false`, description: 'Whether the divider is dashed.' },
   ];
 }
