@@ -12,8 +12,7 @@ import {
   PrismTabComponent,
   ApiTableComponent,
   ApiDoc,
-  PrismDemoSectionComponent,
-  PrismDemoCardComponent
+  PrismDemoSectionComponent
 } from '@devynelogic/prism-core';
 import { tap } from 'rxjs/operators';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -32,8 +31,7 @@ import * as PrismIcons from '@devynelogic/prism-icons';
     PrismTabGroupComponent,
     PrismTabComponent,
     ApiTableComponent,
-    PrismDemoSectionComponent,
-    PrismDemoCardComponent
+    PrismDemoSectionComponent
   ],
   templateUrl: './icons-demo.component.html',
   styleUrls: [],

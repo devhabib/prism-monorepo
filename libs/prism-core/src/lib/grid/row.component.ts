@@ -1,13 +1,14 @@
-import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, computed, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'prism-row',
+  selector: 'prism-row, [prism-row]',
   standalone: true,
   imports: [CommonModule],
   template: `<ng-content></ng-content>`,
   styleUrl: './grid.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   host: {
     '[class.prism-row]': 'true',
     '[class.prism-row-justify-start]': "justify() === 'start'",
@@ -15,6 +16,7 @@ import { CommonModule } from '@angular/common';
     '[class.prism-row-justify-center]': "justify() === 'center'",
     '[class.prism-row-justify-space-around]': "justify() === 'space-around'",
     '[class.prism-row-justify-space-between]': "justify() === 'space-between'",
+    '[class.prism-row-justify-space-evenly]': "justify() === 'space-evenly'",
     '[class.prism-row-align-top]': "align() === 'top'",
     '[class.prism-row-align-middle]': "align() === 'middle'",
     '[class.prism-row-align-bottom]': "align() === 'bottom'",
@@ -25,7 +27,7 @@ import { CommonModule } from '@angular/common';
 })
 export class PrismRowComponent {
   readonly gutter = input<number | [number, number]>(0);
-  readonly justify = input<'start' | 'end' | 'center' | 'space-around' | 'space-between'>('start');
+  readonly justify = input<'start' | 'end' | 'center' | 'space-around' | 'space-between' | 'space-evenly'>('start');
   readonly align = input<'top' | 'middle' | 'bottom'>('top');
 
   readonly gutterValue = computed(() => {

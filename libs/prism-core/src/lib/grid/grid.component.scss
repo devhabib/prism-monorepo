@@ -8,6 +8,18 @@
   &::after {
     display: flex;
   }
+
+  // Alignment
+  &-justify-start { justify-content: flex-start; }
+  &-justify-end { justify-content: flex-end; }
+  &-justify-center { justify-content: center; }
+  &-justify-space-around { justify-content: space-around; }
+  &-justify-space-between { justify-content: space-between; }
+  &-justify-space-evenly { justify-content: space-evenly; }
+
+  &-align-top { align-items: flex-start; }
+  &-align-middle { align-items: center; }
+  &-align-bottom { align-items: flex-end; }
 }
 
 .prism-col {
@@ -18,14 +30,17 @@
 
 // Grid generator for 24 columns
 @for $i from 1 through 24 {
-  .prism-col-#{$i} {
+  .prism-col-#{$i},
+  .prism-col-xs-#{$i} {
     flex: 0 0 calc(100% / 24 * #{$i});
     max-width: calc(100% / 24 * #{$i});
   }
-  .prism-col-offset-#{$i} {
+  .prism-col-offset-#{$i},
+  .prism-col-xs-offset-#{$i} {
     margin-left: calc(100% / 24 * #{$i});
   }
-  .prism-col-order-#{$i} {
+  .prism-col-order-#{$i},
+  .prism-col-xs-order-#{$i} {
     order: #{$i};
   }
 }

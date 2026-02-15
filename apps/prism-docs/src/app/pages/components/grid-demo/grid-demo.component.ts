@@ -65,12 +65,27 @@ export class GridDemoComponent {
     responsive: `<prism-row>
   <prism-col [xs]="24" [sm]="12" [md]="8" [lg]="6">Responsive Col</prism-col>
   <prism-col [xs]="24" [sm]="12" [md]="8" [lg]="6">Responsive Col</prism-col>
+</prism-row>`,
+    responsiveObject: `<prism-row>
+  <prism-col [xs]="{ span: 24 }" [lg]="{ span: 6, offset: 2 }">
+    Col with offset on large screens
+  </prism-col>
+  <prism-col [xs]="{ span: 24 }" [lg]="{ span: 6, offset: 2 }">
+    Col with offset on large screens
+  </prism-col>
+</prism-row>`,
+    align: `<prism-row justify="center" align="middle" style="height: 100px; background: #eee;">
+  <prism-col [span]="4">Center Middle</prism-col>
+</prism-row>
+<prism-row justify="space-between">
+  <prism-col [span]="4">Start</prism-col>
+  <prism-col [span]="4">End</prism-col>
 </prism-row>`
   };
 
   readonly rowApiData: ApiDoc[] = [
     { name: 'gutter', type: 'number | [number, number]', default: '0', description: 'Gutter between columns, you can set [horizontal, vertical] gutter.' },
-    { name: 'justify', type: `'start' | 'end' | 'center' | 'space-around' | 'space-between'`, default: `'start'`, description: 'Horizontal arrangement of the layout.' },
+    { name: 'justify', type: `'start' | 'end' | 'center' | 'space-around' | 'space-between' | 'space-evenly'`, default: `'start'`, description: 'Horizontal arrangement of the layout.' },
     { name: 'align', type: `'top' | 'middle' | 'bottom'`, default: `'top'`, description: 'Vertical arrangement of the layout.' },
   ];
 
@@ -78,11 +93,11 @@ export class GridDemoComponent {
     { name: 'span', type: 'number', default: '-', description: 'The number of cells to occupy (0-24).' },
     { name: 'offset', type: 'number', default: '0', description: 'The number of cells to offset from the left.' },
     { name: 'order', type: 'number', default: '0', description: 'Raster order.' },
-    { name: 'xs', type: 'number', default: '-', description: '<576px responsive columns.' },
-    { name: 'sm', type: 'number', default: '-', description: '>=576px responsive columns.' },
-    { name: 'md', type: 'number', default: '-', description: '>=768px responsive columns.' },
-    { name: 'lg', type: 'number', default: '-', description: '>=992px responsive columns.' },
-    { name: 'xl', type: 'number', default: '-', description: '>=1200px responsive columns.' },
-    { name: 'xxl', type: 'number', default: '-', description: '>=1600px responsive columns.' },
+    { name: 'xs', type: 'number | { span, offset, order }', default: '-', description: '<576px responsive columns.' },
+    { name: 'sm', type: 'number | { span, offset, order }', default: '-', description: '>=576px responsive columns.' },
+    { name: 'md', type: 'number | { span, offset, order }', default: '-', description: '>=768px responsive columns.' },
+    { name: 'lg', type: 'number | { span, offset, order }', default: '-', description: '>=992px responsive columns.' },
+    { name: 'xl', type: 'number | { span, offset, order }', default: '-', description: '>=1200px responsive columns.' },
+    { name: 'xxl', type: 'number | { span, offset, order }', default: '-', description: '>=1600px responsive columns.' },
   ];
 }
