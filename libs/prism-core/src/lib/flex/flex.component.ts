@@ -28,7 +28,9 @@ export class PrismFlexComponent {
     [`prism-flex-wrap-${this.wrap()}`]: true,
   }));
 
-  readonly styles = computed(() => ({
-    gap: typeof this.gap() === 'number' ? `${this.gap()}px` : this.gap(),
-  }));
+  readonly styles = computed(() => {
+    const gapValue = this.gap();
+    const gap = typeof gapValue === 'number' || !isNaN(Number(gapValue)) ? `${gapValue}px` : gapValue;
+    return { gap };
+  });
 }

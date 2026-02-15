@@ -9,7 +9,8 @@ import {
   PrismTabComponent,
   ApiTableComponent,
   PrismIconComponent,
-  ApiDoc
+  ApiDoc,
+  PrismDemoCardComponent
 } from '@devynelogic/prism-core';
 
 @Component({
@@ -24,7 +25,8 @@ import {
     PrismTabGroupComponent,
     PrismTabComponent,
     ApiTableComponent,
-    PrismIconComponent
+    PrismIconComponent,
+    PrismDemoCardComponent
   ],
   templateUrl: './divider-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -48,7 +50,7 @@ export class DividerDemoComponent {
         <span>Power Up</span>
     </div>
 </ng-template>
-<prism-divider [content]="customContent" dashed="true"></prism-divider>`,
+<prism-divider [content]="customContent" [dashed]="true"></prism-divider>`,
     vertical: `<span>Link 1</span>
 <prism-divider type="vertical"></prism-divider>
 <span>Link 2</span>`

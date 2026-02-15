@@ -4,7 +4,9 @@ import {
   PrismButtonComponent, 
   PrismDemoPageHeaderComponent,
   PrismTabGroupComponent,
-  PrismTabComponent
+  PrismTabComponent,
+  PrismDemoCardComponent,
+  PrismCodeBlockComponent
 } from '@devynelogic/prism-core';
 
 @Component({
@@ -15,7 +17,9 @@ import {
     PrismButtonComponent, 
     PrismDemoPageHeaderComponent,
     PrismTabGroupComponent,
-    PrismTabComponent
+    PrismTabComponent,
+    PrismDemoCardComponent,
+    PrismCodeBlockComponent
   ],
   templateUrl: './button-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

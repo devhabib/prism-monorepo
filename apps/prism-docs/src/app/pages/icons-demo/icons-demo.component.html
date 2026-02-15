@@ -9,23 +9,20 @@
     <prism-tab label="Gallery" >
       
       <!-- Dynamic Sizing Demo -->
-      <prism-demo-section title="Dynamic Sizing" subtitle="Icons can be sized using pixels, rems, or percentages.">
-        <prism-demo-card>
-          <div preview class="flex items-center gap-8 flex-wrap">
-            <div class="flex flex-col gap-2">
-               <label class="text-sm font-medium text-slate-700 dark:text-slate-300">Size Value</label>
-               <input 
-                 prismInput 
-                 type="text" 
-                 [value]="demoSize()" 
-                 (input)="updateDemoSize($event)"
-                 placeholder="e.g. 2rem, 48px"
-                 class="w-40"
-               />
-            </div>
-          </div>
-        </prism-demo-card>
-      </prism-demo-section>
+      <div preview class="flex items-center gap-8 flex-wrap">
+        <div class="flex flex-col gap-2">
+           <label class="text-sm font-medium text-slate-700 dark:text-slate-300">Size Value</label>
+           <input 
+             prismInput 
+             type="text" 
+             [value]="demoSize()" 
+             (input)="updateDemoSize($event)"
+             placeholder="e.g. 2rem, 48px"
+             class="w-40"
+           />
+        </div>
+      </div>
+
 
       <!-- Search & Grid -->
       <div class="space-y-4 pb-6 mt-8 mb-4">

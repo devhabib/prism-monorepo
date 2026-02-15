@@ -39,7 +39,11 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'layout/flex',
-        loadComponent: () => import('./pages/components/flex-demo/flex-demo.component').then(m => m.FlexDemoComponent),
+        loadComponent: () => import('./pages/components/flex-demo/flex-layout-demo.component').then(m => m.FlexLayoutDemoComponent),
+      },
+      {
+        path: 'layout/flex-debug',
+        loadComponent: () => import('./pages/components/flex-demo/flex-layout-demo.component').then(m => m.FlexLayoutDemoComponent),
       },
       {
         path: 'layout/grid',

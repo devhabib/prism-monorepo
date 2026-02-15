@@ -11,109 +11,85 @@
       
       <!-- Basic / Variants -->
       <section class="mt-8">
-        <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-50">Variants</h2>
-        <div class="border border-surface-200 dark:border-surface-700 rounded-xl overflow-hidden bg-surface-0 dark:bg-surface-900">
-          <prism-tab-group variant="pill">
-            <prism-tab label="Preview">
-              <div class="p-8 flex flex-wrap gap-4 items-center justify-center min-h-[200px] bg-surface-50/50 dark:bg-surface-950/50">
-                <prism-button label="Primary"></prism-button>
-                <prism-button label="Secondary" variant="secondary"></prism-button>
-                <prism-button label="Outline" variant="outline"></prism-button>
-                <prism-button label="Text" variant="text"></prism-button>
-                <prism-button label="Danger" variant="danger"></prism-button>
-              </div>
-            </prism-tab>
-            <prism-tab label="Code">
-              <div class="p-4 bg-[#1e1e1e] text-white rounded-b-xl overflow-x-auto font-mono text-sm">
-                <pre><code>{{ snippets.basic }}</code></pre>
-              </div>
-            </prism-tab>
-          </prism-tab-group>
-        </div>
+        <h2 class="text-2xl font-bold mb-4 text-surface-900">Variants</h2>
+        <prism-demo-card>
+          <div preview>
+            <div class="p-8 flex flex-wrap gap-4 items-center justify-center min-h-[200px] bg-surface-50/50">
+              <prism-button label="Primary"></prism-button>
+              <prism-button label="Secondary" variant="secondary"></prism-button>
+              <prism-button label="Outline" variant="outline"></prism-button>
+              <prism-button label="Text" variant="text"></prism-button>
+              <prism-button label="Danger" variant="danger"></prism-button>
+            </div>
+          </div>
+          <prism-code-block code [code]="snippets.basic" language="html"></prism-code-block>
+        </prism-demo-card>
       </section>
 
       <!-- Sizes -->
       <section class="mt-10">
-        <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-50">Sizes</h2>
-        <div class="border border-surface-200 dark:border-surface-700 rounded-xl overflow-hidden bg-surface-0 dark:bg-surface-900">
-          <prism-tab-group variant="pill">
-            <prism-tab label="Preview">
-              <div class="p-8 flex flex-wrap gap-4 items-center justify-center min-h-[200px] bg-surface-50/50 dark:bg-surface-950/50">
-                <prism-button label="Small" size="sm"></prism-button>
-                <prism-button label="Medium" size="md"></prism-button>
-                <prism-button label="Large" size="lg"></prism-button>
-              </div>
-            </prism-tab>
-            <prism-tab label="Code">
-              <div class="p-4 bg-[#1e1e1e] text-white rounded-b-xl overflow-x-auto font-mono text-sm">
-                <pre><code>{{ snippets.sizes }}</code></pre>
-              </div>
-            </prism-tab>
-          </prism-tab-group>
-        </div>
+        <h2 class="text-2xl font-bold mb-4 text-surface-900">Sizes</h2>
+        <prism-demo-card>
+          <div preview>
+            <div class="p-8 flex flex-wrap gap-4 items-center justify-center min-h-[200px] bg-surface-50/50">
+              <prism-button label="Small" size="sm"></prism-button>
+              <prism-button label="Medium" size="md"></prism-button>
+              <prism-button label="Large" size="lg"></prism-button>
+            </div>
+          </div>
+          <prism-code-block code [code]="snippets.sizes" language="html"></prism-code-block>
+        </prism-demo-card>
       </section>
 
       <!-- Icons -->
       <section class="mt-10">
-        <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-50">Icons</h2>
-        <div class="border border-surface-200 dark:border-surface-700 rounded-xl overflow-hidden bg-surface-0 dark:bg-surface-900">
-          <prism-tab-group variant="pill">
-            <prism-tab label="Preview">
-              <div class="p-8 flex flex-wrap gap-4 items-center justify-center min-h-[200px] bg-surface-50/50 dark:bg-surface-950/50">
-                <prism-button label="Search" icon="ri-search-line"></prism-button>
-                <prism-button label="Next" icon="ri-arrow-right-line" iconPos="right"></prism-button>
-                <prism-button icon="ri-settings-3-line"></prism-button>
-              </div>
-            </prism-tab>
-            <prism-tab label="Code">
-              <div class="p-4 bg-[#1e1e1e] text-white rounded-b-xl overflow-x-auto font-mono text-sm">
-                <pre><code>{{ snippets.icons }}</code></pre>
-              </div>
-            </prism-tab>
-          </prism-tab-group>
-        </div>
+        <h2 class="text-2xl font-bold mb-4 text-surface-900">Icons</h2>
+        <prism-demo-card>
+          <div preview>
+            <div class="p-8 flex flex-wrap gap-4 items-center justify-center min-h-[200px] bg-surface-50/50">
+              <prism-button label="Search" icon="ri-search-line"></prism-button>
+              <prism-button label="Next" icon="ri-arrow-right-line" iconPos="right"></prism-button>
+              <prism-button icon="ri-settings-3-line"></prism-button>
+            </div>
+          </div>
+          <prism-code-block code [code]="snippets.icons" language="html"></prism-code-block>
+        </prism-demo-card>
       </section>
 
       <!-- States -->
       <section class="mt-10 mb-10">
-        <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-50">States</h2>
-        <div class="border border-surface-200 dark:border-surface-700 rounded-xl overflow-hidden bg-surface-0 dark:bg-surface-900">
-          <prism-tab-group variant="pill">
-            <prism-tab label="Preview">
-              <div class="p-8 flex flex-wrap gap-4 items-center justify-center min-h-[200px] bg-surface-50/50 dark:bg-surface-950/50">
-                <prism-button label="Loading" [loading]="true"></prism-button>
-                <prism-button label="Disabled" [disabled]="true"></prism-button>
-              </div>
-            </prism-tab>
-            <prism-tab label="Code">
-              <div class="p-4 bg-[#1e1e1e] text-white rounded-b-xl overflow-x-auto font-mono text-sm">
-                <pre><code>{{ snippets.states }}</code></pre>
-              </div>
-            </prism-tab>
-          </prism-tab-group>
-        </div>
+        <h2 class="text-2xl font-bold mb-4 text-surface-900">States</h2>
+        <prism-demo-card>
+          <div preview>
+            <div class="p-8 flex flex-wrap gap-4 items-center justify-center min-h-[200px] bg-surface-50/50">
+              <prism-button label="Loading" [loading]="true"></prism-button>
+              <prism-button label="Disabled" [disabled]="true"></prism-button>
+            </div>
+          </div>
+          <prism-code-block code [code]="snippets.states" language="html"></prism-code-block>
+        </prism-demo-card>
       </section>
 
     </prism-tab>
 
     <prism-tab label="API">
-      <div class="mt-8 border border-surface-200 dark:border-surface-700 rounded-xl overflow-hidden overflow-x-auto">
+      <div class="mt-8 border border-surface-200 rounded-xl overflow-hidden overflow-x-auto">
         <table class="w-full text-left border-collapse min-w-[600px]">
           <thead>
-            <tr class="bg-surface-50 dark:bg-surface-900 border-b border-surface-200 dark:border-surface-700">
-              <th class="p-4 font-semibold text-surface-900 dark:text-surface-50">Name</th>
-              <th class="p-4 font-semibold text-surface-900 dark:text-surface-50">Type</th>
-              <th class="p-4 font-semibold text-surface-900 dark:text-surface-50">Default</th>
-              <th class="p-4 font-semibold text-surface-900 dark:text-surface-50">Description</th>
+            <tr class="bg-surface-50 border-b border-surface-200">
+              <th class="p-4 font-semibold text-surface-900">Name</th>
+              <th class="p-4 font-semibold text-surface-900">Type</th>
+              <th class="p-4 font-semibold text-surface-900">Default</th>
+              <th class="p-4 font-semibold text-surface-900">Description</th>
             </tr>
           </thead>
           <tbody>
             @for (prop of apiProperties; track prop.name) {
-              <tr class="border-b border-surface-200 dark:border-surface-700 last:border-0 hover:bg-surface-50 dark:hover:bg-surface-900/50">
-                <td class="p-4 font-mono text-sm text-primary-600 dark:text-primary-400">{{ prop.name }}</td>
-                <td class="p-4 font-mono text-xs text-surface-600 dark:text-surface-400 break-words max-w-xs">{{ prop.type }}</td>
-                <td class="p-4 font-mono text-xs text-surface-600 dark:text-surface-400">{{ prop.default }}</td>
-                <td class="p-4 text-sm text-surface-700 dark:text-surface-300">{{ prop.description }}</td>
+              <tr class="border-b border-surface-200 last:border-0 hover:bg-surface-50">
+                <td class="p-4 font-mono text-sm text-primary-600">{{ prop.name }}</td>
+                <td class="p-4 font-mono text-xs text-surface-600 break-words max-w-xs">{{ prop.type }}</td>
+                <td class="p-4 font-mono text-xs text-surface-600">{{ prop.default }}</td>
+                <td class="p-4 text-sm text-surface-700">{{ prop.description }}</td>
               </tr>
             }
           </tbody>

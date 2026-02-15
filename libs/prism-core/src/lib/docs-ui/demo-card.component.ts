@@ -1,24 +1,26 @@
 import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { PrismTabGroupComponent } from '../tabs/tab-group.component';
 import { PrismTabComponent } from '../tabs/tab.component';
 
 @Component({
   selector: 'prism-demo-card',
   standalone: true,
-  imports: [PrismTabGroupComponent, PrismTabComponent],
+  imports: [CommonModule, PrismTabGroupComponent, PrismTabComponent],
   template: `
-    <div class="border border-surface-200 dark:border-surface-700 rounded-xl overflow-hidden bg-surface-0 dark:bg-surface-900">
-      <div class="border-b border-surface-200 dark:border-surface-700 px-4 py-3 bg-surface-50 dark:bg-surface-800/50">
+    <div class="border border-surface-200 dark:border-surface-700 rounded-xl overflow-hidden bg-surface-0 dark:bg-surface-800">
+      <div class="border-b border-surface-200 dark:border-surface-700 p-4 bg-surface-50 dark:bg-surface-900/50">
         <prism-tab-group variant="pill">
           <prism-tab label="Preview">
-            <div class="p-6 bg-surface-0 dark:bg-surface-900 overflow-x-auto">
-              <ng-content select="[preview]" />
-            </div>
+            <!-- Preview Container -->
+             <div class="p-8 bg-surface-50 dark:bg-surface-900/30 rounded-lg border border-dashed border-surface-200 dark:border-surface-700 mt-4 overflow-x-auto">
+               <ng-content select="[preview]" />
+             </div>
           </prism-tab>
-          <prism-tab label="Source Code">
-            <div class="bg-[#1e1e1e]">
-              <ng-content />
-            </div>
+          <prism-tab label="Code">
+             <div class="mt-4">
+               <ng-content select="[code]" />
+             </div>
           </prism-tab>
         </prism-tab-group>
       </div>

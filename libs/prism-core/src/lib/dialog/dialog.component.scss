@@ -149,39 +149,6 @@
 }
 
 // Dark Mode
-:host-context([data-theme='dark']) {
-  .prism-dialog-mask {
-    background: rgba(0, 0, 0, 0.7);
-  }
-
-  .prism-dialog-panel {
-    background: var(--surface-800);
-    border-color: var(--surface-700);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-  }
-
-  .dialog-header {
-    border-bottom-color: var(--surface-700);
-  }
-
-  .dialog-title {
-    color: var(--surface-50);
-  }
-
-  .dialog-close {
-    color: var(--surface-400);
-
-    &:hover {
-      background: var(--surface-700);
-      color: var(--surface-100);
-    }
-  }
-
-  .dialog-footer {
-    background: var(--surface-900);
-    border-top-color: var(--surface-700);
-  }
-}
 
 // Responsive
 @media (max-width: 640px) {

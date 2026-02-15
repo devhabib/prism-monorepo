@@ -8,7 +8,9 @@ import {
   PrismDemoPageHeaderComponent,
   PrismTabGroupComponent,
   PrismTabComponent,
-  PrismDividerComponent
+  PrismDividerComponent,
+  PrismDemoCardComponent,
+  PrismCodeBlockComponent
 } from '@devynelogic/prism-core';
 
 @Component({
@@ -23,7 +25,9 @@ import {
     PrismDemoPageHeaderComponent,
     PrismTabGroupComponent,
     PrismTabComponent,
-    PrismDividerComponent
+    PrismDividerComponent,
+    PrismDemoCardComponent,
+    PrismCodeBlockComponent
   ],
   templateUrl: './typography-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
