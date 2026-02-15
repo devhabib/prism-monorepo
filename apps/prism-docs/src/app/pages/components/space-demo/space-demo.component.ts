@@ -16,7 +16,6 @@ import {
   PrismRadioComponent,
   PrismRadioGroupComponent,
   PrismDividerComponent,
-  PrismIconComponent,
   PrismSpaceSize
 } from '@devynelogic/prism-core';
 
@@ -39,7 +38,6 @@ import {
     PrismRadioComponent,
     PrismRadioGroupComponent,
     PrismDividerComponent,
-    PrismIconComponent
   ],
   templateUrl: './space-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

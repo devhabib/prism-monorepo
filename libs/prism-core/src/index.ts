@@ -63,6 +63,7 @@ export * from './lib/grid/col.component';
 export * from './lib/layout/layout.component';
 export * from './lib/space/space.component';
 export * from './lib/splitter/splitter.component';
+export * from './lib/splitter/splitter-panel.component';
 
 // Navigation
 export * from './lib/anchor/anchor.component';

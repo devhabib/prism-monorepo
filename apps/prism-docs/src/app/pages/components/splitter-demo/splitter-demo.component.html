@@ -1,17 +1,119 @@
-<prism-demo-page-header title="Splitter" subtitle="A resizable layout component that divides content into multiple panes.">
-</prism-demo-page-header>
+<prism-demo-page-header title="Splitter" subtitle="Split views with adjustable width/height."></prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
-  <prism-demo-card>
-    <prism-tab-group variant="pill">
-      <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-splitter />
-        </div>
-      </prism-tab>
-      <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
-      </prism-tab>
-    </prism-tab-group>
-  </prism-demo-card>
-</prism-demo-section>
+<div class="mt-8">
+  <prism-tab-group>
+    <prism-tab label="Examples">
+      <div class="space-y-12 pt-6">
+        <prism-demo-section title="Horizontal" description="Two panels split horizontally.">
+          <prism-demo-card>
+            <div preview>
+              <prism-splitter style="height: 300px; border: 1px solid var(--surface-200);">
+                <prism-splitter-panel size="30%">
+                  <div class="p-4 bg-slate-50 h-full">Left Panel (30%)</div>
+                </prism-splitter-panel>
+                <prism-splitter-panel>
+                  <div class="p-4 h-full">Right Panel (Fill)</div>
+                </prism-splitter-panel>
+              </prism-splitter>
+            </div>
+            <prism-code-block code [code]="snippets.horizontal" language="html"></prism-code-block>
+          </prism-demo-card>
+        </prism-demo-section>
+
+        <prism-demo-section title="Vertical" description="Two panels split vertically.">
+          <prism-demo-card>
+            <div preview>
+              <prism-splitter orientation="vertical" style="height: 400px; border: 1px solid var(--surface-200);">
+                <prism-splitter-panel size="100px">
+                  <div class="p-4 bg-slate-50 h-full">Top Panel (100px)</div>
+                </prism-splitter-panel>
+                <prism-splitter-panel>
+                  <div class="p-4 h-full">Bottom Panel (Fill)</div>
+                </prism-splitter-panel>
+              </prism-splitter>
+            </div>
+            <prism-code-block code [code]="snippets.vertical" language="html"></prism-code-block>
+          </prism-demo-card>
+        </prism-demo-section>
+
+        <prism-demo-section title="Complex / Nested" description="Nested splitters for complex layouts.">
+          <prism-demo-card>
+            <div preview>
+              <prism-splitter style="height: 400px; border: 1px solid var(--surface-200);">
+                <prism-splitter-panel size="200px">
+                  <div class="p-4 bg-slate-50 h-full">Sidebar (200px)</div>
+                </prism-splitter-panel>
+                <prism-splitter-panel>
+                  <prism-splitter orientation="vertical">
+                    <prism-splitter-panel size="50%">
+                      <div class="p-4 bg-slate-50 h-full">Main Content - Top</div>
+                    </prism-splitter-panel>
+                    <prism-splitter-panel>
+                      <div class="p-4 h-full">Main Content - Bottom</div>
+                    </prism-splitter-panel>
+                  </prism-splitter>
+                </prism-splitter-panel>
+              </prism-splitter>
+            </div>
+            <prism-code-block code [code]="snippets.nested" language="html"></prism-code-block>
+          </prism-demo-card>
+        </prism-demo-section>
+
+        <prism-demo-section title="Constraints" description="Resizable panels with min and max size limits.">
+          <prism-demo-card>
+            <div preview>
+              <prism-splitter style="height: 200px; border: 1px solid var(--surface-200);">
+                <prism-splitter-panel size="150px" [min]="100" [max]="300">
+                  <div class="p-4 bg-slate-50 h-full">Resizable (100px - 300px)</div>
+                </prism-splitter-panel>
+                <prism-splitter-panel>
+                  <div class="p-4 h-full">Flexible</div>
+                </prism-splitter-panel>
+              </prism-splitter>
+            </div>
+            <prism-code-block code [code]="snippets.constraints" language="html"></prism-code-block>
+          </prism-demo-card>
+        </prism-demo-section>
+
+        <prism-demo-section title="Handle Labels" description="Add labels or custom templates to splitter handles.">
+          <prism-demo-card>
+            <div preview>
+              <div class="space-y-8">
+                <prism-splitter style="height: 200px; border: 1px solid var(--surface-200);">
+                  <prism-splitter-panel size="50%" handleLabel="Settings">
+                    <div class="p-4 bg-slate-50 h-full">Panel A</div>
+                  </prism-splitter-panel>
+                  <prism-splitter-panel>
+                    <div class="p-4 h-full">Panel B</div>
+                  </prism-splitter-panel>
+                </prism-splitter>
+
+                <prism-splitter orientation="vertical" style="height: 300px; border: 1px solid var(--surface-200);">
+                  <prism-splitter-panel size="120px" handleLabel="Console">
+                    <div class="p-4 bg-slate-50 h-full">Editor Area</div>
+                  </prism-splitter-panel>
+                  <prism-splitter-panel>
+                    <div class="p-4 h-full">Output Log</div>
+                  </prism-splitter-panel>
+                </prism-splitter>
+              </div>
+            </div>
+            <prism-code-block code [code]="snippets.handleLabels" language="html"></prism-code-block>
+          </prism-demo-card>
+        </prism-demo-section>
+      </div>
+    </prism-tab>
+
+    <prism-tab label="API">
+      <div class="space-y-12 pt-6">
+        <prism-demo-section title="prism-splitter">
+          <prism-api-table [data]="splitterApi"></prism-api-table>
+        </prism-demo-section>
+
+        <prism-demo-section title="prism-splitter-panel">
+          <prism-api-table [data]="panelApi"></prism-api-table>
+        </prism-demo-section>
+      </div>
+    </prism-tab>
+  </prism-tab-group>
+</div>
