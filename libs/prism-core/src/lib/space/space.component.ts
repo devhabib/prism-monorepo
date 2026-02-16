@@ -6,6 +6,7 @@ import {
   TemplateRef,
   Directive,
   contentChildren,
+  inject
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -14,7 +15,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
 })
 export class PrismSpaceItemDirective {
-  constructor(public templateRef: TemplateRef<unknown>) {}
+  public templateRef = inject(TemplateRef<unknown>);
 }
 
 export type PrismSpaceSize = 'small' | 'middle' | 'large' | number;

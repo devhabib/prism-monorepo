@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input, contentChildren, effect } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, contentChildren, TemplateRef, forwardRef, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrismBreadcrumbItemComponent } from './breadcrumb-item.component';
 
@@ -8,32 +8,20 @@ import { PrismBreadcrumbItemComponent } from './breadcrumb-item.component';
   imports: [CommonModule],
   template: `
     <nav class="prism-breadcrumb" aria-label="Breadcrumb">
-      <ng-content></ng-content>
+      <ol class="prism-breadcrumb__list">
+        <ng-content></ng-content>
+      </ol>
     </nav>
   `,
-  styles: [`
-    .prism-breadcrumb {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-  `],
+  styleUrl: './breadcrumb.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class PrismBreadcrumbComponent {
-  separator = input<string>('/');
+  readonly items = contentChildren(forwardRef(() => PrismBreadcrumbItemComponent));
+  readonly separator = input<string | TemplateRef<void>>('/');
   
-  items = contentChildren(PrismBreadcrumbItemComponent);
-
-  constructor() {
-    effect(() => {
-      const itemList = this.items();
-      const sep = this.separator();
-      
-      itemList.forEach((item, index) => {
-        item.isLast.set(index === itemList.length - 1);
-        item.separator.set(sep);
-      });
-    });
+  isTemplate(value: string | TemplateRef<void>): value is TemplateRef<void> {
+    return value instanceof TemplateRef;
   }
 }

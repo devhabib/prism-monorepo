@@ -1,46 +1,48 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, inject, computed, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PrismBreadcrumbComponent } from './breadcrumb.component';
 
 @Component({
   selector: 'prism-breadcrumb-item',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <span class="prism-breadcrumb-item">
-      <span class="breadcrumb-link">
+    <li class="prism-breadcrumb__item">
+      <a 
+        [attr.href]="href() ? href() : null" 
+        [attr.target]="href() ? target() : null"
+        [class.prism-breadcrumb__link]="href()"
+        [class.prism-breadcrumb__text]="!href()"
+      >
         <ng-content></ng-content>
-      </span>
+      </a>
+
       @if (!isLast()) {
-        <span class="breadcrumb-separator">{{ separator() }}</span>
+        <span class="prism-breadcrumb__separator" aria-hidden="true">
+          @if (parent.isTemplate(parent.separator())) {
+            <ng-container *ngTemplateOutlet="asTemplate(parent.separator())"></ng-container>
+          } @else {
+            {{ parent.separator() }}
+          }
+        </span>
       }
-    </span>
+    </li>
   `,
-  styles: [`
-    .prism-breadcrumb-item {
-      display: inline-flex;
-      align-items: center;
-      color: var(--text-muted);
-      font-size: 0.875rem;
-
-      .breadcrumb-link {
-        transition: color 0.2s;
-        cursor: pointer;
-        
-        &:hover {
-          color: var(--primary-600);
-        }
-      }
-
-      .breadcrumb-separator {
-        margin: 0 0.5rem;
-        color: var(--text-muted);
-        opacity: 0.5;
-      }
-    }
-  `],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class PrismBreadcrumbItemComponent {
-  isLast = signal<boolean>(false);
-  separator = signal<string>('/');
+  readonly parent = inject(PrismBreadcrumbComponent);
+
+  readonly href = input<string>();
+  readonly target = input<string>('_self');
+
+  readonly isLast = computed(() => {
+    const items = this.parent.items();
+    return items[items.length - 1] === this;
+  });
+
+  asTemplate(value: string | TemplateRef<void>): TemplateRef<void> {
+    return value as TemplateRef<void>;
+  }
 }

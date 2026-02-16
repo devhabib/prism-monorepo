@@ -3,8 +3,6 @@ import {
   ChangeDetectionStrategy, 
   input, 
   signal, 
-  HostBinding, 
-  output, 
   ElementRef,
   inject,
   forwardRef,
@@ -154,6 +152,11 @@ import { PrismSplitterComponent } from './splitter.component';
     }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[style.flex-basis]': 'flexBasis',
+    '[style.flex-grow]': 'flexGrow',
+    '[style.flex-shrink]': 'flexShrink'
+  }
 })
 export class PrismSplitterPanelComponent {
   size = input<string | number>();
@@ -183,19 +186,16 @@ export class PrismSplitterPanelComponent {
     }
   }
 
-  @HostBinding('style.flex-basis')
   get flexBasis(): string {
     const s = this._currentSize();
     if (s === undefined) return 'auto';
     return typeof s === 'number' ? `${s}px` : s;
   }
 
-  @HostBinding('style.flex-grow')
   get flexGrow(): number {
     return this._currentSize() === undefined ? 1 : 0;
   }
 
-  @HostBinding('style.flex-shrink')
   get flexShrink(): number {
     return (this._currentSize() === undefined || this.resizable()) ? 1 : 0;
   }

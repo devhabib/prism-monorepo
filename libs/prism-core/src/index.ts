@@ -67,6 +67,7 @@ export * from './lib/splitter/splitter-panel.component';
 
 // Navigation
 export * from './lib/anchor/anchor.component';
+export * from './lib/anchor/anchor-link.component';
 export * from './lib/breadcrumb/breadcrumb.component';
 export * from './lib/breadcrumb/breadcrumb-item.component';
 export * from './lib/dropdown/dropdown.component';

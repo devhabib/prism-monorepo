@@ -4,9 +4,9 @@ import {
   input,
   contentChildren,
   Renderer2,
-  signal,
   OnDestroy,
   effect,
+  inject
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrismSplitterPanelComponent } from './splitter-panel.component';
@@ -28,6 +28,7 @@ import { PrismSplitterPanelComponent } from './splitter-panel.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrismSplitterComponent implements OnDestroy {
+  private readonly renderer = inject(Renderer2);
   readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
 
   readonly panels = contentChildren(PrismSplitterPanelComponent);
@@ -35,7 +36,7 @@ export class PrismSplitterComponent implements OnDestroy {
   private dragListeners: (() => void)[] = [];
   private isResizing = false;
 
-  constructor(private renderer: Renderer2) {
+  constructor() {
     // Set up panels when they change or orientation changes
     effect(() => {
       const currentPanels = this.panels();
