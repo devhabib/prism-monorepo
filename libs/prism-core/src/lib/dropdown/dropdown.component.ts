@@ -9,7 +9,8 @@ import {
   inject, 
   Renderer2, 
   PLATFORM_ID,
-  afterNextRender
+  afterNextRender,
+  OnDestroy
 } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 
@@ -87,7 +88,7 @@ export type PrismDropdownPlacement = 'bottomLeft' | 'bottomRight' | 'topLeft' | 
     '(document:click)': 'onDocumentClick($event)'
   }
 })
-export class PrismDropdownTriggerDirective {
+export class PrismDropdownTriggerDirective implements OnDestroy {
   private readonly elementRef = inject(ElementRef);
   private readonly renderer = inject(Renderer2);
   private readonly document = inject(DOCUMENT);
@@ -100,6 +101,8 @@ export class PrismDropdownTriggerDirective {
 
   private _hoverTimeout?: ReturnType<typeof setTimeout>;
   private _isMenuMoved = false;
+  private _unlistenMenuEnter?: () => void;
+  private _unlistenMenuLeave?: () => void;
 
   constructor() {
     afterNextRender(() => {
@@ -122,6 +125,26 @@ export class PrismDropdownTriggerDirective {
       this.renderer.appendChild(this.document.body, menuEl);
     }
     this._isMenuMoved = true;
+
+    // Add listeners to the menu element for safe hover
+    if (this._unlistenMenuEnter) {
+      this._unlistenMenuEnter();
+    }
+    if (this._unlistenMenuLeave) {
+      this._unlistenMenuLeave();
+    }
+
+    this._unlistenMenuEnter = this.renderer.listen(menuEl, 'mouseenter', () => {
+      if (this.trigger() === 'hover') {
+        this.clearCloseTimer();
+      }
+    });
+
+    this._unlistenMenuLeave = this.renderer.listen(menuEl, 'mouseleave', () => {
+      if (this.trigger() === 'hover') {
+        this.startCloseTimer();
+      }
+    });
   }
 
   onClick(event: MouseEvent): void {
@@ -138,19 +161,41 @@ export class PrismDropdownTriggerDirective {
 
   onMouseEnter(): void {
     if (this.trigger() === 'hover') {
-      if (this._hoverTimeout) clearTimeout(this._hoverTimeout);
+      this.clearCloseTimer();
       this.showMenu();
     }
   }
 
   onMouseLeave(): void {
     if (this.trigger() === 'hover') {
-      this._hoverTimeout = setTimeout(() => {
-        const menu = this.menu();
-        if (menu && typeof menu.hide === 'function') {
-          menu.hide();
-        }
-      }, 150);
+      this.startCloseTimer();
+    }
+  }
+
+  private clearCloseTimer(): void {
+    if (this._hoverTimeout) {
+      clearTimeout(this._hoverTimeout);
+      this._hoverTimeout = undefined;
+    }
+  }
+
+  private startCloseTimer(): void {
+    this.clearCloseTimer();
+    this._hoverTimeout = setTimeout(() => {
+      const menu = this.menu();
+      if (menu && typeof menu.hide === 'function') {
+        menu.hide();
+      }
+    }, 200);
+  }
+
+  ngOnDestroy(): void {
+    this.clearCloseTimer();
+    if (this._unlistenMenuEnter) {
+      this._unlistenMenuEnter();
+    }
+    if (this._unlistenMenuLeave) {
+      this._unlistenMenuLeave();
     }
   }
 
