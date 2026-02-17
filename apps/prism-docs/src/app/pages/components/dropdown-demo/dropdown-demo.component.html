@@ -1,17 +1,98 @@
-<prism-demo-page-header title="Dropdown" subtitle="A menu that appears when a user clicks or hovers over an element.">
+<prism-demo-page-header title="Dropdown" subtitle="A versatile menu component for navigation and actions, supporting custom positioning and triggers.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
-  <prism-demo-card>
-    <prism-tab-group variant="pill">
-      <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-dropdown />
-        </div>
-      </prism-tab>
-      <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
-      </prism-tab>
-    </prism-tab-group>
+<prism-demo-section title="Trigger Modes" subtitle="Support for both hover and click interaction patterns.">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Hover Example -->
+    <prism-demo-card title="Hover Trigger">
+      <div preview class="min-h-[160px] flex items-center justify-center">
+        <button prismDropdown 
+                [prismDropdown]="hoverMenu" 
+                trigger="hover"
+                class="px-4 py-2 border border-surface-200 rounded-md hover:bg-surface-50 transition-colors flex items-center gap-2 font-medium">
+          Hover me
+          <prism-icon name="arrow-down-s-line"></prism-icon>
+        </button>
+        
+          <prism-dropdown-menu #hoverMenu>
+            <prism-menu-item (click)="onItemClick('Profile')">1st menu item</prism-menu-item>
+            <prism-menu-item (click)="onItemClick('Settings')">2nd menu item</prism-menu-item>
+            <prism-menu-item (click)="onItemClick('Help')">3rd menu item</prism-menu-item>
+          </prism-dropdown-menu>
+      </div>
+      <prism-code-block code [ts]="snippets.hover"></prism-code-block>
+    </prism-demo-card>
+
+    <!-- Click Example -->
+    <prism-demo-card title="Click Trigger">
+      <div preview class="min-h-[160px] flex items-center justify-center">
+        <prism-button 
+          label="Click me" 
+          [prismDropdown]="clickMenu" 
+          trigger="click">
+        </prism-button>
+        
+          <prism-dropdown-menu #clickMenu>
+            <prism-menu-item (click)="onItemClick('Dashboard')">Dashboard</prism-menu-item>
+            <prism-menu-item (click)="onItemClick('Team')">Team Management</prism-menu-item>
+            <prism-menu-item (click)="onItemClick('Billing')">Billing Settings</prism-menu-item>
+          </prism-dropdown-menu>
+      </div>
+      <prism-code-block code [ts]="snippets.click"></prism-code-block>
+    </prism-demo-card>
+  </div>
+</prism-demo-section>
+
+<prism-demo-section title="Placements" subtitle="Align the menu based on your layout needs with smart flipping logic.">
+  <prism-demo-card title="Directional Alignment">
+    <div preview class="min-h-[200px] flex flex-wrap items-center justify-center gap-4">
+      <prism-button [prismDropdown]="pMenu" placement="bottomLeft" label="bottomLeft" variant="outline"></prism-button>
+      <prism-button [prismDropdown]="pMenu" placement="bottomRight" label="bottomRight" variant="outline"></prism-button>
+      <prism-button [prismDropdown]="pMenu" placement="topLeft" label="topLeft" variant="outline"></prism-button>
+      <prism-button [prismDropdown]="pMenu" placement="topRight" label="topRight" variant="outline"></prism-button>
+      
+      <prism-dropdown-menu #pMenu>
+        <prism-menu-item>Menu Item 1</prism-menu-item>
+        <prism-menu-item>Menu Item 2</prism-menu-item>
+        <prism-menu-item>Menu Item 3</prism-menu-item>
+      </prism-dropdown-menu>
+    </div>
+    <prism-code-block code [ts]="snippets.placements"></prism-code-block>
   </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Advanced Items" subtitle="Menu items can include icons, dividers, and semantic coloring.">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <prism-demo-card title="Icons & States">
+      <div preview class="min-h-[160px] flex items-center justify-center">
+        <prism-button 
+          label="Account Actions" 
+          variant="secondary"
+          [prismDropdown]="itemsMenu" 
+          trigger="click">
+        </prism-button>
+        
+        <prism-dropdown-menu #itemsMenu>
+          <prism-menu-item (click)="onItemClick('Profile')">
+            <prism-icon name="user-line"></prism-icon>
+            View Profile
+          </prism-menu-item>
+          <prism-menu-item (click)="onItemClick('Edit')">
+            <prism-icon name="edit-line"></prism-icon>
+            Edit Account
+          </prism-menu-item>
+          <prism-menu-item [disabled]="true">
+            <prism-icon name="lock-line"></prism-icon>
+            Admin Settings
+          </prism-menu-item>
+          <div class="prism-menu-divider"></div>
+          <prism-menu-item (click)="onItemClick('Logout')" class="text-danger-600">
+            <prism-icon name="logout-box-r-line"></prism-icon>
+            Sign out
+          </prism-menu-item>
+        </prism-dropdown-menu>
+      </div>
+      <prism-code-block code [ts]="snippets.items"></prism-code-block>
+    </prism-demo-card>
+  </div>
 </prism-demo-section>

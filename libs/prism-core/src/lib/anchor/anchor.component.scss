@@ -1,5 +1,4 @@
-@use '../../../../prism-theme/src/lib/core/variables' as *;
-@use '../../../../prism-theme/src/lib/core/mixins' as *;
+@use 'prism-theme' as *;
 
 .prism-anchor {
   position: relative;

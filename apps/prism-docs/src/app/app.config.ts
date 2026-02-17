@@ -24,7 +24,10 @@ import {
   piAlertFill, 
   piLayoutMasonryFill, 
   piMore2Fill,
-  piHome4Line
+  piHome4Line,
+  piArrowDownSLine,
+  piLockLine,
+  piLogoutBoxRLine
 } from '@devynelogic/prism-icons';
 
 export const appConfig: ApplicationConfig = {
@@ -46,7 +49,10 @@ export const appConfig: ApplicationConfig = {
         piAlertFill, 
         piLayoutMasonryFill, 
         piMore2Fill,
-        piHome4Line
+        piHome4Line,
+        piArrowDownSLine,
+        piLockLine,
+        piLogoutBoxRLine
       ]);
 
       // Register all icons from bundle

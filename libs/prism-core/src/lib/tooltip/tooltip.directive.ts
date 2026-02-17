@@ -8,8 +8,10 @@ import {
   EnvironmentInjector, 
   ApplicationRef, 
   OnDestroy, 
-  NgZone
+  NgZone,
+  PLATFORM_ID
 } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { PrismTooltipComponent } from './tooltip.component';
 
 @Directive({
@@ -33,6 +35,12 @@ export class PrismTooltipDirective implements OnDestroy {
   private _appRef = inject(ApplicationRef);
   private _injector = inject(EnvironmentInjector);
   private _ngZone = inject(NgZone);
+  private _document = inject(DOCUMENT);
+  private _platformId = inject(PLATFORM_ID);
+
+  private get _isBrowser(): boolean {
+    return isPlatformBrowser(this._platformId);
+  }
 
   onMouseEnter(): void { 
     if (this.tooltipTrigger() === 'hover') this.show(); 
@@ -57,7 +65,7 @@ export class PrismTooltipDirective implements OnDestroy {
   }
 
   show(): void {
-    if (this._componentRef || !this.prismTooltip()) return;
+    if (!this._isBrowser || this._componentRef || !this.prismTooltip()) return;
 
     // 1. Create Component
     this._componentRef = createComponent(PrismTooltipComponent, {
@@ -69,7 +77,7 @@ export class PrismTooltipDirective implements OnDestroy {
     this._componentRef.setInput('position', this.tooltipPosition());
 
     // 3. Attach to Body (Floating)
-    document.body.appendChild(this._componentRef.location.nativeElement);
+    this._document.body.appendChild(this._componentRef.location.nativeElement);
     this._appRef.attachView(this._componentRef.hostView);
 
     // 4. Calculate Position after a frame to ensure dimensions are ready
@@ -82,8 +90,11 @@ export class PrismTooltipDirective implements OnDestroy {
 
     // 5. Listen to window changes
     this._ngZone.runOutsideAngular(() => {
-      window.addEventListener('scroll', this._onRefresh, true);
-      window.addEventListener('resize', this._onRefresh);
+      const win = this._document.defaultView;
+      if (win) {
+        win.addEventListener('scroll', this._onRefresh, true);
+        win.addEventListener('resize', this._onRefresh);
+      }
     });
   }
 
@@ -103,8 +114,13 @@ export class PrismTooltipDirective implements OnDestroy {
     
     this._componentRef = null;
 
-    window.removeEventListener('scroll', this._onRefresh, true);
-    window.removeEventListener('resize', this._onRefresh);
+    if (this._isBrowser) {
+      const win = this._document.defaultView;
+      if (win) {
+        win.removeEventListener('scroll', this._onRefresh, true);
+        win.removeEventListener('resize', this._onRefresh);
+      }
+    }
   }
 
   private _onRefresh = (): void => {
@@ -114,8 +130,11 @@ export class PrismTooltipDirective implements OnDestroy {
   }
 
   updatePosition(): void {
-    if (!this._componentRef) return;
+    if (!this._componentRef || !this._isBrowser) return;
     
+    const win = this._document.defaultView;
+    if (!win) return;
+
     const hostRect = this._el.nativeElement.getBoundingClientRect();
     const tooltipEl = this._componentRef.location.nativeElement;
     
@@ -151,12 +170,15 @@ export class PrismTooltipDirective implements OnDestroy {
 
     calculate(pos);
 
+    const viewportWidth = win.innerWidth;
+    const viewportHeight = win.innerHeight;
+
     // Auto-Flip (Vertical)
     if (pos === 'top' && top < padding) {
       pos = 'bottom';
       calculate(pos);
       this._componentRef.setInput('position', 'bottom');
-    } else if (pos === 'bottom' && top + tooltipHeight > window.innerHeight - padding) {
+    } else if (pos === 'bottom' && top + tooltipHeight > viewportHeight - padding) {
       pos = 'top';
       calculate(pos);
       this._componentRef.setInput('position', 'top');
@@ -167,15 +189,15 @@ export class PrismTooltipDirective implements OnDestroy {
       pos = 'right';
       calculate(pos);
       this._componentRef.setInput('position', 'right');
-    } else if (pos === 'right' && left + tooltipWidth > window.innerWidth - padding) {
+    } else if (pos === 'right' && left + tooltipWidth > viewportWidth - padding) {
       pos = 'left';
       calculate(pos);
       this._componentRef.setInput('position', 'left');
     }
 
     // Clamping
-    left = Math.max(padding, Math.min(left, window.innerWidth - tooltipWidth - padding));
-    top = Math.max(padding, Math.min(top, window.innerHeight - tooltipHeight - padding));
+    left = Math.max(padding, Math.min(left, viewportWidth - tooltipWidth - padding));
+    top = Math.max(padding, Math.min(top, viewportHeight - tooltipHeight - padding));
 
     tooltipEl.style.top = `${top}px`;
     tooltipEl.style.left = `${left}px`;

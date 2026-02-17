@@ -6,14 +6,14 @@ import {
   signal, 
   contentChildren, 
   ElementRef, 
-  AfterViewInit, 
   OnDestroy, 
   viewChild,
   inject,
   PLATFORM_ID,
-  forwardRef
+  forwardRef,
+  afterNextRender
 } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { fromEvent, Subject } from 'rxjs';
 import { throttleTime, takeUntil } from 'rxjs/operators';
 import { PrismAnchorLinkComponent } from './anchor-link.component';
@@ -37,10 +37,11 @@ import { PrismAnchorLinkComponent } from './anchor-link.component';
   styleUrl: './anchor.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PrismAnchorComponent implements AfterViewInit, OnDestroy {
+export class PrismAnchorComponent implements OnDestroy {
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly document = inject(DOCUMENT);
   
-  readonly container = input<string | HTMLElement | Window>(window);
+  readonly container = input<string | HTMLElement | Window | undefined>(undefined);
   readonly offsetTop = input<number>(0);
   readonly targetOffset = input<number>(0);
 
@@ -56,11 +57,12 @@ export class PrismAnchorComponent implements AfterViewInit, OnDestroy {
   private readonly links = contentChildren(forwardRef(() => PrismAnchorLinkComponent), { descendants: true });
   private readonly anchorContainer = viewChild<ElementRef<HTMLElement>>('anchorContainer');
 
-  ngAfterViewInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
+  constructor() {
+    afterNextRender(() => {
       this.initScrollSpy();
-    }
+    });
   }
+
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -83,14 +85,18 @@ export class PrismAnchorComponent implements AfterViewInit, OnDestroy {
   }
 
   private getScrollContainer(): HTMLElement | Window | null {
+    if (!isPlatformBrowser(this.platformId)) return null;
+
     const c = this.container();
     if (typeof c === 'string') {
-      return document.querySelector(c) as HTMLElement;
+      return this.document.querySelector(c) as HTMLElement;
     }
-    return c;
+    return c || this.document.defaultView || null;
   }
 
   private checkActiveLink(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     const links = this.links();
     if (!links.length) return;
 
@@ -103,7 +109,7 @@ export class PrismAnchorComponent implements AfterViewInit, OnDestroy {
 
     for (const link of links) {
       const href = link.href();
-      const element = document.getElementById(href.replace('#', ''));
+      const element = this.document.getElementById(href.replace('#', ''));
       if (element) {
         const rect = element.getBoundingClientRect();
         // The element is active if its top is above the threshold
@@ -120,21 +126,15 @@ export class PrismAnchorComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  private getScrollTop(): number {
-    const container = this.getScrollContainer();
-    if (container instanceof Window) {
-      return window.scrollY || document.documentElement.scrollTop;
-    }
-    return container?.scrollTop || 0;
-  }
-
   private getContainerOffset(): number {
     const container = this.getScrollContainer();
-    if (container instanceof Window) return 0;
-    return container?.getBoundingClientRect().top || 0;
+    if (!container || (typeof Window !== 'undefined' && container instanceof Window)) return 0;
+    return (container as HTMLElement).getBoundingClientRect().top || 0;
   }
 
   updateInkBar(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     const activeHref = this.activeLink();
     if (!activeHref) {
       this.inkBarVisible.set(false);
@@ -163,26 +163,31 @@ export class PrismAnchorComponent implements AfterViewInit, OnDestroy {
   }
 
   private scrollToTarget(href: string): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     const targetId = href.startsWith('#') ? href.substring(1) : href;
-    const target = document.getElementById(targetId);
+    const target = this.document.getElementById(targetId);
     
     if (target) {
       const scrollContainer = this.getScrollContainer();
       if (!scrollContainer) return;
 
-      if (scrollContainer instanceof Window) {
+      const win = this.document.defaultView;
+      if (!win) return;
+
+      if (typeof Window !== 'undefined' && scrollContainer instanceof Window) {
         const rect = target.getBoundingClientRect();
-        const top = rect.top + window.scrollY - this.targetOffset();
-        window.scrollTo({
+        const top = rect.top + (win.scrollY || win.pageYOffset) - this.targetOffset();
+        win.scrollTo({
           top,
           behavior: 'smooth'
         });
       } else {
         const rect = target.getBoundingClientRect();
-        const containerRect = scrollContainer.getBoundingClientRect();
-        const top = scrollContainer.scrollTop + (rect.top - containerRect.top) - this.targetOffset();
+        const containerRect = (scrollContainer as HTMLElement).getBoundingClientRect();
+        const top = (scrollContainer as HTMLElement).scrollTop + (rect.top - containerRect.top) - this.targetOffset();
         
-        scrollContainer.scrollTo({
+        (scrollContainer as HTMLElement).scrollTo({
           top,
           behavior: 'smooth'
         });

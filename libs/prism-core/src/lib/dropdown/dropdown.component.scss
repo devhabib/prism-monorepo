@@ -1,0 +1,120 @@
+@use 'prism-theme' as *;
+@use 'sass:map';
+
+.prism-dropdown-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  display: block;
+
+  // Transform for animation
+  transform: translateY(var(--prism-dropdown-offset, 10px));
+  transition:
+    opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.2s;
+
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+}
+
+.prism-dropdown-content {
+  min-width: 180px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: $space-xs 0;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  [data-theme="dark"] & {
+    background: var(--surface-800);
+    border-color: var(--surface-700);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.prism-menu-item {
+  display: flex !important;
+  align-items: center;
+  padding: $space-xs $space-md;
+  color: var(--surface-700);
+  transition: all 0.2s;
+  cursor: pointer;
+  font-size: 0.875rem;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  gap: $space-sm;
+  box-sizing: border-box;
+  outline: none;
+  user-select: none;
+  text-decoration: none;
+  font-weight: 500;
+
+  [data-theme="dark"] & {
+    color: var(--surface-200);
+  }
+
+  &:hover:not(.disabled) {
+    background: var(--surface-50);
+    color: var(--primary-main);
+
+    [data-theme="dark"] & {
+      background: var(--surface-700);
+    }
+  }
+
+  &:focus-visible:not(.disabled) {
+    background: var(--surface-50);
+    color: var(--primary-main);
+    box-shadow: inset 0 0 0 2px var(--primary-main);
+
+    [data-theme="dark"] & {
+      background: var(--surface-700);
+    }
+  }
+
+  &.disabled {
+    color: var(--surface-400);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  // Support for text-danger coloring via utility classes
+  &.text-danger-600 {
+    color: var(--danger-main);
+
+    &:hover:not(.disabled) {
+      background: rgba(239, 68, 68, 0.08);
+      color: var(--danger-main);
+    }
+  }
+
+  prism-icon {
+    font-size: 1.125rem;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.prism-menu-divider {
+  height: 1px;
+  margin: $space-xs 0;
+  background: var(--surface-100);
+
+  [data-theme="dark"] & {
+    background: var(--surface-700);
+  }
+}

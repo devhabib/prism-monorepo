@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../../../../libs/prism-theme/src/lib/index' as *;
+@use 'prism-theme' as *;
 
 .smoke-test {
   padding: 4rem;
@@ -7,7 +7,7 @@
   margin: 0 auto;
 
   h1 {
-    color: map.get($primary, main); // Updated to use map.get
+    color: map.get($primary, main); 
     font-size: 3rem;
   }
 
@@ -19,15 +19,15 @@
   }
 
   .card {
-    background: map.get($surface, 0); // Updated to use map.get
-    border: 1px solid map.get($surface, 200); // Updated to use map.get
+    background: map.get($surface, 0); 
+    border: 1px solid map.get($surface, 200); 
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 
     h2 {
       margin-bottom: 1rem;
-      color: map.get($surface, 800); // Updated to use map.get
+      color: map.get($surface, 800); 
     }
   }
 
@@ -40,11 +40,11 @@
     text-align: center;
 
     &.primary {
-      background-color: map.get($primary, main); // Updated to use map.get
+      background-color: map.get($primary, main); 
     }
 
     &.secondary {
-      background-color: map.get($surface, 500); // Using new Secondary (Slate)
+      background-color: map.get($surface, 500); 
     }
   }
 }

@@ -13,7 +13,7 @@ import { PrismTabComponent } from '../tabs/tab.component';
         <prism-tab-group variant="pill">
           <prism-tab label="Preview">
             <!-- Preview Container -->
-             <div class="p-8 bg-surface-50 dark:bg-surface-900/30 rounded-lg border border-dashed border-surface-200 dark:border-surface-700 mt-4 overflow-x-auto">
+             <div class="p-8 bg-surface-50 dark:bg-surface-900/30 rounded-lg border border-dashed border-surface-200 dark:border-surface-700 mt-4">
                <ng-content select="[preview]" />
              </div>
           </prism-tab>
