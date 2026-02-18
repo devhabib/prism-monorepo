@@ -46,7 +46,7 @@ export class SidebarComponent {
         { label: 'Breadcrumb', route: '/components/breadcrumb', icon: 'arrow-right-s-line' },
         { label: 'Dropdown', route: '/components/dropdown', icon: 'arrow-down-s-line' },
         // { label: 'Menu', route: '/components/menu', icon: 'menu-line' },
-        { label: 'Pagination', route: '/components/paginator', icon: 'number-1' },
+        { label: 'Pagination', route: '/components/pagination', icon: 'number-1' },
         { label: 'Steps', route: '/components/steps', icon: 'list-check' },
         { label: 'Tabs', route: '/components/tabs', icon: 'more-line' }
       ]

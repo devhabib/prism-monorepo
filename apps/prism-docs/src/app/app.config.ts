@@ -18,16 +18,21 @@ import * as icons from '@devynelogic/prism-icons';
 import { 
   piSearchLine, 
   piFileCopyLine, 
-  piEditLine, 
   piArrowUpLine, 
   piMailFill, 
   piAlertFill, 
   piLayoutMasonryFill, 
   piMore2Fill,
+  piMoreLine,
   piHome4Line,
   piArrowDownSLine,
   piLockLine,
-  piLogoutBoxRLine
+  piLogoutBoxRLine,
+  piArrowLeftSLine,
+  piArrowRightSLine,
+  piEyeLine,
+  piEditLine,
+  piDeleteBinLine
 } from '@devynelogic/prism-icons';
 
 export const appConfig: ApplicationConfig = {
@@ -49,10 +54,15 @@ export const appConfig: ApplicationConfig = {
         piAlertFill, 
         piLayoutMasonryFill, 
         piMore2Fill,
+        piMoreLine,
         piHome4Line,
         piArrowDownSLine,
         piLockLine,
-        piLogoutBoxRLine
+        piLogoutBoxRLine,
+        piArrowLeftSLine,
+        piArrowRightSLine,
+        piEyeLine,
+        piDeleteBinLine
       ]);
 
       // Register all icons from bundle

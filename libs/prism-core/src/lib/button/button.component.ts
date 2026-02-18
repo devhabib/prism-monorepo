@@ -1,10 +1,12 @@
 import { Component, input, computed, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { PrismIconComponent } from '../icon/icon.component';
+
 @Component({
   selector: 'prism-button',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PrismIconComponent],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

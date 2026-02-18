@@ -10,15 +10,15 @@ import {
 } from '@angular/core';
 import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import { PrismColumn, SortConfig } from './datatable.types';
-import { PrismPaginatorComponent } from '../paginator/paginator.component';
-import { PageEvent } from '../paginator/paginator.types';
+import { PrismPaginationComponent } from '../pagination/pagination.component';
+import { PageEvent } from '../pagination/pagination.types';
 import { PrismCheckboxComponent } from '../checkbox/checkbox.component';
 import { PrismEmptyComponent } from '../empty/empty.component';
 
 @Component({
   selector: 'prism-table',
   standalone: true,
-  imports: [CommonModule, NgTemplateOutlet, PrismPaginatorComponent, PrismCheckboxComponent, PrismEmptyComponent],
+  imports: [CommonModule, NgTemplateOutlet, PrismPaginationComponent, PrismCheckboxComponent, PrismEmptyComponent],
   templateUrl: './datatable.component.html',
   styleUrl: './datatable.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,7 +39,8 @@ export class PrismTableComponent<T> {
   // New Inputs
   globalFilter = input<string>('');
   paginator = input(false);
-  rows = input(10);
+  rows = model(10);
+  pageIndex = model(0);
   
   // Selection Inputs
   selectionMode = input<'single' | 'multiple' | null>(null);
@@ -47,7 +48,7 @@ export class PrismTableComponent<T> {
 
   // State
   readonly sortConfig = signal<SortConfig<T> | null>(null);
-  readonly first = signal(0); // Pagination state
+  readonly first = computed(() => this.pageIndex() * this.rows());
   
   // Selection Model
   selection = model<T[] | T | null>(null);
@@ -117,7 +118,8 @@ export class PrismTableComponent<T> {
   }
 
   onPageChange(event: PageEvent): void {
-    this.first.set(event.first);
+    this.pageIndex.set(event.page);
+    this.rows.set(event.pageSize);
     this.page.emit(event);
   }
 

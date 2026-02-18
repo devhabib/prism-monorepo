@@ -1,0 +1,114 @@
+@use '../../../../prism-theme/src/lib/index' as *;
+
+:host {
+  display: block;
+}
+
+.prism-pagination {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: center;
+  gap: $space-md;
+  row-gap: $space-sm;
+  color: var(--text-main);
+  font-size: 0.875rem;
+
+  &-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: $space-xs;
+  }
+
+  &-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: var(--text-muted);
+  }
+
+  &-options {
+    margin-left: $space-sm;
+  }
+
+  &-jumper {
+    display: flex;
+    align-items: center;
+    gap: $space-xs;
+    margin-left: $space-sm;
+
+    &-input {
+      width: 48px;
+      height: 32px;
+      padding: 0 $space-xs;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface-0);
+      color: var(--text-main);
+      text-align: center;
+      transition: all 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: var(--primary-500);
+        box-shadow: 0 0 0 2px rgba($primary-500, 0.1);
+      }
+    }
+  }
+
+  // Simple Mode
+  &-simple {
+    &-container {
+      display: flex;
+      align-items: center;
+      gap: $space-sm;
+    }
+
+    &-content {
+      display: flex;
+      align-items: center;
+      gap: $space-xs;
+    }
+
+    &-input {
+      width: 48px;
+      height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface-0);
+      color: var(--text-main);
+      text-align: center;
+      font-size: 0.875rem;
+
+      &:focus {
+        outline: none;
+        border-color: var(--primary-500);
+      }
+    }
+
+    &-slash {
+      color: var(--text-muted);
+    }
+  }
+}
+
+// Dark Theme Adjustments if needed
+[data-theme="dark"] {
+  .prism-pagination {
+    &-jumper-input,
+    &-simple-input {
+      background: var(--surface-800);
+    }
+  }
+}

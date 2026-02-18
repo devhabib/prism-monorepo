@@ -56,10 +56,10 @@
 </div>
 
 @if (paginator()) {
-  <prism-paginator 
-    [totalRecords]="filteredData().length" 
-    [rows]="rows()" 
-    [first]="first()"
+  <prism-pagination 
+    [total]="filteredData().length" 
+    [(pageSize)]="rows" 
+    [(pageIndex)]="pageIndex"
     (pageChange)="onPageChange($event)">
-  </prism-paginator>
+  </prism-pagination>
 }

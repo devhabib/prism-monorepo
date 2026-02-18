@@ -87,7 +87,11 @@ export type SelectOption = {
         }
         
         @if (isOpen()) {
-          <div class="prism-select__dropdown" (click)="onDropdownClick($event)" (keydown)="$event.stopPropagation()" tabindex="-1">
+          <div class="prism-select__dropdown" 
+               [style.maxHeight]="maxHeight()"
+               (click)="onDropdownClick($event)" 
+               (keydown)="$event.stopPropagation()" 
+               tabindex="-1">
             <!-- Search for single select only -->
             @if (searchable() && !multiple()) {
               <div class="prism-select__search">
@@ -154,6 +158,8 @@ export class PrismSelectComponent {
   searchable = input<boolean>(false);
   multiple = input<boolean>(false);
   closeOnOutsideClick = input<boolean>(true);
+  size = input<'sm' | 'md' | 'lg'>('md');
+  maxHeight = input<string>('300px');
   
   value = model<unknown | unknown[]>(null);
   

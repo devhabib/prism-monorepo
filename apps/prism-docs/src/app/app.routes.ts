@@ -81,8 +81,8 @@ export const appRoutes: Route[] = [
       },
       */
       {
-        path: 'components/paginator',
-        loadComponent: () => import('./pages/components/paginator-demo/paginator-demo.component').then(m => m.PaginatorDemoComponent),
+        path: 'components/pagination',
+        loadComponent: () => import('./pages/components/pagination-demo/pagination-demo.component').then(m => m.PaginationDemoComponent),
       },
       {
         path: 'components/steps',

@@ -8,7 +8,7 @@ import { PrismTabComponent } from '../tabs/tab.component';
   standalone: true,
   imports: [CommonModule, PrismTabGroupComponent, PrismTabComponent],
   template: `
-    <div class="border border-surface-200 dark:border-surface-700 rounded-xl overflow-hidden bg-surface-0 dark:bg-surface-800">
+    <div class="border border-surface-200 dark:border-surface-700 rounded-xl bg-surface-0 dark:bg-surface-800">
       <div class="border-b border-surface-200 dark:border-surface-700 p-4 bg-surface-50 dark:bg-surface-900/50">
         <prism-tab-group variant="pill">
           <prism-tab label="Preview">

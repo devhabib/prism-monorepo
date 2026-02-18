@@ -1,0 +1,111 @@
+<nav class="prism-pagination" [class.prism-pagination-simple]="simple()" aria-label="Pagination Navigation">
+  @if (simple()) {
+    <div class="prism-pagination-simple-container">
+      <prism-button
+        variant="text"
+        icon="arrow-left-s-line"
+        [size]="size()"
+        [disabled]="pageIndex() === 0"
+        (click)="handlePageChange(pageIndex() - 1)"
+        aria-label="Previous Page"
+      />
+      
+      <div class="prism-pagination-simple-content">
+        <input 
+          type="text" 
+          class="prism-pagination-simple-input"
+          [value]="pageIndex() + 1"
+          (input)="onJumpInput($event)"
+          (keyup.enter)="handleJump($event)"
+          (blur)="handleJump($event)"
+        />
+        <span class="prism-pagination-simple-slash">/</span>
+        <span class="prism-pagination-simple-total">{{ totalPages() }}</span>
+      </div>
+
+      <prism-button
+        variant="text"
+        icon="arrow-right-s-line"
+        [size]="size()"
+        [disabled]="pageIndex() === totalPages() - 1"
+        (click)="handlePageChange(pageIndex() + 1)"
+        aria-label="Next Page"
+      />
+    </div>
+  } @else {
+    <ul class="prism-pagination-list">
+      <!-- Prev Button -->
+      <li class="prism-pagination-item">
+        <prism-button
+          variant="text"
+          icon="arrow-left-s-line"
+          [size]="size()"
+          [disabled]="pageIndex() === 0"
+          (click)="handlePageChange(pageIndex() - 1)"
+          aria-label="Previous Page"
+        />
+      </li>
+
+      <!-- Page Numbers -->
+      @for (item of range(); track $index) {
+        <li class="prism-pagination-item">
+          @if (item === '...') {
+            <span class="prism-pagination-ellipsis">
+              <prism-icon name="more-line" />
+            </span>
+          } @else {
+            <prism-button
+              [variant]="item === pageIndex() + 1 ? 'primary' : 'text'"
+              [size]="size()"
+              (click)="handlePageChange(castToNumber(item) - 1)"
+            >
+              {{ item }}
+            </prism-button>
+          }
+        </li>
+      }
+
+      <!-- Next Button -->
+      <li class="prism-pagination-item">
+        <prism-button
+          variant="text"
+          icon="arrow-right-s-line"
+          [size]="size()"
+          [disabled]="pageIndex() === totalPages() - 1"
+          (click)="handlePageChange(pageIndex() + 1)"
+          aria-label="Next Page"
+        />
+      </li>
+    </ul>
+  }
+
+  <!-- Size Changer -->
+  @if (showSizeChanger()) {
+    <div class="prism-pagination-options">
+      <prism-select
+        [options]="sizeOptions()"
+        [value]="pageSize()"
+        (valueChange)="handleSizeChange($any($event))"
+        [size]="size()"
+        [maxHeight]="'200px'"
+        style="width: 120px;"
+      />
+    </div>
+  }
+
+  <!-- Quick Jumper -->
+  @if (showQuickJumper() && !simple()) {
+    <div class="prism-pagination-jumper">
+      Go to
+      <input 
+        #jumperInput
+        type="text" 
+        class="prism-pagination-jumper-input"
+        [value]="jumpPageIndex()"
+        (input)="onJumpInput($event)"
+        (keyup.enter)="handleJump($event)"
+      />
+      page
+    </div>
+  }
+</nav>

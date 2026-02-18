@@ -1,0 +1,95 @@
+<prism-demo-page-header 
+  title="Pagination" 
+  description="A component to divide long content into separate pages." />
+
+<prism-tab-group>
+  <prism-tab label="Examples">
+    <div class="demo-container">
+
+      <!-- Basic Usage -->
+      <prism-demo-section title="Basic Usage" description="Standard pagination for most use cases.">
+        <prism-demo-card>
+          <div preview class="demo-preview">
+            <prism-pagination [total]="50" [(pageIndex)]="basicPageIndex" (pageChange)="onPageChange($event, 'basic')" />
+            <div class="mt-4 text-sm text-muted">Current Page: {{ basicPageIndex() + 1 }}</div>
+          </div>
+          <prism-code-block code [code]="basicCode" language="html" />
+        </prism-demo-card>
+      </prism-demo-section>
+
+      <!-- Changer -->
+      <prism-demo-section title="Changer" description="Pagination with items per page selector.">
+        <prism-demo-card>
+          <div preview class="demo-preview" style="gap: 24px; flex-direction: column; align-items: flex-start;">
+            <prism-pagination 
+              [total]="500" 
+              [(pageIndex)]="changerPageIndex" 
+              [(pageSize)]="changerPageSize"
+              [showSizeChanger]="true" 
+              (pageChange)="onPageChange($event, 'changer')"
+            />
+            <div class="text-sm text-muted">
+              Page Index: {{ changerPageIndex() }}, Page Size: {{ changerPageSize() }}
+            </div>
+          </div>
+          <prism-code-block code [code]="changerCode" language="html" />
+        </prism-demo-card>
+      </prism-demo-section>
+
+      <!-- Quick Jumper -->
+      <prism-demo-section title="Jump" description="Pagination with go-to page input.">
+        <prism-demo-card>
+          <div preview class="demo-preview">
+            <prism-pagination 
+              [total]="500" 
+              [(pageIndex)]="jumpPageIndex" 
+              [showQuickJumper]="true" 
+              (pageChange)="onPageChange($event, 'jump')"
+            />
+          </div>
+          <prism-code-block code [code]="jumpCode" language="html" />
+        </prism-demo-card>
+      </prism-demo-section>
+
+      <!-- Simple Mode -->
+      <prism-demo-section title="Simple Mode" description="Minimalist style for small containers or tight spaces.">
+        <prism-demo-card>
+          <div preview class="demo-preview">
+            <prism-pagination 
+              [total]="50" 
+              [(pageIndex)]="simplePageIndex" 
+              [simple]="true" 
+              (pageChange)="onPageChange($event, 'simple')"
+            />
+          </div>
+          <prism-code-block code [code]="simpleCode" language="html" />
+        </prism-demo-card>
+      </prism-demo-section>
+
+      <!-- Theming -->
+      <prism-demo-section title="Theming" description="Toggle between light and dark themes to see how the component adapts.">
+        <prism-demo-card>
+          <div preview class="demo-preview" [attr.data-theme]="isDarkMode() ? 'dark' : 'light'" [style.background]="isDarkMode() ? '#0f172a' : '#ffffff'" style="padding: 2rem; border-radius: 8px; border: 1px solid var(--border); width: 100%;">
+            <div class="flex items-center gap-4 mb-6">
+              <prism-switch [(checked)]="isDarkMode" />
+              <span [style.color]="isDarkMode() ? '#ffffff' : '#0f172a'">{{ isDarkMode() ? 'Dark' : 'Light' }} Mode</span>
+            </div>
+            
+            <prism-pagination [total]="100" [showSizeChanger]="true" [showQuickJumper]="true" />
+          </div>
+        </prism-demo-card>
+      </prism-demo-section>
+
+    </div>
+  </prism-tab>
+
+  <prism-tab label="API">
+    <prism-demo-section title="PrismPagination Inputs">
+      <prism-api-table [data]="apiInputs" />
+    </prism-demo-section>
+
+    <prism-demo-section title="PrismPagination Outputs" class="mt-8">
+      <prism-api-table [data]="apiOutputs" />
+    </prism-demo-section>
+  </prism-tab>
+</prism-tab-group>

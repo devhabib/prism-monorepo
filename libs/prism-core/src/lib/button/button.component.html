@@ -3,16 +3,18 @@
   [class]="buttonClasses()"
 >
   @if (loading()) {
-    <i class="ri-loader-4-line p-button-loading-icon"></i>
+    <prism-icon name="loader-4-line" class="p-button-loading-icon" />
   } @else if (icon() && iconPos() === 'left') {
-    <i [class]="icon()" class="p-button-icon-left"></i>
+    <prism-icon [name]="icon()!" class="p-button-icon-left" />
   }
 
   @if (label()) {
     <span class="p-button-label">{{ label() }}</span>
+  } @else {
+    <ng-content />
   }
 
   @if (!loading() && icon() && iconPos() === 'right') {
-    <i [class]="icon()" class="p-button-icon-right"></i>
+    <prism-icon [name]="icon()!" class="p-button-icon-right" />
   }
 </button>
