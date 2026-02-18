@@ -1,35 +1,61 @@
-I am ready to implement the "Prism Core" Design System. You are the Senior Angular Architect.
+**Role:** Lead Angular Architect & Prompt Engineer
+**Context:** This project is a high-traffic NPM ecosystem (`@devynelogic/prism-core`, `prism-icons`, `prism-theme`) built on an Nx Monorepo.
+**Goal:** v0.0.5 Major Update — 100% Type Safety, 100% Test Coverage, 0 Lint Errors.
 
-**Current State:**
-The monorepo structure is set. We have a `libs/prism-theme` library waiting for code.
+---
 
-**Your Task:**
-Populate the Design Token System in `libs/prism-theme/src/lib/core/`. You must write production-ready SCSS code for the following files.
+## **1. Strict Project Architecture**
 
-**1. \_variables.scss** (The DNA)
+You **MUST** respect the library boundaries and import paths defined in `tsconfig.base.json`:
 
-- Define a semantic color palette:
-  - `$primary`: A professional tech blue (e.g., #2563EB).
-  - `$surface`: A clean slate scale (for cards/modals).
-  - `$semantic`: Success, Warning, Danger.
-- Define a spacing scale (`$space-xs` to `$space-xxl`) using `rem`.
-- Define z-indices as a map (`$z-layers`) to prevent stacking context wars.
+- **`@devynelogic/prism-core`**: Main component logic. Located in `libs/prism-core`.
+- **`@devynelogic/prism-icons`**: SVG/Icon registry logic. Located in `libs/prism-icons`.
+- **`@devynelogic/prism-theme`**: SASS variables, tokens, and global styles. Located in `libs/prism-theme`.
+- **Documentation App**: Located in `apps/prism-docs`.
 
-**2. \_functions.scss** (The Tools)
+---
 
-- Write a `rem($pixels)` function that converts px to rem (assume 16px base).
-- Write a `contrast-color($color)` function that automatically returns black or white text based on the background brightness (WCAG compliance).
+## **2. Component Standards (Angular 21)**
 
-**3. \_mixins.scss** (The Logic)
+Every component created or refactored must adhere to these "No Mistakes" rules:
 
-- `flex-center`: Quickly center items.
-- `glassmorphism`: A mixin for that modern, frosted-glass UI effect (backdrop-filter).
-- `focus-ring`: A standard, accessible focus outline for interactive elements.
+- **Standalone Everything:** No `NgModules`. and never use `standalone: true`. Angular 21 default support standalone
+- **Signals Only:** Use `signal()`, `computed()`, and `effect()` for state. Avoid `BehaviorSubject` unless necessary for internal service events.
+- **Inputs/Outputs:** Use `input()`, `input.required()`, and `output()`.
+- **Control Flow:** Use `@if`, `@for`, `@switch`. Never use `*ngIf` or `*ngFor`.
+- **Animations Workaround:** Do **NOT** use `@angular/animations`. Use CSS Grid height transitions (the `0fr` to `1fr` trick) or the Web Animations API directly to maintain a lightweight bundle.
 
-**4. \_reset.scss** (The Foundation)
+---
 
-- Apply a modern box-sizing reset.
-- Remove default margins from `body`, `h1-h6`, `p`.
+## **3. Build & Test Ecosystem**
 
-**Execution Rule:**
-Write the code for each file clearly. Do not explain "what is a variable"; just provide the robust, senior-level code.
+- **Vitest:** Tests must run via `npx nx test prism-core`.
+- **Sass Resolution:** Always configure `loadPaths` in `vite.config.ts` or `project.json` to include `libs/prism-theme/src/lib` so `@use '@devynelogic/prism-theme'` works.
+- **Linting:** Use `eslint` with Angular-recommended rules. No `any` types. Strictly typed events.
+
+---
+
+## **4. SASS & Theming Protocol**
+
+- **Variables:** Always import via `@use '@devynelogic/prism-theme' as *;`.
+- **Prefixing:** All CSS classes must start with `.prism-` to avoid conflicts.
+- **Theming:** Components must support both `.prism-theme-light` and `.prism-theme-dark`.
+
+---
+
+## **5. Export Strategy**
+
+- Any new component **MUST** be exported in `libs/prism-core/src/index.ts`.
+- Public API for styles must be updated in `libs/prism-theme/src/lib/_index.scss` using `@forward`.
+
+---
+
+## **Prompting Instructions for Antigravity**
+
+> "When generating code, verify the file path against `nx.json`. Use Angular Signal-based architecture. If styling, check `libs/prism-theme` for existing variables. Before finishing, generate a Vitest `.spec.ts` file ensuring 100% branch coverage."
+
+---
+
+### **Next Step**
+
+I am now synced with this master configuration. Would you like me to start by **reviewing the Table component** on your current codebase to align it with these v0.0.5 standards?

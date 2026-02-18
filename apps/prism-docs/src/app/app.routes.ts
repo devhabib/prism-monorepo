@@ -74,10 +74,12 @@ export const appRoutes: Route[] = [
         path: 'components/dropdown',
         loadComponent: () => import('./pages/components/dropdown-demo/dropdown-demo.component').then(m => m.DropdownDemoComponent),
       },
+      /*
       {
         path: 'components/menu',
         loadComponent: () => import('./pages/components/menu-demo/menu-demo.component').then(m => m.MenuDemoComponent),
       },
+      */
       {
         path: 'components/paginator',
         loadComponent: () => import('./pages/components/paginator-demo/paginator-demo.component').then(m => m.PaginatorDemoComponent),
