@@ -21,7 +21,8 @@
     "@angular/forms": "^21.1.0",
     "@angular/platform-browser": "^21.1.0",
     "@devynelogic/prism-icons": "0.0.4",
-    "rxjs": "~7.8.0"
+    "rxjs": "~7.8.0",
+    "vitest": ">=1.0.0"
   },
   "publishConfig": {
     "access": "public"

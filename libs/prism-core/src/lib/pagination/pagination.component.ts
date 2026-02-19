@@ -80,8 +80,8 @@ export class PrismPaginationComponent {
     const range: PaginationRangeItem[] = [];
     const left = current - delta;
     const right = current + delta;
-    let showLeftEllipsis = left > 2;
-    let showRightEllipsis = right < total - 1;
+    const showLeftEllipsis = left > 2;
+    const showRightEllipsis = right < total - 1;
 
     range.push(1);
 

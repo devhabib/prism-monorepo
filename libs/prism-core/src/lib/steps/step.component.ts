@@ -1,22 +1,27 @@
-import { Component, ChangeDetectionStrategy, input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, model, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PrismIconComponent } from '../icon/icon.component';
 
 @Component({
   selector: 'prism-step',
-  standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PrismIconComponent],
   template: `
-    <div class="prism-step-item">
+    <div class="prism-step-item"
+         [class.prism-step-item-process]="status() === 'process'"
+         [class.prism-step-item-wait]="status() === 'wait'"
+         [class.prism-step-item-finish]="status() === 'finish'"
+         [class.prism-step-item-error]="status() === 'error'"
+         [class.prism-step-item-last]="isLast()">
       <div class="prism-step-item-container">
         <div class="prism-step-item-tail"></div>
         <div class="prism-step-item-icon">
           <span class="prism-step-icon">
             @if (status() === 'finish') {
-              <i class="ri-check-line"></i>
+              <prism-icon name="check-line" size="18" />
             } @else if (status() === 'error') {
-              <i class="ri-close-line"></i>
+              <prism-icon name="close-line" size="18" />
             } @else {
-              {{ index() + 1 }}
+              <span class="prism-step-index">{{ index() + 1 }}</span>
             }
           </span>
         </div>
@@ -30,10 +35,21 @@ import { CommonModule } from '@angular/common';
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: [`
+    :host {
+      display: inline-block;
+      flex: 1;
+      overflow: hidden;
+      vertical-align: top;
+    }
+  `]
 })
 export class PrismStepComponent {
-  readonly title = input<string>('');
+  readonly title = input.required<string>();
   readonly description = input<string>('');
-  readonly status = input<'wait' | 'process' | 'finish' | 'error'>('wait');
-  readonly index = input<number>(0);
+  
+  // These are managed by the parent PrismStepsComponent but can be overridden
+  readonly status = model<'wait' | 'process' | 'finish' | 'error'>('wait');
+  readonly index = model<number>(0);
+  readonly isLast = signal<boolean>(false);
 }

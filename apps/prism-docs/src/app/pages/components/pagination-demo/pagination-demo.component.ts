@@ -10,6 +10,7 @@ import {
   PrismTabGroupComponent,
   PrismTabComponent,
   PrismSwitchComponent,
+  PageEvent
 } from '@devynelogic/prism-core';
 
 @Component({
@@ -75,7 +76,7 @@ export class PaginationDemoComponent {
   [simple]="true" 
 />`;
 
-  onPageChange(event: any, type: string): void {
-    console.log(`Page change for ${type}:`, event);
+  onPageChange(event: PageEvent, type: string): void {
+    console.warn(`Page change for ${type}:`, event);
   }
 }

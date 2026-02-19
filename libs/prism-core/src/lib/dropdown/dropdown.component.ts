@@ -197,6 +197,14 @@ export class PrismDropdownTriggerDirective implements OnDestroy {
     if (this._unlistenMenuLeave) {
       this._unlistenMenuLeave();
     }
+
+    // Cleanup: Remove menu from body if it was moved there
+    if (this._isMenuMoved && this.menu() && this.menu().elementRef) {
+      const menuEl = this.menu().elementRef.nativeElement;
+      if (menuEl && menuEl.parentNode === this.document.body) {
+        this.renderer.removeChild(this.document.body, menuEl);
+      }
+    }
   }
 
   onDocumentClick(event: MouseEvent): void {

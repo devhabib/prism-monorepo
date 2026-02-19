@@ -1,59 +1,102 @@
-<prism-demo-page-header title="Steps" subtitle="A navigation bar that guides users through the steps of a task." />
+<prism-demo-page-header title="Steps" description="A navigation bar that guides users through the steps of a task.">
+</prism-demo-page-header>
 
-<prism-tab-group>
+<prism-tab-group variant="line" class="mt-8">
   <prism-tab label="Examples">
-    <div class="space-y-8">
-      <prism-demo-section title="Basic Usage" description="The simplest use of steps.">
-        <div class="border border-surface-200 rounded-xl overflow-hidden bg-surface-0">
-          <prism-tab-group variant="pill">
-            <prism-tab label="Preview">
-              <div class="p-8 flex flex-col gap-8 bg-surface-50">
-                <prism-steps [current]="current()">
-                  <prism-step title="Step 1" description="This is a description."></prism-step>
-                  <prism-step title="Step 2" description="This is a description."></prism-step>
-                  <prism-step title="Step 3" description="This is a description."></prism-step>
-                </prism-steps>
-                
-                <div class="flex gap-2">
-                  <prism-button (click)="prev()" [disabled]="current() === 0">Previous</prism-button>
-                  <prism-button (click)="next()" [disabled]="current() === 2">Next</prism-button>
-                </div>
-              </div>
-            </prism-tab>
-            <prism-tab label="Code">
-              <prism-code-block language="html" [code]="snippets.basic"></prism-code-block>
-            </prism-tab>
-          </prism-tab-group>
-        </div>
+    <div class="demo-content">
+      <prism-demo-section title="Basic" description="The simplest usage.">
+        <prism-demo-card>
+          <div preview class="demo-preview">
+            <prism-steps [current]="0">
+              <prism-step title="Finished" description="This is a description."></prism-step>
+              <prism-step title="In Progress" description="This is a description."></prism-step>
+              <prism-step title="Waiting" description="This is a description."></prism-step>
+            </prism-steps>
+          </div>
+          <prism-code-block code [code]="snippets.basic" language="html"></prism-code-block>
+        </prism-demo-card>
       </prism-demo-section>
 
-      <prism-demo-section title="Vertical" description="Vertical steps are more suitable for thin containers.">
-        <div class="border border-surface-200 rounded-xl overflow-hidden bg-surface-0">
-          <prism-tab-group variant="pill">
-            <prism-tab label="Preview">
-              <div class="p-8 flex flex-col gap-4 bg-surface-50">
-                <prism-steps direction="vertical" [current]="1">
-                  <prism-step title="Finished" description="This is a description."></prism-step>
-                  <prism-step title="In Progress" description="This is a description."></prism-step>
-                  <prism-step title="Waiting" description="This is a description."></prism-step>
-                </prism-steps>
-              </div>
-            </prism-tab>
-            <prism-tab label="Code">
-              <prism-code-block language="html" [code]="snippets.vertical"></prism-code-block>
-            </prism-tab>
-          </prism-tab-group>
-        </div>
+      <prism-demo-section title="Switch Step" description="Cooperate with the system and logs.">
+        <prism-demo-card>
+          <div preview class="demo-preview">
+            <prism-steps [(current)]="current">
+              <prism-step title="First" description="This is a description."></prism-step>
+              <prism-step title="Second" description="This is a description."></prism-step>
+              <prism-step title="Third" description="This is a description."></prism-step>
+            </prism-steps>
+            
+            <div style="margin-top: 24px;">
+              <prism-button (click)="prev()" [disabled]="current() === 0">Previous</prism-button>
+              <prism-button (click)="next()" [disabled]="current() === 2" variant="primary" style="margin-left: 8px;">Next</prism-button>
+            </div>
+          </div>
+          <prism-code-block code [code]="snippets.switch" language="html"></prism-code-block>
+        </prism-demo-card>
+      </prism-demo-section>
+
+      <prism-demo-section title="Vertical" description="Steps in vertical direction.">
+        <prism-demo-card>
+          <div preview class="demo-preview">
+            <div style="height: 300px;">
+              <prism-steps direction="vertical" [current]="1">
+                <prism-step title="Finished" description="This is a description."></prism-step>
+                <prism-step title="In Progress" description="This is a description."></prism-step>
+                <prism-step title="Waiting" description="This is a description."></prism-step>
+              </prism-steps>
+            </div>
+          </div>
+          <prism-code-block code [code]="snippets.vertical" language="html"></prism-code-block>
+        </prism-demo-card>
+      </prism-demo-section>
+
+
+
+      <prism-demo-section title="Error State" description="By using status='error', you can show an error state for the current step.">
+        <prism-demo-card>
+          <div preview class="demo-preview">
+            <prism-steps [current]="1" status="error">
+              <prism-step title="Finished" description="This is a description."></prism-step>
+              <prism-step title="Error" description="This is a description."></prism-step>
+              <prism-step title="Waiting" description="This is a description."></prism-step>
+            </prism-steps>
+          </div>
+          <prism-code-block code [code]="snippets.error" language="html"></prism-code-block>
+        </prism-demo-card>
+      </prism-demo-section>
+
+      <prism-demo-section title="Theming" description="Toggle between light and dark themes to see how the component adapts.">
+        <prism-demo-card>
+          <div preview class="demo-preview" 
+               [attr.data-theme]="isDarkMode() ? 'dark' : 'light'" 
+               [style.background]="isDarkMode() ? '#0f172a' : '#ffffff'" 
+               style="padding: 2rem; border-radius: 8px; border: 1px solid var(--border); width: 100%;">
+            
+            <div class="flex items-center gap-4 mb-6">
+              <prism-switch [(checked)]="isDarkMode" />
+              <span [style.color]="isDarkMode() ? '#ffffff' : '#0f172a'">{{ isDarkMode() ? 'Dark' : 'Light' }} Mode</span>
+            </div>
+            
+            <prism-steps [current]="1">
+              <prism-step title="Active" description="Currently active step."></prism-step>
+              <prism-step title="Waiting" description="Next step."></prism-step>
+            </prism-steps>
+          </div>
+          <prism-code-block code [code]="snippets.theming" language="html"></prism-code-block>
+        </prism-demo-card>
       </prism-demo-section>
     </div>
   </prism-tab>
 
   <prism-tab label="API">
-    <prism-demo-section title="PrismSteps API">
-      <prism-api-table [data]="apiData"></prism-api-table>
-    </prism-demo-section>
-    <prism-demo-section title="PrismStep API">
-      <prism-api-table [data]="stepApiData"></prism-api-table>
-    </prism-demo-section>
+    <div class="api-content mt-8">
+      <prism-demo-section title="PrismSteps (Container)">
+        <prism-api-table [data]="apiData"></prism-api-table>
+      </prism-demo-section>
+      
+      <prism-demo-section title="PrismStep (Item)">
+        <prism-api-table [data]="stepApiData"></prism-api-table>
+      </prism-demo-section>
+    </div>
   </prism-tab>
 </prism-tab-group>

@@ -2,6 +2,8 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PrismPaginationComponent } from './pagination.component';
 import { By } from '@angular/platform-browser';
+import { PrismIconRegistry } from '../icon/icon-registry.service';
+import { piMoreLine, piArrowLeftSLine, piArrowRightSLine } from '@devynelogic/prism-icons';
 
 describe('PrismPaginationComponent', () => {
   let component: PrismPaginationComponent;
@@ -10,7 +12,11 @@ describe('PrismPaginationComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PrismPaginationComponent],
+      providers: [PrismIconRegistry]
     }).compileComponents();
+
+    const registry = TestBed.inject(PrismIconRegistry);
+    registry.addIcons([piMoreLine, piArrowLeftSLine, piArrowRightSLine]);
 
     fixture = TestBed.createComponent(PrismPaginationComponent);
     component = fixture.componentInstance;
