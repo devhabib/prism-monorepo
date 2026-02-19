@@ -5,9 +5,7 @@ import {
   PrismCodeBlockComponent, 
   PrismDemoPageHeaderComponent,
   PrismDemoSectionComponent,
-  PrismDemoCardComponent,
-  PrismTabGroupComponent,
-  PrismTabComponent
+  PrismDemoCardComponent
 } from '@devynelogic/prism-core';
 
 @Component({
@@ -19,9 +17,7 @@ import {
     PrismCodeBlockComponent,
     PrismDemoPageHeaderComponent,
     PrismDemoSectionComponent,
-    PrismDemoCardComponent,
-    PrismTabGroupComponent,
-    PrismTabComponent
+    PrismDemoCardComponent
   ],
   templateUrl: './select-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

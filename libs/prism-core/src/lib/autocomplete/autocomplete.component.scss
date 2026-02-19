@@ -1,0 +1,87 @@
+@use '../../../../prism-theme/src/lib/index' as *;
+
+.prism-autocomplete {
+  position: relative;
+  width: 100%;
+
+  &__loader {
+    animation: prism-spin 1s linear infinite;
+    color: var(--primary-500);
+  }
+
+  &__panel {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background-color: var(--surface-0);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 1000;
+    padding: 0.375rem;
+    list-style: none;
+    margin: 0;
+    animation: prismAutocompleteSlideDown 0.2s ease;
+
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__option {
+    padding: 0.625rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: var(--text-main);
+    transition: all 0.15s ease;
+    outline: none;
+
+    &:hover,
+    &--active {
+      background-color: var(--surface-100);
+    }
+
+    &[aria-selected="true"] {
+      background-color: var(--primary-50);
+      color: var(--primary-500);
+      font-weight: 500;
+
+      [data-theme="dark"] & {
+        background-color: rgba(79, 70, 229, 0.15);
+      }
+    }
+
+    &--empty {
+      color: var(--text-muted);
+      cursor: default;
+      text-align: center;
+      padding: 1.5rem 1rem;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+@keyframes prismAutocompleteSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes prism-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

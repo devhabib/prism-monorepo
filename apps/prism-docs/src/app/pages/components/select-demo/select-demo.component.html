@@ -2,16 +2,12 @@
 </prism-demo-page-header>
 
 <prism-demo-section title="Basic Usage">
-  <prism-demo-card>
-    <prism-tab-group variant="pill">
-      <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-select label="Choose an option"></prism-select>
-        </div>
-      </prism-tab>
-      <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
-      </prism-tab>
-    </prism-tab-group>
+  <prism-demo-card [minHeight]="'300px'">
+    <div preview class="demo-preview">
+      <div style="width: 300px;">
+        <prism-select label="Choose an option"></prism-select>
+      </div>
+    </div>
+    <prism-code-block code [code]="snippets.usage" language="html"></prism-code-block>
   </prism-demo-card>
 </prism-demo-section>

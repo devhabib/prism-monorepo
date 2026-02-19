@@ -1,17 +1,60 @@
-<prism-demo-page-header title="AutoComplete" subtitle="An input component that provides suggestions as the user types.">
+<prism-demo-page-header title="AutoComplete" description="An input component that provides suggestions as the user types.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
-  <prism-demo-card>
-    <prism-tab-group variant="pill">
-      <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-autocomplete />
-        </div>
-      </prism-tab>
-      <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
-      </prism-tab>
-    </prism-tab-group>
-  </prism-demo-card>
-</prism-demo-section>
+<prism-tab-group variant="line" class="mt-8">
+  <prism-tab label="Examples">
+    <div class="demo-content">
+      <prism-demo-section title="Basic Usage" description="The simplest usage of AutoComplete with static options.">
+        <prism-demo-card [minHeight]="'300px'">
+          <div preview class="demo-preview">
+            <div style="width: 300px;">
+              <prism-autocomplete [(value)]="basicValue" [options]="options" />
+              <p class="mt-4 text-sm text-muted">Selected: {{ basicValue() || 'None' }}</p>
+            </div>
+          </div>
+          <prism-code-block code [code]="snippets.basic" language="html"></prism-code-block>
+        </prism-demo-card>
+      </prism-demo-section>
+
+      <prism-demo-section title="Custom Filter" description="Using a custom filter function (e.g., 'Starts with' instead of default 'Contains').">
+        <prism-demo-card [minHeight]="'300px'">
+          <div preview class="demo-preview">
+            <div style="width: 300px;">
+              <prism-autocomplete 
+                [(value)]="customValue" 
+                [options]="options" 
+                [filterFn]="customFilter" 
+                placeholder="Starts with..." 
+              />
+            </div>
+          </div>
+          <prism-code-block code [code]="snippets.custom" language="html"></prism-code-block>
+        </prism-demo-card>
+      </prism-demo-section>
+
+      <prism-demo-section title="Async Search" description="Handle asynchronous data loading with the searchChange event.">
+        <prism-demo-card [minHeight]="'300px'">
+          <div preview class="demo-preview">
+            <div style="width: 300px;">
+              <prism-autocomplete 
+                [(value)]="asyncValue" 
+                [options]="options" 
+                [isLoading]="isLoading()"
+                (searchChange)="onSearchChange($event)" 
+              />
+            </div>
+          </div>
+          <prism-code-block code [code]="snippets.async" language="html"></prism-code-block>
+        </prism-demo-card>
+      </prism-demo-section>
+    </div>
+  </prism-tab>
+
+  <prism-tab label="API">
+    <div class="api-content mt-8">
+      <prism-demo-section title="PrismAutoComplete API">
+        <prism-api-table [data]="apiData"></prism-api-table>
+      </prism-demo-section>
+    </div>
+  </prism-tab>
+</prism-tab-group>
