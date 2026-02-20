@@ -1,0 +1,121 @@
+<div class="prism-transfer" [class.is-disabled]="disabled()">
+  
+  <!-- Left List -->
+  <div class="prism-transfer__list">
+    <div class="prism-transfer__list-header">
+      <prism-checkbox 
+        [checked]="leftCheckedAll()" 
+        [disabled]="disabled()"
+        (checkedChange)="toggleLeftAll($event)"
+      />
+      <span class="prism-transfer__list-title">
+        {{ leftSelected().length > 0 ? leftSelected().length + '/' : '' }}{{ leftItems().length }} {{ titles()[0] }}
+      </span>
+    </div>
+
+    @if (showSearch()) {
+      <div class="prism-transfer__list-search">
+        <input 
+          prismInput
+          type="text"
+          [ngModel]="leftSearch()" 
+          (ngModelChange)="leftSearch.set($event)" 
+          placeholder="Search items" 
+          [disabled]="disabled()"
+        />
+      </div>
+    }
+
+    <div class="prism-transfer__list-body" role="listbox">
+      @if (leftItems().length === 0) {
+        <prism-empty description="No data" />
+      } @else {
+        @for (item of leftItems(); track item.key) {
+          <div 
+            class="prism-transfer__item" 
+            [class.is-disabled]="item.disabled || disabled()"
+            (click)="!item.disabled && toggleLeftItem(item.key)"
+            (keydown.enter)="!item.disabled && toggleLeftItem(item.key)"
+            (keydown.space)="!item.disabled && toggleLeftItem(item.key); $event.preventDefault()"
+            [attr.aria-selected]="leftSelected().includes(item.key)"
+            role="option"
+            tabindex="-1"
+          >
+            <prism-checkbox [checked]="leftSelected().includes(item.key)" [disabled]="item.disabled || disabled()" />
+            <span class="prism-transfer__item-label">{{ item.label }}</span>
+          </div>
+        }
+      }
+    </div>
+  </div>
+
+  <!-- Operations -->
+  <div class="prism-transfer__operations">
+    <prism-button 
+      variant="outline" 
+      icon="arrow-right-s-line" 
+      class="prism-transfer__btn-right"
+      [disabled]="leftMoveDisabled()" 
+      (click)="moveToRight()"
+      size="sm"
+    />
+    <prism-button 
+      variant="outline" 
+      icon="arrow-left-s-line" 
+      class="prism-transfer__btn-left"
+      [disabled]="rightMoveDisabled()" 
+      (click)="moveToLeft()"
+      size="sm"
+    />
+  </div>
+
+  <!-- Right List -->
+  <div class="prism-transfer__list">
+    <div class="prism-transfer__list-header">
+      <prism-checkbox 
+        [checked]="rightCheckedAll()" 
+        [disabled]="disabled()"
+        (checkedChange)="toggleRightAll($event)"
+      />
+      <span class="prism-transfer__list-title">
+        {{ rightSelected().length > 0 ? rightSelected().length + '/' : '' }}{{ rightItems().length }} {{ titles()[1] }}
+      </span>
+    </div>
+
+    @if (showSearch()) {
+      <div class="prism-transfer__list-search">
+        <input 
+          prismInput
+          type="text"
+          [ngModel]="rightSearch()" 
+          (ngModelChange)="rightSearch.set($event)" 
+          placeholder="Search items" 
+          [disabled]="disabled()"
+        />
+      </div>
+    }
+
+    <div class="prism-transfer__list-body" role="listbox">
+      @if (rightItems().length === 0) {
+        <prism-empty description="No data" />
+      } @else {
+        @for (item of rightItems(); track item.key) {
+          <div 
+            class="prism-transfer__item" 
+            [class.is-disabled]="item.disabled || disabled()"
+            (click)="!item.disabled && toggleRightItem(item.key)"
+            (keydown.enter)="!item.disabled && toggleRightItem(item.key)"
+            (keydown.space)="!item.disabled && toggleRightItem(item.key); $event.preventDefault()"
+            [attr.aria-selected]="rightSelected().includes(item.key)"
+            role="option"
+            tabindex="-1"
+          >
+            <prism-checkbox [checked]="rightSelected().includes(item.key)" [disabled]="item.disabled || disabled()" />
+            <span class="prism-transfer__item-label">{{ item.label }}</span>
+          </div>
+        }
+      }
+    </div>
+  </div>
+
+</div>

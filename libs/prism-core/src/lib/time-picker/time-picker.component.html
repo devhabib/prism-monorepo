@@ -1,0 +1,131 @@
+<div
+  class="prism-time-picker"
+  [class.is-open]="isOpen()"
+  [class.is-disabled]="disabled()"
+>
+  <div
+    class="prism-time-picker__trigger"
+    (click)="toggleDropdown()"
+    (keydown.enter)="toggleDropdown()"
+    tabindex="0"
+    role="button"
+    aria-haspopup="listbox"
+    [attr.aria-expanded]="isOpen()"
+  >
+    <span class="prism-time-picker__value" [class.is-placeholder]="!value()">
+      {{ formattedTime() || placeholder() }}
+    </span>
+    <prism-icon name="time-line" class="prism-time-picker__icon" />
+  </div>
+
+  <div class="prism-time-picker__dropdown-container" [class.is-open]="isOpen()">
+    <div class="prism-time-picker__dropdown">
+      <div class="prism-time-picker__columns">
+        <!-- Hours Column -->
+        <div
+          class="prism-time-picker__column"
+          role="listbox"
+          aria-label="Hours"
+          tabindex="0"
+          (keydown)="onKeydown($event, 'hour')"
+        >
+          @for (h of hours(); track h) {
+            <div
+              class="prism-time-picker__cell"
+              [class.is-selected]="selectedHour() === h"
+              (click)="selectHour(h)"
+              (keydown.enter)="selectHour(h)"
+              tabindex="0"
+              role="option"
+              [attr.aria-selected]="selectedHour() === h"
+            >
+              {{ h < 10 ? '0' + h : h }}
+            </div>
+          }
+        </div>
+
+        <!-- Minutes Column -->
+        <div
+          class="prism-time-picker__column"
+          role="listbox"
+          aria-label="Minutes"
+          tabindex="0"
+          (keydown)="onKeydown($event, 'minute')"
+        >
+          @for (m of minutes(); track m) {
+            <div
+              class="prism-time-picker__cell"
+              [class.is-selected]="selectedMinute() === m"
+              (click)="selectMinute(m)"
+              (keydown.enter)="selectMinute(m)"
+              tabindex="0"
+              role="option"
+              [attr.aria-selected]="selectedMinute() === m"
+            >
+              {{ m < 10 ? '0' + m : m }}
+            </div>
+          }
+        </div>
+
+        <!-- Seconds Column (Optional) -->
+        @if (format() === 'HH:mm:ss') {
+          <div
+            class="prism-time-picker__column"
+            role="listbox"
+            aria-label="Seconds"
+            tabindex="0"
+            (keydown)="onKeydown($event, 'second')"
+          >
+            @for (s of seconds(); track s) {
+              <div
+                class="prism-time-picker__cell"
+                [class.is-selected]="selectedSecond() === s"
+                (click)="selectSecond(s)"
+                (keydown.enter)="selectSecond(s)"
+                tabindex="0"
+                role="option"
+                [attr.aria-selected]="selectedSecond() === s"
+              >
+                {{ s < 10 ? '0' + s : s }}
+              </div>
+            }
+          </div>
+        }
+
+        <!-- AM/PM Column (Optional) -->
+        @if (use12Hour()) {
+          <div
+            class="prism-time-picker__column"
+            role="listbox"
+            aria-label="AM/PM"
+            tabindex="0"
+            (keydown)="onKeydown($event, 'ampm')"
+          >
+            <div
+              class="prism-time-picker__cell"
+              [class.is-selected]="selectedAmPm() === 'AM'"
+              (click)="selectAmPm('AM')"
+              (keydown.enter)="selectAmPm('AM')"
+              tabindex="0"
+              role="option"
+              [attr.aria-selected]="selectedAmPm() === 'AM'"
+            >
+              AM
+            </div>
+            <div
+              class="prism-time-picker__cell"
+              [class.is-selected]="selectedAmPm() === 'PM'"
+              (click)="selectAmPm('PM')"
+              (keydown.enter)="selectAmPm('PM')"
+              tabindex="0"
+              role="option"
+              [attr.aria-selected]="selectedAmPm() === 'PM'"
+            >
+              PM
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

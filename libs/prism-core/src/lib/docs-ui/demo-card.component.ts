@@ -56,7 +56,7 @@ import { PrismTabComponent } from '../tabs/tab.component';
 
       prism-tab-group {
         width: 100%;
-        overflow: hidden;
+        overflow: visible;
       }
     }
   `],

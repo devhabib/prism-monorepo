@@ -5,7 +5,7 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <!-- Hover Example -->
     <prism-demo-card title="Hover Trigger">
-      <div preview class="min-h-[160px] flex items-center justify-center">
+      <div preview class="min-h-[300px] flex justify-center mt-4">
         <button prismDropdown 
                 [prismDropdown]="hoverMenu" 
                 trigger="hover"
@@ -25,7 +25,7 @@
 
     <!-- Click Example -->
     <prism-demo-card title="Click Trigger">
-      <div preview class="min-h-[160px] flex items-center justify-center">
+      <div preview class="min-h-[300px] flex justify-center mt-4">
         <prism-button 
           label="Click me" 
           [prismDropdown]="clickMenu" 
@@ -45,7 +45,7 @@
 
 <prism-demo-section title="Placements" subtitle="Align the menu based on your layout needs with smart flipping logic.">
   <prism-demo-card title="Directional Alignment">
-    <div preview class="min-h-[200px] flex flex-wrap items-center justify-center gap-4 p-4">
+    <div preview class="min-h-[350px] flex flex-wrap justify-center gap-4 p-4 mt-8">
       <prism-button [prismDropdown]="pMenu" placement="bottomLeft" label="bottomLeft" variant="outline"></prism-button>
       <prism-button [prismDropdown]="pMenu" placement="bottomRight" label="bottomRight" variant="outline"></prism-button>
       <prism-button [prismDropdown]="pMenu" placement="topLeft" label="topLeft" variant="outline"></prism-button>
@@ -64,7 +64,7 @@
 <prism-demo-section title="Advanced Items" subtitle="Menu items can include icons, dividers, and semantic coloring.">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <prism-demo-card title="Icons & States">
-      <div preview class="min-h-[160px] flex items-center justify-center">
+      <div preview class="min-h-[300px] flex justify-center mt-4">
         <prism-button 
           label="Account Actions" 
           variant="secondary"

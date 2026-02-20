@@ -48,6 +48,27 @@
     gap: 4px;
   }
 
+  &__search-wrapper {
+    position: relative;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    min-width: 40px;
+  }
+
+  &__search-mirror {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    right: 0;
+  }
+
   &__search-input-trigger {
     border: none;
     outline: none;

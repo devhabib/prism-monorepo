@@ -1,0 +1,178 @@
+@use '../../../../../libs/prism-theme/src/lib/prism-theme' as *;
+
+.prism-upload {
+  display: block;
+  width: 100%;
+
+  &.is-disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__trigger {
+    display: inline-block;
+
+    &.is-dragger {
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      background: var(--surface-50);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      padding: 32px;
+
+      &:hover, &.is-dragover {
+        border-color: var(--primary-500);
+        background: var(--primary-50);
+      }
+    }
+  }
+
+  &__dragger-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  &__dragger-icon {
+    font-size: 3rem;
+    color: var(--primary-500);
+    margin-bottom: 8px;
+  }
+
+  &__dragger-text {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-main);
+    margin: 0;
+  }
+
+  &__dragger-hint {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  // --- File List ---
+  &__list {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__file-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    background: var(--surface-50);
+    border: 1px solid var(--surface-100);
+    border-radius: 6px;
+    transition: all 0.2s;
+
+    &:hover {
+      background: var(--surface-100);
+      
+      .prism-upload__remove-btn {
+        opacity: 1;
+      }
+    }
+
+    &.is-error {
+      border-color: var(--danger-main, #EF4444);
+      .prism-upload__file-name {
+        color: var(--danger-main, #EF4444);
+      }
+      .prism-upload__error-icon {
+        color: var(--danger-main, #EF4444);
+      }
+    }
+
+    &.is-uploading {
+      background: var(--surface-0);
+    }
+  }
+
+  &__file-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__file-icon {
+    color: var(--text-muted);
+    font-size: 1.125rem;
+  }
+
+  &__file-name {
+    flex: 1;
+    font-size: 0.875rem;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__file-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__spinner {
+    color: var(--primary-500);
+    animation: spin 1s linear infinite;
+  }
+
+  &__success-icon {
+    color: var(--success-main, #10B981);
+  }
+
+  &__remove-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.2s;
+
+    &:hover {
+      background: var(--surface-200);
+      color: var(--text-main);
+    }
+  }
+
+  &__progress {
+    height: 4px;
+    background: var(--surface-200);
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+
+  &__progress-bar {
+    height: 100%;
+    background: var(--primary-500);
+    transition: width 0.3s ease;
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

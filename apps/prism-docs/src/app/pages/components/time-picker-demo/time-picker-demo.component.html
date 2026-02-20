@@ -1,16 +1,61 @@
-<prism-demo-page-header title="TimePicker" subtitle="A component for selecting time.">
+<prism-demo-page-header title="TimePicker" subtitle="A UI component for selecting time.">
 </prism-demo-page-header>
 
 <prism-demo-section title="Basic Usage">
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-time-picker />
+        <div class="p-4" style="max-width: 300px; min-height: 250px;">
+          <prism-time-picker [(value)]="basicValue" />
         </div>
       </prism-tab>
       <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
+        <prism-code-block [ts]="snippets.basic"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="12-Hour Format">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4" style="max-width: 300px; min-height: 250px;">
+          <prism-time-picker [(value)]="twelveHourValue" format="hh:mm a" [use12Hour]="true" />
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.twelveHour"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="With Seconds">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4" style="max-width: 300px; min-height: 250px;">
+          <prism-time-picker [(value)]="secondsValue" format="HH:mm:ss" />
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.seconds"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Disabled">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4" style="max-width: 300px;">
+          <prism-time-picker [(value)]="disabledValue" [disabled]="true" />
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.disabled"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>

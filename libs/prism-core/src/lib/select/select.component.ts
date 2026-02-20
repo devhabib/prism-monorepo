@@ -49,16 +49,22 @@ export type SelectOption = {
           }
           
           @if (searchable()) {
-            <input 
-              #searchInput
-              type="text"
-              class="prism-select__search-input-trigger"
-              [placeholder]="selectedOptions().length === 0 ? placeholder() : ''"
-              [(ngModel)]="searchQuery"
-              (click)="$event.stopPropagation()"
-              (focus)="openDropdown()"
-              [disabled]="disabled()"
-            />
+            <div class="prism-select__search-wrapper">
+              @if (!searchQuery() && !multiple() && selectedOptions().length > 0) {
+                <span class="prism-select__search-mirror">{{ selectedOptions()[0]?.label }}</span>
+              }
+              <input 
+                #searchInput
+                type="text"
+                class="prism-select__search-input-trigger"
+                [placeholder]="selectedOptions().length === 0 ? placeholder() : ''"
+                [ngModel]="searchQuery()"
+                (ngModelChange)="searchQuery.set($event)"
+                (click)="$event.stopPropagation()"
+                (focus)="openDropdown()"
+                [disabled]="disabled()"
+              />
+            </div>
           } @else if (selectedOptions().length > 0 && !multiple()) {
              <span>{{ selectedOptions()[0]?.label }}</span>
           } @else if (selectedOptions().length === 0) {

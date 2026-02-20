@@ -1,16 +1,31 @@
-<prism-demo-page-header title="Transfer" subtitle="A component for moving items between two lists.">
+<prism-demo-page-header title="Transfer" subtitle="Double column transfer choice box.">
 </prism-demo-page-header>
 
 <prism-demo-section title="Basic Usage">
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-transfer />
+        <div class="p-4" style="max-width: 600px;">
+          <prism-transfer [dataSource]="basicData()" [(targetKeys)]="basicKeys" />
         </div>
       </prism-tab>
       <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
+        <prism-code-block [ts]="snippets.basic"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Searchable">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4" style="max-width: 600px;">
+          <prism-transfer [dataSource]="searchData()" [(targetKeys)]="searchKeys" [showSearch]="true" />
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.search"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>

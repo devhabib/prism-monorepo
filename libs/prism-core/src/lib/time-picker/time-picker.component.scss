@@ -1,0 +1,123 @@
+@use '../../../../../libs/prism-theme/src/lib/prism-theme' as *;
+
+.prism-time-picker {
+  position: relative;
+  width: 100%;
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.625rem 1rem;
+    background: var(--surface-0);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-height: 40px;
+
+    &:hover {
+      border-color: var(--primary-500);
+    }
+  }
+
+  &__value {
+    font-size: 0.875rem;
+    color: var(--text-main);
+
+    &.is-placeholder {
+      color: var(--text-muted);
+    }
+  }
+
+  &__icon {
+    color: var(--text-muted);
+  }
+
+  &__dropdown-container {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    z-index: 1000;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.2s ease-out;
+    background: var(--surface-0);
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border: 0 solid var(--border);
+    overflow: hidden;
+
+    &.is-open {
+      grid-template-rows: 1fr;
+      border-width: 1px;
+    }
+  }
+
+  &__dropdown {
+    min-height: 0;
+    width: auto;
+    min-width: 180px;
+    padding: 0;
+  }
+
+  &__columns {
+    display: flex;
+    height: 200px;
+  }
+
+  &__column {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: none; // Firefox
+    &::-webkit-scrollbar {
+      display: none; // Chrome/Safari
+    }
+
+    border-right: 1px solid var(--border);
+    padding: 4px 0;
+    outline: none;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    &:focus-visible {
+      box-shadow: inset 0 0 0 2px var(--primary-200);
+    }
+
+    scroll-snap-type: y mandatory;
+  }
+
+  &__cell {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: all 0.2s;
+    scroll-snap-align: center;
+    margin: 0 4px;
+    border-radius: 4px;
+
+    &:hover {
+      background: var(--surface-100);
+    }
+
+    &.is-selected {
+      background: var(--primary-50);
+      color: var(--primary-700);
+      font-weight: 600;
+    }
+  }
+
+  &.is-disabled {
+    opacity: 0.6;
+    .prism-time-picker__trigger {
+      cursor: not-allowed;
+      background: var(--surface-50);
+    }
+  }
+}

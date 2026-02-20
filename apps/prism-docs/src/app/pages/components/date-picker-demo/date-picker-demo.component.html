@@ -2,10 +2,10 @@
 </prism-demo-page-header>
 
 <prism-demo-section title="Basic Usage" description="Basic date selection with internal calendar.">
-  <prism-demo-card>
+  <prism-demo-card [minHeight]="'300px'">
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4 space-y-4 max-w-sm">
+        <div class="p-4 space-y-4 max-w-sm" style="min-height: 380px;">
           <prism-date-picker [(value)]="selectedDate" placeholder="Pick a date" />
           <div class="text-sm text-muted">Selected Date: {{ selectedDate() | date:'mediumDate' }}</div>
         </div>
@@ -18,7 +18,7 @@
 </prism-demo-section>
 
 <prism-demo-section title="Disabled State" description="Read-only or disabled date selection.">
-  <prism-demo-card>
+  <prism-demo-card >
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
         <div class="p-4 space-y-4 max-w-sm">
@@ -33,10 +33,10 @@
 </prism-demo-section>
 
 <prism-demo-section title="Custom Placeholder" description="Set a custom placeholder for the input.">
-  <prism-demo-card>
+  <prism-demo-card [minHeight]="'300px'">
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4 space-y-4 max-w-sm">
+        <div class="p-4 space-y-4 max-w-sm" style="min-height: 380px;">
           <prism-date-picker placeholder="Choose your birthday" />
         </div>
       </prism-tab>

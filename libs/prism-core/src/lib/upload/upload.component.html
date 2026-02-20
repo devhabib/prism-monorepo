@@ -1,0 +1,82 @@
+<div class="prism-upload" [class.is-disabled]="disabled()">
+
+  <!-- Trigger Area -->
+  <div 
+    class="prism-upload__trigger" 
+    [class.is-dragover]="isDragOver()"
+    [class.is-dragger]="listType() === 'dragger'"
+    (click)="openFileDialog()"
+    (keydown.enter)="openFileDialog()"
+    (dragover)="listType() === 'dragger' ? onDragOver($event) : null"
+    (dragleave)="listType() === 'dragger' ? onDragLeave($event) : null"
+    (drop)="listType() === 'dragger' ? onDrop($event) : null"
+    tabindex="0"
+    role="button"
+    aria-label="Upload files"
+  >
+    <input 
+      #fileInput
+      type="file" 
+      class="prism-upload__input" 
+      [accept]="accept()" 
+      [multiple]="multiple()"
+      [disabled]="disabled()"
+      (change)="onFileSelect($event)"
+      tabindex="-1"
+    />
+    
+    @if (listType() === 'dragger') {
+      <div class="prism-upload__dragger-content">
+        <prism-icon name="upload-cloud-2-line" class="prism-upload__dragger-icon" />
+        <p class="prism-upload__dragger-text">Click or drag file to this area to upload</p>
+        <p class="prism-upload__dragger-hint">Support for a single or bulk upload.</p>
+      </div>
+    } @else {
+      <prism-button variant="outline" icon="upload-2-line" label="Click to Upload" [disabled]="disabled()" />
+    }
+  </div>
+
+  <!-- File List -->
+  <div class="prism-upload__list" aria-live="polite">
+    @for (file of fileList(); track file.uid) {
+      <div 
+        class="prism-upload__file-item" 
+        [class.is-error]="file.status === 'error'"
+        [class.is-uploading]="file.status === 'uploading'"
+      >
+        <div class="prism-upload__file-info">
+          <prism-icon [name]="file.status === 'error' ? 'file-warning-line' : 'file-3-line'" class="prism-upload__file-icon" />
+          <span class="prism-upload__file-name" [title]="file.name">{{ file.name }}</span>
+          
+          <div class="prism-upload__file-actions">
+            @if (file.status === 'uploading') {
+              <prism-icon name="loader-4-line" class="prism-upload__spinner" />
+            }
+            @if (file.status === 'error') {
+              <prism-icon name="error-warning-fill" class="prism-upload__error-icon" />
+            }
+            @if (file.status === 'done') {
+              <prism-icon name="check-line" class="prism-upload__success-icon" />
+            }
+            <button 
+              type="button" 
+              class="prism-upload__remove-btn" 
+              (click)="removeFile(file, $event)"
+              [disabled]="disabled()"
+              aria-label="Remove file"
+            >
+              <prism-icon name="delete-bin-line" />
+            </button>
+          </div>
+        </div>
+
+        @if (file.status === 'uploading') {
+          <div class="prism-upload__progress">
+            <div class="prism-upload__progress-bar" [style.width.%]="file.percent || 0"></div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+</div>

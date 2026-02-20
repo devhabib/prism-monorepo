@@ -1,16 +1,46 @@
-<prism-demo-page-header title="Upload" subtitle="A component for uploading files.">
+<prism-demo-page-header title="Upload" subtitle="Component for uploading files to the server.">
 </prism-demo-page-header>
 
 <prism-demo-section title="Basic Usage">
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-upload />
+        <div class="p-4" style="max-width: 400px;">
+          <prism-upload [(fileList)]="basicFiles" accept=".png,.jpg,.pdf" />
         </div>
       </prism-tab>
       <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
+        <prism-code-block [ts]="snippets.basic"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Drag & Drop">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4" style="max-width: 600px;">
+          <prism-upload [(fileList)]="dragFiles" listType="dragger" [multiple]="true" />
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.dragger"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Disabled">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4" style="max-width: 400px;">
+          <prism-upload [(fileList)]="disabledFiles" [disabled]="true" />
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.disabled"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>

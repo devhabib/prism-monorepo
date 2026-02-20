@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { 
   PrismTimePickerComponent, 
   PrismCodeBlockComponent, 
@@ -14,6 +15,7 @@ import {
   selector: 'app-time-picker-demo',
   imports: [
     CommonModule, 
+    FormsModule,
     PrismTimePickerComponent, 
     PrismCodeBlockComponent,
     PrismDemoPageHeaderComponent,
@@ -26,7 +28,15 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimePickerDemoComponent {
+  readonly basicValue = signal<string | null>('14:30');
+  readonly twelveHourValue = signal<string | null>('08:15 AM');
+  readonly disabledValue = signal<string | null>('09:00');
+  readonly secondsValue = signal<string | null>('12:45:30');
+
   readonly snippets = {
-    usage: `<prism-time-picker></prism-time-picker>`
+    basic: `<prism-time-picker [(value)]="time" />`,
+    twelveHour: `<prism-time-picker [(value)]="time" format="hh:mm a" [use12Hour]="true" />`,
+    disabled: `<prism-time-picker [(value)]="time" [disabled]="true" />`,
+    seconds: `<prism-time-picker [(value)]="time" format="HH:mm:ss" />`
   };
 }
