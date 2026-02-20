@@ -10,6 +10,7 @@ export * from './lib/pagination/pagination.types';
 export * from './lib/avatar/avatar.component';
 export * from './lib/code-block/code-block.component';
 export * from './lib/services/theme.service';
+export * from './lib/services/overlay.service';
 export * from './lib/theme-toggle/theme-toggle.component';
 export * from './lib/services/toast.service';
 export * from './lib/toast/toast.component';

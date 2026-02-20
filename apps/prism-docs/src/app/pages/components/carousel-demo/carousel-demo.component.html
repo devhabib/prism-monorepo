@@ -32,7 +32,7 @@
           <prism-carousel [vertical]="true" dotPosition="right">
             @for (panel of panelColors; track panel.label) {
               <prism-carousel-panel>
-                <div style="display:flex;align-items:center;justify-content:center;height:240px;border-radius:8px;color:#fff;font-size:1.5rem;font-weight:700"
+                <div style="display:flex;align-items:center;justify-content:center;height:100%;border-radius:8px;color:#fff;font-size:1.5rem;font-weight:700"
                      [style.background]="panel.bg">
                   {{ panel.label }}
                 </div>

@@ -69,7 +69,7 @@
     <prism-demo-section title="Single Selection" subtitle="Select a single row from the table.">
       <prism-demo-card>
         <div preview class="w-full overflow-x-auto">
-          <div class="flex items-center gap-2 mb-4 min-h-[32px] p-2 bg-slate-50 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+          <div class="flex items-center gap-2 mb-4 min-h-[32px] p-2 bg-slate-50 rounded border border-slate-200">
             <span class="text-sm text-muted">Selected:</span>
             @if (singleSelection()) {
               <prism-tag [label]="singleSelection()!.name" (onRemove)="singleSelection.set(null)" [removable]="true" />

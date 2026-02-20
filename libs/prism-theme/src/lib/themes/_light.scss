@@ -17,4 +17,16 @@
   --success: #10B981;
   --warning: #F59E0B;
   --danger: #EF4444;
+
+  /* --- PRISM COMPONENT VARIABLES (LIGHT ENGINES) --- */
+  --prism-primary-color: var(--primary-main);
+  
+  --prism-text-primary: var(--text-main);
+  --prism-text-secondary: var(--text-muted);
+  
+  --prism-border-color: var(--border);
+
+  --prism-bg-app: var(--bg-app);
+  --prism-bg-layout: var(--surface-50);
+  --prism-bg-container: var(--surface-0);
 }

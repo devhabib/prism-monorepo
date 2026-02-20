@@ -1,17 +1,117 @@
 <prism-demo-page-header title="Statistic" subtitle="A component for displaying numeric values and their associated labels.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
+<prism-tab-group>
+  <prism-tab label="Examples">
+    <div class="flex flex-col gap-8">
+      <prism-demo-section title="Basic Usage" description="Display a number with a title.">
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-statistic />
+        <div class="p-4" style="background: var(--prism-bg-layout);">
+          <prism-row [gutter]="16">
+            <prism-col [span]="12">
+              <prism-card>
+                <prism-statistic title="Active Users" [value]="112893"></prism-statistic>
+              </prism-card>
+            </prism-col>
+            <prism-col [span]="12">
+              <prism-card>
+                <prism-statistic title="Account Balance (CNY)" [value]="112893" [precision]="2"></prism-statistic>
+              </prism-card>
+            </prism-col>
+          </prism-row>
         </div>
       </prism-tab>
       <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
+        <prism-code-block [ts]="snippets.basic"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>
 </prism-demo-section>
+
+<prism-demo-section title="Animated Count Up" description="Animate numeric values when they first load and update.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4" style="background: var(--prism-bg-layout);">
+          <prism-row [gutter]="16">
+            <prism-col [span]="12">
+              <prism-card>
+                <prism-statistic 
+                  title="Total Downloads" 
+                  [value]="value()" 
+                  [countUp]="true" 
+                  [countUpDuration]="2500"
+                ></prism-statistic>
+              </prism-card>
+            </prism-col>
+            <prism-col [span]="12">
+              <prism-card>
+                <prism-statistic 
+                  title="Revenue" 
+                  [value]="revenue()" 
+                  [precision]="2" 
+                  prefix="$" 
+                  [countUp]="true"
+                  [countUpDuration]="2000"
+                ></prism-statistic>
+              </prism-card>
+            </prism-col>
+          </prism-row>
+          <div style="margin-top: 16px;">
+            <prism-button (click)="updateValues()" variant="primary">Update Values</prism-button>
+          </div>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.countUp"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Prefix & Suffix" description="Add prefix and suffix to the value.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4" style="background: var(--prism-bg-layout);">
+          <prism-row [gutter]="16">
+            <prism-col [span]="12">
+              <prism-card>
+                <prism-statistic 
+                  title="Feedback" 
+                  [value]="1128" 
+                  prefix="👍"
+                ></prism-statistic>
+              </prism-card>
+            </prism-col>
+            <prism-col [span]="12">
+              <prism-card>
+                <prism-statistic 
+                  title="Unmerged" 
+                  [value]="93" 
+                  suffix="/ 100"
+                ></prism-statistic>
+              </prism-card>
+            </prism-col>
+          </prism-row>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.prefixSuffix"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+    </div>
+  </prism-tab>
+
+  <prism-tab label="API">
+    <div class="flex flex-col gap-8">
+      <prism-demo-section title="API Overview" description="Inputs and Outputs for PrismStatistic">
+        <prism-api-table [data]="apiData"></prism-api-table>
+      </prism-demo-section>
+    </div>
+  </prism-tab>
+</prism-tab-group>

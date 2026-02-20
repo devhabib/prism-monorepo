@@ -47,4 +47,16 @@
   --success: #34d399;
   --warning: #fbbf24;
   --danger: #f87171;
+
+  /* --- PRISM COMPONENT VARIABLES (DARK ENGINES) --- */
+  --prism-primary-color: var(--primary-main);
+  
+  --prism-text-primary: var(--text-main);
+  --prism-text-secondary: var(--text-muted);
+  
+  --prism-border-color: var(--border);
+
+  --prism-bg-app: var(--bg-app);
+  --prism-bg-layout: var(--surface-900);
+  --prism-bg-container: var(--surface-800);
 }

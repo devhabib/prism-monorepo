@@ -1,17 +1,172 @@
 <prism-demo-page-header title="Popover" subtitle="A floating component that displays additional information when an element is clicked or hovered.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
+<prism-tab-group>
+  <prism-tab label="Examples">
+    <div class="flex flex-col gap-8">
+      <prism-demo-section title="Basic Usage" description="The most basic popover, which appears on hover.">
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-popover />
+        <div class="p-8 flex justify-center">
+          <prism-button [prismPopoverTrigger]="popover" placement="top" variant="primary">Hover Me</prism-button>
+          <prism-popover #popover="prismPopover" title="Title" content="This is popover content."></prism-popover>
         </div>
       </prism-tab>
       <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
+        <prism-code-block [ts]="snippets.basic"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>
 </prism-demo-section>
+
+<prism-demo-section title="Click Trigger" description="Click the button to toggle the popover. Clicking anywhere outside closes it.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-8 flex justify-center">
+          <prism-button [prismPopoverTrigger]="popover2" trigger="click" placement="bottom" variant="secondary">Click Me</prism-button>
+          <prism-popover #popover2="prismPopover" title="Title" content="This popover opens on click."></prism-popover>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.click"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Focus Trigger" description="Use focus to show the popover on input fields.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-8 flex justify-center w-full max-w-sm mx-auto">
+          <prism-input class="w-full">
+            <input prismInput placeholder="Focus me" [prismPopoverTrigger]="popover3" trigger="focus" placement="right" />
+          </prism-input>
+          <prism-popover #popover3="prismPopover" content="Focus triggers this popover"></prism-popover>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.focus"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Content Only" description="A popover without a title.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-8 flex justify-center">
+          <prism-button [prismPopoverTrigger]="contentOnlyPopover" placement="top" variant="primary">Hover Me</prism-button>
+          <prism-popover #contentOnlyPopover="prismPopover" content="This is popover content without a title."></prism-popover>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.contentOnly"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Placement" description="There are 12 placement options available.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-8 w-full max-w-lg mx-auto flex flex-col gap-4 items-center">
+          <div class="flex gap-4 ml-16">
+            <prism-button [prismPopoverTrigger]="tl" placement="topLeft">TL</prism-button>
+            <prism-popover #tl="prismPopover" title="Title" content="Content"></prism-popover>
+            <prism-button [prismPopoverTrigger]="topP" placement="top">Top</prism-button>
+            <prism-popover #topP="prismPopover" title="Title" content="Content"></prism-popover>
+            <prism-button [prismPopoverTrigger]="tr" placement="topRight">TR</prism-button>
+            <prism-popover #tr="prismPopover" title="Title" content="Content"></prism-popover>
+          </div>
+          
+          <div class="flex flex-row justify-between w-full">
+            <div class="flex flex-col gap-4 w-16">
+               <prism-button [prismPopoverTrigger]="lt" placement="leftTop">LT</prism-button>
+               <prism-popover #lt="prismPopover" title="Title" content="Content"></prism-popover>
+               <prism-button [prismPopoverTrigger]="l" placement="left">Left</prism-button>
+               <prism-popover #l="prismPopover" title="Title" content="Content"></prism-popover>
+               <prism-button [prismPopoverTrigger]="lb" placement="leftBottom">LB</prism-button>
+               <prism-popover #lb="prismPopover" title="Title" content="Content"></prism-popover>
+            </div>
+            
+            <div class="flex flex-col gap-4 w-16">
+               <prism-button [prismPopoverTrigger]="rt" placement="rightTop">RT</prism-button>
+               <prism-popover #rt="prismPopover" title="Title" content="Content"></prism-popover>
+               <prism-button [prismPopoverTrigger]="r" placement="right">Right</prism-button>
+               <prism-popover #r="prismPopover" title="Title" content="Content"></prism-popover>
+               <prism-button [prismPopoverTrigger]="rb" placement="rightBottom">RB</prism-button>
+               <prism-popover #rb="prismPopover" title="Title" content="Content"></prism-popover>
+            </div>
+          </div>
+
+          <div class="flex gap-4 ml-16">
+            <prism-button [prismPopoverTrigger]="bl" placement="bottomLeft">BL</prism-button>
+            <prism-popover #bl="prismPopover" title="Title" content="Content"></prism-popover>
+            <prism-button [prismPopoverTrigger]="bot" placement="bottom">Bottom</prism-button>
+            <prism-popover #bot="prismPopover" title="Title" content="Content"></prism-popover>
+            <prism-button [prismPopoverTrigger]="br" placement="bottomRight">BR</prism-button>
+            <prism-popover #br="prismPopover" title="Title" content="Content"></prism-popover>
+          </div>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.placement"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Complex Content" description="You can use templates for title and content to render complex forms inside a popover.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-8 flex justify-center">
+          <prism-button [prismPopoverTrigger]="popover4" trigger="click" placement="bottomRight" variant="primary">Complex Content</prism-button>
+          <prism-popover #popover4="prismPopover" [title]="titleTemplate" [content]="contentTemplate"></prism-popover>
+          
+          <ng-template #titleTemplate>
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span>Quick Settings</span>
+              <a href="javascript:void(0)" (click)="popover4.hide()" style="font-weight: normal; font-size: 12px; color: var(--prism-primary-color);">Close</a>
+            </div>
+          </ng-template>
+          
+          <ng-template #contentTemplate>
+            <div >
+              <p style="margin-top: 0; margin-bottom: 12px; font-size: 14px;">Adjust your settings below.</p>
+              <prism-input>
+                 <input prismInput placeholder="Email" />
+              </prism-input>
+              <div style="margin-top: 12px; display: flex; justify-content: flex-end;">
+                 <prism-button variant="primary" size="sm" (click)="popover4.hide()">Save</prism-button>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.complex"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+      </prism-demo-section>
+    </div>
+  </prism-tab>
+
+  <prism-tab label="API">
+    <div class="flex flex-col gap-8">
+      <prism-demo-section title="API Overview" description="PrismPopoverTriggerDirective">
+  <prism-api-table [data]="apiData"></prism-api-table>
+</prism-demo-section>
+
+      <prism-demo-section title="" description="PrismPopoverComponent">
+        <prism-api-table [data]="popoverApiData"></prism-api-table>
+      </prism-demo-section>
+    </div>
+  </prism-tab>
+</prism-tab-group>

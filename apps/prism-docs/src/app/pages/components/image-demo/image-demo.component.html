@@ -1,17 +1,50 @@
 <prism-demo-page-header title="Image" subtitle="A component for displaying images with support for preview and error handling.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
-  <prism-demo-card>
+<prism-tab-group>
+  <prism-tab label="Examples">
+    <prism-demo-section title="Basic Usage" description="Click the image to view a full-screen preview with zoom, pan, and rotate controls.">
+      <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-image />
+        <div class="p-8">
+          <prism-image 
+            src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" 
+            width="200" 
+            height="200">
+          </prism-image>
         </div>
       </prism-tab>
       <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
+        <prism-code-block [ts]="snippets.basic"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>
 </prism-demo-section>
+
+<prism-demo-section title="Error State" description="Shows a fallback when the image fails to load.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-8">
+          <prism-image 
+            src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ-broken.png" 
+            width="200" 
+            height="200"
+            [preview]="false">
+          </prism-image>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.error"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+  </prism-tab>
+
+  <prism-tab label="API">
+    <prism-api-table [data]="apiData"></prism-api-table>
+  </prism-tab>
+</prism-tab-group>

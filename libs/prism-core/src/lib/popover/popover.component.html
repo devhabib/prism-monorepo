@@ -1,0 +1,23 @@
+<div class="prism-popover-arrow"></div>
+<div class="prism-popover-inner">
+  @if (title()) {
+     <div class="prism-popover-title">
+        @if (isString(title())) {
+          {{ title() }}
+        } @else {
+          <ng-container *ngTemplateOutlet="$any(title())"></ng-container>
+        }
+     </div>
+  }
+  <div class="prism-popover-inner-content">
+     @if (content()) {
+        @if (isString(content())) {
+          {{ content() }}
+        } @else {
+           <ng-container *ngTemplateOutlet="$any(content())"></ng-container>
+        }
+     } @else {
+        <ng-content></ng-content>
+     }
+  </div>
+</div>

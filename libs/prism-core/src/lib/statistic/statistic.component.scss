@@ -1,0 +1,47 @@
+
+:host {
+  display: block;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--prism-text-primary);
+  font-family: var(--prism-font-family);
+  line-height: var(--prism-line-height-base);
+}
+
+.prism-statistic {
+  &-title {
+    margin-bottom: 4px;
+    color: var(--prism-text-secondary);
+    font-size: var(--prism-font-size-sm);
+  }
+
+  &-content {
+    display: flex;
+    align-items: baseline;
+    color: var(--prism-text-primary);
+    font-size: 24px;
+    font-weight: 600;
+
+    &-prefix {
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+    &-value {
+      display: inline-block;
+    }
+
+    &-suffix {
+      display: inline-block;
+      margin-left: 4px;
+    }
+  }
+}
+
+// Mobile Responsive
+@media (max-width: 768px) {
+  .prism-statistic-content {
+     font-size: 20px;
+  }
+}

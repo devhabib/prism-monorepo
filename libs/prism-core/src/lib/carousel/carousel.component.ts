@@ -133,12 +133,19 @@ export class PrismCarouselComponent {
   private autoplayTimer: ReturnType<typeof setInterval> | null = null;
 
   constructor() {
+    // Sync active state to panels (critical for fade effect)
+    effect(() => {
+      const currentIdx = this.activeIndex();
+      const panelsArray = this.panels();
+      panelsArray.forEach((panel, i) => {
+        panel.isActive.set(i === currentIdx);
+      });
+    });
+
     // Manage autoplay lifecycle
     effect(() => {
       const shouldAutoplay = this.autoplay();
       const speed = this.autoplaySpeed();
-      // Read totalSlides to re-trigger when panels change
-      this.totalSlides();
 
       this.clearAutoplay();
 

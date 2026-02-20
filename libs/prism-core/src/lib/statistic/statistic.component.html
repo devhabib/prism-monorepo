@@ -1,0 +1,39 @@
+@if (title()) {
+  <div class="prism-statistic-title">
+    @if (isString(title())) {
+      {{ title() }}
+    } @else {
+      <ng-container *ngTemplateOutlet="$any(title())"></ng-container>
+    }
+  </div>
+}
+
+<div class="prism-statistic-content" [ngStyle]="valueStyle() || {}">
+  @if (prefix()) {
+    <span class="prism-statistic-content-prefix">
+      @if (isString(prefix())) {
+        {{ prefix() }}
+      } @else {
+        <ng-container *ngTemplateOutlet="$any(prefix())"></ng-container>
+      }
+    </span>
+  }
+  
+  <span class="prism-statistic-content-value">
+     @if (isNumber(value())) {
+       {{ (displayValue() | number: '1.' + precision() + '-' + precision()) }}
+     } @else {
+       {{ displayValue() }}
+     }
+  </span>
+  
+  @if (suffix()) {
+    <span class="prism-statistic-content-suffix">
+      @if (isString(suffix())) {
+        {{ suffix() }}
+      } @else {
+        <ng-container *ngTemplateOutlet="$any(suffix())"></ng-container>
+      }
+    </span>
+  }
+</div>

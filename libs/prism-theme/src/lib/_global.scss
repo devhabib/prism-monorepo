@@ -19,6 +19,17 @@
   --space-sm: 0.5rem;
   --space-md: 1rem;
   --space-lg: 1.5rem;
+
+  /* --- 4. PRISM COMPONENT VARIABLES (AGNOSTIC) --- */
+  --prism-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --prism-font-size-base: 14px;
+  --prism-font-size-sm: 12px;
+  --prism-font-size-lg: 16px;
+  --prism-line-height-base: 1.5714285714285714;
+  
+  --prism-border-radius-sm: 4px;
+  --prism-border-radius-base: 6px;
+  --prism-border-radius-lg: 8px;
 }
 
 [data-theme="dark"] {

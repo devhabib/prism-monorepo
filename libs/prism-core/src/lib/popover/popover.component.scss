@@ -1,0 +1,178 @@
+.prism-popover {
+  display: none;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1), transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  transform: scale(0.9);
+  
+  &.visible {
+     display: block; // when measuring and active
+     pointer-events: auto;
+     opacity: 1;
+     transform: scale(1);
+  }
+  
+  // Outer layer is fully transparent padding, inner layer has background
+  min-width: 177px;
+  max-width: 250px;
+  
+  &-inner {
+    background-color: var(--prism-bg-container);
+    border-radius: var(--prism-border-radius-lg);
+    box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  &-title {
+     padding: 8px 16px;
+     min-width: 177px;
+     min-height: 32px;
+     margin: 0;
+     color: var(--prism-text-primary);
+     font-weight: 600;
+     border-bottom: 1px solid var(--prism-border-color);
+  }
+
+  &-inner-content {
+     padding: 12px 16px;
+     color: var(--prism-text-primary);
+  }
+
+  // Arrow
+  &-arrow {
+     position: absolute;
+     display: block;
+     width: 16px;
+     height: 16px;
+     overflow: hidden;
+     pointer-events: none;
+     background: transparent;
+
+     &::before {
+       position: absolute;
+       bottom: 0;
+       left: 0;
+       width: 16px;
+       height: 16px;
+       background: var(--prism-bg-container);
+       box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+       content: "";
+       transform: translateY(-50%) rotate(45deg);
+     }
+  }
+
+  // Placement adjustments
+  &.prism-popover-placement-top,
+  &.prism-popover-placement-topLeft,
+  &.prism-popover-placement-topRight {
+     padding-bottom: 12px;
+     .prism-popover-arrow {
+       bottom: 4px;
+       left: 50%;
+       transform: translateX(-50%);
+       
+       &::before {
+         bottom: 100%;
+         left: 0;
+         transform: translateY(50%) rotate(45deg);
+       }
+     }
+  }
+
+  &.prism-popover-placement-topLeft .prism-popover-arrow {
+     left: 16px;
+     transform: translateX(0);
+  }
+
+  &.prism-popover-placement-topRight .prism-popover-arrow {
+     left: auto;
+     right: 16px;
+     transform: translateX(0);
+  }
+
+  &.prism-popover-placement-bottom,
+  &.prism-popover-placement-bottomLeft,
+  &.prism-popover-placement-bottomRight {
+     padding-top: 12px;
+     .prism-popover-arrow {
+       top: 4px;
+       left: 50%;
+       transform: translateX(-50%);
+       
+       &::before {
+         top: 100%;
+         left: 0;
+         transform: translateY(-50%) rotate(45deg);
+         box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.05);
+       }
+     }
+  }
+
+  &.prism-popover-placement-bottomLeft .prism-popover-arrow {
+     left: 16px;
+     transform: translateX(0);
+  }
+
+  &.prism-popover-placement-bottomRight .prism-popover-arrow {
+     left: auto;
+     right: 16px;
+     transform: translateX(0);
+  }
+
+  &.prism-popover-placement-left,
+  &.prism-popover-placement-leftTop,
+  &.prism-popover-placement-leftBottom {
+     padding-right: 12px;
+     .prism-popover-arrow {
+       right: 4px;
+       top: 50%;
+       transform: translateY(-50%);
+       
+       &::before {
+         right: 100%;
+         top: 0;
+         left: auto;
+         transform: translateX(50%) rotate(45deg);
+       }
+     }
+  }
+
+  &.prism-popover-placement-leftTop .prism-popover-arrow {
+     top: 16px;
+     transform: translateY(0);
+  }
+
+  &.prism-popover-placement-leftBottom .prism-popover-arrow {
+     top: auto;
+     bottom: 16px;
+     transform: translateY(0);
+  }
+
+  &.prism-popover-placement-right,
+  &.prism-popover-placement-rightTop,
+  &.prism-popover-placement-rightBottom {
+     padding-left: 12px;
+     .prism-popover-arrow {
+       left: 4px;
+       top: 50%;
+       transform: translateY(-50%);
+       
+       &::before {
+         left: 100%;
+         top: 0;
+         transform: translateX(-50%) rotate(45deg);
+         box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.05); /* depending on rotation */
+       }
+     }
+  }
+  
+  &.prism-popover-placement-rightTop .prism-popover-arrow {
+     top: 16px;
+     transform: translateY(0);
+  }
+
+  &.prism-popover-placement-rightBottom .prism-popover-arrow {
+     top: auto;
+     bottom: 16px;
+     transform: translateY(0);
+  }
+}

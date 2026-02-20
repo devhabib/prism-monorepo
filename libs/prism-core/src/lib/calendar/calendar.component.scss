@@ -204,9 +204,20 @@
     }
 
     .prism-calendar__day {
-      min-height: 80px;
-      align-items: flex-start;
-      padding: 8px;
+      min-height: 96px;
+      align-items: center; 
+      justify-content: center;
+      padding: 8px 12px;
+    }
+
+    .prism-calendar__day-number {
+      width: 32px;
+      height: 32px;
+      font-size: 1rem;
+    }
+
+    .prism-calendar__day-content {
+      text-align: left; 
     }
 
     .prism-calendar__header {

@@ -1,17 +1,97 @@
-<prism-demo-page-header title="List" subtitle="A simple list component to display data sets.">
+<prism-demo-page-header title="List" subtitle="Simple and flexible list component to display a series of rows.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
+<prism-tab-group>
+  <prism-tab label="Examples">
+    <prism-demo-section title="Basic Usage" description="Basic list demonstrating header, footer, and bordered layout.">
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-list />
+        <div class="p-8">
+          <prism-list header="Header" footer="Footer" [bordered]="true">
+            <prism-list-item>Racing car sprays burning fuel into crowd.</prism-list-item>
+            <prism-list-item>Japanese princess to wed commoner.</prism-list-item>
+            <prism-list-item>Australian walks 100km after outback crash.</prism-list-item>
+          </prism-list>
         </div>
       </prism-tab>
       <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
+        <prism-code-block [ts]="snippets.basic"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>
 </prism-demo-section>
+
+<prism-demo-section title="Avatar & Meta Pattern" description="Common list item layout pattern with an avatar, title, and description.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-8">
+          <prism-list [dataSource]="data()" [itemTemplate]="itemTpl" [bordered]="true">
+          </prism-list>
+          
+          <ng-template #itemTpl let-item>
+            <prism-list-item [extra]="actionTemplate">
+              <prism-list-item-meta 
+                [title]="titleTemplate" 
+                [description]="item.description" 
+                [avatar]="avatarTemplate">
+              </prism-list-item-meta>
+            </prism-list-item>
+          
+            <ng-template #titleTemplate>
+               <a href="javascript:void(0)" style="color: var(--prism-text-primary); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--prism-primary-color)'" onmouseout="this.style.color='var(--prism-text-primary)'">{{ item.title }}</a>
+            </ng-template>
+
+            <ng-template #avatarTemplate>
+              <img [src]="item.avatar" alt="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" />
+            </ng-template>
+
+            <ng-template #actionTemplate>
+              <a href="javascript:void(0)" style="color: var(--prism-primary-color); text-decoration: none;">edit</a>
+            </ng-template>
+          </ng-template>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.avatarMeta"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Grid Mode" description="Automatically layout list items in a grid. This mode automatically drops to 1 column on mobile screens.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-8" style="background: var(--prism-bg-layout);">
+          <prism-list [grid]="{ gutter: 16, column: 3 }" [dataSource]="data()" [itemTemplate]="gridItemTpl">
+          </prism-list>
+          
+          <ng-template #gridItemTpl let-item>
+            <prism-list-item style="padding: 0; width: 100%;">
+              <prism-card [title]="item.title" style="width: 100%; display: block;">
+                Card content related to {{ item.title }}
+              </prism-card>
+            </prism-list-item>
+          </ng-template>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.grid"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+    </prism-demo-section>
+  </prism-tab>
+
+  <prism-tab label="API">
+    <prism-demo-section title="API Overview">
+      <prism-api-table [data]="apiDataList"></prism-api-table>
+    </prism-demo-section>
+
+    <prism-demo-section title="" description="prism-list-item-meta">
+      <prism-api-table [data]="apiDataListItemMeta"></prism-api-table>
+    </prism-demo-section>
+  </prism-tab>
+</prism-tab-group>
