@@ -1,18 +1,92 @@
-<prism-demo-page-header title="Badge" subtitle="A small numerical value or status descriptor for another element.">
-</prism-demo-page-header>
+<prism-demo-page-header
+  title="Badge"
+  subtitle="Small numerical value or status dot displayed over another element."
+/>
 
-<prism-demo-section title="Basic Usage">
-  <prism-demo-card>
-    <prism-tab-group variant="pill">
-      <prism-tab label="Preview">
-        <div class="p-4 flex gap-4">
-          <prism-badge label="99"></prism-badge>
-          <prism-badge label="New" variant="success"></prism-badge>
+<prism-tab-group>
+  <prism-tab label="Examples">
+
+    <!-- Basic -->
+    <prism-demo-section title="Basic" subtitle="Show a count badge on an avatar.">
+      <prism-demo-card>
+        <div preview class="flex gap-6 items-center">
+          <prism-badge [count]="5">
+            <prism-avatar label="U" size="lg" />
+          </prism-badge>
+          <prism-badge [count]="25" status="success">
+            <prism-avatar label="U" size="lg" />
+          </prism-badge>
+          <prism-badge [count]="0" [showZero]="true" status="warning">
+            <prism-avatar label="U" size="lg" />
+          </prism-badge>
         </div>
-      </prism-tab>
-      <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
-      </prism-tab>
-    </prism-tab-group>
-  </prism-demo-card>
-</prism-demo-section>
+        <prism-code-block [code]="snippets.basic" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+    <!-- Standalone -->
+    <prism-demo-section title="Standalone" subtitle="Use a badge without wrapping another element.">
+      <prism-demo-card>
+        <div preview class="flex gap-4 items-center">
+          <prism-badge [count]="99" [isStandalone]="true" />
+          <prism-badge count="New" [isStandalone]="true" status="success" />
+          <prism-badge count="Hot" [isStandalone]="true" status="warning" />
+        </div>
+        <prism-code-block [code]="snippets.standalone" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+    <!-- Dot Mode -->
+    <prism-demo-section title="Dot Mode" subtitle="A small dot without a number, used for status indicators.">
+      <prism-demo-card>
+        <div preview class="flex gap-6 items-center">
+          <prism-badge [dot]="true" status="error">
+            <prism-icon name="notification-line" style="font-size:1.5rem" />
+          </prism-badge>
+          <prism-badge [dot]="true" status="success">
+            <prism-icon name="mail-line" style="font-size:1.5rem" />
+          </prism-badge>
+          <prism-badge [dot]="true" status="processing">
+            <prism-icon name="message-line" style="font-size:1.5rem" />
+          </prism-badge>
+        </div>
+        <prism-code-block [code]="snippets.dot" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+    <!-- Dynamic Count -->
+    <prism-demo-section title="Dynamic Count" subtitle="Increment and decrement the badge count.">
+      <prism-demo-card>
+        <div preview class="flex gap-4 items-center">
+          <prism-badge [count]="dynamicCount()">
+            <prism-avatar label="U" size="lg" />
+          </prism-badge>
+          <prism-button (click)="decrement()" variant="outline" size="sm">−</prism-button>
+          <span style="font-weight:600; min-width:2ch; text-align:center">{{ dynamicCount() }}</span>
+          <prism-button (click)="increment()" variant="outline" size="sm">+</prism-button>
+        </div>
+        <prism-code-block [code]="snippets.dynamic" language="typescript" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+    <!-- Overflow Count -->
+    <prism-demo-section title="Overflow Count" subtitle="Cap the displayed number with an overflow suffix.">
+      <prism-demo-card>
+        <div preview class="flex gap-6 items-center">
+          <prism-badge [count]="100" [overflowCount]="99">
+            <prism-avatar label="U" size="lg" />
+          </prism-badge>
+          <prism-badge [count]="1000" [overflowCount]="999">
+            <prism-avatar label="U" size="lg" />
+          </prism-badge>
+        </div>
+        <prism-code-block [code]="snippets.overflow" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+  </prism-tab>
+
+  <prism-tab label="API">
+    <prism-api-table [data]="apiData" />
+  </prism-tab>
+</prism-tab-group>

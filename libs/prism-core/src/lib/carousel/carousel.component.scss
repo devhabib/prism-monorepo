@@ -1,0 +1,205 @@
+.prism-carousel {
+  display: block;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  // ── Container ──
+  &__container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  // ── Viewport ──
+  &__viewport {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  // ── Track ──
+  &__track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    touch-action: pan-y;
+    will-change: transform;
+  }
+
+  // ── Panel ──
+  &__panel {
+    flex: 0 0 100%;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  // ── Arrows ──
+  &__arrow {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: var(--surface-0, #fff);
+    color: var(--text-main, #0f172a);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s ease;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover {
+      background: var(--surface-100, #f1f5f9);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    &--prev {
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &--next {
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  &:hover .prism-carousel__arrow {
+    opacity: 1;
+  }
+
+  // ── Dots ──
+  &__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 0;
+
+    &--top {
+      order: -1;
+      padding: 0 0 12px 0;
+    }
+
+    &--bottom {
+      padding: 12px 0 0 0;
+    }
+
+    &--left,
+    &--right {
+      flex-direction: column;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0;
+    }
+
+    &--left {
+      left: 12px;
+    }
+
+    &--right {
+      right: 12px;
+    }
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border: none;
+    border-radius: 50%;
+    background: var(--surface-300, #cbd5e1);
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+
+    &.is-active {
+      background: var(--primary-500, #6366f1);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    &:hover:not(.is-active) {
+      background: var(--surface-400, #94a3b8);
+    }
+  }
+
+  // ── Vertical Mode ──
+  &--vertical {
+    .prism-carousel__container {
+      flex-direction: column;
+    }
+
+    .prism-carousel__track {
+      flex-direction: column;
+    }
+
+    .prism-carousel__panel {
+      flex: 0 0 100%;
+      min-height: 0;
+      height: 100%;
+    }
+
+    .prism-carousel__viewport {
+      height: 300px;
+    }
+
+    .prism-carousel__arrow {
+      left: 50%;
+
+      &--prev {
+        top: 8px;
+        right: auto;
+        transform: translateX(-50%) rotate(90deg);
+      }
+
+      &--next {
+        top: auto;
+        bottom: 8px;
+        right: auto;
+        transform: translateX(-50%) rotate(90deg);
+      }
+    }
+
+    .prism-carousel__dot.is-active {
+      width: 8px;
+      height: 24px;
+      border-radius: 4px;
+    }
+  }
+
+  // ── Fade Effect ──
+  &--fade {
+    .prism-carousel__track {
+      position: relative;
+      transition: none;
+    }
+
+    .prism-carousel__panel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+
+      &:first-child {
+        position: relative;
+      }
+    }
+
+    // Active panel via nth-child won't work dynamically;
+    // We'll use a class added by the component
+  }
+}

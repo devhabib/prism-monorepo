@@ -94,6 +94,7 @@ export * from './lib/upload/upload.component';
 // Data Display
 export * from './lib/calendar/calendar.component';
 export * from './lib/carousel/carousel.component';
+export * from './lib/carousel/carousel-panel.component';
 export * from './lib/image/image.component';
 export * from './lib/list/list.component';
 export * from './lib/popover/popover.component';

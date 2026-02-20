@@ -6,7 +6,7 @@
 </ng-template>
 
 <ng-template #statusCell let-row="row">
-  <prism-badge [label]="row.status" [variant]="getStatusVariant(row.status)" />
+  <prism-badge [count]="row.status" [status]="getStatusVariant(row.status)" />
 </ng-template>
 
 <ng-template #nameCell let-row="row">
@@ -95,7 +95,7 @@
         <div preview class="w-full overflow-x-auto">
           <div class="flex items-center gap-2 mb-4 min-h-[32px] p-2 bg-slate-50 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
             <span class="text-sm text-muted">Selection Count:</span>
-            <prism-badge [label]="multipleSelection().length.toString()" variant="info" />
+            <prism-badge [count]="multipleSelection().length.toString()" status="default" />
           </div>
           
           <prism-table 
@@ -149,7 +149,7 @@
         </div>
         <div class="flex justify-between border-b border-slate-100 dark:border-slate-700 pb-2">
           <strong class="text-sm">Status:</strong>
-          <prism-badge [label]="selectedRow()!.status" [variant]="getStatusVariant(selectedRow()!.status)" />
+          <prism-badge [count]="selectedRow()!.status" [status]="getStatusVariant(selectedRow()!.status)" />
         </div>
         <div class="flex justify-between pt-2">
           <strong class="text-sm">Avatar URL:</strong>

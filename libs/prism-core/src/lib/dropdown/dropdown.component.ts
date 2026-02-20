@@ -260,6 +260,7 @@ export class PrismDropdownTriggerDirective implements OnDestroy {
     const scrollX = win.scrollX || win.pageXOffset;
     const scrollY = win.scrollY || win.pageYOffset;
 
+    const GAP = 4;
     let top = 0;
     let left = 0;
     let currentPlacement = this.placement();
@@ -268,17 +269,17 @@ export class PrismDropdownTriggerDirective implements OnDestroy {
     const spaceBelow = viewportHeight - triggerRect.bottom;
     const spaceAbove = triggerRect.top;
 
-    if (currentPlacement.startsWith('bottom') && spaceBelow < menuRect.height && spaceAbove > spaceBelow) {
+    if (currentPlacement.startsWith('bottom') && spaceBelow < menuRect.height + GAP && spaceAbove > spaceBelow) {
       currentPlacement = currentPlacement.replace('bottom', 'top') as PrismDropdownPlacement;
-    } else if (currentPlacement.startsWith('top') && spaceAbove < menuRect.height && spaceBelow > spaceAbove) {
+    } else if (currentPlacement.startsWith('top') && spaceAbove < menuRect.height + GAP && spaceBelow > spaceAbove) {
       currentPlacement = currentPlacement.replace('top', 'bottom') as PrismDropdownPlacement;
     }
 
     // Calculate vertical position (absolute to document)
     if (currentPlacement.startsWith('bottom')) {
-      top = triggerRect.bottom + scrollY;
+      top = triggerRect.bottom + scrollY + GAP;
     } else {
-      top = triggerRect.top + scrollY - menuRect.height;
+      top = triggerRect.top + scrollY - menuRect.height - GAP;
     }
 
     // Calculate horizontal position (absolute to document)
@@ -300,8 +301,8 @@ export class PrismDropdownTriggerDirective implements OnDestroy {
     this.renderer.setStyle(menuEl, 'left', `${left}px`);
     this.renderer.setStyle(menuEl, 'min-width', `${triggerRect.width}px`);
     
-    // Transform for animation base
-    const translateY = (currentPlacement as string).startsWith('bottom') ? -10 : 10;
+    // Transform for animation base (start closer to the trigger)
+    const translateY = currentPlacement.startsWith('bottom') ? -GAP : GAP;
     this.renderer.setStyle(menuEl, '--prism-dropdown-offset', `${translateY}px`);
   }
 }

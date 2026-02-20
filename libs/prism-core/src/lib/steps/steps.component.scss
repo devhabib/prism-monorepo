@@ -1,5 +1,52 @@
 @use '../../../../prism-theme/src/lib/index' as *;
 
+@mixin vertical-step-styles {
+  .prism-step-item {
+    display: block;
+    overflow: visible;
+    flex: 1;
+    padding-bottom: 24px;
+    width: 100%;
+
+    &.prism-step-item-last {
+      padding-bottom: 0;
+      .prism-step-item-tail {
+        display: none !important;
+      }
+    }
+
+    .prism-step-item-tail {
+      position: absolute;
+      top: 36px;
+      left: 16px;
+      width: 1px;
+      height: 100%;
+      padding: 4px 0;
+      display: block !important;
+
+      &::after {
+        content: '';
+        display: block;
+        width: 1px;
+        height: calc(100% - 40px);
+        background: var(--border);
+        border-radius: 1px;
+        transition: all 0.3s;
+      }
+    }
+
+    .prism-step-item-content {
+      min-height: 48px;
+      width: calc(100% - 60px);
+      margin-left: 44px;
+    }
+    
+    .prism-step-item-title::after {
+      display: none !important;
+    }
+  }
+}
+
 .prism-steps {
   display: flex;
   width: 100%;
@@ -24,29 +71,20 @@
     .prism-step-item {
       display: inline-block;
       flex: 1;
-      overflow: hidden; // Clip the long title bar
+      overflow: hidden;
       vertical-align: top;
       width: 100%;
+
       &.prism-step-item-last {
         flex: none;
-        
-        .prism-step-item-title {
-          padding-right: 0;
-          &::after {
-            display: none !important;
-          }
-        }
-        
+        .prism-step-item-title::after,
         .prism-step-item-tail {
           display: none !important;
-        }
-        .prism-step-item-content{
-          width: 100%;
         }
       }
 
       .prism-step-item-tail {
-        display: none; // Default horizontal uses title::after
+        display: none;
       }
 
       .prism-step-item-title {
@@ -69,61 +107,18 @@
     }
   }
 
-  // Vertical Alignment & Mobile Fallback
+  // Vertical Logic (Common for .prism-steps-vertical and mobile fallback)
   &.prism-steps-vertical,
   &:not(.prism-steps-vertical) {
     @media (max-width: 767px) {
       flex-direction: column;
-
-      .prism-step-item {
-        display: block;
-        overflow: visible;
-        flex: 1;
-        padding-bottom: 24px;
-        width: 100%;
-
-        &.prism-step-item-last {
-          padding-bottom: 0;
-          .prism-step-item-tail {
-            display: none !important;
-          }
-        }
-
-        .prism-step-item-tail {
-          position: absolute;
-          top: 36px;
-          left: 16px;
-          width: 1px;
-          height: 100%;
-          padding: 4px 0;
-          display: block !important;
-
-          &::after {
-            content: '';
-            display: block;
-            width: 1px;
-            height: calc(100% - 40px);
-            background: var(--border);
-            border-radius: 1px;
-            transition: all 0.3s;
-          }
-        }
-
-        .prism-step-item-content {
-          min-height: 48px;
-          width: calc(100% - 60px);
-          margin-left: 44px;
-        }
-        
-        .prism-step-item-title::after {
-          display: none !important;
-        }
-      }
+      @include vertical-step-styles;
     }
   }
 
   &.prism-steps-vertical {
     flex-direction: column;
+    @include vertical-step-styles;
   }
 }
 

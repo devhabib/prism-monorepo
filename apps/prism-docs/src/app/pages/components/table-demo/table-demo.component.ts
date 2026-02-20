@@ -120,7 +120,7 @@ export class TableDemoComponent {
     this.showDetailsDialog.set(true);
   }
 
-  getStatusVariant(status: string): 'success' | 'warning' | 'danger' | 'info' {
+  getStatusVariant(status: string): 'success' | 'warning' | 'error' | 'default' {
     switch (status) {
       case 'Active':
       case 'Completed':
@@ -128,9 +128,9 @@ export class TableDemoComponent {
       case 'Refund':
         return 'warning';
       case 'Offline':
-        return 'danger';
+        return 'error';
       default:
-        return 'info';
+        return 'default';
     }
   }
 

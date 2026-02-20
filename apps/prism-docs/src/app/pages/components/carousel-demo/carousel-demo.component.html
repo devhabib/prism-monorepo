@@ -1,17 +1,90 @@
-<prism-demo-page-header title="Carousel" subtitle="A slideshow component for cycling through elements.">
-</prism-demo-page-header>
+<prism-demo-page-header
+  title="Carousel"
+  subtitle="A slideshow component for cycling through content panels."
+/>
 
-<prism-demo-section title="Basic Usage">
-  <prism-demo-card>
-    <prism-tab-group variant="pill">
-      <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-carousel />
+<prism-tab-group>
+  <prism-tab label="Examples">
+
+    <!-- Basic Horizontal -->
+    <prism-demo-section title="Basic" subtitle="Default horizontal carousel with navigation arrows and dots.">
+      <prism-demo-card>
+        <div preview>
+          <prism-carousel>
+            @for (panel of panelColors; track panel.label) {
+              <prism-carousel-panel>
+                <div style="display:flex;align-items:center;justify-content:center;height:240px;border-radius:8px;color:#fff;font-size:1.5rem;font-weight:700"
+                     [style.background]="panel.bg">
+                  {{ panel.label }}
+                </div>
+              </prism-carousel-panel>
+            }
+          </prism-carousel>
         </div>
-      </prism-tab>
-      <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
-      </prism-tab>
-    </prism-tab-group>
-  </prism-demo-card>
-</prism-demo-section>
+        <prism-code-block [code]="snippets.basic" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+    <!-- Vertical -->
+    <prism-demo-section title="Vertical" subtitle="Slides transition vertically instead of horizontally.">
+      <prism-demo-card>
+        <div preview>
+          <prism-carousel [vertical]="true" dotPosition="right">
+            @for (panel of panelColors; track panel.label) {
+              <prism-carousel-panel>
+                <div style="display:flex;align-items:center;justify-content:center;height:240px;border-radius:8px;color:#fff;font-size:1.5rem;font-weight:700"
+                     [style.background]="panel.bg">
+                  {{ panel.label }}
+                </div>
+              </prism-carousel-panel>
+            }
+          </prism-carousel>
+        </div>
+        <prism-code-block [code]="snippets.vertical" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+    <!-- Autoplay -->
+    <prism-demo-section title="Autoplay" subtitle="Automatically advance slides every 2 seconds.">
+      <prism-demo-card>
+        <div preview>
+          <prism-carousel [autoplay]="true" [autoplaySpeed]="2000">
+            @for (panel of panelColors; track panel.label) {
+              <prism-carousel-panel>
+                <div style="display:flex;align-items:center;justify-content:center;height:240px;border-radius:8px;color:#fff;font-size:1.5rem;font-weight:700"
+                     [style.background]="panel.bg">
+                  {{ panel.label }}
+                </div>
+              </prism-carousel-panel>
+            }
+          </prism-carousel>
+        </div>
+        <prism-code-block [code]="snippets.autoplay" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+    <!-- Fade -->
+    <prism-demo-section title="Fade Effect" subtitle="Cross-fade between slides instead of sliding.">
+      <prism-demo-card>
+        <div preview>
+          <prism-carousel effect="fade" [autoplay]="true" [autoplaySpeed]="3000">
+            @for (panel of panelColors; track panel.label) {
+              <prism-carousel-panel>
+                <div style="display:flex;align-items:center;justify-content:center;height:240px;border-radius:8px;color:#fff;font-size:1.5rem;font-weight:700"
+                     [style.background]="panel.bg">
+                  {{ panel.label }}
+                </div>
+              </prism-carousel-panel>
+            }
+          </prism-carousel>
+        </div>
+        <prism-code-block [code]="snippets.fade" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+  </prism-tab>
+
+  <prism-tab label="API">
+    <prism-api-table [data]="apiData" />
+  </prism-tab>
+</prism-tab-group>

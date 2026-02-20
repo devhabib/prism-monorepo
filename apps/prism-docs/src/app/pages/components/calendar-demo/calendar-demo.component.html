@@ -1,17 +1,74 @@
-<prism-demo-page-header title="Calendar" subtitle="A calendar component for displaying and selecting dates in a month view.">
-</prism-demo-page-header>
+<prism-demo-page-header
+  title="Calendar"
+  subtitle="A full-featured calendar panel for displaying and selecting dates."
+/>
 
-<prism-demo-section title="Basic Usage">
-  <prism-demo-card [minHeight]="'300px'">
-    <prism-tab-group variant="pill">
-      <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-calendar />
+<prism-tab-group>
+  <prism-tab label="Examples">
+
+    <!-- Card Mode -->
+    <prism-demo-section title="Card Mode" subtitle="Compact calendar card for sidebars and forms.">
+      <prism-demo-card>
+        <div preview class="flex gap-4 items-start flex-wrap">
+          <prism-calendar
+            [fullscreen]="false"
+            [(value)]="selectedDate"
+            (selectChange)="onDateSelect($event)"
+          />
+          <div style="padding:16px; font-size:0.875rem; color: var(--text-muted)">
+            @if (selectedDate()) {
+              Selected: <strong>{{ selectedDate()?.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }}</strong>
+            } @else {
+              Click a date to select it.
+            }
+          </div>
         </div>
-      </prism-tab>
-      <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
-      </prism-tab>
-    </prism-tab-group>
-  </prism-demo-card>
-</prism-demo-section>
+        <prism-code-block [code]="snippets.card" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+    <!-- Fullscreen Mode -->
+    <prism-demo-section title="Full-Screen Mode" subtitle="Large calendar filling the container width.">
+      <prism-demo-card>
+        <div preview>
+          <prism-calendar
+            [fullscreen]="true"
+            [(value)]="fullscreenDate"
+          />
+        </div>
+        <prism-code-block [code]="snippets.fullscreen" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+    <!-- Year View -->
+    <prism-demo-section title="Year View" subtitle="Toggle to a month-picker panel.">
+      <prism-demo-card>
+        <div preview class="flex gap-4 items-start">
+          <prism-calendar
+            [fullscreen]="false"
+            mode="year"
+          />
+        </div>
+        <prism-code-block [code]="snippets.yearView" language="html" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+    <!-- Disabled Dates -->
+    <prism-demo-section title="Disabled Dates" subtitle="Prevent selection of weekends or custom dates.">
+      <prism-demo-card>
+        <div preview class="flex gap-4 items-start">
+          <prism-calendar
+            [fullscreen]="false"
+            [disabledDate]="isWeekend"
+          />
+        </div>
+        <prism-code-block [code]="snippets.disabledDates" language="typescript" />
+      </prism-demo-card>
+    </prism-demo-section>
+
+  </prism-tab>
+
+  <prism-tab label="API">
+    <prism-api-table [data]="apiData" />
+  </prism-tab>
+</prism-tab-group>

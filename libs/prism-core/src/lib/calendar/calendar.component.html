@@ -1,0 +1,106 @@
+<div class="prism-calendar__inner">
+  <!-- Header -->
+  <div class="prism-calendar__header">
+    <div class="prism-calendar__header-left">
+      @if (mode() === 'month') {
+        <button type="button" class="prism-calendar__nav-btn" (click)="prevYear()" aria-label="Previous year">
+          «
+        </button>
+        <button type="button" class="prism-calendar__nav-btn" (click)="prevMonth()" aria-label="Previous month">
+          ‹
+        </button>
+      } @else {
+        <button type="button" class="prism-calendar__nav-btn" (click)="prevYear()" aria-label="Previous year">
+          «
+        </button>
+      }
+    </div>
+
+    <button type="button" class="prism-calendar__title-btn" (click)="toggleMode()">
+      @if (mode() === 'month') {
+        {{ viewMonthName() }} {{ viewYear() }}
+      } @else {
+        {{ viewYear() }}
+      }
+    </button>
+
+    <div class="prism-calendar__header-right">
+      @if (mode() === 'month') {
+        <button type="button" class="prism-calendar__nav-btn" (click)="nextMonth()" aria-label="Next month">
+          ›
+        </button>
+        <button type="button" class="prism-calendar__nav-btn" (click)="nextYear()" aria-label="Next year">
+          »
+        </button>
+      } @else {
+        <button type="button" class="prism-calendar__nav-btn" (click)="nextYear()" aria-label="Next year">
+          »
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Month View -->
+  @if (mode() === 'month') {
+    <div class="prism-calendar__body">
+      <div class="prism-calendar__weekdays">
+        @for (day of weekdaysShort; track day; let i = $index) {
+          <span class="prism-calendar__weekday" [attr.data-mini]="weekdaysMini[i]">{{ day }}</span>
+        }
+      </div>
+      <div class="prism-calendar__days" role="grid">
+        @for (day of calendarDays(); track day.date.getTime()) {
+          <div
+            class="prism-calendar__day"
+            [class.is-other-month]="!day.isCurrentMonth"
+            [class.is-today]="day.isToday"
+            [class.is-selected]="isSelected(day.date)"
+            [class.is-disabled]="day.isDisabled"
+            (click)="selectDate(day.date)"
+            (keydown.enter)="selectDate(day.date)"
+            tabindex="0"
+            role="gridcell"
+            [attr.aria-selected]="isSelected(day.date)"
+            [attr.aria-disabled]="day.isDisabled"
+          >
+            <span class="prism-calendar__day-number">{{ day.date.getDate() }}</span>
+            @if (dateCellTpl()) {
+              <div class="prism-calendar__day-content">
+                <ng-container
+                  [ngTemplateOutlet]="dateCellTpl()!"
+                  [ngTemplateOutletContext]="{ $implicit: day.date }"
+                />
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- Year View (Month Picker) -->
+  @if (mode() === 'year') {
+    <div class="prism-calendar__months" role="grid">
+      @for (m of monthsGrid(); track m.index) {
+        <div
+          class="prism-calendar__month-cell"
+          [class.is-current]="m.isCurrent"
+          [class.is-selected]="isSelectedMonth(m.index)"
+          (click)="selectMonth(m.index)"
+          (keydown.enter)="selectMonth(m.index)"
+          tabindex="0"
+          role="gridcell"
+        >
+          @if (monthCellTpl()) {
+            <ng-container
+              [ngTemplateOutlet]="monthCellTpl()!"
+              [ngTemplateOutletContext]="{ $implicit: m }"
+            />
+          } @else {
+            {{ m.shortLabel }}
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

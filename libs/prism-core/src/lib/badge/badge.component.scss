@@ -1,57 +1,118 @@
 .prism-badge {
+  position: relative;
   display: inline-flex;
-  align-items: center;
-  padding: 0.25rem 0.625rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1;
-  white-space: nowrap;
-  
-  &--pill {
-    border-radius: 9999px;
-  }
-  
-  &--square {
-    border-radius: 6px;
-  }
-  
-  &--success {
-    background-color: rgb(220, 252, 231);
-    color: rgb(22, 101, 52);
-    
-    [data-theme="dark"] & {
-      background-color: rgba(34, 197, 94, 0.15);
-      color: rgb(134, 239, 172);
+  vertical-align: middle;
+
+  // ── Standalone (no projected content) ──
+  &--standalone {
+    .prism-badge__count,
+    .prism-badge__dot {
+      position: relative;
+      top: auto !important;
+      right: auto !important;
+      transform: none;
     }
   }
-  
-  &--warning {
-    background-color: rgb(254, 243, 199);
-    color: rgb(113, 63, 18);
-    
-    [data-theme="dark"] & {
-      background-color: rgba(234, 179, 8, 0.15);
-      color: rgb(253, 224, 71);
+
+  // ── Count Sup ──
+  &__count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    transform: translate(50%, -50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    border-radius: 10px;
+    box-shadow: 0 0 0 2px var(--surface-0, #fff);
+    pointer-events: none;
+    animation: prism-badge-zoom-in 0.3s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+
+    // Status colors
+    &--error {
+      background-color: var(--danger, #ef4444);
+      color: #fff;
+    }
+    &--success {
+      background-color: var(--success, #10b981);
+      color: #fff;
+    }
+    &--warning {
+      background-color: var(--warning, #f59e0b);
+      color: #fff;
+    }
+    &--processing {
+      background-color: var(--primary-500, #6366f1);
+      color: #fff;
+    }
+    &--default {
+      background-color: var(--surface-400, #94a3b8);
+      color: #fff;
     }
   }
-  
-  &--danger {
-    background-color: rgb(254, 226, 226);
-    color: rgb(127, 29, 29);
-    
-    [data-theme="dark"] & {
-      background-color: rgba(239, 68, 68, 0.15);
-      color: rgb(252, 165, 165);
+
+  // ── Dot ──
+  &__dot {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    transform: translate(50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--surface-0, #fff);
+    pointer-events: none;
+    animation: prism-badge-zoom-in 0.3s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+
+    &--error {
+      background-color: var(--danger, #ef4444);
+    }
+    &--success {
+      background-color: var(--success, #10b981);
+    }
+    &--warning {
+      background-color: var(--warning, #f59e0b);
+    }
+    &--processing {
+      background-color: var(--primary-500, #6366f1);
+      animation: prism-badge-zoom-in 0.3s cubic-bezier(0.12, 0.4, 0.29, 1.46),
+                 prism-badge-pulse 1.5s ease-in-out infinite;
+    }
+    &--default {
+      background-color: var(--surface-400, #94a3b8);
     }
   }
-  
-  &--info {
-    background-color: rgb(219, 234, 254);
-    color: rgb(30, 58, 138);
-    
-    [data-theme="dark"] & {
-      background-color: rgba(59, 130, 246, 0.15);
-      color: rgb(147, 197, 253);
-    }
+}
+
+// ── Animations ──
+@keyframes prism-badge-zoom-in {
+  0% {
+    opacity: 0;
+    transform: translate(50%, -50%) scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(50%, -50%) scale(1);
+  }
+}
+
+@keyframes prism-badge-pulse {
+  0% {
+    box-shadow: 0 0 0 2px var(--surface-0, #fff);
+  }
+  50% {
+    box-shadow: 0 0 0 2px var(--surface-0, #fff), 0 0 0 5px rgba(99, 102, 241, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 0 2px var(--surface-0, #fff);
   }
 }

@@ -1,0 +1,50 @@
+<div class="prism-carousel__container">
+  <!-- Arrow: Prev -->
+  <button
+    type="button"
+    class="prism-carousel__arrow prism-carousel__arrow--prev"
+    (click)="prev()"
+    aria-label="Previous slide"
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+  </button>
+
+  <!-- Track -->
+  <div class="prism-carousel__viewport">
+    <div
+      class="prism-carousel__track"
+      [style.transform]="trackTransform()"
+    >
+      <ng-content select="prism-carousel-panel" />
+    </div>
+  </div>
+
+  <!-- Arrow: Next -->
+  <button
+    type="button"
+    class="prism-carousel__arrow prism-carousel__arrow--next"
+    (click)="next()"
+    aria-label="Next slide"
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </button>
+</div>
+
+<!-- Dots -->
+@if (dots() && totalSlides() > 1) {
+  <div class="prism-carousel__dots" [class]="dotsPositionClass()">
+    @for (panel of panels(); track $index) {
+      <button
+        type="button"
+        class="prism-carousel__dot"
+        [class.is-active]="$index === activeIndex()"
+        (click)="goTo($index)"
+        [attr.aria-label]="'Go to slide ' + ($index + 1)"
+      ></button>
+    }
+  </div>
+}
