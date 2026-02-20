@@ -1,12 +1,12 @@
 <!-- Row Templates (Must be defined for ViewChild to find them) -->
 <ng-template #amountCell let-row="row">
-  <span [class]="row.amount < 0 ? 'text-red-500 font-medium' : 'text-green-600 dark:text-green-400 font-medium'">
+  <span [class]="row.amount < 0 ? 'text-red-500 font-medium' : 'text-green-600 font-medium'">
     {{ row.amount | currency }}
   </span>
 </ng-template>
 
 <ng-template #statusCell let-row="row">
-  <prism-badge [count]="row.status" [status]="getStatusVariant(row.status)" />
+  <prism-badge [count]="row.status" [status]="getStatusVariant(row.status)" [isStandalone]="true" />
 </ng-template>
 
 <ng-template #nameCell let-row="row">
@@ -93,9 +93,9 @@
     <prism-demo-section title="Multiple Selection" subtitle="Select multiple rows using checkboxes.">
       <prism-demo-card>
         <div preview class="w-full overflow-x-auto">
-          <div class="flex items-center gap-2 mb-4 min-h-[32px] p-2 bg-slate-50 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+          <div class="flex items-center gap-2 mb-4 min-h-[32px] p-2 bg-slate-50 rounded border border-slate-200">
             <span class="text-sm text-muted">Selection Count:</span>
-            <prism-badge [count]="multipleSelection().length.toString()" status="default" />
+            <prism-badge [count]="multipleSelection().length.toString()" status="default" [isStandalone]="true" />
           </div>
           
           <prism-table 
@@ -138,27 +138,41 @@
 <!-- Details Dialog -->
 <prism-dialog 
   [(visible)]="showDetailsDialog" 
-  header="Employee Details"
-  width="600px">
+  header="Employee Profile"
+  width="480px">
   @if (selectedRow()) {
-    <prism-card [header]="selectedRow()!.name" [subheader]="selectedRow()!.role">
-      <div class="space-y-3">
-        <div class="flex justify-between border-b border-slate-100 dark:border-slate-700 pb-2">
-          <strong class="text-sm">ID:</strong>
-          <span class="text-sm text-muted">{{ selectedRow()!.id }}</span>
-        </div>
-        <div class="flex justify-between border-b border-slate-100 dark:border-slate-700 pb-2">
-          <strong class="text-sm">Status:</strong>
-          <prism-badge [count]="selectedRow()!.status" [status]="getStatusVariant(selectedRow()!.status)" />
-        </div>
-        <div class="flex justify-between pt-2">
-          <strong class="text-sm">Avatar URL:</strong>
-          <span class="text-sm text-muted truncate max-w-[300px]">{{ selectedRow()!.avatar || 'N/A' }}</span>
+    <div class="flex flex-col items-center text-center mb-6 mt-1">
+      <prism-avatar 
+        [image]="selectedRow()!.avatar" 
+        [label]="selectedRow()!.name.charAt(0)" 
+        shape="circle" 
+        size="xl"
+        class="mb-3 shadow-md border-2 border-white" />
+      <h3 class="text-lg font-bold mb-0.5" style="color: var(--prism-text-primary);">{{ selectedRow()!.name }}</h3>
+      <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100 uppercase tracking-wider">
+        {{ selectedRow()!.role }}
+      </span>
+    </div>
+
+    <div class="divide-y divide-slate-100 border-t border-b border-slate-100 -mx-6">
+      <div class="flex justify-between items-center py-3 px-6">
+        <span class="text-xs font-medium uppercase tracking-tight text-slate-400">Employee ID</span>
+        <span class="text-sm font-semibold" style="color: var(--prism-text-primary);">#{{ selectedRow()!.id }}</span>
+      </div>
+      <div class="flex justify-between items-center py-3 px-6">
+        <span class="text-xs font-medium uppercase tracking-tight text-slate-400">Current Status</span>
+        <prism-badge [count]="selectedRow()!.status" [status]="getStatusVariant(selectedRow()!.status)" [isStandalone]="true" />
+      </div>
+      <div class="flex flex-col gap-2 py-3 px-6">
+        <span class="text-xs font-medium uppercase tracking-tight text-slate-400">Profile Metadata</span>
+        <div class="flex items-center gap-2 bg-slate-50 p-2.5 rounded border border-slate-200">
+           <i class="ri-link text-slate-400"></i>
+           <span class="text-xs text-slate-500 font-mono truncate select-all">{{ selectedRow()!.avatar || 'N/A' }}</span>
         </div>
       </div>
-    </prism-card>
+    </div>
   }
   <div footer>
-    <prism-button label="Close" variant="outline" (click)="showDetailsDialog.set(false)" />
+    <prism-button label="Close" variant="outline" (click)="showDetailsDialog.set(false)" class="w-full" />
   </div>
 </prism-dialog>

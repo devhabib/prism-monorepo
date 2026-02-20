@@ -34,7 +34,7 @@ export type PrismBadgeStatus = 'success' | 'error' | 'warning' | 'default' | 'pr
 })
 export class PrismBadgeComponent {
   /** The number or text to display in the badge */
-  readonly count = input<number | string>(0);
+  readonly count = input<number | string>('');
 
   /** Whether to show as a small dot instead of a number */
   readonly dot = input<boolean>(false);

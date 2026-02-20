@@ -67,3 +67,9 @@ tr:hover td {
 .prism-table__row--selected td {
   background-color: var(--color-primary-subtle) !important;
 }
+
+prism-pagination {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}

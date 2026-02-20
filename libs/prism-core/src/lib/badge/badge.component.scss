@@ -5,12 +5,15 @@
 
   // ── Standalone (no projected content) ──
   &--standalone {
+    line-height: 0; // Prevent host from taking extra height
+    
     .prism-badge__count,
     .prism-badge__dot {
       position: relative;
       top: auto !important;
       right: auto !important;
       transform: none;
+      display: inline-flex;
     }
   }
 
@@ -25,10 +28,10 @@
     align-items: center;
     justify-content: center;
     min-width: 20px;
-    height: 20px;
-    padding: 0 6px;
-    font-size: 0.6875rem;
-    font-weight: 600;
+    height: 22px;
+    padding: 0 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
     line-height: 1;
     white-space: nowrap;
     border-radius: 10px;
@@ -38,23 +41,23 @@
 
     // Status colors
     &--error {
-      background-color: var(--danger, #ef4444);
+      background-color: var(--danger, #ff4d4f);
       color: #fff;
     }
     &--success {
-      background-color: var(--success, #10b981);
+      background-color: var(--success, #52c41a);
       color: #fff;
     }
     &--warning {
-      background-color: var(--warning, #f59e0b);
+      background-color: var(--warning, #faad14);
       color: #fff;
     }
     &--processing {
-      background-color: var(--primary-500, #6366f1);
+      background-color: var(--primary, #1890ff);
       color: #fff;
     }
     &--default {
-      background-color: var(--surface-400, #94a3b8);
+      background-color: var(--prism-text-tertiary, #d9d9d9);
       color: #fff;
     }
   }
