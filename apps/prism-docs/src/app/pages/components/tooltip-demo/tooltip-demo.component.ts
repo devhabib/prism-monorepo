@@ -14,7 +14,6 @@ import {
 
 @Component({
   selector: 'prism-tooltip-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismTooltipDirective, 

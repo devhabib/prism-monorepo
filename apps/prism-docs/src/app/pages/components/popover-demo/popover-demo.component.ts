@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-popover-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismPopoverComponent, 

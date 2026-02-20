@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 // Pipe cast helper since we can't use type guard in template easily directly with stricter checks without a pipe or method
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'asTemplate', standalone: true })
+@Pipe({ name: 'asTemplate',  })
 export class AsTemplatePipe implements PipeTransform {
     transform(value: unknown): TemplateRef<unknown> {
         return value as TemplateRef<unknown>;
@@ -13,7 +13,6 @@ export class AsTemplatePipe implements PipeTransform {
 
 @Component({
   selector: 'prism-divider',
-  standalone: true,
   imports: [CommonModule, AsTemplatePipe],
   template: `
     <div 

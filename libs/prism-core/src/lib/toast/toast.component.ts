@@ -5,7 +5,6 @@ import { ToastService, Toast } from '../services/toast.service';
 
 @Component({
   selector: 'prism-toast',
-  standalone: true,
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `

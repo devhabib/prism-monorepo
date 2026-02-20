@@ -15,7 +15,6 @@ import {
 
 @Component({
   selector: 'prism-toast-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismCodeBlockComponent, 

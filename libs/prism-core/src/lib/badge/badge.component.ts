@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'prism-badge',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <span 

@@ -26,7 +26,6 @@ type Product = { sku: string; name: string; category: string; stock: number; pri
 
 @Component({
   selector: 'prism-table-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismTableComponent, 

@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-statistic-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismStatisticComponent, 

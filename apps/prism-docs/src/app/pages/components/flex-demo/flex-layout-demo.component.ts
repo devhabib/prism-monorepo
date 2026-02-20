@@ -20,7 +20,6 @@ import {
 
 @Component({
   selector: 'app-flex-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismFlexComponent, 

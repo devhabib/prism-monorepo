@@ -1,16 +1,65 @@
-<prism-demo-page-header title="Rate" subtitle="A rate component for displaying and selecting ratings.">
+<prism-demo-page-header title="Rate" subtitle="A star rating component.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
+<prism-demo-section title="Basic Usage" description="Basic 5-star rating component.">
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-rate />
+        <div class="p-4 space-y-4">
+          <prism-rate [value]="3" />
         </div>
       </prism-tab>
       <prism-tab label="Code">
         <prism-code-block [ts]="snippets.usage"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Half Star" description="Support for half-star selection using 'allowHalf'.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 space-y-4">
+          <prism-rate [allowHalf]="true" [(value)]="rateValue" />
+          <div class="text-sm text-muted">Value: {{ rateValue() }}</div>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.half"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Custom Count & Icon" description="Customize the number of stars and the icon used.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 space-y-4">
+          <prism-rate [count]="10" [value]="7" />
+          <div class="mt-4">
+             <prism-rate icon="heart-fill" [value]="4" />
+          </div>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.custom"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Disabled" description="Read-only rating state.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 space-y-4">
+          <prism-rate [disabled]="true" [value]="4" />
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.disabled"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>

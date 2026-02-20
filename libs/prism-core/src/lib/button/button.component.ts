@@ -5,7 +5,6 @@ import { PrismIconComponent } from '../icon/icon.component';
 
 @Component({
   selector: 'prism-button',
-  standalone: true,
   imports: [CommonModule, PrismIconComponent],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',

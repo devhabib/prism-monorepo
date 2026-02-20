@@ -16,7 +16,6 @@ import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'prism-menu-item',
-  standalone: true,
   imports: [],
   template: `<ng-content></ng-content>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,7 +32,6 @@ export class PrismMenuItemComponent {
 
 @Component({
   selector: 'prism-dropdown-menu',
-  standalone: true,
   imports: [],
   template: `
     <div class="prism-dropdown-content">
@@ -80,7 +78,6 @@ export type PrismDropdownPlacement = 'bottomLeft' | 'bottomRight' | 'topLeft' | 
 
 @Directive({
   selector: '[prismDropdown]',
-  standalone: true,
   host: {
     '(click)': 'onClick($event)',
     '(mouseenter)': 'onMouseEnter()',

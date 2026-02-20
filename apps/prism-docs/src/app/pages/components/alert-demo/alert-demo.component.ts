@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-alert-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismAlertComponent, 

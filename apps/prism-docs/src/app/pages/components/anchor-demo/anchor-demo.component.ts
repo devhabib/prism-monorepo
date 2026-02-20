@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-anchor-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismAnchorComponent, 

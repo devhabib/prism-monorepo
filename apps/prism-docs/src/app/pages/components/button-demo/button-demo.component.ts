@@ -11,7 +11,6 @@ import {
 
 @Component({
   selector: 'app-button-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismButtonComponent, 

@@ -14,7 +14,6 @@ import {
 
 @Component({
   selector: 'app-dropdown-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismDropdownTriggerDirective,

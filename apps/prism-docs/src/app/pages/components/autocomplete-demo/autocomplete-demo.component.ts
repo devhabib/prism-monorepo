@@ -14,7 +14,6 @@ import {
 
 @Component({
   selector: 'app-autocomplete-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismAutoCompleteComponent, 

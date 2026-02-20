@@ -4,7 +4,6 @@ import { PrismBreadcrumbItemComponent } from './breadcrumb-item.component';
 
 @Component({
   selector: 'prism-breadcrumb',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <nav class="prism-breadcrumb" aria-label="Breadcrumb">

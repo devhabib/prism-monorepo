@@ -15,7 +15,6 @@ import {
 
 @Component({
   selector: 'app-cascader-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismCascaderComponent, 

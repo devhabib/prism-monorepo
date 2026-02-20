@@ -15,7 +15,6 @@ import {
 
 @Component({
   selector: 'app-empty-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismEmptyComponent, 

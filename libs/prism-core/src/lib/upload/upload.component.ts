@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'prism-upload',
-  standalone: true,
   imports: [CommonModule],
   template: `<div class="prism-upload">Work in Progress: Upload</div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,

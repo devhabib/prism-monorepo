@@ -13,7 +13,6 @@ import { PrismSplitterPanelComponent } from './splitter-panel.component';
 
 @Component({
   selector: 'prism-splitter',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div 

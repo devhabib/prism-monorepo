@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'prism-autocomplete',
-  standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
     <div class="prism-autocomplete" [class.prism-autocomplete--open]="isOpen()">

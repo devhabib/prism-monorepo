@@ -12,7 +12,7 @@ import { PrismColumn } from './datatable.types';
     <prism-table [data]="testData" [columns]="testCols"></prism-table>
   `,
   imports: [PrismTableComponent],
-  standalone: true
+  
 })
 class TestHostComponent implements OnInit {
   @ViewChild('statusCell', { static: true }) statusTemplate!: TemplateRef<any>;

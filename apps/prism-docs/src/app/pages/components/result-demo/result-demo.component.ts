@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-result-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismResultComponent, 

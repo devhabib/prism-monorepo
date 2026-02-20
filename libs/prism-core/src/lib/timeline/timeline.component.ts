@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'prism-timeline',
-  standalone: true,
   imports: [CommonModule],
   template: `<div class="prism-timeline">Work in Progress: Timeline</div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,

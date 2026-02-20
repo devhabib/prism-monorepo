@@ -1,16 +1,69 @@
-<prism-demo-page-header title="Input" subtitle="A text input component.">
+<prism-demo-page-header title="Input" subtitle="A multi-functional input component.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
+<prism-demo-section title="Basic Usage" description="Basic input component with Signal model binding.">
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4 space-y-4">
-          <input prismInput placeholder="Default input" />
+        <div class="p-4 space-y-4 max-w-sm">
+          <prism-input [(value)]="inputValue" placeholder="Enter text..." />
+          <div class="text-sm text-muted">Value: {{ inputValue() }}</div>
         </div>
       </prism-tab>
       <prism-tab label="Code">
         <prism-code-block [ts]="snippets.usage"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Sizes" description="Input comes in three sizes: sm, md, and lg.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 space-y-4 max-w-sm">
+          <prism-input size="sm" placeholder="Small input" />
+          <prism-input size="md" placeholder="Medium input (default)" />
+          <prism-input size="lg" placeholder="Large input" />
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.sizes"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Icons" description="Add prefix or suffix icons using Remix Icon names.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 space-y-4 max-w-sm">
+          <prism-input prefix="user-line" placeholder="Username" />
+          <prism-input suffix="search-line" placeholder="Search..." />
+          <prism-input prefix="mail-line" suffix="check-line" placeholder="Email" />
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.icons"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Validation States" description="Different states like error, success, and disabled.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 space-y-4 max-w-sm">
+          <prism-input [error]="true" placeholder="Error state" />
+          <prism-input [success]="true" placeholder="Success state" />
+          <prism-input [disabled]="true" [value]="'Disabled value'" />
+          <prism-input [readonly]="true" [value]="'Readonly value'" />
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.states"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'prism-tab',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div class="prism-tab-content" [class.active]="_isActive()">

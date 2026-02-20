@@ -12,7 +12,6 @@ import { CommonModule } from '@angular/common';
 
 @Directive({
   selector: '[prismSpaceItem]',
-  standalone: true,
 })
 export class PrismSpaceItemDirective {
   public templateRef = inject(TemplateRef<unknown>);
@@ -23,7 +22,6 @@ export type PrismSpaceAlign = 'start' | 'end' | 'center' | 'baseline' | 'stretch
 
 @Component({
   selector: 'prism-space',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div

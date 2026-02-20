@@ -5,7 +5,6 @@ export type PrismSpinSize = 'sm' | 'md' | 'lg';
 
 @Component({
   selector: 'prism-spin',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div class="prism-spin-container">

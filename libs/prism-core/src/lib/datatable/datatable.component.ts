@@ -17,7 +17,6 @@ import { PrismEmptyComponent } from '../empty/empty.component';
 
 @Component({
   selector: 'prism-table',
-  standalone: true,
   imports: [CommonModule, NgTemplateOutlet, PrismPaginationComponent, PrismCheckboxComponent, PrismEmptyComponent],
   templateUrl: './datatable.component.html',
   styleUrl: './datatable.component.scss',

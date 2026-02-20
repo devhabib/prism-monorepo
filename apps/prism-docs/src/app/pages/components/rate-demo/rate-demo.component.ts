@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { 
   PrismRateComponent, 
   PrismCodeBlockComponent, 
@@ -12,9 +13,9 @@ import {
 
 @Component({
   selector: 'app-rate-demo',
-  standalone: true,
   imports: [
     CommonModule, 
+    FormsModule,
     PrismRateComponent, 
     PrismCodeBlockComponent,
     PrismDemoPageHeaderComponent,
@@ -27,7 +28,12 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RateDemoComponent {
+  rateValue = signal(3.5);
+
   readonly snippets = {
-    usage: `<prism-rate></prism-rate>`
+    usage: `<prism-rate [(value)]="rateValue" />`,
+    half: `<prism-rate [allowHalf]="true" [(value)]="rateValue" />`,
+    custom: `<prism-rate [count]="10" icon="heart-fill" [(value)]="rateValue" />`,
+    disabled: `<prism-rate [disabled]="true" [value]="4" />`
   };
 }

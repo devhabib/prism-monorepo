@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'prism-list',
-  standalone: true,
   imports: [CommonModule],
   template: `<div class="prism-list">Work in Progress: List</div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,

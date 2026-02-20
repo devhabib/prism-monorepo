@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'prism-switch',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './switch.component.html',
   styleUrl: './switch.component.scss',

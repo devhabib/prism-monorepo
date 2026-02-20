@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'prism-card',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',

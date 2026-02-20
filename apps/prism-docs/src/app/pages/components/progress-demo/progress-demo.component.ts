@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-progress-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismProgressComponent, 

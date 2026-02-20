@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-menu-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismMenuComponent, 

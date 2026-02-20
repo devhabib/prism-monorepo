@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { 
   PrismDatePickerComponent, 
   PrismCodeBlockComponent, 
@@ -12,9 +13,9 @@ import {
 
 @Component({
   selector: 'app-date-picker-demo',
-  standalone: true,
   imports: [
     CommonModule, 
+    FormsModule,
     PrismDatePickerComponent, 
     PrismCodeBlockComponent,
     PrismDemoPageHeaderComponent,
@@ -27,7 +28,11 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePickerDemoComponent {
+  selectedDate = signal<Date | null>(new Date());
+
   readonly snippets = {
-    usage: `<prism-date-picker></prism-date-picker>`
+    usage: `<prism-date-picker [(value)]="selectedDate" />`,
+    disabled: `<prism-date-picker [disabled]="true" [value]="selectedDate()" />`,
+    placeholder: `<prism-date-picker placeholder="Select a special day" />`
   };
 }

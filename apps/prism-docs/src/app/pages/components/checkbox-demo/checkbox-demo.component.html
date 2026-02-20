@@ -1,16 +1,34 @@
-<prism-demo-page-header title="Checkbox" subtitle="A checkbox component for selecting multiple values from a set.">
+<prism-demo-page-header title="Checkbox" subtitle="A checkbox component.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
+<prism-demo-section title="Basic Usage" description="Basic checkbox with Signal model binding.">
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-checkbox label="Subscribe to newsletter"></prism-checkbox>
+        <div class="p-4 space-y-4">
+          <prism-checkbox [(checked)]="checked" label="Subscribe to newsletter" />
+          <div class="text-sm text-muted">Checked: {{ checked() }}</div>
         </div>
       </prism-tab>
       <prism-tab label="Code">
         <prism-code-block [ts]="snippets.usage"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="States" description="Checkbox support various states like checked and disabled.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 space-y-4 flex flex-col">
+          <prism-checkbox [checked]="true" label="Checked" />
+          <prism-checkbox [disabled]="true" label="Disabled" />
+          <prism-checkbox [disabled]="true" [checked]="true" label="Checked & Disabled" />
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.states"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>

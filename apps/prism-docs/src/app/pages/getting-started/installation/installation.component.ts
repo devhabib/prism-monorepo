@@ -4,7 +4,6 @@ import { PrismCardComponent, PrismCodeBlockComponent } from '@devynelogic/prism-
 
 @Component({
   selector: 'prism-installation',
-  standalone: true,
   imports: [CommonModule, PrismCardComponent, PrismCodeBlockComponent],
   template: `
     <h1>Installation</h1>

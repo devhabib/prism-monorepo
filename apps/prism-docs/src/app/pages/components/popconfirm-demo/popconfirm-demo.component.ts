@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-popconfirm-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismPopconfirmComponent, 

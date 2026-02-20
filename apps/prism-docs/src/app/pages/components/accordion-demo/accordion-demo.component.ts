@@ -15,7 +15,6 @@ import {
 
 @Component({
   selector: 'prism-accordion-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismAccordionComponent, 

@@ -1,42 +1,53 @@
-<prism-demo-page-header title="Radio" subtitle="A radio button component for selecting a single value from a set.">
+<prism-demo-page-header title="Radio" subtitle="A radio input component.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
+<prism-demo-section title="Basic Usage" description="The most basic usage of a radio group.">
   <prism-demo-card>
-    <prism-tab-group variant="pill">
-      <prism-tab label="Preview">
-        <div class="p-4">
-          <div class="mb-4 font-medium">Selected: {{ selectedValue() | titlecase }}</div>
-          <prism-radio-group [(value)]="selectedValue">
-            <prism-radio value="apple">Apple</prism-radio>
-            <prism-radio value="banana">Banana</prism-radio>
-            <prism-radio value="cherry">Cherry</prism-radio>
-            <prism-radio value="disabled" [disabled]="true">Disabled</prism-radio>
-          </prism-radio-group>
-        </div>
-      </prism-tab>
-      <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
-      </prism-tab>
-    </prism-tab-group>
+    <div preview class="p-4 space-y-4">
+      <prism-radio-group [(value)]="selectedValue">
+        <prism-radio value="apple">Apple</prism-radio>
+        <prism-radio value="banana">Banana</prism-radio>
+        <prism-radio value="cherry">Cherry</prism-radio>
+      </prism-radio-group>
+      <div class="text-sm text-muted">Selected: {{ selectedValue() }}</div>
+    </div>
+    <prism-code-block code [ts]="snippets.usage"></prism-code-block>
   </prism-demo-card>
 </prism-demo-section>
 
-<prism-demo-section title="Vertical Layout">
+<prism-demo-section title="Direction" description="Radio groups can be displayed vertically by setting direction='vertical'.">
   <prism-demo-card>
-    <prism-tab-group variant="pill">
-      <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-radio-group direction="vertical" [(value)]="selectedValue">
-            <prism-radio value="apple">Apple</prism-radio>
-            <prism-radio value="banana">Banana</prism-radio>
-            <prism-radio value="cherry">Cherry</prism-radio>
-          </prism-radio-group>
-        </div>
-      </prism-tab>
-      <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.vertical"></prism-code-block>
-      </prism-tab>
-    </prism-tab-group>
+    <div preview class="p-4">
+      <prism-radio-group direction="vertical" [(value)]="selectedValue">
+        <prism-radio value="apple">Apple</prism-radio>
+        <prism-radio value="banana">Banana</prism-radio>
+        <prism-radio value="cherry">Cherry</prism-radio>
+      </prism-radio-group>
+    </div>
+    <prism-code-block code [ts]="snippets.vertical"></prism-code-block>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Disabled Group" description="Disable the entire radio group by setting [disabled]='true'.">
+  <prism-demo-card>
+    <div preview class="p-4">
+      <prism-radio-group [disabled]="true" [value]="'apple'">
+        <prism-radio value="apple">Apple (Disabled)</prism-radio>
+        <prism-radio value="banana">Banana (Disabled)</prism-radio>
+      </prism-radio-group>
+    </div>
+    <prism-code-block code [ts]="snippets.disabledGroup"></prism-code-block>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Disabled Option" description="Disable individual radio options by setting [disabled]='true' on the prism-radio component.">
+  <prism-demo-card>
+    <div preview class="p-4">
+      <prism-radio-group [value]="'banana'">
+        <prism-radio value="apple" [disabled]="true">Apple (Disabled)</prism-radio>
+        <prism-radio value="banana">Banana (Active)</prism-radio>
+      </prism-radio-group>
+    </div>
+    <prism-code-block code [ts]="snippets.disabledOption"></prism-code-block>
   </prism-demo-card>
 </prism-demo-section>

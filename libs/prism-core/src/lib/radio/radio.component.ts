@@ -4,7 +4,6 @@ import { PrismRadioGroupComponent } from './radio-group.component';
 
 @Component({
   selector: 'prism-radio',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <label 
@@ -32,23 +31,23 @@ import { PrismRadioGroupComponent } from './radio-group.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrismRadioComponent {
-  value = input<unknown>();
-  disabled = input<boolean>(false);
+  readonly value = input<unknown>();
+  readonly disabled = input<boolean>(false);
 
-  group = inject(PrismRadioGroupComponent, { optional: true });
+  protected group = inject(PrismRadioGroupComponent, { optional: true });
 
-  isChecked = computed(() => {
+  readonly isChecked = computed(() => {
     if (!this.group) return false;
     return this.group.value() === this.value();
   });
 
-  isDisabled = computed(() => {
+  readonly isDisabled = computed(() => {
     return this.disabled() || (this.group?.disabled() ?? false);
   });
 
   onSelect(event: Event): void {
     event.stopPropagation();
-    if (this.group) {
+    if (this.group && !this.isDisabled()) {
       this.group.selectValue(this.value());
     }
   }

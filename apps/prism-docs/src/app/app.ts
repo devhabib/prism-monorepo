@@ -1,5 +1,8 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { PrismIconRegistry } from '@devynelogic/prism-core';
+import * as icons from '@devynelogic/prism-icons';
+import { PrismIconDef } from '@devynelogic/prism-icons';
 
 @Component({
   imports: [RouterModule],
@@ -10,4 +13,13 @@ import { RouterModule } from '@angular/router';
 })
 export class App {
   protected title = 'prism-docs';
+  private registry = inject(PrismIconRegistry);
+
+  constructor() {
+    // Register all icons from bundle
+    const allIcons = Object.values(icons).filter(
+      (icon) => icon && typeof icon === 'object' && 'name' in icon
+    ) as PrismIconDef[];
+    this.registry.addIcons(allIcons);
+  }
 }

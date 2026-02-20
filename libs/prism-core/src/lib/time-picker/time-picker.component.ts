@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'prism-time-picker',
-  standalone: true,
   imports: [CommonModule],
   template: `<div class="prism-time-picker">Work in Progress: TimePicker</div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,

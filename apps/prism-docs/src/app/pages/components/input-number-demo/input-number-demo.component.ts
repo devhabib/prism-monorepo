@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { 
   PrismInputNumberComponent, 
   PrismCodeBlockComponent, 
@@ -10,13 +11,11 @@ import {
   PrismTabComponent
 } from '@devynelogic/prism-core';
 
-import { signal } from '@angular/core';
-
 @Component({
   selector: 'app-input-number-demo',
-  standalone: true,
   imports: [
     CommonModule, 
+    FormsModule,
     PrismInputNumberComponent, 
     PrismCodeBlockComponent,
     PrismDemoPageHeaderComponent,
@@ -32,8 +31,11 @@ export class InputNumberDemoComponent {
   quantity = signal(1);
 
   readonly snippets = {
-    usage: `<prism-input-number [(value)]="quantity" [min]="1" [max]="10"></prism-input-number>
-<p>Selected Quantity: {{ quantity() }}</p>`,
-    disabled: `<prism-input-number [disabled]="true" [value]="5"></prism-input-number>`
+    usage: `<prism-input-number [(value)]="quantity" [min]="1" [max]="10" />`,
+    precision: `<prism-input-number [precision]="2" [step]="0.1" [value]="10.55" />`,
+    sizes: `
+<prism-input-number size="sm" [value]="1" />
+<prism-input-number size="md" [value]="1" />
+<prism-input-number size="lg" [value]="1" />`
   };
 }

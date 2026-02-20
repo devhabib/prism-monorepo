@@ -1,14 +1,13 @@
-<prism-demo-page-header title="InputNumber" subtitle="A numeric input component.">
+<prism-demo-page-header title="Input Number" subtitle="A number input component with controls.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
+<prism-demo-section title="Basic Usage" description="Basic numeric input with minimum and maximum constraints.">
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4 flex items-center space-x-4">
-          <div class="text-sm font-medium">Quantity (1-10):</div>
+        <div class="p-4 space-y-4 max-w-sm">
           <prism-input-number [(value)]="quantity" [min]="1" [max]="10" />
-          <div class="text-sm text-gray-500">Current Value: {{ quantity() }}</div>
+          <div class="text-sm text-muted">Value: {{ quantity() }}</div>
         </div>
       </prism-tab>
       <prism-tab label="Code">
@@ -18,16 +17,37 @@
   </prism-demo-card>
 </prism-demo-section>
 
-<prism-demo-section title="Disabled State">
+<prism-demo-section title="Precision & Step" description="Control the step increment and decimal precision.">
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-input-number [disabled]="true" [value]="5" />
+        <div class="p-4 space-y-4 max-w-sm">
+          <p class="text-xs text-muted mb-2">Step 0.1, Precision 2</p>
+          <prism-input-number [precision]="2" [step]="0.1" [value]="10.55" />
+          
+           <p class="text-xs text-muted mb-2 mt-4">Step 0.01, Precision 3</p>
+          <prism-input-number [precision]="3" [step]="0.01" [value]="1" />
         </div>
       </prism-tab>
       <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.disabled"></prism-code-block>
+        <prism-code-block [ts]="snippets.precision"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Sizes" description="Input Number supports sm, md, and lg sizes.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 space-y-4 max-w-sm">
+          <prism-input-number size="sm" [value]="1" />
+          <prism-input-number size="md" [value]="1" />
+          <prism-input-number size="lg" [value]="1" />
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.sizes"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>

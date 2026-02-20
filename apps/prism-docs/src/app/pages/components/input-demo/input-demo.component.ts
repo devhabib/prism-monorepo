@@ -1,7 +1,8 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { 
-  PrismInputDirective, 
+  PrismInputComponent, 
   PrismCodeBlockComponent, 
   PrismDemoPageHeaderComponent,
   PrismDemoSectionComponent,
@@ -12,10 +13,10 @@ import {
 
 @Component({
   selector: 'app-input-demo',
-  standalone: true,
   imports: [
-    CommonModule, 
-    PrismInputDirective, 
+    CommonModule,
+    FormsModule,
+    PrismInputComponent, 
     PrismCodeBlockComponent,
     PrismDemoPageHeaderComponent,
     PrismDemoSectionComponent,
@@ -27,7 +28,20 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputDemoComponent {
+  inputValue = signal('');
+
   readonly snippets = {
-    usage: `<input prismInput placeholder="Enter text..." />`
+    usage: `<prism-input [(value)]="name" placeholder="Enter your name" />`,
+    sizes: `
+<prism-input size="sm" placeholder="Small size" />
+<prism-input size="md" placeholder="Medium size" />
+<prism-input size="lg" placeholder="Large size" />`,
+    icons: `
+<prism-input prefix="user-line" placeholder="Username" />
+<prism-input suffix="search-line" placeholder="Search..." />`,
+    states: `
+<prism-input [error]="true" placeholder="Error state" />
+<prism-input [success]="true" placeholder="Success state" />
+<prism-input [disabled]="true" placeholder="Disabled input" />`
   };
 }

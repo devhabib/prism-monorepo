@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-timeline-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismTimelineComponent, 

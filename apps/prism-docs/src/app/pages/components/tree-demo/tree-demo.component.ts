@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-tree-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismTreeComponent, 

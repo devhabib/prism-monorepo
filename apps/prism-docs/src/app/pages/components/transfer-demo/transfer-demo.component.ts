@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-transfer-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismTransferComponent, 

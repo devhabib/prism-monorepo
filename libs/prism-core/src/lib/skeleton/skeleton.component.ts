@@ -5,7 +5,6 @@ export type PrismSkeletonVariant = 'text' | 'circle' | 'rect';
 
 @Component({
   selector: 'prism-skeleton',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div 

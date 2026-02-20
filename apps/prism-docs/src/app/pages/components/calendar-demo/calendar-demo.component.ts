@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-calendar-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismCalendarComponent, 

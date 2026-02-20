@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-upload-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismUploadComponent, 

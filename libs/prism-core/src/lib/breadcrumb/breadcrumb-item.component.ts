@@ -4,7 +4,6 @@ import { PrismBreadcrumbComponent } from './breadcrumb.component';
 
 @Component({
   selector: 'prism-breadcrumb-item',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <li class="prism-breadcrumb__item">

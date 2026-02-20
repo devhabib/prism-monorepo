@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-list-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismListComponent, 

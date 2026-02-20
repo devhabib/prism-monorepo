@@ -17,7 +17,6 @@ import {
 
 @Component({
   selector: 'prism-card-demo',
-  standalone: true,
   imports: [
     CommonModule,
     FormsModule,

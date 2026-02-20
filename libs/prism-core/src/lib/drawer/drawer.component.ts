@@ -5,7 +5,6 @@ import { DrawerPosition } from './drawer.types';
 
 @Component({
   selector: 'prism-drawer',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './drawer.component.html',
   styleUrl: './drawer.component.scss',

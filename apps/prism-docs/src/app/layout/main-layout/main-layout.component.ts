@@ -7,7 +7,6 @@ import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-main-layout',
-  standalone: true,
   imports: [CommonModule, RouterOutlet, SidebarComponent, ToastComponent, PrismIconComponent],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss',

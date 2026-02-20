@@ -20,7 +20,6 @@ import * as PrismIcons from '@devynelogic/prism-icons';
 
 @Component({
   selector: 'app-icons-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     ReactiveFormsModule, 

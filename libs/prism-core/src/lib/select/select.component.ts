@@ -1,7 +1,8 @@
-import { Component, ChangeDetectionStrategy, input, model, signal, computed, effect, viewChild, ElementRef, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, model, signal, computed, effect, viewChild, ElementRef, inject, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { PrismTagComponent } from '../tag/tag.component';
+import { PrismIconComponent } from '../icon/icon.component';
 
 export type SelectOption = {
   label: string;
@@ -10,140 +11,101 @@ export type SelectOption = {
 
 @Component({
   selector: 'prism-select',
-  standalone: true,
-  imports: [CommonModule, FormsModule, PrismTagComponent],
-  template: `
-    @if (mode() === 'native') {
-      <!-- Native Select -->
-      <select 
-        class="prism-select-native"
-        [value]="value()"
-        [multiple]="multiple()"
-        (change)="onNativeChange($event)">
-        <option value="" disabled>{{ placeholder() }}</option>
-        @for (option of options(); track option.value) {
-          <option [value]="option.value">{{ option.label }}</option>
-        }
-      </select>
-    } @else {
-      <!-- Custom Select -->
-      <div class="prism-select" [class.prism-select--open]="isOpen()">
-        <!-- Trigger for single select -->
-        @if (!multiple()) {
-          <button 
-            type="button"
-            class="button prism-select__trigger"
-            (click)="toggleDropdown()"
-            [attr.aria-expanded]="isOpen()">
-            <div class="prism-select__value">
-              @if (selectedOptions().length > 0) {
-                <span>{{ selectedOptions()[0].label }}</span>
-              } @else {
-                <span class="prism-select__placeholder">{{ placeholder() }}</span>
-              }
-            </div>
-            <i class="ri-arrow-down-s-line prism-select__arrow"></i>
-          </button>
-        } @else {
-          <!-- Searchable trigger for multi-select -->
-          <div 
-            class="prism-select__trigger prism-select__trigger--searchable"
-            (click)="openDropdown()"
-            (keydown.enter)="openDropdown()"
-            tabindex="0">
-            <div class="prism-select__value">
-              @if (selectedOptions().length > 0) {
-                <div class="prism-select__tags">
-                  @for (option of selectedOptions(); track option.value) {
-                    <prism-tag 
-                      [label]="option.label" 
-                      [removable]="true"
-                      (remove)="removeOption(option.value)" />
-                  }
-                </div>
-              }
-              <input 
-                #searchInput
-                type="text"
-                class="prism-select__search-trigger"
-                [placeholder]="selectedOptions().length === 0 ? placeholder() : ''"
-                [value]="searchQuery()"
-                (input)="onSearchInput($event)"
-                (click)="openDropdown()"
-                (focus)="openDropdown()"
-              />
-            </div>
-            @if (searchQuery()) {
-              <button 
-                type="button"
-                class="button prism-select__clear"
-                (click)="clearSearch(); $event.stopPropagation()"
-                aria-label="Clear search">
-                <i class="ri-close-line"></i>
-              </button>
-            }
-            <i class="ri-arrow-down-s-line prism-select__arrow"></i>
-          </div>
-        }
-        
-        @if (isOpen()) {
-          <div class="prism-select__dropdown" 
-               [style.maxHeight]="maxHeight()"
-               (click)="onDropdownClick($event)" 
-               (keydown)="$event.stopPropagation()" 
-               tabindex="-1">
-            <!-- Search for single select only -->
-            @if (searchable() && !multiple()) {
-              <div class="prism-select__search">
-                <input 
-                  #singleSearchInput
-                  type="text"
-                  class="prism-select__search-input"
-                  placeholder="Search..."
-                  [value]="searchQuery()"
-                  (input)="onSearchInput($event)"
-                  (click)="$event.stopPropagation()"
-                />
-                @if (searchQuery()) {
-                  <button 
-                    type="button"
-                    class="button prism-select__clear prism-select__clear--search"
-                    (click)="clearSearch(); $event.stopPropagation()"
-                    aria-label="Clear search">
-                    <i class="ri-close-line"></i>
-                  </button>
-                }
-              </div>
-            }
-            <ul class="prism-select__options">
-              @for (option of filteredOptions(); track option.value) {
-                <li 
-                  class="prism-select__option"
-                  [class.prism-select__option--selected]="isSelected(option.value)"
-                  (click)="selectOption(option)"
-                  (keydown.enter)="selectOption(option)"
-                  tabindex="0">
-                  @if (multiple()) {
-                    <span class="prism-select__checkbox">
-                      @if (isSelected(option.value)) {
-                        <i class="ri-checkbox-line"></i>
-                      } @else {
-                        <i class="ri-checkbox-blank-line"></i>
-                      }
-                    </span>
-                  }
-                  <span>{{ option.label }}</span>
-                </li>
-              } @empty {
-                <li class="prism-select__option prism-select__option--empty">
-                  No options found
-                </li>
-              }
-            </ul>
-          </div>
-        }
-      </div>
+  imports: [CommonModule, FormsModule, PrismTagComponent, PrismIconComponent],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => PrismSelectComponent),
+      multi: true
     }
+  ],
+  template: `
+    <div 
+      class="prism-select" 
+      [class.prism-select--open]="isOpen()"
+      [class.prism-select--disabled]="disabled()"
+      [class.prism-select--multiple]="multiple()"
+      [class]="'prism-select--' + size()"
+    >
+      <div 
+        class="prism-select__trigger" 
+        (click)="toggleDropdown()"
+        (keydown.enter)="toggleDropdown()"
+        tabindex="0"
+        role="button"
+        [attr.aria-expanded]="isOpen()"
+      >
+        <div class="prism-select__value">
+          @if (multiple() && selectedOptions().length > 0) {
+            <div class="prism-select__tags">
+              @for (option of selectedOptions(); track option.value) {
+                <prism-tag 
+                  [label]="option.label" 
+                  [removable]="!disabled()"
+                  (remove)="removeOption(option.value)" 
+                />
+              }
+            </div>
+          }
+          
+          @if (searchable()) {
+            <input 
+              #searchInput
+              type="text"
+              class="prism-select__search-input-trigger"
+              [placeholder]="selectedOptions().length === 0 ? placeholder() : ''"
+              [(ngModel)]="searchQuery"
+              (click)="$event.stopPropagation()"
+              (focus)="openDropdown()"
+              [disabled]="disabled()"
+            />
+          } @else if (selectedOptions().length > 0 && !multiple()) {
+             <span>{{ selectedOptions()[0]?.label }}</span>
+          } @else if (selectedOptions().length === 0) {
+            <span class="prism-select__placeholder">{{ placeholder() }}</span>
+          }
+        </div>
+        
+        <div class="prism-select__actions">
+          @if (allowClear() && value() !== null && !disabled()) {
+             <button type="button" class="prism-select__clear" (click)="clearValue(); $event.stopPropagation()" aria-label="Clear value">
+                <prism-icon name="close-circle-fill" />
+             </button>
+          }
+          <prism-icon name="arrow-down-s-line" class="prism-select__arrow" />
+        </div>
+      </div>
+
+      <div class="prism-select__dropdown-container" [class.is-open]="isOpen()" [style.max-height]="maxHeight()">
+        <div class="prism-select__dropdown">
+          <ul class="prism-select__options">
+            @for (option of filteredOptions(); track option.value) {
+              <li 
+                class="prism-select__option"
+                [class.prism-select__option--selected]="isSelected(option.value)"
+                (click)="toggleOption(option); $event.stopPropagation()"
+                (keydown.enter)="toggleOption(option); $event.stopPropagation()"
+                tabindex="0"
+                role="option"
+                [attr.aria-selected]="isSelected(option.value)"
+              >
+                @if (multiple()) {
+                   <prism-icon 
+                    [name]="isSelected(option.value) ? 'checkbox-fill' : 'checkbox-blank-line'" 
+                    class="prism-select__checkbox-icon"
+                   />
+                }
+                <span>{{ option.label }}</span>
+              </li>
+            } @empty {
+              <li class="prism-select__option prism-select__option--empty">
+                No options found
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
   `,
   styleUrls: ['./select.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -151,156 +113,137 @@ export type SelectOption = {
     '(document:click)': 'onDocumentClick($event)'
   }
 })
-export class PrismSelectComponent {
-  options = input<SelectOption[]>([]);
-  placeholder = input<string>('Select...');
-  mode = input<'native' | 'custom'>('custom');
-  searchable = input<boolean>(false);
-  multiple = input<boolean>(false);
-  closeOnOutsideClick = input<boolean>(true);
-  size = input<'sm' | 'md' | 'lg'>('md');
-  maxHeight = input<string>('300px');
+export class PrismSelectComponent implements ControlValueAccessor {
+  readonly options = input<SelectOption[]>([]);
+  readonly placeholder = input<string>('Select...');
+  readonly searchable = input<boolean>(false);
+  readonly multiple = input<boolean>(false);
+  readonly allowClear = input<boolean>(false);
+  readonly size = input<'sm' | 'md' | 'lg'>('md');
+  readonly maxHeight = input<string>('300px');
   
-  value = model<unknown | unknown[]>(null);
+  readonly value = model<unknown>(null);
+  readonly disabled = model<boolean>(false);
   
-  isOpen = signal(false);
-  searchQuery = signal('');
+  readonly isOpen = signal(false);
+  readonly searchQuery = model('');
   
-  searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
-  singleSearchInput = viewChild<ElementRef<HTMLInputElement>>('singleSearchInput');
+  readonly searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
   
   private elementRef = inject(ElementRef);
   
+  private onChange: (value: unknown) => void = () => {
+    // Registered by ControlValueAccessor
+  };
+  onTouched: () => void = () => {
+    // Registered by ControlValueAccessor
+  };
+
+
   constructor() {
-    // Auto-focus search input when dropdown opens
     effect(() => {
-      if (this.isOpen()) {
-        setTimeout(() => {
-          if (this.multiple()) {
-            this.searchInput()?.nativeElement.focus();
-          } else if (this.searchable()) {
-            this.singleSearchInput()?.nativeElement.focus();
-          }
-        }, 0);
+      if (this.isOpen() && this.searchable()) {
+        setTimeout(() => this.searchInput()?.nativeElement.focus(), 0);
       }
     });
   }
-  
-  selectedOptions = computed(() => {
+
+  readonly selectedOptions = computed(() => {
     const val = this.value();
     const opts = this.options();
-    
     if (this.multiple()) {
       const values = Array.isArray(val) ? val : [];
       return opts.filter(opt => values.includes(opt.value));
-    } else {
-      return val ? opts.filter(opt => opt.value === val) : [];
     }
-  });
-  
-  filteredOptions = computed(() => {
-    const query = this.searchQuery().toLowerCase();
-    const opts = this.options();
-    
-    if (!query) return opts;
-    
-    return opts.filter(opt => 
-      opt.label.toLowerCase().includes(query)
-    );
+    return opts.filter(opt => opt.value === val);
   });
 
+  readonly filteredOptions = computed(() => {
+    const query = this.searchQuery().toLowerCase();
+    const opts = this.options();
+    if (!query) return opts;
+    return opts.filter(opt => opt.label.toLowerCase().includes(query));
+  });
+
+  writeValue(value: unknown): void {
+    this.value.set(value);
+  }
+
+  protected updateValue(value: unknown): void {
+    this.value.set(value);
+    this.onChange(value);
+  }
+
+  registerOnChange(fn: (value: unknown) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled.set(isDisabled);
+  }
+
   toggleDropdown(): void {
+    if (this.disabled()) return;
     this.isOpen.update(v => !v);
     if (!this.isOpen()) {
       this.searchQuery.set('');
     }
+    this.onTouched();
   }
 
   openDropdown(): void {
-    if (!this.isOpen()) {
-      this.isOpen.set(true);
-    }
+    if (this.disabled()) return;
+    this.isOpen.set(true);
   }
 
-  clearSearch(): void {
-    this.searchQuery.set('');
-    this.searchInput()?.nativeElement.focus();
-  }
-
-  onDropdownClick(event: Event): void {
-    event.stopPropagation();
-  }
-
-  onDocumentClick(event: Event): void {
-    if (!this.closeOnOutsideClick()) return;
-    
-    const clickedInside = this.elementRef.nativeElement.contains(event.target);
-    if (!clickedInside && this.isOpen()) {
-      this.isOpen.set(false);
-      this.searchQuery.set('');
-    }
-  }
-
-  selectOption(option: SelectOption): void {
+  toggleOption(option: SelectOption): void {
     if (this.multiple()) {
       const current = Array.isArray(this.value()) ? [...(this.value() as unknown[])] : [];
       const index = current.indexOf(option.value);
-      
       if (index > -1) {
         current.splice(index, 1);
       } else {
         current.push(option.value);
       }
-      
-      this.value.set(current);
-      // Keep dropdown open for multi-select
-      this.searchQuery.set('');
-      
-      // Focus back on search input if available
-      setTimeout(() => {
-        this.searchInput()?.nativeElement.focus();
-      }, 0);
+      this.updateValue(current);
     } else {
-      this.value.set(option.value);
+      this.updateValue(option.value);
       this.isOpen.set(false);
       this.searchQuery.set('');
     }
   }
 
   removeOption(optionValue: unknown): void {
-    if (this.multiple()) {
-      const current = Array.isArray(this.value()) ? [...(this.value() as unknown[])] : [];
-      const index = current.indexOf(optionValue);
-      
-      if (index > -1) {
-        current.splice(index, 1);
-        this.value.set(current);
-      }
+    if (this.disabled()) return;
+    const current = Array.isArray(this.value()) ? [...(this.value() as unknown[])] : [];
+    const index = current.indexOf(optionValue);
+    if (index > -1) {
+      current.splice(index, 1);
+      this.updateValue(current);
     }
+  }
+
+  clearValue(): void {
+    this.updateValue(this.multiple() ? [] : null);
+    this.searchQuery.set('');
   }
 
   isSelected(optionValue: unknown): boolean {
+    const val = this.value();
     if (this.multiple()) {
-      const values = Array.isArray(this.value()) ? (this.value() as unknown[]) : [];
-      return values.includes(optionValue);
-    } else {
-      return this.value() === optionValue;
+      return Array.isArray(val) && val.includes(optionValue);
     }
+    return val === optionValue;
   }
 
-  onNativeChange(event: Event): void {
-    const target = event.target as HTMLSelectElement;
-    
-    if (this.multiple()) {
-      const selected = Array.from(target.selectedOptions).map(opt => opt.value);
-      this.value.set(selected);
-    } else {
-      this.value.set(target.value);
+  onDocumentClick(event: Event): void {
+    if (!this.elementRef.nativeElement.contains(event.target) && this.isOpen()) {
+      this.isOpen.set(false);
+      this.searchQuery.set('');
     }
-  }
-
-  onSearchInput(event: Event): void {
-    const target = event.target as HTMLInputElement;
-    this.searchQuery.set(target.value);
   }
 }

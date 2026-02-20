@@ -6,7 +6,6 @@ export type PrismAlertType = 'success' | 'info' | 'warning' | 'error';
 
 @Component({
   selector: 'prism-alert',
-  standalone: true,
   imports: [CommonModule, PrismIconComponent],
   template: `
     @if (!closed()) {

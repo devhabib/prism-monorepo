@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-carousel-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismCarouselComponent, 

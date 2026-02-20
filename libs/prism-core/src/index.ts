@@ -14,8 +14,10 @@ export * from './lib/theme-toggle/theme-toggle.component';
 export * from './lib/services/toast.service';
 export * from './lib/toast/toast.component';
 export * from './lib/button/button.component';
+export * from './lib/input/input.component';
 export * from './lib/input/input.directive';
 export * from './lib/api-table/api-table.component';
+export * from './lib/form/form.component';
 
 // Documentation UI
 export * from './lib/docs-ui/demo-page-header.component';
@@ -79,7 +81,7 @@ export * from './lib/steps/step.component';
 export * from './lib/autocomplete/autocomplete.component';
 export * from './lib/cascader/cascader.component';
 export * from './lib/date-picker/date-picker.component';
-export * from './lib/form/form.component';
+export * from './lib/form/form-field.component';
 export * from './lib/input-number/input-number.component';
 export * from './lib/radio/radio.component';
 export * from './lib/radio/radio-group.component';

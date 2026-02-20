@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-time-picker-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismTimePickerComponent, 

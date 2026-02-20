@@ -15,7 +15,6 @@ import {
 
 @Component({
   selector: 'app-typography-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     FormsModule,

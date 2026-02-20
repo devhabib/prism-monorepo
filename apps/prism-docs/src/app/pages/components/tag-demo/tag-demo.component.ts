@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-tag-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismTagComponent, 

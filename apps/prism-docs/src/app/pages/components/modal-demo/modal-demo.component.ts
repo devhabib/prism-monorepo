@@ -20,7 +20,6 @@ import { UserProfileDialogComponent } from './user-profile-dialog.component';
 
 @Component({
   selector: 'prism-modal-demo',
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,

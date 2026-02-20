@@ -10,7 +10,6 @@ import { PrismAccordionPanelComponent } from './accordion-panel.component';
 
 @Component({
   selector: 'prism-accordion',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div class="prism-accordion" [class.prism-accordion--bordered]="bordered()">

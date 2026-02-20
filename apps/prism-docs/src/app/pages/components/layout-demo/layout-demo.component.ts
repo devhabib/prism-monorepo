@@ -18,7 +18,6 @@ import {
 
 @Component({
   selector: 'app-layout-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismLayoutComponent, 

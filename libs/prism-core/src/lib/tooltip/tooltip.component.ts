@@ -9,7 +9,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'prism-tooltip',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div class="tooltip-container" [class]="position()">

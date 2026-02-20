@@ -1,65 +1,90 @@
-import { Component, ChangeDetectionStrategy, input, forwardRef, model } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, model, effect, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { PrismIconComponent } from '../icon/icon.component';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'prism-input-number',
-  standalone: true,
-  imports: [CommonModule, PrismIconComponent],
-  template: `
-    <div class="prism-input-number" [class.is-disabled]="disabled()">
-      <div class="prism-input-number-input-wrap">
-        <input 
-          #inputRef
-          type="number"
-          class="prism-input-number-input"
-          [value]="value()"
-          [attr.min]="min() ?? null"
-          [attr.max]="max() ?? null"
-          [attr.step]="step()"
-          [disabled]="disabled()"
-          (input)="onInput($event)"
-          (blur)="onTouched()"
-        />
-      </div>
-      <div class="prism-input-number-controls">
-        <button type="button" class="control-up" (click)="stepUp()" [disabled]="disabled()">
-          <prism-icon name="arrow-up-s-line" />
-        </button>
-        <button type="button" class="control-down" (click)="stepDown()" [disabled]="disabled()">
-          <prism-icon name="arrow-down-s-line" />
-        </button>
-      </div>
-    </div>
-  `,
-  styleUrls: ['./input-number.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule, FormsModule, PrismIconComponent],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => PrismInputNumberComponent),
       multi: true
     }
-  ]
+  ],
+  template: `
+    <div class="prism-input-number" 
+         [class.prism-input-number--disabled]="disabled()"
+         [class.prism-input-number--readonly]="readonly()"
+         [class]="'prism-input-number--' + size()">
+      <div class="prism-input-number-controls">
+        <button 
+          type="button" 
+          class="prism-input-number-handler prism-input-number-handler-up" 
+          (click)="stepUp()"
+          [disabled]="disabled() || readonly() || (value() >= max())"
+        >
+          <prism-icon name="arrow-up-s-line" />
+        </button>
+        <button 
+          type="button" 
+          class="prism-input-number-handler prism-input-number-handler-down" 
+          (click)="stepDown()"
+          [disabled]="disabled() || readonly() || (value() <= min())"
+        >
+          <prism-icon name="arrow-down-s-line" />
+        </button>
+      </div>
+      <div class="prism-input-number-input-wrap">
+        <input
+          #inputElement
+          type="number"
+          class="prism-input-number-input"
+          [value]="value()"
+          [disabled]="disabled()"
+          [readOnly]="readonly()"
+          [min]="min()"
+          [max]="max()"
+          [step]="step()"
+          [placeholder]="placeholder()"
+          (input)="onInput($event)"
+          (blur)="onBlur()"
+        />
+      </div>
+    </div>
+  `,
+  styleUrls: ['./input-number.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrismInputNumberComponent implements ControlValueAccessor {
-  min = input<number>();
-  max = input<number>();
-  step = input<number>(1);
-  disabled = model<boolean>(false);
-  value = model<number>(0);
+  readonly min = input<number>(-Infinity);
+  readonly max = input<number>(Infinity);
+  readonly step = input<number>(1);
+  readonly precision = input<number | null>(null);
+  readonly size = input<'sm' | 'md' | 'lg'>('md');
+  readonly readonly = input<boolean>(false);
+  readonly placeholder = input<string>('');
   
-  // ControlValueAccessor methods
-  private onChange: (_value: number) => void = () => {
-    // Placeholder defined by ControlValueAccessor
+  readonly value = model<number>(0);
+  readonly disabled = model<boolean>(false);
+
+  private onChange: (value: number) => void = () => {
+    // Registered by ControlValueAccessor
   };
   onTouched: () => void = () => {
-    // Placeholder defined by ControlValueAccessor
+    // Registered by ControlValueAccessor
   };
 
+  constructor() {
+    effect(() => {
+      this.onChange(this.value());
+    });
+  }
+
   writeValue(value: number): void {
-    this.value.set(value);
+    const nextValue = this.clampValue(value ?? 0);
+    this.value.set(nextValue);
   }
 
   registerOnChange(fn: (value: number) => void): void {
@@ -74,52 +99,43 @@ export class PrismInputNumberComponent implements ControlValueAccessor {
     this.disabled.set(isDisabled);
   }
 
-  onInput(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    let val = parseFloat(inputElement.value);
-
-    if (isNaN(val)) {
-      val = 0; // Or handle as per desired behavior for invalid input
-    }
-
-    let next = val;
-    const minVal = this.min();
-    const maxVal = this.max();
-
-    if (minVal !== undefined && val < minVal) next = minVal;
-    if (maxVal !== undefined && val > maxVal) next = maxVal;
-    
-    this.value.set(next);
-    this.onChange(next);
-  }
-
   stepUp(): void {
-    if (this.disabled()) return;
-    const val = this.value();
-    const next = val + this.step();
-    const maxVal = this.max();
-    if (maxVal === undefined || next <= maxVal) {
-      this.value.set(next);
-    }
+    if (this.disabled() || this.readonly()) return;
+    this.updateValue(this.value() + this.step());
   }
 
   stepDown(): void {
-    if (this.disabled()) return;
-    const val = this.value();
-    const next = val - this.step();
-    const minVal = this.min();
-    if (minVal === undefined || next >= minVal) {
-      this.value.set(next);
+    if (this.disabled() || this.readonly()) return;
+    this.updateValue(this.value() - this.step());
+  }
+
+  onInput(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    const val = parseFloat(target.value);
+    if (!isNaN(val)) {
+      this.updateValue(val);
     }
   }
 
-  onModelChange(val: number): void {
-    if (this.disabled()) return;
-    let next = val;
-    const minVal = this.min();
-    const maxVal = this.max();
-    if (minVal !== undefined && val < minVal) next = minVal;
-    if (maxVal !== undefined && val > maxVal) next = maxVal;
-    this.value.set(next);
+  onBlur(): void {
+    this.onTouched();
+    // Clamp on blur to ensure valid state
+    this.updateValue(this.value());
+  }
+
+  private updateValue(val: number): void {
+    const clamped = this.clampValue(val);
+    this.value.set(clamped);
+  }
+
+  private clampValue(val: number): number {
+    let clamped = Math.min(this.max(), Math.max(this.min(), val));
+    
+    const precision = this.precision();
+    if (precision !== null) {
+      clamped = parseFloat(clamped.toFixed(precision));
+    }
+    
+    return clamped;
   }
 }

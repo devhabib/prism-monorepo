@@ -15,7 +15,6 @@ import {
 
 @Component({
   selector: 'app-pagination-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismPaginationComponent,

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'prism-flex',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div [class]="classes()" [style]="styles()">

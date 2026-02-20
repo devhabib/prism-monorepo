@@ -20,7 +20,6 @@ import { PrismAnchorLinkComponent } from './anchor-link.component';
 
 @Component({
   selector: 'prism-anchor',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div class="prism-anchor" #anchorContainer>

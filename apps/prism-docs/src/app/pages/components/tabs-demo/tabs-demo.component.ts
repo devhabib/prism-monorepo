@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal, computed } from '@angular/core';
+import { Component, ChangeDetectionStrategy, model, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
@@ -16,7 +16,6 @@ import {
 
 @Component({
   selector: 'prism-tabs-demo',
-  standalone: true,
   imports: [
     CommonModule,
     FormsModule,
@@ -56,8 +55,8 @@ import {
 })
 export class TabsDemoComponent {
   // Playground State
-  playgroundVariant = signal<'line' | 'pill' | 'enclosed'>('line');
-  playgroundOrientation = signal<'horizontal' | 'vertical'>('horizontal');
+  playgroundVariant = model<'line' | 'pill' | 'enclosed'>('line');
+  playgroundOrientation = model<'horizontal' | 'vertical'>('horizontal');
 
   variantOptions = [
     { label: 'Line', value: 'line' },

@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'prism-slider',
-  standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
     <div class="prism-slider-container">

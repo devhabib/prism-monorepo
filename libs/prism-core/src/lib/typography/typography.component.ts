@@ -17,7 +17,6 @@ import { PrismIconComponent } from '../icon/icon.component';
 
 @Component({
   selector: 'prism-typography',
-  standalone: true,
   imports: [CommonModule],
   template: `<ng-content></ng-content>`,
   styleUrl: './typography.component.scss',
@@ -43,7 +42,6 @@ export class PrismTypographyComponent {
     h5[prism-title],
     h6[prism-title]
   `,
-  standalone: true,
   imports: [CommonModule],
   template: `<ng-content></ng-content>`,
   styleUrl: './typography.component.scss',
@@ -61,7 +59,6 @@ export class PrismTitleComponent {
 
 @Component({
   selector: 'span[prism-text], prism-text',
-  standalone: true,
   imports: [CommonModule, PrismIconComponent, FormsModule],
   styleUrl: './typography.component.scss',
   template: `
@@ -208,7 +205,6 @@ export class PrismTextComponent {
 
 @Component({
   selector: 'p[prism-paragraph], prism-paragraph',
-  standalone: true,
   imports: [CommonModule],
   styleUrl: './typography.component.scss',
   template: `

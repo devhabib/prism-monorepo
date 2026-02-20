@@ -1,13 +1,49 @@
-<prism-demo-page-header title="Select" subtitle="A selection component for selecting a value from a dropdown list.">
+<prism-demo-page-header title="Select" subtitle="A selection component with search and multi-select support.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
-  <prism-demo-card [minHeight]="'300px'">
-    <div preview class="demo-preview">
-      <div style="width: 300px;">
-        <prism-select label="Choose an option"></prism-select>
-      </div>
-    </div>
-    <prism-code-block code [code]="snippets.usage" language="html"></prism-code-block>
+<prism-demo-section title="Basic Usage" description="Basic dropdown selection.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 space-y-4 max-w-sm">
+          <prism-select [options]="options" [(value)]="singleValue" label="Pick a fruit" />
+          <div class="text-sm text-muted">Value: {{ singleValue() }}</div>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.usage"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Multi Select" description="Allows selecting multiple options.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 space-y-4 max-w-sm">
+          <prism-select [options]="options" [multiple]="true" [(value)]="multiValue" label="Pick fruits" />
+          <div class="text-sm text-muted">Value: {{ multiValue() | json }}</div>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.multiple"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Searchable" description="Enable filtering options with a search input.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 space-y-4 max-w-sm">
+          <prism-select [options]="options" [searchable]="true" label="Find fruit" />
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.searchable"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
   </prism-demo-card>
 </prism-demo-section>

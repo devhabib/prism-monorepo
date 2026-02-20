@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-image-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismImageComponent, 

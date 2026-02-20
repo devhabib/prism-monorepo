@@ -12,7 +12,6 @@ import { PrismTabComponent } from './tab.component';
 
 @Component({
   selector: 'prism-tab-group',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './tab-group.component.html',
   styleUrl: './tab-group.component.scss',

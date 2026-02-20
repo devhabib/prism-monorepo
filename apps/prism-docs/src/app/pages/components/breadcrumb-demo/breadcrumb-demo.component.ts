@@ -13,7 +13,6 @@ import {
 
 @Component({
   selector: 'app-breadcrumb-demo',
-  standalone: true,
   imports: [
     CommonModule,
     PrismBreadcrumbComponent,

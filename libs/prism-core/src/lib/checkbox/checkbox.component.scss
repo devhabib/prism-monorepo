@@ -41,10 +41,17 @@
       box-shadow: 0 0 0 2px var(--primary-300);
     }
     
-    input:disabled + & {
+    input:disabled:not(:checked) + & {
       background-color: var(--surface-100);
       border-color: var(--border);
       cursor: not-allowed;
+    }
+
+    input:disabled:checked + & {
+      background-color: var(--primary-200);
+      border-color: var(--primary-200);
+      cursor: not-allowed;
+      opacity: 0.8;
     }
     
     &--radio {

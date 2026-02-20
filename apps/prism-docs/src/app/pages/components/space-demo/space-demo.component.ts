@@ -21,7 +21,6 @@ import {
 
 @Component({
   selector: 'app-space-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     FormsModule,

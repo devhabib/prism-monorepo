@@ -11,7 +11,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'prism-sider',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div class="prism-sider-children">
@@ -64,7 +63,6 @@ export class PrismSiderComponent {
 
 @Component({
   selector: 'prism-header',
-  standalone: true,
   imports: [CommonModule],
   template: `<ng-content></ng-content>`,
   host: {
@@ -79,7 +77,6 @@ export class PrismHeaderComponent {
 
 @Component({
   selector: 'prism-content',
-  standalone: true,
   imports: [CommonModule],
   template: `<ng-content></ng-content>`,
   host: {
@@ -94,7 +91,6 @@ export class PrismContentComponent {
 
 @Component({
   selector: 'prism-footer',
-  standalone: true,
   imports: [CommonModule],
   template: `<ng-content></ng-content>`,
   host: {
@@ -109,7 +105,6 @@ export class PrismFooterComponent {
 
 @Component({
   selector: 'prism-layout',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <ng-content></ng-content>

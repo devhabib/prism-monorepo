@@ -9,7 +9,6 @@ type UserProfileData = {
 
 @Component({
   selector: 'app-user-profile-dialog',
-  standalone: true,
   imports: [PrismButtonComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `

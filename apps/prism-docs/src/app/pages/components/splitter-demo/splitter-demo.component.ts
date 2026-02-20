@@ -15,7 +15,6 @@ import {
 
 @Component({
   selector: 'app-splitter-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismSplitterComponent, 

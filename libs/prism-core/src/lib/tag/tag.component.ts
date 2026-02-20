@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'prism-tag',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <span class="prism-tag">

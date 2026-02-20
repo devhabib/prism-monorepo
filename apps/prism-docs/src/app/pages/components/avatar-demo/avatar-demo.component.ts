@@ -14,7 +14,6 @@ import {
 
 @Component({
   selector: 'app-avatar-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismAvatarComponent, 

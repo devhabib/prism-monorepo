@@ -14,7 +14,6 @@ import {
 
 @Component({
   selector: 'app-grid-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismRowComponent, 

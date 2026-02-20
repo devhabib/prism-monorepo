@@ -4,7 +4,6 @@ import { PrismCardComponent } from '@devynelogic/prism-core';
 
 @Component({
   selector: 'prism-accessibility',
-  standalone: true,
   imports: [CommonModule, PrismCardComponent],
   template: `
     <h1>Accessibility</h1>

@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { 
   PrismCheckboxComponent, 
   PrismCodeBlockComponent, 
@@ -12,9 +13,9 @@ import {
 
 @Component({
   selector: 'app-checkbox-demo',
-  standalone: true,
   imports: [
     CommonModule, 
+    FormsModule,
     PrismCheckboxComponent, 
     PrismCodeBlockComponent,
     PrismDemoPageHeaderComponent,
@@ -27,7 +28,13 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxDemoComponent {
+  checked = signal(false);
+
   readonly snippets = {
-    usage: `<prism-checkbox label="Checkbox"></prism-checkbox>`
+    usage: `<prism-checkbox [(checked)]="checked" label="Accept terms" />`,
+    states: `
+<prism-checkbox [checked]="true" label="Checked" />
+<prism-checkbox [disabled]="true" label="Disabled" />
+<prism-checkbox [disabled]="true" [checked]="true" label="Checked & Disabled" />`
   };
 }

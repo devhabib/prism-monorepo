@@ -6,7 +6,6 @@ export type PrismResultStatus = 'success' | 'error' | 'info' | 'warning' | '404'
 
 @Component({
   selector: 'prism-result',
-  standalone: true,
   imports: [CommonModule, PrismIconComponent],
   template: `
     <div class="prism-result">

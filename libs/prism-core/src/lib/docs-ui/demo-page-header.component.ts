@@ -2,7 +2,6 @@ import { Component, input, ChangeDetectionStrategy, ViewEncapsulation } from '@a
 
 @Component({
   selector: 'prism-demo-page-header',
-  standalone: true,
   template: `
     <header class="demo-header">
       <h1 class="demo-title">{{ title() }}</h1>

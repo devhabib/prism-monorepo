@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'prism-code-block',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './code-block.component.html',
   styleUrl: './code-block.component.scss',

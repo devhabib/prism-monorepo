@@ -19,7 +19,6 @@ import { UserProfileDialogComponent } from '../modal-demo/user-profile-dialog.co
 
 @Component({
   selector: 'prism-drawer-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismButtonComponent, 

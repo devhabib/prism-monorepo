@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-skeleton-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismSkeletonComponent, 

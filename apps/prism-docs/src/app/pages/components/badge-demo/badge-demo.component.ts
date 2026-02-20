@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'app-badge-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismBadgeComponent, 

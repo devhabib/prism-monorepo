@@ -13,7 +13,6 @@ import {
 
 @Component({
   selector: 'prism-switch-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismSwitchComponent, 
@@ -64,7 +63,6 @@ import { PrismSwitchComponent } from '@devynelogic/prism-core';
 
 @Component({
   selector: 'app-switch-example',
-  standalone: true,
   imports: [PrismSwitchComponent],
   template: '<prism-switch [(checked)]="checked" />'
 })

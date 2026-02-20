@@ -4,7 +4,6 @@ import { PrismIconRegistry } from './icon-registry.service';
 
 @Component({
   selector: 'prism-icon',
-  standalone: true,
   imports: [CommonModule],
   template: ``,
   styles: [`

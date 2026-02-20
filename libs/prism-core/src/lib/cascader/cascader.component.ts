@@ -10,7 +10,6 @@ export type CascaderOption = {
 
 @Component({
   selector: 'prism-cascader',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div class="prism-cascader" [class.prism-cascader--open]="isOpen()" [class.prism-cascader--disabled]="disabled()">

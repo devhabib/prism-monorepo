@@ -14,7 +14,6 @@ import { signal } from '@angular/core';
 
 @Component({
   selector: 'app-spin-demo',
-  standalone: true,
   imports: [
     CommonModule, 
     PrismSpinComponent, 

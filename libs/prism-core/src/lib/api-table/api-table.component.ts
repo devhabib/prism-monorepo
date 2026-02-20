@@ -10,7 +10,6 @@ export type ApiDoc = {
 
 @Component({
   selector: 'prism-api-table',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './api-table.component.html',
   styleUrl: './api-table.component.scss',

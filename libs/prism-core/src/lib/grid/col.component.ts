@@ -4,7 +4,6 @@ import { PrismRowComponent } from './row.component';
 
 @Component({
   selector: 'prism-col, [prism-col]',
-  standalone: true,
   imports: [CommonModule],
   template: `<ng-content></ng-content>`,
   styleUrl: './grid.component.scss',

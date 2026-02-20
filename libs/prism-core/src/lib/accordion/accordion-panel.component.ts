@@ -11,7 +11,6 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 
 @Component({
   selector: 'prism-accordion-panel',
-  standalone: true,
   imports: [NgTemplateOutlet],
   template: `
     <div class="prism-collapse-panel" [class.prism-collapse-panel--active]="active()">

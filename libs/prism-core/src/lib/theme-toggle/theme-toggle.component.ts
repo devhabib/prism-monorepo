@@ -4,7 +4,6 @@ import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'prism-theme-toggle',
-  standalone: true,
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `

@@ -1,16 +1,80 @@
-<prism-demo-page-header title="Form" subtitle="A component for managing form layouts and validation.">
+<prism-demo-page-header title="Form Integration" subtitle="Demonstrating how all refactored core components integrate seamlessly with Angular Forms.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
+<prism-demo-section title="Comprehensive Integration" description="A complete form example showcasing signals, control value accessors, and the hybrid input strategy.">
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-form />
+        <div class="p-4 max-w-xl mx-auto">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+            
+            <prism-form-field label="Username" [required]="true" [error]="hasError('username') ? 'Username is required' : ''">
+              <input prismInput formControlName="username" placeholder="Enter username" />
+            </prism-form-field>
+
+            <prism-form-field label="Email" [error]="hasError('email') ? 'Invalid email format' : ''">
+              <prism-input formControlName="email" placeholder="example@domain.com" prefix="mail-line" />
+            </prism-form-field>
+
+            <div class="grid grid-cols-2 gap-4">
+               <prism-form-field label="Age">
+                <prism-input-number formControlName="age" [min]="0" [max]="120" />
+              </prism-form-field>
+
+              <prism-form-field label="Birth Date">
+                <prism-date-picker formControlName="birthdate" />
+              </prism-form-field>
+            </div>
+
+            <prism-form-field label="Interests">
+              <prism-select formControlName="interests" [options]="options" [multiple]="true" />
+            </prism-form-field>
+
+            <prism-form-field label="Service Satisfaction">
+              <prism-rate formControlName="satisfaction" [allowHalf]="true" />
+            </prism-form-field>
+
+            <div class="flex flex-col gap-2">
+              <label class="text-sm font-medium">Gender</label>
+              <prism-radio-group formControlName="gender">
+                <prism-radio value="male">Male</prism-radio>
+                <prism-radio value="female">Female</prism-radio>
+              </prism-radio-group>
+            </div>
+
+            <div class="pt-2">
+              <prism-checkbox formControlName="agreement">I accept the terms and conditions</prism-checkbox>
+            </div>
+
+            <div class="flex items-center gap-4 pt-4">
+              <prism-button type="submit" [disabled]="!form.valid" label="Submit Application" />
+              @if (isSubmitted()) {
+                <span class="text-green-600 text-sm font-medium animate-pulse">Application submitted!</span>
+              }
+            </div>
+          </form>
+
+          <div class="mt-8 p-4 bg-slate-50 dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800">
+             <h4 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Form State (Live)</h4>
+             
+             <div class="space-y-4">
+               <div>
+                 <span class="text-[10px] text-slate-400 font-mono block mb-1">REALTIME_STORE:</span>
+                 <pre class="text-[11px] font-mono p-2 bg-white rounded border border-slate-100 ">{{ formValue() | json }}</pre>
+               </div>
+
+               @if (submittedValue()) {
+                 <div>
+                   <span class="text-[10px] text-green-500 font-mono block mb-1">SUBMITTED_PAYLOAD:</span>
+                   <pre class="text-[11px] font-mono p-2 bg-green-50 dark:bg-green-950/20 rounded border border-green-100 dark:border-green-900/30 text-green-700 dark:text-green-400">{{ submittedValue() | json }}</pre>
+                 </div>
+               }
+             </div>
+          </div>
         </div>
       </prism-tab>
       <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
+        <prism-code-block [ts]="snippets.integration"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>

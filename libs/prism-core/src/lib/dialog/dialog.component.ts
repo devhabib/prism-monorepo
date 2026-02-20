@@ -4,7 +4,6 @@ import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'prism-dialog',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.scss',

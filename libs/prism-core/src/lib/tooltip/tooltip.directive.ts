@@ -16,7 +16,6 @@ import { PrismTooltipComponent } from './tooltip.component';
 
 @Directive({
   selector: '[prismTooltip]',
-  standalone: true,
   host: {
     '(mouseenter)': 'onMouseEnter()',
     '(mouseleave)': 'onMouseLeave()',

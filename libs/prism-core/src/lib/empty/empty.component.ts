@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'prism-empty',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div class="prism-empty">

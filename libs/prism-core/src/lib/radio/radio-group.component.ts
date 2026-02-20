@@ -1,10 +1,9 @@
-import { Component, ChangeDetectionStrategy, input, forwardRef, signal, model } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, forwardRef, model, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'prism-radio-group',
-  standalone: true,
   imports: [CommonModule],
   providers: [
     {
@@ -22,24 +21,30 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrismRadioGroupComponent implements ControlValueAccessor {
-  direction = input<'horizontal' | 'vertical'>('horizontal');
-  name = input<string>(`prism-radio-group-${Math.random().toString(36).substring(2, 9)}`);
+  readonly direction = input<'horizontal' | 'vertical'>('horizontal');
+  readonly name = input<string>(`prism-radio-group-${Math.random().toString(36).substring(2, 9)}`);
 
-  value = model<unknown>(null);
-  disabled = signal<boolean>(false);
+  readonly value = model<unknown>(null);
+  readonly disabled = model<boolean>(false);
 
-  private onChange: (_value: unknown) => void = () => {
-    // Placeholder for ControlValueAccessor
+  private onChange: (value: unknown) => void = () => {
+    // Registered by ControlValueAccessor
   };
   onTouched: () => void = () => {
-    // Placeholder for ControlValueAccessor
+    // Registered by ControlValueAccessor
   };
+
+  constructor() {
+    effect(() => {
+      this.onChange(this.value());
+    });
+  }
 
   writeValue(value: unknown): void {
     this.value.set(value);
   }
 
-  registerOnChange(fn: (_value: unknown) => void): void {
+  registerOnChange(fn: (value: unknown) => void): void {
     this.onChange = fn;
   }
 
@@ -54,7 +59,6 @@ export class PrismRadioGroupComponent implements ControlValueAccessor {
   selectValue(value: unknown): void {
     if (this.disabled()) return;
     this.value.set(value);
-    this.onChange(value);
     this.onTouched();
   }
 }
