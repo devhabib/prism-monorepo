@@ -1,0 +1,17 @@
+@use 'sass:map';
+@use 'variables' as *;
+
+/// Responsive breakpoint mixin
+/// @param {String} $bp - The breakpoint name (xs, sm, md, lg, xl, xxl)
+@mixin respond-to($bp) {
+  $val: map.get($breakpoints, $bp);
+  
+  @if $val {
+    @media (min-width: $val) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint #{$bp} not found in $breakpoints map.";
+    @content;
+  }
+}

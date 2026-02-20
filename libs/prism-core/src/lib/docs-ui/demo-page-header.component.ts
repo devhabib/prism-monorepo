@@ -12,19 +12,28 @@ import { Component, input, ChangeDetectionStrategy, ViewEncapsulation } from '@a
   `,
   styles: [`
     .demo-header {
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
+      @media (min-width: 768px) {
+        margin-bottom: 3rem;
+      }
       
       .demo-title {
-        font-size: 2.5rem;
+        font-size: 1.75rem;
         font-weight: 700;
         color: var(--text-main);
         margin: 0 0 0.5rem 0;
+        @media (min-width: 768px) {
+          font-size: 2.5rem;
+        }
       }
 
       .demo-subtitle {
-        font-size: 1.125rem;
+        font-size: 1rem;
         color: var(--text-muted);
         margin: 0;
+        @media (min-width: 768px) {
+          font-size: 1.125rem;
+        }
       }
     }
   `],

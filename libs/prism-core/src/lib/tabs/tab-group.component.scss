@@ -32,11 +32,13 @@
 // Tab Navigation
 .tab-nav {
   display: flex;
+  flex-wrap: nowrap;
   gap: 0.5rem;
   border-bottom: 2px solid var(--surface-200);
   margin-bottom: 1.5rem;
   overflow-x: auto; /* Handle many tabs */
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
   
   &::-webkit-scrollbar {
     display: none;

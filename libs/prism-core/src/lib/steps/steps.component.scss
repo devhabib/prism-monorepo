@@ -14,6 +14,13 @@
   }
   // Horizontal Alignment
   &:not(.prism-steps-vertical) {
+    display: flex;
+    flex-direction: column;
+
+    @include respond-to(md) {
+      flex-direction: row;
+    }
+
     .prism-step-item {
       display: inline-block;
       flex: 1;
@@ -53,54 +60,71 @@
           height: 1px;
           background: var(--border);
           transition: all 0.3s;
+
+          @media (max-width: 767px) {
+            display: none !important;
+          }
         }
       }
     }
   }
 
-  // Vertical Alignment
-  &.prism-steps-vertical {
-    flex-direction: column;
+  // Vertical Alignment & Mobile Fallback
+  &.prism-steps-vertical,
+  &:not(.prism-steps-vertical) {
+    @media (max-width: 767px) {
+      flex-direction: column;
 
-    .prism-step-item {
-      display: block;
-      overflow: visible;
-      flex: 1;
-      padding-bottom: 24px;
+      .prism-step-item {
+        display: block;
+        overflow: visible;
+        flex: 1;
+        padding-bottom: 24px;
+        width: 100%;
 
-      &.prism-step-item-last {
-        padding-bottom: 0;
+        &.prism-step-item-last {
+          padding-bottom: 0;
+          .prism-step-item-tail {
+            display: none !important;
+          }
+        }
+
         .prism-step-item-tail {
+          position: absolute;
+          top: 36px;
+          left: 16px;
+          width: 1px;
+          height: 100%;
+          padding: 4px 0;
+          display: block !important;
+
+          &::after {
+            content: '';
+            display: block;
+            width: 1px;
+            height: calc(100% - 40px);
+            background: var(--border);
+            border-radius: 1px;
+            transition: all 0.3s;
+          }
+        }
+
+        .prism-step-item-content {
+          min-height: 48px;
+          width: calc(100% - 60px);
+          margin-left: 44px;
+        }
+        
+        .prism-step-item-title::after {
           display: none !important;
         }
       }
-
-      .prism-step-item-tail {
-        position: absolute;
-        top: 36px;
-        left: 16px;
-        width: 1px;
-        height: 100%;
-        padding: 4px 0;
-
-        &::after {
-          content: '';
-          display: block;
-          width: 1px;
-          height: calc(100% - 40px);
-          background: var(--border);
-          border-radius: 1px;
-          transition: all 0.3s;
-        }
-      }
-
-      .prism-step-item-content {
-        min-height: 48px;
-        width: calc(100% - 60px);
-      }
     }
   }
 
+  &.prism-steps-vertical {
+    flex-direction: column;
+  }
 }
 
 .prism-step-item {

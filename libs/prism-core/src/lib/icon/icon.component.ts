@@ -43,7 +43,10 @@ export class PrismIconComponent {
 
   constructor() {
     effect(() => {
-      const iconName = this.name();
+      let iconName = this.name();
+      if (iconName.startsWith('ri-')) {
+        iconName = iconName.replace('ri-', '');
+      }
       const svgData = this.registry.getIcon(iconName);
       
       if (svgData) {

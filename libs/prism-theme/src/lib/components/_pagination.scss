@@ -5,6 +5,7 @@
   display: flex !important;
   flex-direction: row !important;
   align-items: center;
+  justify-content: center;
   gap: $space-md;
   color: var(--text-main);
   font-size: 0.875rem;

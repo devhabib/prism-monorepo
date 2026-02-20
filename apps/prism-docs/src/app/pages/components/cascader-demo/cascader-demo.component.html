@@ -7,7 +7,7 @@
       <prism-demo-section title="Basic Usage" description="The simplest usage of Cascader.">
         <prism-demo-card [minHeight]="'300px'">
           <div preview class="demo-preview">
-            <div style="width: 300px;">
+            <div class="w-full max-w-sm">
               <prism-cascader [(value)]="basicValue" [options]="options" />
               <p class="mt-4 text-sm text-muted">Value: {{ basicValue().join(' / ') || 'None' }}</p>
             </div>
@@ -19,7 +19,7 @@
       <prism-demo-section title="Default Value" description="Setting a pre-selected value.">
         <prism-demo-card [minHeight]="'300px'">
           <div preview class="demo-preview">
-            <div style="width: 300px;">
+            <div class="w-full max-w-sm">
               <prism-cascader [(value)]="defaultValue" [options]="options" />
             </div>
           </div>
@@ -30,7 +30,7 @@
       <prism-demo-section title="Hover Trigger" description="Expand sub-menus when mouse hovers over an option.">
         <prism-demo-card [minHeight]="'300px'">
           <div preview class="demo-preview">
-            <div style="width: 300px;">
+            <div class="w-full max-w-sm">
               <prism-cascader [(value)]="hoverValue" [options]="options" expandTrigger="hover" />
             </div>
           </div>
@@ -41,7 +41,7 @@
       <prism-demo-section title="Disabled" description="Disabled state of the component. 'Jiangsu' node is also disabled in data.">
         <prism-demo-card [minHeight]="'300px'">
           <div preview class="demo-preview">
-            <div style="width: 300px;">
+            <div class="w-full max-w-sm">
               <prism-cascader [options]="options" [disabled]="true" />
             </div>
           </div>

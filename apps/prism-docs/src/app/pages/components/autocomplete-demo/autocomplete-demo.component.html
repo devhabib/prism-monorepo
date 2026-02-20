@@ -7,7 +7,7 @@
       <prism-demo-section title="Basic Usage" description="The simplest usage of AutoComplete with static options.">
         <prism-demo-card [minHeight]="'300px'">
           <div preview class="demo-preview">
-            <div style="width: 300px;">
+            <div class="w-full max-w-sm">
               <prism-autocomplete [(value)]="basicValue" [options]="options" />
               <p class="mt-4 text-sm text-muted">Selected: {{ basicValue() || 'None' }}</p>
             </div>
@@ -19,7 +19,7 @@
       <prism-demo-section title="Custom Filter" description="Using a custom filter function (e.g., 'Starts with' instead of default 'Contains').">
         <prism-demo-card [minHeight]="'300px'">
           <div preview class="demo-preview">
-            <div style="width: 300px;">
+            <div class="w-full max-w-sm">
               <prism-autocomplete 
                 [(value)]="customValue" 
                 [options]="options" 
@@ -35,7 +35,7 @@
       <prism-demo-section title="Async Search" description="Handle asynchronous data loading with the searchChange event.">
         <prism-demo-card [minHeight]="'300px'">
           <div preview class="demo-preview">
-            <div style="width: 300px;">
+            <div class="w-full max-w-sm">
               <prism-autocomplete 
                 [(value)]="asyncValue" 
                 [options]="options" 

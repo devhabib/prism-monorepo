@@ -13,21 +13,31 @@ import { Component, input, ChangeDetectionStrategy, ViewEncapsulation } from '@a
   `,
   styles: [`
     .demo-section {
-      margin-bottom: 4rem;
+      margin-bottom: 3rem;
+      @media (min-width: 768px) {
+        margin-bottom: 4rem;
+      }
 
       .section-title {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         font-weight: 600;
         color: var(--text-main);
         margin-bottom: 1rem;
         padding-bottom: 0.75rem;
         border-bottom: 1px solid var(--border);
+        @media (min-width: 768px) {
+          font-size: 1.5rem;
+        }
       }
 
       .section-description {
         margin-bottom: 1.5rem;
         color: var(--text-muted);
         line-height: 1.6;
+        font-size: 0.875rem;
+        @media (min-width: 768px) {
+          font-size: 1rem;
+        }
         
         code {
           background: var(--surface-100);

@@ -38,6 +38,26 @@ import { PrismTabComponent } from '../tabs/tab.component';
       display: block;
       width: 100%;
       /* Avoid overflow: hidden to prevent clipping Signal-based components with absolute popups */
+      
+      .p-4 {
+        padding: 1rem;
+        @media (min-width: 768px) {
+          padding: 1.5rem;
+        }
+      }
+
+      .p-8 {
+        padding: 1rem;
+        overflow-x: auto;
+        @media (min-width: 768px) {
+          padding: 2rem;
+        }
+      }
+
+      prism-tab-group {
+        width: 100%;
+        overflow: hidden;
+      }
     }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush,

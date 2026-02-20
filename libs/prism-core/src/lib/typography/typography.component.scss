@@ -1,4 +1,4 @@
-@use '../../../../prism-theme/src/lib/core/variables' as *;
+@use '../../../../prism-theme/src/lib/prism-theme' as *;
 
 .prism-typography {
   color: var(--text-main, #334155); // Fallback to slate-700
@@ -85,36 +85,54 @@ h6.prism-typography {
 
 h1.prism-typography {
   margin-top: 0;
-  font-size: 2.375rem; // 38px
+  font-size: 1.75rem;
+  @include respond-to(md) {
+    font-size: 2.375rem; // 38px
+  }
 }
 
 h2.prism-typography {
   margin-top: 1.2em;
-  font-size: 1.875rem; // 30px
+  font-size: 1.5rem;
+  @include respond-to(md) {
+    font-size: 1.875rem; // 30px
+  }
 }
 
 h3.prism-typography {
   margin-top: 1.2em;
-  font-size: 1.5rem; // 24px
+  font-size: 1.25rem;
+  @include respond-to(md) {
+    font-size: 1.5rem; // 24px
+  }
 }
 
 h4.prism-typography {
   margin-top: 1.2em;
-  font-size: 1.25rem; // 20px
+  font-size: 1.125rem;
+  @include respond-to(md) {
+    font-size: 1.25rem; // 20px
+  }
 }
 
 h5.prism-typography {
   margin-top: 1.2em;
-  font-size: 1.125rem; // 18px
+  font-size: 1rem;
+  @include respond-to(md) {
+    font-size: 1.125rem; // 18px
+  }
 }
 
 h6.prism-typography {
   margin-top: 1.2em;
-  font-size: 1rem; // 16px
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--text-muted, #94a3b8);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  @include respond-to(md) {
+    font-size: 1rem; // 16px
+  }
 }
 
 a.prism-typography {
