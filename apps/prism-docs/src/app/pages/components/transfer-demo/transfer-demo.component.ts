@@ -8,7 +8,9 @@ import {
   PrismDemoSectionComponent,
   PrismDemoCardComponent,
   PrismTabGroupComponent,
-  PrismTabComponent
+  PrismTabComponent,
+  ApiTableComponent,
+  ApiDoc
 } from '@devynelogic/prism-core';
 
 @Component({
@@ -21,7 +23,8 @@ import {
     PrismDemoSectionComponent,
     PrismDemoCardComponent,
     PrismTabGroupComponent,
-    PrismTabComponent
+    PrismTabComponent,
+    ApiTableComponent
   ],
   templateUrl: './transfer-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -49,4 +52,12 @@ export class TransferDemoComponent {
     basic: `<prism-transfer \n  [dataSource]="basicData()"\n  [(targetKeys)]="basicKeys"\n/>`,
     search: `<prism-transfer \n  [dataSource]="searchData()"\n  [(targetKeys)]="searchKeys"\n  [showSearch]="true"\n/>`
   };
+
+  readonly apiData: ApiDoc[] = [
+    { name: 'dataSource', type: 'input<TransferItem[]>', default: '[]', description: 'Data options for the transfer component.' },
+    { name: 'titles', type: 'input<[string, string]>', default: "['Source', 'Target']", description: 'Titles for the left and right lists.' },
+    { name: 'showSearch', type: 'input<boolean>', default: 'false', description: 'Whether to show the search inputs.' },
+    { name: 'disabled', type: 'model<boolean>', default: 'false', description: 'Whether the component is disabled.' },
+    { name: 'targetKeys', type: 'model<string[]>', default: '[]', description: 'The keys of items in the right list.' }
+  ];
 }

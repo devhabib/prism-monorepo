@@ -1,7 +1,10 @@
 <prism-demo-page-header title="Transfer" subtitle="Double column transfer choice box.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
+<prism-tab-group variant="line" class="mt-8">
+  <prism-tab label="Examples">
+    <div class="demo-content">
+      <prism-demo-section title="Basic Usage">
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
@@ -30,3 +33,14 @@
     </prism-tab-group>
   </prism-demo-card>
 </prism-demo-section>
+    </div>
+  </prism-tab>
+
+  <prism-tab label="API">
+    <div class="api-content mt-8">
+      <prism-demo-section title="PrismTransfer API">
+        <prism-api-table [data]="apiData"></prism-api-table>
+      </prism-demo-section>
+    </div>
+  </prism-tab>
+</prism-tab-group>

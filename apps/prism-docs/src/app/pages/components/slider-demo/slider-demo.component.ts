@@ -7,7 +7,9 @@ import {
   PrismDemoSectionComponent,
   PrismDemoCardComponent,
   PrismTabGroupComponent,
-  PrismTabComponent
+  PrismTabComponent,
+  ApiTableComponent,
+  ApiDoc
 } from '@devynelogic/prism-core';
 
 import { signal } from '@angular/core';
@@ -22,7 +24,8 @@ import { signal } from '@angular/core';
     PrismDemoSectionComponent,
     PrismDemoCardComponent,
     PrismTabGroupComponent,
-    PrismTabComponent
+    PrismTabComponent,
+    ApiTableComponent
   ],
   templateUrl: './slider-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -40,4 +43,12 @@ export class SliderDemoComponent {
   [(value)]="advancedValue">
 </prism-slider>`
   };
+
+  readonly apiData: ApiDoc[] = [
+    { name: 'min', type: 'input<number>', default: '0', description: 'The minimum allowed value.' },
+    { name: 'max', type: 'input<number>', default: '100', description: 'The maximum allowed value.' },
+    { name: 'step', type: 'input<number>', default: '1', description: 'The step granularity size.' },
+    { name: 'disabled', type: 'input<boolean>', default: 'false', description: 'Whether the component is disabled.' },
+    { name: 'value', type: 'model<number>', default: '0', description: 'The two-way bound slider value.' }
+  ];
 }

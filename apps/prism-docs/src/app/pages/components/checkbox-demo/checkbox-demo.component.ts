@@ -8,7 +8,9 @@ import {
   PrismDemoSectionComponent,
   PrismDemoCardComponent,
   PrismTabGroupComponent,
-  PrismTabComponent
+  PrismTabComponent,
+  ApiTableComponent,
+  ApiDoc
 } from '@devynelogic/prism-core';
 
 @Component({
@@ -22,7 +24,8 @@ import {
     PrismDemoSectionComponent,
     PrismDemoCardComponent,
     PrismTabGroupComponent,
-    PrismTabComponent
+    PrismTabComponent,
+    ApiTableComponent
   ],
   templateUrl: './checkbox-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,4 +40,11 @@ export class CheckboxDemoComponent {
 <prism-checkbox [disabled]="true" label="Disabled" />
 <prism-checkbox [disabled]="true" [checked]="true" label="Checked & Disabled" />`
   };
+
+  readonly apiData: ApiDoc[] = [
+    { name: 'label', type: 'input<string>', default: "''", description: 'Text label for the checkbox.' },
+    { name: 'type', type: "input<'checkbox' | 'radio'>", default: "'checkbox'", description: 'Type of the input, standard or radio.' },
+    { name: 'checked', type: 'model<boolean>', default: 'false', description: 'Two-way binding for checked state.' },
+    { name: 'disabled', type: 'model<boolean>', default: 'false', description: 'Whether the checkbox is disabled.' }
+  ];
 }

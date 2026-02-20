@@ -1,7 +1,10 @@
 <prism-demo-page-header title="Checkbox" subtitle="A checkbox component.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage" description="Basic checkbox with Signal model binding.">
+<prism-tab-group variant="line" class="mt-8">
+  <prism-tab label="Examples">
+    <div class="demo-content">
+      <prism-demo-section title="Basic Usage" description="Basic checkbox with Signal model binding.">
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
@@ -33,3 +36,14 @@
     </prism-tab-group>
   </prism-demo-card>
 </prism-demo-section>
+    </div>
+  </prism-tab>
+
+  <prism-tab label="API">
+    <div class="api-content mt-8">
+      <prism-demo-section title="PrismCheckbox API">
+        <prism-api-table [data]="apiData"></prism-api-table>
+      </prism-demo-section>
+    </div>
+  </prism-tab>
+</prism-tab-group>

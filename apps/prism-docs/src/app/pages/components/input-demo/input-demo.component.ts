@@ -8,7 +8,9 @@ import {
   PrismDemoSectionComponent,
   PrismDemoCardComponent,
   PrismTabGroupComponent,
-  PrismTabComponent
+  PrismTabComponent,
+  ApiTableComponent,
+  ApiDoc
 } from '@devynelogic/prism-core';
 
 @Component({
@@ -22,7 +24,8 @@ import {
     PrismDemoSectionComponent,
     PrismDemoCardComponent,
     PrismTabGroupComponent,
-    PrismTabComponent
+    PrismTabComponent,
+    ApiTableComponent
   ],
   templateUrl: './input-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,4 +47,17 @@ export class InputDemoComponent {
 <prism-input [success]="true" placeholder="Success state" />
 <prism-input [disabled]="true" placeholder="Disabled input" />`
   };
+
+  readonly apiData: ApiDoc[] = [
+    { name: 'value', type: 'model<string>', default: "''", description: 'Two-way bound value of the input.' },
+    { name: 'type', type: 'input<string>', default: "'text'", description: 'HTML input type.' },
+    { name: 'placeholder', type: 'input<string>', default: "''", description: 'Placeholder text.' },
+    { name: 'disabled', type: 'model<boolean>', default: 'false', description: 'Whether the input is disabled.' },
+    { name: 'readonly', type: 'input<boolean>', default: 'false', description: 'Whether the input is read-only.' },
+    { name: 'size', type: "input<'sm' | 'md' | 'lg'>", default: "'md'", description: 'Size of the input.' },
+    { name: 'error', type: "input<boolean>", default: 'false', description: 'Error validation status.' },
+    { name: 'success', type: "input<boolean>", default: 'false', description: 'Success validation status.' },
+    { name: 'prefix', type: 'input<string | TemplateRef>', default: 'null', description: 'Icon name or template for prefix.' },
+    { name: 'suffix', type: 'input<string | TemplateRef>', default: 'null', description: 'Icon name or template for suffix.' }
+  ];
 }

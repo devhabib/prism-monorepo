@@ -9,7 +9,9 @@ import {
   PrismDemoSectionComponent,
   PrismDemoCardComponent,
   PrismTabGroupComponent,
-  PrismTabComponent
+  PrismTabComponent,
+  ApiTableComponent,
+  ApiDoc
 } from '@devynelogic/prism-core';
 
 @Component({
@@ -23,7 +25,8 @@ import {
     PrismDemoSectionComponent,
     PrismDemoCardComponent,
     PrismTabGroupComponent,
-    PrismTabComponent
+    PrismTabComponent,
+    ApiTableComponent
   ],
   templateUrl: './upload-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,4 +45,17 @@ export class UploadDemoComponent {
     dragger: `<prism-upload [(fileList)]="files" listType="dragger" [multiple]="true" />`,
     disabled: `<prism-upload [(fileList)]="files" [disabled]="true" />`
   };
+
+  readonly apiData: ApiDoc[] = [
+    { name: 'accept', type: 'input<string>', default: "''", description: 'Accepted file types.' },
+    { name: 'multiple', type: 'input<boolean>', default: 'false', description: 'Whether multiple files are allowed.' },
+    { name: 'disabled', type: 'model<boolean>', default: 'false', description: 'Whether the upload is disabled.' },
+    { name: 'maxCount', type: 'input<number>', default: '0', description: 'Maximum number of files allowed (0 means unlimited).' },
+    { name: 'listType', type: "input<'text' | 'dragger'>", default: "'text'", description: 'Type of the upload interface.' },
+    { name: 'fileList', type: 'model<PrismUploadFile[]>', default: '[]', description: 'The two-way bound selected files.' },
+    { name: 'beforeUpload', type: 'input<Function>', default: 'undefined', description: 'Hook executed before upload. Returning false cancels.' },
+    { name: 'customRequest', type: 'input<Function>', default: 'undefined', description: 'Custom upload request handler.' },
+    { name: 'fileChange', type: 'output<PrismUploadFile[]>', default: '-', description: 'Emitted when file list changes.' },
+    { name: 'remove', type: 'output<PrismUploadFile>', default: '-', description: 'Emitted when a file is removed.' }
+  ];
 }

@@ -8,7 +8,9 @@ import {
   PrismDemoSectionComponent,
   PrismDemoCardComponent,
   PrismTabGroupComponent,
-  PrismTabComponent
+  PrismTabComponent,
+  ApiTableComponent,
+  ApiDoc
 } from '@devynelogic/prism-core';
 
 @Component({
@@ -22,7 +24,8 @@ import {
     PrismDemoSectionComponent,
     PrismDemoCardComponent,
     PrismTabGroupComponent,
-    PrismTabComponent
+    PrismTabComponent,
+    ApiTableComponent
   ],
   templateUrl: './date-picker-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,4 +38,10 @@ export class DatePickerDemoComponent {
     disabled: `<prism-date-picker [disabled]="true" [value]="selectedDate()" />`,
     placeholder: `<prism-date-picker placeholder="Select a special day" />`
   };
+
+  readonly apiData: ApiDoc[] = [
+    { name: 'placeholder', type: 'input<string>', default: "'Select date'", description: 'Placeholder for the date input.' },
+    { name: 'disabled', type: 'model<boolean>', default: 'false', description: 'Whether the date picker is disabled.' },
+    { name: 'value', type: 'model<Date | null>', default: 'null', description: 'The two-way bound selected date.' }
+  ];
 }
