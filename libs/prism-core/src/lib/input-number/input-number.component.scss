@@ -1,79 +1,144 @@
 @use '../../../../../libs/prism-theme/src/lib/prism-theme' as *;
 
 .prism-input-number {
+  position: relative;
   display: inline-flex;
-  align-items: stretch;
-  border: 1px solid #d9d9d9;
-  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--surface-0);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: all 0.3s;
   overflow: hidden;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  height: 32px;
-  background: #fff;
 
   &:hover {
     border-color: $primary-main;
-  }
-
-  &.is-focused {
-    border-color: $primary-main;
-    box-shadow: 0 0 0 2px rgba($primary-main, 0.1);
-  }
-
-  &.is-disabled {
-    background: #f5f5f5;
-    cursor: not-allowed;
-    border-color: #d9d9d9 !important;
     
-    input {
-      color: var(--text-muted);
-      cursor: not-allowed;
-    }
-
-    .btn-step {
-      cursor: not-allowed;
-      color: var(--text-muted);
-      &:hover { background: transparent; }
+    .prism-input-number-handlers {
+      opacity: 1;
     }
   }
 
-  .btn-step {
-    flex: 0 0 32px;
+  &--focused {
+    box-shadow: 0 0 0 2px rgba($primary-main, 0.1);
+    
+    .prism-input-number-handlers {
+      opacity: 1;
+    }
+  }
+
+  &--disabled {
+    background-color: var(--surface-200);
+    border-color: var(--border) !important;
+    cursor: not-allowed;
+
+    .prism-input-number-input {
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
+
+    .prism-input-number-handler {
+      cursor: not-allowed;
+      color: var(--text-muted);
+    }
+  }
+
+  // Sizes
+  &--sm {
+    height: 32px;
+    .prism-input-number-input { font-size: 12px; }
+  }
+  &--md {
+    height: 40px;
+    .prism-input-number-input { font-size: 14px; }
+  }
+  &--lg {
+    height: 48px;
+    .prism-input-number-input { font-size: 16px; }
+  }
+
+  &-input-wrap {
+    flex: 1;
+    height: 100%;
+  }
+
+  &-input {
+    width: 100%;
+    height: 100%;
+    padding: 0 11px;
+    text-align: left;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    color: var(--text-main);
+    font-family: inherit;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    
+    // Hide native steppers
+    -moz-appearance: textfield;
+    appearance: textfield;
+    
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      appearance: none;
+      margin: 0;
+    }
+
+    &::placeholder {
+      color: var(--text-muted);
+    }
+  }
+
+  &-handlers {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 22px;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--border);
+    background: var(--surface-100);
+    opacity: 0;
+    transition: opacity 0.24s linear 0.1s;
+    z-index: 1;
+
+    .prism-input-number:hover &,
+    .prism-input-number--focused & {
+      opacity: 1;
+    }
+  }
+
+  &-handler {
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: none;
-    background: transparent;
     cursor: pointer;
-    color: var(--text-main);
-    transition: background 0.2s;
-    padding: 0;
+    color: var(--text-muted);
+    transition: all 0.15s linear;
+    user-select: none;
+    line-height: 0;
 
-    &:hover:not(:disabled) {
-      background: #f8fafc;
+    &:hover:not(&-disabled) {
       color: $primary-main;
+      background-color: var(--surface-200);
     }
 
-    &:disabled {
-      color: #bfbfbf;
+    &:active:not(&-disabled) {
+      background-color: var(--surface-300);
+    }
+
+    &-up {
+      border-bottom: 1px solid var(--border);
+    }
+
+    &-disabled {
       cursor: not-allowed;
+      color: var(--text-light) !important;
+      background-color: transparent !important;
     }
-  }
-
-  .input-wrapper {
-    flex: 1;
-    border-left: 1px solid #f0f0f0;
-    border-right: 1px solid #f0f0f0;
-  }
-
-  input {
-    width: 100%;
-    height: 100%;
-    border: none;
-    padding: 0 $space-sm;
-    text-align: center;
-    outline: none;
-    font-size: 0.875rem;
-    color: var(--text-main);
-    background: transparent;
   }
 }

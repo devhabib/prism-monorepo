@@ -8,7 +8,8 @@ import {
   PrismDemoSectionComponent,
   PrismDemoCardComponent,
   PrismTabGroupComponent,
-  PrismTabComponent
+  PrismTabComponent,
+  PrismSpaceComponent
 } from '@devynelogic/prism-core';
 
 @Component({
@@ -22,7 +23,8 @@ import {
     PrismDemoSectionComponent,
     PrismDemoCardComponent,
     PrismTabGroupComponent,
-    PrismTabComponent
+    PrismTabComponent,
+    PrismSpaceComponent
   ],
   templateUrl: './input-number-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

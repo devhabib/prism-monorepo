@@ -40,11 +40,11 @@
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4 space-y-4 max-w-sm">
+        <prism-space direction="vertical" size="small">
           <prism-input-number size="sm" [value]="1" />
           <prism-input-number size="md" [value]="1" />
           <prism-input-number size="lg" [value]="1" />
-        </div>
+        </prism-space>
       </prism-tab>
       <prism-tab label="Code">
         <prism-code-block [ts]="snippets.sizes"></prism-code-block>

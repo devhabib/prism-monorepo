@@ -99,6 +99,12 @@ import { PrismInputDirective } from './input.directive';
       cursor: not-allowed;
       opacity: 0.6;
     }
+    .prism-input-suffix{
+      .prism-icon{
+        right: 0.75rem;
+        left: auto;
+      }
+    }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

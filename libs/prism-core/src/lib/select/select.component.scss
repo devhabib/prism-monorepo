@@ -148,6 +148,9 @@
       background: var(--primary-50);
       color: var(--primary-500);
       font-weight: 500;
+      &:not(:last-child) {
+        margin-bottom: 2px;
+      }
     }
 
     &--empty {

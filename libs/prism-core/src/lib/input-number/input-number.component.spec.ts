@@ -73,11 +73,11 @@ describe('PrismInputNumberComponent', () => {
     const upBtn = fixture.debugElement.query(By.css('.prism-input-number-handler-up')).nativeElement;
     const downBtn = fixture.debugElement.query(By.css('.prism-input-number-handler-down')).nativeElement;
 
-    upBtn.click();
+    upBtn.dispatchEvent(new MouseEvent('mousedown'));
     fixture.detectChanges();
     expect(host.value()).toBe(11);
 
-    downBtn.click();
+    downBtn.dispatchEvent(new MouseEvent('mousedown'));
     fixture.detectChanges();
     expect(host.value()).toBe(10);
   });
@@ -89,22 +89,22 @@ describe('PrismInputNumberComponent', () => {
     fixture.detectChanges();
 
     const upBtn = fixture.debugElement.query(By.css('.prism-input-number-handler-up')).nativeElement;
-    upBtn.click();
+    upBtn.dispatchEvent(new MouseEvent('mousedown'));
     fixture.detectChanges();
     expect(host.value()).toBe(10);
 
-    upBtn.click();
+    upBtn.dispatchEvent(new MouseEvent('mousedown'));
     fixture.detectChanges();
     expect(host.value()).toBe(10); // Still 10
 
     host.value.set(1);
     fixture.detectChanges();
     const downBtn = fixture.debugElement.query(By.css('.prism-input-number-handler-down')).nativeElement;
-    downBtn.click();
+    downBtn.dispatchEvent(new MouseEvent('mousedown'));
     fixture.detectChanges();
     expect(host.value()).toBe(0);
 
-    downBtn.click();
+    downBtn.dispatchEvent(new MouseEvent('mousedown'));
     fixture.detectChanges();
     expect(host.value()).toBe(0); // Still 0
   });
@@ -130,8 +130,8 @@ describe('PrismInputNumberComponent', () => {
     const downBtn = fixture.debugElement.query(By.css('.prism-input-number-handler-down')).nativeElement;
     const input = fixture.debugElement.query(By.css('input')).nativeElement;
 
-    expect(upBtn.disabled).toBe(true);
-    expect(downBtn.disabled).toBe(true);
+    expect(upBtn.classList.contains('prism-input-number-handler-disabled')).toBe(true);
+    expect(downBtn.classList.contains('prism-input-number-handler-disabled')).toBe(true);
     expect(input.disabled).toBe(true);
   });
 
@@ -141,7 +141,7 @@ describe('PrismInputNumberComponent', () => {
     fixture.detectChanges();
 
     const upBtn = fixture.debugElement.query(By.css('.prism-input-number-handler-up')).nativeElement;
-    upBtn.click();
+    upBtn.dispatchEvent(new MouseEvent('mousedown'));
     fixture.detectChanges();
     expect(host.value()).toBe(10);
   });
