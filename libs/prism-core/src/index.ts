@@ -102,7 +102,10 @@ export * from './lib/list/list.component';
 export * from './lib/popover/popover.component';
 export * from './lib/statistic/statistic.component';
 export * from './lib/timeline/timeline.component';
+export * from './lib/timeline/timeline-item.component';
 export * from './lib/tree/tree.component';
+export * from './lib/tree/tree-node.component';
+export * from './lib/tree/tree.types';
 
 // Feedback
 export * from './lib/alert/alert.component';

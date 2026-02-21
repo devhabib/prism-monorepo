@@ -1,0 +1,92 @@
+@use '../../../../prism-theme/src/lib/_index.scss' as *;
+
+.prism-tree {
+  color: var(--text-900);
+  font-size: var(--prism-font-size-base);
+  font-family: var(--prism-font-family);
+  user-select: none;
+
+  &-node {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 0;
+
+    &-content {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      border-radius: var(--prism-border-radius-sm);
+      transition: all 0.2s ease;
+      padding: 4px 8px;
+
+      &:hover {
+        background: var(--surface-100);
+      }
+    }
+
+    &-selected > .prism-tree-node-content {
+      background: var(--primary-50);
+      color: var(--primary-600);
+      font-weight: 500;
+    }
+
+    &-disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      
+      .prism-tree-node-content:hover {
+        background: transparent;
+      }
+    }
+
+    &-switcher {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      margin-right: 4px;
+      cursor: pointer;
+      color: var(--text-400);
+      transition: color 0.2s;
+
+      &:hover {
+        color: var(--text-900);
+      }
+
+      &-icon {
+        transition: transform 0.2s;
+      }
+    }
+
+    &-checkbox {
+      margin-right: 8px;
+    }
+
+    &-icon {
+      margin-right: 8px;
+      display: inline-flex;
+      align-items: center;
+      color: var(--text-500);
+    }
+
+    &-title {
+      flex: 1;
+      padding: 0 4px;
+    }
+  }
+
+  &-empty {
+    padding: 16px;
+    text-align: center;
+    color: var(--text-400);
+  }
+}
+
+// Dark theme adjustments if needed (mostly handled by CSS variables)
+[data-theme="dark"] .prism-tree {
+  &-node-selected > .prism-tree-node-content {
+    background: var(--primary-900-opacity-20);
+    color: var(--primary-400);
+  }
+}

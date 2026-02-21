@@ -2,18 +2,24 @@
   position: relative;
   display: inline-flex;
   vertical-align: middle;
+  --prism-badge-translate: translate(50%, -50%);
 
   // ── Standalone (no projected content) ──
   &--standalone {
-    line-height: 0; // Prevent host from taking extra height
+    line-height: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    --prism-badge-translate: translate(0, 0);
     
     .prism-badge__count,
     .prism-badge__dot {
       position: relative;
-      top: auto !important;
-      right: auto !important;
-      transform: none;
+      top: 0 !important;
+      right: 0 !important;
+      transform: var(--prism-badge-translate) !important;
       display: inline-flex;
+      margin: 0;
     }
   }
 
@@ -22,44 +28,29 @@
     position: absolute;
     top: 0;
     right: 0;
-    z-index: 1;
-    transform: translate(50%, -50%);
+    z-index: 10;
+    transform: var(--prism-badge-translate);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     min-width: 20px;
-    height: 22px;
-    padding: 0 8px;
-    font-size: 0.75rem;
+    height: 20px;
+    padding: 0 6px;
+    font-size: 12px;
     font-weight: 500;
-    line-height: 1;
+    line-height: 20px;
     white-space: nowrap;
     border-radius: 10px;
-    box-shadow: 0 0 0 2px var(--surface-0, #fff);
+    box-shadow: 0 0 0 1px var(--surface-bg, #fff);
     pointer-events: none;
-    animation: prism-badge-zoom-in 0.3s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+    animation: prism-badge-zoom-in 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46);
 
     // Status colors
-    &--error {
-      background-color: var(--danger, #ff4d4f);
-      color: #fff;
-    }
-    &--success {
-      background-color: var(--success, #52c41a);
-      color: #fff;
-    }
-    &--warning {
-      background-color: var(--warning, #faad14);
-      color: #fff;
-    }
-    &--processing {
-      background-color: var(--primary, #1890ff);
-      color: #fff;
-    }
-    &--default {
-      background-color: var(--prism-text-tertiary, #d9d9d9);
-      color: #fff;
-    }
+    &--error { background-color: var(--danger-500, #ef4444); color: #fff; }
+    &--success { background-color: var(--success-500, #10b981); color: #fff; }
+    &--warning { background-color: var(--warning-500, #f59e0b); color: #fff; }
+    &--processing { background-color: var(--primary-500, #6366f1); color: #fff; }
+    &--default { background-color: var(--surface-400, #94a3b8); color: #fff; }
   }
 
   // ── Dot ──
@@ -67,44 +58,36 @@
     position: absolute;
     top: 0;
     right: 0;
-    z-index: 1;
-    transform: translate(50%, -50%);
+    z-index: 10;
+    transform: var(--prism-badge-translate);
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    box-shadow: 0 0 0 2px var(--surface-0, #fff);
+    box-shadow: 0 0 0 1px var(--surface-bg, #fff);
     pointer-events: none;
-    animation: prism-badge-zoom-in 0.3s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+    animation: prism-badge-zoom-in 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46);
 
-    &--error {
-      background-color: var(--danger, #ef4444);
-    }
-    &--success {
-      background-color: var(--success, #10b981);
-    }
-    &--warning {
-      background-color: var(--warning, #f59e0b);
-    }
+    &--error { background-color: var(--danger-500, #ef4444); }
+    &--success { background-color: var(--success-500, #10b981); }
+    &--warning { background-color: var(--warning-500, #f59e0b); }
     &--processing {
       background-color: var(--primary-500, #6366f1);
-      animation: prism-badge-zoom-in 0.3s cubic-bezier(0.12, 0.4, 0.29, 1.46),
+      animation: prism-badge-zoom-in 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46),
                  prism-badge-pulse 1.5s ease-in-out infinite;
     }
-    &--default {
-      background-color: var(--surface-400, #94a3b8);
-    }
+    &--default { background-color: var(--surface-400, #94a3b8); }
   }
 }
 
 // ── Animations ──
 @keyframes prism-badge-zoom-in {
-  0% {
+  from {
     opacity: 0;
-    transform: translate(50%, -50%) scale(0);
+    transform: var(--prism-badge-translate) scale(0);
   }
-  100% {
+  to {
     opacity: 1;
-    transform: translate(50%, -50%) scale(1);
+    transform: var(--prism-badge-translate) scale(1);
   }
 }
 

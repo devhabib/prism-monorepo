@@ -1,0 +1,253 @@
+@use '../../../../prism-theme/src/lib/_index.scss' as *;
+
+.prism-timeline {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--prism-font-size-base, 14px);
+  font-family: var(--prism-font-family, sans-serif);
+  display: block;
+
+  &-item {
+    position: relative;
+    padding-bottom: 24px;
+    margin: 0;
+    list-style: none;
+    min-height: 40px;
+    display: block;
+
+    &-tail {
+      position: absolute;
+      top: 14px; 
+      left: 4px;
+      height: calc(100% - 14px);
+      border-left: 2px solid var(--surface-300, #cbd5e1);
+      display: block;
+      z-index: 1;
+    }
+
+    &:last-of-type &-tail {
+      display: none;
+    }
+
+    &-head {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: var(--surface-bg, #fff);
+      border: 2px solid var(--primary-500, #6366f1);
+      border-radius: 50%;
+      z-index: 2;
+      left: 0;
+      top: 4px;
+
+      &-dot {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: var(--primary-500, #6366f1);
+        display: block;
+      }
+
+      // Higher specificity override for custom dots (projected content)
+      &:has([dot]), 
+      &.prism-timeline-item-head-custom {
+        position: absolute;
+        width: auto !important;
+        height: auto !important;
+        border: none !important;
+        background: transparent !important;
+        border-radius: 0 !important;
+        top: 9px !important; 
+        left: 5px !important; 
+        transform: translate(-50%, -50%) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        z-index: 3 !important;
+
+        // Hide the default dot if it exists inside
+        .prism-timeline-item-head-dot {
+          display: none !important;
+        }
+      }
+    }
+
+    &[data-custom-dot="true"] {
+      .prism-timeline-item-head {
+        position: absolute;
+        width: auto !important;
+        height: auto !important;
+        border: none !important;
+        background: transparent !important;
+        border-radius: 0 !important;
+        top: 9px !important; 
+        left: 5px !important; 
+        transform: translate(-50%, -50%) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        z-index: 3 !important;
+
+        .prism-timeline-item-head-dot {
+          display: none !important;
+        }
+      }
+    }
+
+    &-label {
+      position: absolute;
+      top: -1px;
+      width: calc(50% - 12px);
+      text-align: right;
+      display: none;
+    }
+
+    &-content {
+      position: relative;
+      top: -1px;
+      margin-left: 26px;
+      word-break: break-all;
+      min-height: 24px;
+      line-height: normal;
+    }
+  }
+
+  // Modes
+  &-left {
+    .prism-timeline-item-head {
+      left: 0;
+    }
+    .prism-timeline-item-tail {
+      left: 4px;
+    }
+  }
+
+  &-right {
+    .prism-timeline-item {
+      &-tail {
+        left: auto;
+        right: 4px;
+      }
+      &-head {
+        left: auto;
+        right: 0;
+      }
+      &-content {
+        margin-right: 26px;
+        margin-left: 0;
+        text-align: right;
+      }
+    }
+  }
+
+  // Alternate Mode
+  &-alternate {
+    .prism-timeline-item {
+      &-tail {
+        left: 50%;
+        margin-left: -1px;
+      }
+      &-head {
+         left: 50%;
+         margin-left: -5px;
+      }
+
+      &-label {
+        display: block;
+      }
+
+      &:nth-of-type(odd) {
+        .prism-timeline-item-content {
+          width: calc(50% - 12px);
+          text-align: right;
+          margin-left: 0;
+          padding-right: 20px;
+        }
+        .prism-timeline-item-label {
+          left: 50%;
+          margin-left: 14px;
+          text-align: left;
+        }
+      }
+
+      &:nth-of-type(even) {
+        .prism-timeline-item-content {
+          margin-left: calc(50% + 14px);
+          text-align: left;
+        }
+        .prism-timeline-item-label {
+          left: 0;
+          text-align: right;
+          padding-right: 20px;
+        }
+      }
+    }
+  }
+
+  // Reverse Mode
+  &-reverse {
+    display: flex;
+    flex-direction: column-reverse;
+
+    .prism-timeline-item:first-of-type .prism-timeline-item-tail {
+      display: none;
+    }
+    .prism-timeline-item:last-of-type .prism-timeline-item-tail {
+      display: block;
+    }
+  }
+
+  // Pending
+  &-pending {
+    .prism-timeline-item-pending .prism-timeline-item-tail {
+        display: block;
+    }
+
+    &:not(.prism-timeline-reverse) .prism-timeline-item:nth-last-of-type(2) .prism-timeline-item-tail {
+      border-left-style: dashed;
+    }
+
+    &.prism-timeline-reverse .prism-timeline-item-pending .prism-timeline-item-tail {
+        border-left-style: dashed;
+    }
+  }
+
+  &-item-head-pending {
+    border-color: var(--surface-300, #cbd5e1);
+    animation: prism-timeline-pending-blink 2s infinite ease-in-out;
+  }
+}
+
+@keyframes prism-timeline-pending-blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .prism-timeline-alternate {
+    .prism-timeline-item {
+      &-tail {
+        left: 5px;
+      }
+      &-head {
+        left: 0.5px;
+        margin-left: 0;
+      }
+      &-label {
+        display: none;
+      }
+      
+      &:nth-of-type(odd), &:nth-of-type(even) {
+        .prism-timeline-item-content {
+          width: auto;
+          margin-left: 26px;
+          text-align: left;
+          padding-right: 0;
+        }
+      }
+    }
+  }
+}

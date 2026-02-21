@@ -1,17 +1,107 @@
-<prism-demo-page-header title="Timeline" subtitle="A component for displaying chronological events.">
+<prism-demo-page-header 
+  title="Timeline" 
+  subtitle="Vertical display timeline of events.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
-  <prism-demo-card>
-    <prism-tab-group variant="pill">
-      <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-timeline />
+<prism-tab-group>
+  <prism-tab label="Examples">
+    <prism-demo-section title="Basic Timeline">
+      <prism-demo-card>
+        <div preview>
+          <div class="p-4 rounded-lg">
+            <prism-timeline>
+              <prism-timeline-item>Create a services site 2015-09-01</prism-timeline-item>
+              <prism-timeline-item>Solve initial network problems 2015-09-01</prism-timeline-item>
+              <prism-timeline-item>Technical testing 2015-09-01</prism-timeline-item>
+              <prism-timeline-item>Network problems being solved 2015-09-01</prism-timeline-item>
+            </prism-timeline>
+          </div>
         </div>
-      </prism-tab>
-      <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
-      </prism-tab>
-    </prism-tab-group>
-  </prism-demo-card>
-</prism-demo-section>
+        <div code>
+          <prism-code-block [ts]="snippets.basic"></prism-code-block>
+        </div>
+      </prism-demo-card>
+    </prism-demo-section>
+
+    <prism-demo-section title="Alternate">
+      <prism-demo-card>
+        <div preview>
+          <div class="p-4 rounded-lg">
+            <prism-timeline mode="alternate">
+              <prism-timeline-item>
+                <span label>2015-09-01</span>
+                Create a services site
+              </prism-timeline-item>
+              <prism-timeline-item>
+                <span label>2015-09-01</span>
+                Solve initial network problems
+              </prism-timeline-item>
+              <prism-timeline-item>
+                <span label>2015-09-01</span>
+                Technical testing
+              </prism-timeline-item>
+              <prism-timeline-item>
+                <span label>2015-09-01</span>
+                Network problems being solved
+              </prism-timeline-item>
+            </prism-timeline>
+          </div>
+        </div>
+        <div code>
+          <prism-code-block [ts]="snippets.alternate"></prism-code-block>
+        </div>
+      </prism-demo-card>
+    </prism-demo-section>
+
+    <prism-demo-section title="Custom Icon">
+      <prism-demo-card>
+        <div preview>
+          <div class="p-4 rounded-lg">
+            <prism-timeline>
+              <prism-timeline-item>
+                <prism-icon dot name="checkbox-circle-line" class="text-green-500" />
+                Technical testing 2024-02-21
+              </prism-timeline-item>
+              <prism-timeline-item>
+                <prism-icon dot name="time-line" class="text-blue-500" />
+                Network problems being solved
+              </prism-timeline-item>
+              <prism-timeline-item>
+                Solve initial network problems
+              </prism-timeline-item>
+            </prism-timeline>
+          </div>
+        </div>
+        <div code>
+          <prism-code-block [ts]="snippets.custom"></prism-code-block>
+        </div>
+      </prism-demo-card>
+    </prism-demo-section>
+
+    <prism-demo-section title="Reverse & Pending">
+      <prism-demo-card>
+        <div preview>
+          <div class="p-4 rounded-lg">
+            <prism-timeline pending="Recording..." [reverse]="true">
+              <prism-timeline-item>Create a services site 2015-09-01</prism-timeline-item>
+              <prism-timeline-item>Solve initial network problems 2015-09-01</prism-timeline-item>
+            </prism-timeline>
+          </div>
+        </div>
+        <div code>
+          <prism-code-block [ts]="snippets.pending"></prism-code-block>
+        </div>
+      </prism-demo-card>
+    </prism-demo-section>
+  </prism-tab>
+
+  <prism-tab label="API">
+    <prism-demo-section title="Timeline API">
+      <h3 class="text-lg font-medium mb-4">Timeline Properties</h3>
+      <prism-api-table [data]="apiData.timelineInputs" />
+      
+      <h3 class="text-lg font-medium mb-4 mt-8">Timeline Item Properties</h3>
+      <prism-api-table [data]="apiData.itemInputs" />
+    </prism-demo-section>
+  </prism-tab>
+</prism-tab-group>
