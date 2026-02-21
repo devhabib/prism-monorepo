@@ -1,6 +1,9 @@
 <prism-demo-page-header title="Alert" subtitle="A component for displaying important messages to users.">
 </prism-demo-page-header>
 
+<prism-tab-group variant="line" class="mt-8">
+  <prism-tab label="Examples">
+
 <prism-demo-section title="Basic Usage">
   <prism-demo-card>
     <prism-tab-group variant="pill">
@@ -39,3 +42,14 @@
     </prism-tab-group>
   </prism-demo-card>
 </prism-demo-section>
+
+  </prism-tab>
+
+  <prism-tab label="API">
+    <prism-demo-section title="API">
+      <div class="mt-4">
+        <prism-api-table [data]="apiData"></prism-api-table>
+      </div>
+    </prism-demo-section>
+  </prism-tab>
+</prism-tab-group>

@@ -1,0 +1,58 @@
+@use '../../../../prism-theme/src/lib/index' as *;
+
+.prism-popconfirm {
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+    padding: $space-sm;
+    min-width: 180px;
+  }
+  
+  &__message {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-xs;
+    color: var(--text-main);
+    font-size: 14px;
+    
+    &-icon {
+      color: var(--warning-main);
+      margin-top: 2px;
+    }
+  }
+  
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: $space-xs;
+    margin-top: $space-xs;
+  }
+}
+
+// Ensure popconfirm uses popover styles as base if needed, or define bubble here
+.prism-popconfirm-bubble {
+  background-color: var(--surface-0);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1060;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: inherit;
+    border: inherit;
+    transform: rotate(45deg);
+  }
+}
+
+.prism-theme-dark {
+  .prism-popconfirm-bubble {
+    background-color: var(--surface-800);
+    border-color: var(--surface-700);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+}

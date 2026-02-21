@@ -1,45 +1,113 @@
+@use '../../../../prism-theme/src/lib/index' as *;
+
 .prism-tag {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
-  padding: 0.25rem 0.625rem;
+  gap: $space-xxs;
+  padding: 0 0.5rem;
+  height: 22px;
+  line-height: normal; // Ensure vertical centering
   background-color: var(--surface-100);
   border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 0.875rem;
+  border-radius: 4px;
+  font-size: 12px;
   color: var(--text-main);
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  cursor: default;
+  white-space: nowrap;
   
   &__label {
-    line-height: 1;
+    display: inline-block;
   }
   
-  &__remove {
-    display: flex;
+  &__close {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0;
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 12px;
     background: none;
     border: none;
-    border-radius: 4px;
+    border-radius: 2px;
     color: var(--text-muted);
     cursor: pointer;
     transition: all 0.2s ease;
+    margin-left: 4px;
     
     svg {
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
     }
     
     &:hover {
-      background-color: var(--surface-200);
       color: var(--text-main);
     }
+  }
+
+  // Predefined States (using host bindings or classes)
+  &--checkable {
+    cursor: pointer;
+    &:hover {
+      border-color: var(--primary-main);
+      color: var(--primary-main);
+    }
     
-    &:focus-visible {
-      outline: 2px solid var(--primary-300);
-      outline-offset: 2px;
+    &.prism-tag--checked {
+      background-color: var(--primary-main);
+      border-color: var(--primary-main);
+      color: #fff;
+    }
+  }
+
+  // Status Colors
+  &--success {
+    color: #52c41a;
+    background: #f6ffed;
+    border-color: #b7eb8f;
+  }
+
+  &--processing {
+    color: #1890ff;
+    background: #e6f7ff;
+    border-color: #91d5ff;
+  }
+
+  &--warning {
+    color: #faad14;
+    background: #fffbe6;
+    border-color: #ffe58f;
+  }
+
+  &--error {
+    color: #ff4d4f;
+    background: #fff1f0;
+    border-color: #ffa39e;
+  }
+
+  // Custom Colors
+  &[style*="background-color"] {
+    color: #fff;
+    border-color: transparent;
+    .prism-tag__close {
+      color: rgba(255, 255, 255, 0.85);
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+}
+
+// Dark Mode Overrides
+.prism-theme-dark {
+  .prism-tag {
+    background-color: var(--surface-800);
+    border-color: var(--surface-700);
+    color: var(--text-main);
+    
+    &--checkable:hover {
+      border-color: var(--primary-400);
+      color: var(--primary-400);
     }
   }
 }

@@ -7,7 +7,8 @@ import {
   PrismDemoSectionComponent,
   PrismDemoCardComponent,
   PrismTabGroupComponent,
-  PrismTabComponent
+  PrismTabComponent,
+  ApiTableComponent
 } from '@devynelogic/prism-core';
 
 @Component({
@@ -20,7 +21,8 @@ import {
     PrismDemoSectionComponent,
     PrismDemoCardComponent,
     PrismTabGroupComponent,
-    PrismTabComponent
+    PrismTabComponent,
+    ApiTableComponent
   ],
   templateUrl: './alert-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,4 +46,13 @@ export class AlertDemoComponent {
   (onClose)="handleClose()">
 </prism-alert>`
   };
+
+  readonly apiData = [
+    { name: 'type', type: "'success' | 'info' | 'warning' | 'error'", default: "'info'", description: 'Type of the alert.' },
+    { name: 'title', type: 'string', default: "'-'", description: 'Title of the alert.' },
+    { name: 'description', type: 'string', default: "'-'", description: 'Description body of the alert.' },
+    { name: 'showIcon', type: 'boolean', default: 'false', description: 'Whether to show an icon.' },
+    { name: 'closeable', type: 'boolean', default: 'false', description: 'Whether the alert can be closed.' },
+    { name: 'onClose', type: 'EventEmitter<void>', default: '-', description: 'Callback when the alert is closed.' }
+  ];
 }

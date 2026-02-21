@@ -8,13 +8,14 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   plugins: [
     angular({
-      tsconfig: './tsconfig.spec.json'
+      tsconfig: join(__dirname, './tsconfig.spec.json')
     })
   ],
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: ['src/test-setup.ts'],
+    root: __dirname,
+    setupFiles: [join(__dirname, 'src/test-setup.ts')],
     include: ['src/**/*.{test,spec}.{ts,mts,cts,jsx,tsx}'],
     reporters: ['default'],
   },

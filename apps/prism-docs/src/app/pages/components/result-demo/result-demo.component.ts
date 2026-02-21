@@ -7,7 +7,8 @@ import {
   PrismDemoSectionComponent,
   PrismDemoCardComponent,
   PrismTabGroupComponent,
-  PrismTabComponent
+  PrismTabComponent,
+  ApiTableComponent
 } from '@devynelogic/prism-core';
 
 @Component({
@@ -20,7 +21,8 @@ import {
     PrismDemoSectionComponent,
     PrismDemoCardComponent,
     PrismTabGroupComponent,
-    PrismTabComponent
+    PrismTabComponent,
+    ApiTableComponent
   ],
   templateUrl: './result-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -45,4 +47,11 @@ export class ResultDemoComponent {
   </div>
 </prism-result>`
   };
+
+  readonly apiData = [
+    { name: 'status', description: 'Result status', type: "'success' | 'error' | 'info' | 'warning' | '404' | '403' | '500'", default: "'info'" },
+    { name: 'title', description: 'The title', type: 'string | TemplateRef<any>', default: '-' },
+    { name: 'subtitle', description: 'The subtitle', type: 'string | TemplateRef<any>', default: '-' },
+    { name: 'icon', description: 'Custom icon template', type: 'TemplateRef<any>', default: '-' }
+  ];
 }

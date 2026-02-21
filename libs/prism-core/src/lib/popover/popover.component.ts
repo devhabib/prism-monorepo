@@ -90,6 +90,7 @@ export class PrismPopoverComponent {
 
 @Directive({
   selector: '[prismPopoverTrigger]',
+  standalone: true,
   host: {
     '(click)': 'onClick($event)',
     '(mouseenter)': 'onMouseEnter()',
@@ -105,7 +106,16 @@ export class PrismPopoverTriggerDirective implements OnDestroy {
   private readonly document = inject(DOCUMENT);
   private readonly platformId = inject(PLATFORM_ID);
 
-  readonly popover = input.required<PrismPopoverComponent>({ alias: 'prismPopoverTrigger' });
+  readonly popoverInput = input<PrismPopoverComponent | undefined>(undefined, { alias: 'prismPopoverTrigger' });
+  private _manualPopover?: PrismPopoverComponent;
+
+  get popover(): PrismPopoverComponent | undefined {
+    return this._manualPopover || this.popoverInput();
+  }
+
+  set manualPopover(val: PrismPopoverComponent | undefined) {
+    this._manualPopover = val;
+  }
   readonly trigger = input<'click' | 'hover' | 'focus'>('hover');
   readonly placement = input<PrismPopoverPlacement>('top');
 
@@ -119,9 +129,9 @@ export class PrismPopoverTriggerDirective implements OnDestroy {
   }
 
   private initPopoverElement(): void {
-    if (this._isPopoverMoved || !this.popover() || !this.popover().elementRef) return;
+    if (this._isPopoverMoved || !this.popover || !this.popover.elementRef) return;
 
-    const popoverEl = this.popover().elementRef.nativeElement;
+    const popoverEl = this.popover.elementRef.nativeElement;
     if (!popoverEl) return;
 
     this.renderer.setStyle(popoverEl, 'position', 'absolute');
@@ -136,7 +146,7 @@ export class PrismPopoverTriggerDirective implements OnDestroy {
   onClick(event: MouseEvent): void {
     if (this.trigger() === 'click') {
       event.stopPropagation();
-      const popover = this.popover();
+      const popover = this.popover;
       if (popover && popover.visible()) {
         popover.hide();
       } else {
@@ -165,9 +175,8 @@ export class PrismPopoverTriggerDirective implements OnDestroy {
   }
 
   onBlur(): void {
-    if (this.trigger() === 'focus') {
-      this.popover().hide();
-    }
+    if (!this.popover) return;
+    this.popover.hide();
   }
 
   private clearCloseTimer(): void {
@@ -180,7 +189,7 @@ export class PrismPopoverTriggerDirective implements OnDestroy {
   private startCloseTimer(): void {
     this.clearCloseTimer();
     this._hoverTimeout = setTimeout(() => {
-      const popover = this.popover();
+      const popover = this.popover;
       if (popover && !popover.isHovered()) {
         popover.hide();
       } else if (popover && popover.isHovered()) {
@@ -198,8 +207,8 @@ export class PrismPopoverTriggerDirective implements OnDestroy {
   ngOnDestroy(): void {
     this.clearCloseTimer();
 
-    if (this._isPopoverMoved && this.popover() && this.popover().elementRef) {
-      const popoverEl = this.popover().elementRef.nativeElement;
+    if (this._isPopoverMoved && this.popover && this.popover.elementRef) {
+      const popoverEl = this.popover.elementRef.nativeElement;
       if (popoverEl && popoverEl.parentNode === this.document.body) {
          try {
             this.renderer.removeChild(this.document.body, popoverEl);
@@ -211,7 +220,7 @@ export class PrismPopoverTriggerDirective implements OnDestroy {
   }
 
   onDocumentClick(event: MouseEvent): void {
-    const popover = this.popover();
+    const popover = this.popover;
     const triggerType = this.trigger();
     
     // Only care about outside clicks for click trigger usually
@@ -228,7 +237,7 @@ export class PrismPopoverTriggerDirective implements OnDestroy {
   }
 
   private showPopover(): void {
-    const popover = this.popover();
+    const popover = this.popover;
     if (!popover) return;
 
     if (isPlatformBrowser(this.platformId)) {
@@ -241,7 +250,7 @@ export class PrismPopoverTriggerDirective implements OnDestroy {
 
   private updatePosition(): void {
     const win = this.document.defaultView;
-    const popover = this.popover();
+    const popover = this.popover;
     if (!win || !popover || !popover.elementRef) return;
 
     const triggerEl = this.elementRef.nativeElement;

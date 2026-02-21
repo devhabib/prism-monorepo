@@ -1,18 +1,88 @@
 <prism-demo-page-header title="Tag" subtitle="A component for categorizing or labeling content with keywords.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
+<prism-tab-group variant="line" class="mt-8">
+  <prism-tab label="Examples">
+
+<prism-demo-section title="Basic Usage" description="The most basic usage.">
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
         <div class="p-4 flex gap-2">
-          <prism-tag label="Default Tag"></prism-tag>
-          <prism-tag label="Outline Tag" variant="outline"></prism-tag>
+          <prism-tag>Tag 1</prism-tag>
+          <prism-tag>Tag 2</prism-tag>
+          <prism-tag>
+            <a href="https://github.com/devhabib/prism-monorepo" target="_blank" class="text-primary hover:underline">GitHub</a>
+          </prism-tag>
         </div>
       </prism-tab>
       <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
+        <prism-code-block [ts]="snippets.basic"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>
 </prism-demo-section>
+
+<prism-demo-section title="Colors" description="We provide five preset colors for different statuses, and you can also set custom hex colors.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 flex flex-wrap gap-2">
+          <prism-tag color="default">default</prism-tag>
+          <prism-tag color="success">success</prism-tag>
+          <prism-tag color="processing">processing</prism-tag>
+          <prism-tag color="warning">warning</prism-tag>
+          <prism-tag color="error">error</prism-tag>
+          <prism-tag color="#108ee9">#108ee9</prism-tag>
+          <prism-tag color="#87d068">#87d068</prism-tag>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.colors"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Closable" description="Tags can be closed by clicking the close icon.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 flex gap-2">
+          <prism-tag [closable]="true" (closed)="onClose($event)">Closable 1</prism-tag>
+          <prism-tag [closable]="true" (closed)="$event.preventDefault()">Prevent Default</prism-tag>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.closable"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Checkable" description="Selectable tags that act like checkboxes.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 flex gap-2">
+          <prism-tag [checkable]="true" [(checked)]="checked1">Checkable 1</prism-tag>
+          <prism-tag [checkable]="true" [(checked)]="checked2">Checkable 2</prism-tag>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.checkable"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+  </prism-tab>
+
+  <prism-tab label="API">
+    <prism-demo-section title="API">
+      <div class="mt-4">
+        <prism-api-table [data]="apiData"></prism-api-table>
+      </div>
+    </prism-demo-section>
+  </prism-tab>
+</prism-tab-group>

@@ -1,6 +1,9 @@
 <prism-demo-page-header title="Spin" subtitle="A loading spinner component.">
 </prism-demo-page-header>
 
+<prism-tab-group variant="line" class="mt-8">
+  <prism-tab label="Examples">
+
 <prism-demo-section title="Basic Usage">
   <prism-demo-card>
     <prism-tab-group variant="pill">
@@ -30,9 +33,9 @@
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
         <div class="p-4 flex items-center space-x-8">
-          <prism-spin size="sm"></prism-spin>
-          <prism-spin size="md"></prism-spin>
-          <prism-spin size="lg"></prism-spin>
+          <prism-spin simple size="sm"></prism-spin>
+          <prism-spin simple size="md"></prism-spin>
+          <prism-spin simple size="lg"></prism-spin>
         </div>
       </prism-tab>
       <prism-tab label="Code">
@@ -41,3 +44,82 @@
     </prism-tab-group>
   </prism-demo-card>
 </prism-demo-section>
+
+<prism-demo-section title="Customized Description (Tip)" description="Add a descriptive loading text below the spinner.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 space-y-4">
+          <prism-spin tip="Loading user data..." [spinning]="true">
+            <div class="p-8 border border-gray-100 rounded-lg bg-white">
+              <h3 class="text-lg font-semibold mb-2">User Profile</h3>
+              <p class="text-gray-600">Information is being loaded...</p>
+            </div>
+          </prism-spin>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.tip"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Custom Indicator" description="Use your own loading indicator or icon instead of the default circular spinner.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 space-y-4">
+          <ng-template #customIndicator>
+            <i class="ri-loader-4-line text-3xl animate-spin text-indigo-600"></i>
+          </ng-template>
+          
+          <prism-spin [indicator]="customIndicator" [spinning]="true">
+            <div class="p-8 border border-gray-100 rounded-lg bg-white">
+              <h3 class="text-lg font-semibold mb-2">Syncing Data</h3>
+              <p class="text-gray-600">We are syncing your latest changes to the cloud.</p>
+            </div>
+          </prism-spin>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.custom"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Delayed Loading" description="For very fast requests, showing a loading state might cause flickering. Use delay to only show the spinner if the request takes longer than the specified time (e.g. 500ms).">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 space-y-4">
+          <button (click)="isDelayedSpinning.set(!isDelayedSpinning())" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded mb-4 focus:outline-none transition-colors">
+            Toggle Spinning (500ms Delay): {{ isDelayedSpinning() }}
+          </button>
+          
+          <prism-spin [spinning]="isDelayedSpinning()" [delay]="500">
+            <div class="p-8 border border-gray-100 rounded-lg bg-white">
+              <h3 class="text-lg font-semibold mb-2">Fast Operation</h3>
+              <p class="text-gray-600">Toggle the state quickly to simulate a fast network response. If toggled off before 500ms, the spinner will never appear.</p>
+            </div>
+          </prism-spin>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.delay"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+  </prism-tab>
+
+  <prism-tab label="API">
+    <prism-demo-section title="API">
+      <div class="mt-4">
+        <prism-api-table [data]="apiData"></prism-api-table>
+      </div>
+    </prism-demo-section>
+  </prism-tab>
+</prism-tab-group>

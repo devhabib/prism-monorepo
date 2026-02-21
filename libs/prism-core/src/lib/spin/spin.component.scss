@@ -1,61 +1,68 @@
-@use '../../../../../libs/prism-theme/src/lib/prism-theme' as *;
+@use '../../../../prism-theme/src/lib/index' as *;
 
 .prism-spin-container {
   position: relative;
   display: inline-block;
   width: 100%;
+}
 
-  .prism-spin-content {
-    transition: filter 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), opacity 0.3s;
-    
-    &.spinning {
-      opacity: 0.5;
-      filter: blur(4px);
-      user-select: none;
-      pointer-events: none;
-    }
-  }
+.prism-spin--blur {
+  opacity: 0.5;
+  filter: blur(2px);
+  pointer-events: none;
+  user-select: none;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
 
-  .prism-spin-mask {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-  }
+.prism-spin-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.4);
+  z-index: 10;
+}
+
+.prism-spin-mask--simple {
+  position: relative;
+  background: transparent;
 }
 
 .prism-spin-loader {
-  display: inline-block;
-  color: $primary-main;
-  vertical-align: middle;
-
-  &.spin-sm { font-size: 14px; }
-  &.spin-md { font-size: 20px; }
-  &.spin-lg { font-size: 32px; }
-
-  svg {
-    animation: rotate 1s linear infinite;
-    width: 1em;
-    height: 1em;
-  }
-
-  circle {
-    stroke: currentColor;
-    stroke-linecap: round;
-    animation: dash 1.5s ease-in-out infinite;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-xs;
+  color: var(--primary-main);
+  
+  &.prism-spin--sm .prism-spin-svg { width: 16px; height: 16px; }
+  &.prism-spin--md .prism-spin-svg { width: 32px; height: 32px; }
+  &.prism-spin--lg .prism-spin-svg { width: 48px; height: 48px; }
 }
 
-@keyframes rotate {
+.prism-spin-svg {
+  animation: prism-rotate 2s linear infinite;
+}
+
+.prism-spin-circle {
+  stroke: currentColor;
+  stroke-linecap: round;
+  animation: prism-dash 1.5s ease-in-out infinite;
+}
+
+.prism-spin-tip {
+  font-size: 14px;
+}
+
+@keyframes prism-rotate {
   100% { transform: rotate(360deg); }
 }
 
-@keyframes dash {
+@keyframes prism-dash {
   0% {
     stroke-dasharray: 1, 150;
     stroke-dashoffset: 0;
@@ -67,5 +74,11 @@
   100% {
     stroke-dasharray: 90, 150;
     stroke-dashoffset: -124;
+  }
+}
+
+.prism-theme-dark {
+  .prism-spin-mask {
+    background: rgba(15, 23, 42, 0.4);
   }
 }

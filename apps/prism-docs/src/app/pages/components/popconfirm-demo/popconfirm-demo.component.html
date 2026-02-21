@@ -1,17 +1,82 @@
 <prism-demo-page-header title="Popconfirm" subtitle="A confirmation box that appears when an element is clicked.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
+<prism-tab-group variant="line" class="mt-8">
+  <prism-tab label="Examples">
+
+<prism-demo-section title="Basic Usage" description="The most basic usage.">
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
         <div class="p-4">
-          <prism-popconfirm />
+          <prism-button [prismPopconfirmTrigger]="confirm" (confirmed)="onConfirm()" (cancelled)="onCancel()">Delete</prism-button>
+          <prism-popconfirm #confirm title="Are you sure you want to delete this task?" (confirmed)="onConfirm()" (cancelled)="onCancel()">
+          </prism-popconfirm>
         </div>
       </prism-tab>
       <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
+        <prism-code-block [ts]="snippets.basic"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>
 </prism-demo-section>
+
+<prism-demo-section title="Placement" description="Support 12 placements.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4">
+          <prism-space>
+            <prism-button [prismPopconfirmTrigger]="confirmLeft" placement="left">Left</prism-button>
+            <prism-button [prismPopconfirmTrigger]="confirmTop" placement="top">Top</prism-button>
+            <prism-button [prismPopconfirmTrigger]="confirmBottom" placement="bottom">Bottom</prism-button>
+            <prism-button [prismPopconfirmTrigger]="confirmRight" placement="right">Right</prism-button>
+          </prism-space>
+
+          <prism-popconfirm #confirmLeft title="Confirm Left?"></prism-popconfirm>
+          <prism-popconfirm #confirmTop title="Confirm Top?"></prism-popconfirm>
+          <prism-popconfirm #confirmBottom title="Confirm Bottom?"></prism-popconfirm>
+          <prism-popconfirm #confirmRight title="Confirm Right?"></prism-popconfirm>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.placement"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Custom Text" description="Customizing button labels.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4">
+          <prism-button [prismPopconfirmTrigger]="confirmCustom">Custom Text</prism-button>
+          <prism-popconfirm #confirmCustom 
+            title="Change status to 'Done'?" 
+            confirmText="Yes, Do it" 
+            cancelText="Wait">
+          </prism-popconfirm>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.custom"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+  </prism-tab>
+
+  <prism-tab label="API">
+    <div class="mt-4 space-y-12">
+      <prism-demo-section title="Popconfirm API">
+        <prism-api-table [data]="componentApiData"></prism-api-table>
+      </prism-demo-section>
+
+      <prism-demo-section title="Popconfirm Trigger API">
+        <prism-api-table [data]="directiveApiData"></prism-api-table>
+      </prism-demo-section>
+    </div>
+  </prism-tab>
+</prism-tab-group>

@@ -1,17 +1,74 @@
 <prism-demo-page-header title="Progress" subtitle="A component for displaying the progress status of an operation.">
 </prism-demo-page-header>
 
-<prism-demo-section title="Basic Usage">
+<prism-tab-group variant="line" class="mt-8">
+  <prism-tab label="Examples">
+
+<prism-demo-section title="Progress Line" description="A standard progress bar.">
   <prism-demo-card>
     <prism-tab-group variant="pill">
       <prism-tab label="Preview">
-        <div class="p-4">
-          <prism-progress />
+        <div class="p-4 flex flex-col gap-4">
+          <prism-progress [percent]="30"></prism-progress>
+          <prism-progress [percent]="50" status="active"></prism-progress>
+          <prism-progress [percent]="70" status="exception"></prism-progress>
+          <prism-progress [percent]="100"></prism-progress>
+          <prism-progress [percent]="50" [showInfo]="false"></prism-progress>
         </div>
       </prism-tab>
       <prism-tab label="Code">
-        <prism-code-block [ts]="snippets.usage"></prism-code-block>
+        <prism-code-block [ts]="snippets.line"></prism-code-block>
       </prism-tab>
     </prism-tab-group>
   </prism-demo-card>
 </prism-demo-section>
+
+<prism-demo-section title="Progress Circle" description="A circular progress bar.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 flex gap-8 flex-wrap">
+          <prism-progress type="circle" [percent]="30" [width]="80"></prism-progress>
+          <prism-progress type="circle" [percent]="70" status="exception" [width]="80"></prism-progress>
+          <prism-progress type="circle" [percent]="100" [width]="80"></prism-progress>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.circle"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+<prism-demo-section title="Dynamic Demo" description="Interact with buttons to change the progress percentage.">
+  <prism-demo-card>
+    <prism-tab-group variant="pill">
+      <prism-tab label="Preview">
+        <div class="p-4 flex flex-col gap-6">
+          <prism-progress [percent]="percent()"></prism-progress>
+          <div class="flex gap-8 items-center">
+             <prism-progress type="circle" [percent]="percent()" [width]="100"></prism-progress>
+             <div class="flex gap-2">
+               <prism-button (click)="decrease()">-</prism-button>
+               <prism-button (click)="increase()">+</prism-button>
+             </div>
+          </div>
+        </div>
+      </prism-tab>
+      <prism-tab label="Code">
+        <prism-code-block [ts]="snippets.dynamic"></prism-code-block>
+      </prism-tab>
+    </prism-tab-group>
+  </prism-demo-card>
+</prism-demo-section>
+
+  </prism-tab>
+
+  <prism-tab label="API">
+    <prism-demo-section title="API">
+      <div class="mt-4">
+        <prism-api-table [data]="apiData"></prism-api-table>
+      </div>
+    </prism-demo-section>
+  </prism-tab>
+</prism-tab-group>

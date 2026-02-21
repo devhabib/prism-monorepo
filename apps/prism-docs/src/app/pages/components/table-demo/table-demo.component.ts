@@ -1,12 +1,12 @@
 import { Component, TemplateRef, signal, effect, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { 
-  PrismTableComponent, 
-  PrismColumn, 
-  PrismCodeBlockComponent, 
-  PrismAvatarComponent, 
-  ApiTableComponent, 
+import {
+  PrismTableComponent,
+  PrismColumn,
+  PrismCodeBlockComponent,
+  PrismAvatarComponent,
+  ApiTableComponent,
   ApiDoc,
   PrismTagComponent,
   PrismBadgeComponent,
@@ -14,7 +14,6 @@ import {
   PrismTabGroupComponent,
   PrismTabComponent,
   PrismDialogComponent,
-  PrismCardComponent,
   PrismDemoPageHeaderComponent,
   PrismDemoSectionComponent,
   PrismDemoCardComponent
@@ -27,11 +26,11 @@ type Product = { sku: string; name: string; category: string; stock: number; pri
 @Component({
   selector: 'prism-table-demo',
   imports: [
-    CommonModule, 
-    PrismTableComponent, 
-    PrismCodeBlockComponent, 
-    PrismAvatarComponent, 
-    ReactiveFormsModule, 
+    CommonModule,
+    PrismTableComponent,
+    PrismCodeBlockComponent,
+    PrismAvatarComponent,
+    ReactiveFormsModule,
     ApiTableComponent,
     PrismTagComponent,
     PrismBadgeComponent,
@@ -39,7 +38,6 @@ type Product = { sku: string; name: string; category: string; stock: number; pri
     PrismTabGroupComponent,
     PrismTabComponent,
     PrismDialogComponent,
-    PrismCardComponent,
     PrismDemoPageHeaderComponent,
     PrismDemoSectionComponent,
     PrismDemoCardComponent
@@ -94,9 +92,9 @@ export class TableDemoComponent {
     { id: '4', name: 'David Smith', role: 'Developer', status: 'Active', avatar: 'https://i.pravatar.cc/150?u=david' },
     { id: '5', name: 'Eve White', role: 'Product Owner', status: 'Active', avatar: 'https://i.pravatar.cc/150?u=eve' },
   ];
-  
+
   userCols: PrismColumn<Employee>[] = [];
-  
+
   singleSelection = signal<Employee | null>(null);
   multipleSelection = signal<Employee[]>([]);
 
@@ -159,7 +157,7 @@ export class TableDemoComponent {
           { key: 'status', header: 'Status', cellTemplate: statusTpl },
           { key: 'actions' as keyof Employee, header: 'Actions', cellTemplate: actionsTpl }
         ];
-        
+
         // Config for selection tables (simplified columns)
         this.userCols = [
           { key: 'name', header: 'Name' },
