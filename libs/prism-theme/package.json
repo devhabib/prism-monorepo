@@ -1,6 +1,6 @@
 {
   "name": "@devynelogic/prism-theme",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Global styles, theming system, and SCSS utilities for Prism Design System.",
   "author": "DevyneLogic",
   "license": "MIT",

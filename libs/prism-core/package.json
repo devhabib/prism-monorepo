@@ -1,6 +1,6 @@
 {
   "name": "@devynelogic/prism-core",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "DevyneLogic",
   "license": "MIT",
   "repository": {
@@ -20,7 +20,7 @@
     "@angular/core": "^21.1.0",
     "@angular/forms": "^21.1.0",
     "@angular/platform-browser": "^21.1.0",
-    "@devynelogic/prism-icons": "0.0.4",
+    "@devynelogic/prism-icons": "0.0.5",
     "rxjs": "~7.8.0",
     "vitest": ">=1.0.0"
   },
