@@ -101,7 +101,6 @@ export class PrismTableComponent<T> {
     return data;
   });
 
-  // Methods
   toggleSort(key: keyof T): void {
     const currentSort = this.sortConfig();
 
