@@ -14,6 +14,7 @@ on:
 permissions:
   contents: read
   packages: write
+  id-token: write
 
 jobs:
   publish:
@@ -47,7 +48,7 @@ jobs:
             echo "✅ Version $PACKAGE_VERSION already exists. Skipping."
           else
             echo "🚀 Publishing @devynelogic/prism-icons@$PACKAGE_VERSION..."
-            npm publish --access public
+            npm publish --access public --provenance
             echo "✅ Published!"
           fi
         env:
@@ -63,7 +64,7 @@ jobs:
             echo "✅ Version $PACKAGE_VERSION already exists. Skipping."
           else
             echo "🚀 Publishing @devynelogic/prism-core@$PACKAGE_VERSION..."
-            npm publish --access public
+            npm publish --access public --provenance
             echo "✅ Published!"
           fi
         env:
@@ -79,7 +80,7 @@ jobs:
             echo "✅ Version $PACKAGE_VERSION already exists. Skipping."
           else
             echo "🚀 Publishing @devynelogic/prism-theme@$PACKAGE_VERSION..."
-            npm publish --access public
+            npm publish --access public --provenance
             echo "✅ Published!"
           fi
         env:
