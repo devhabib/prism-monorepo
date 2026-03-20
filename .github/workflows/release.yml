@@ -39,6 +39,7 @@ jobs:
           npx nx build prism-theme --configuration=production --skip-nx-cache
 
       - name: Publish Prism Icons
+        if: github.ref == 'refs/heads/main'
         run: |
           cd dist/libs/prism-icons
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
@@ -55,6 +56,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish Prism Core
+        if: github.ref == 'refs/heads/main'
         run: |
           cd dist/libs/prism-core
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
@@ -71,6 +73,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish Prism Theme
+        if: github.ref == 'refs/heads/main'
         run: |
           cd dist/libs/prism-theme
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
