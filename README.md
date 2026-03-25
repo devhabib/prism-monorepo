@@ -39,7 +39,7 @@ A comprehensive Angular UI component library published under the `@devynelogic` 
 ## 🚀 Live Demo
 
 You can view the documentation and live examples here:
-**[Prism Docs Site](https://prism-docs.netlify.app)** <!-- MAINTAINER: replace with your Netlify URL -->
+**[Prism Docs Site](https://prism-ds.netlify.app/getting-started/installation)**
 
 ---
 
@@ -49,7 +49,7 @@ You can view the documentation and live examples here:
 npm install @devynelogic/prism-core @devynelogic/prism-theme @devynelogic/prism-icons
 ```
 
-> **Note on compatibility:** This library is built for **Angular 17+**. Please ensure your project meets this requirement.
+> **Note on compatibility:** This library is built exclusively for **Angular 21** with a **100% zoneless architecture**. It does not support legacy zone-based Angular versions.
 
 ---
 

@@ -16,7 +16,8 @@ export class SidebarComponent {
       group: 'Getting Started',
       items: [
         { label: 'Installation', route: '/getting-started/installation', icon: 'download-line' },
-        { label: 'Accessibility', route: '/getting-started/accessibility', icon: 'accessibility-line' }
+        { label: 'Accessibility', route: '/getting-started/accessibility', icon: 'accessibility-line' },
+        { label: 'Contributing', route: '/getting-started/contributing', icon: 'git-pull-request-line' }
       ]
     },
     {

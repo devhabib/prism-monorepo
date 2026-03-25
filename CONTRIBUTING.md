@@ -2,34 +2,52 @@
 
 First off, thank you for considering contributing to Prism! It's people like you that make Prism a great tool for the Angular community.
 
-## 🤝 Ways to Contribute
+## 🤝 Contribution Policy
 
-You can contribute in many ways:
-- **Reporting Bugs:** Create an issue describing a reproducible bug.
-- **Suggesting Features:** Propose new components or APIs.
-- **Code Contributions:** Submit Pull Requests with fixes or features.
-- **Documentation:** Improve existing guides or fix typos.
+To maintain a stable and high-quality codebase, **direct pushes to the `development` or `main` branches are strictly prohibited.**
+
+All contributions must follow our strict Pull Request (PR) workflow:
+
+1.  **Fork the repository** to your own GitHub account.
+2.  **Create a branch** off the `development` branch (e.g., `feature/your-feature-name`, `fix/issue-description`).
+3.  **Make your changes** locally adhering to our Angular 21 zoneless standards.
+4.  **Submit a Pull Request** targeting the `development` branch.
+5.  **Review & Approval**: All PRs require review and approval from the repository owner (Habib) before merging.
 
 ---
 
-## 💻 Development Workflow
+## 💻 Local Development Setup
 
-To streamline the process, please follow these steps:
+### 1. Fork & Clone
 
-1. **Fork the repository** to your own GitHub account.
-2. **Create a branch** from the `development` branch (not `main`).
-   - *Branch naming convention:*
-     - `feat/component-name` (e.g., `feat/tooltip`)
-     - `fix/issue-description` (e.g., `fix/button-alignment`)
-     - `docs/what-changed` (e.g., `docs/readme-typo`)
-     - `chore/what-changed` (e.g., `chore/ci-update`)
-3. **Make your changes** locally.
-4. **Run lint and build** commands to ensure everything passes:
-   ```bash
-   npx nx lint
-   npx nx build prism-core
-   ```
-5. **Open a Pull Request** targeting the `development` branch.
+```bash
+git clone https://github.com/devhabib/prism-monorepo.git
+cd prism-monorepo
+```
+
+### 2. Branching
+
+Always branch off `development`:
+
+```bash
+git checkout development
+git checkout -b feature/amazing-feature
+```
+
+### 3. Install Dependencies
+
+```bash
+npm install
+```
+
+### 4. Verify Changes
+
+Run lint and build commands to ensure everything passes before submitting your PR:
+
+```bash
+npx nx lint
+npx nx build prism-core
+```
 
 ---
 
@@ -40,6 +58,7 @@ We follow the **Conventional Commits** format for clear git history. Your commit
 `<type>(<scope>): <short description>`
 
 ### Examples:
+
 - `feat(core): add tooltip component`
 - `fix(theme): correct CSS variable for primary color`
 - `docs(readme): add quick start section`
@@ -51,10 +70,10 @@ We follow the **Conventional Commits** format for clear git history. Your commit
 
 If you are adding a new component, please ensure you complete this checklist:
 
-1. Create the component inside `libs/prism-core/src/lib/`.
-2. Export the component in the library's `index.ts` file so it's consumable.
-3. Add a documentation page or example in `apps/prism-docs/src/app/pages/`.
-4. Update the `CHANGELOG.md` under the `[Unreleased]` section with your addition.
+1.  Create the component inside `libs/prism-core/src/lib/`.
+2.  Export the component in the library's `index.ts` file so it's consumable.
+3.  Add a documentation page or example in `apps/prism-docs/src/app/pages/`.
+4.  Update the `CHANGELOG.md` under the `[Unreleased]` section with your addition.
 
 ---
 
@@ -66,7 +85,7 @@ Version bumps are handled exclusively by the maintainers right before merging to
 
 ---
 
-## 🎨 Code Style
+## 🎨 Code style
 
 To maintain a clean codebase, we enforce formatting and linting rules:
 
