@@ -36,7 +36,8 @@ jobs:
         run: npm ci
 
       - name: Run Lint
-        run: npx nx run-many -t lint -p prism-core prism-theme prism-icons prism-docs --parallel=3
+        run: npx nx run-many -t lint --parallel=3
+
 
 
       - name: Run Build
@@ -44,5 +45,6 @@ jobs:
 
 
       - name: Run Tests
-        run: npx nx run-many -t test -p prism-core prism-theme prism-icons --parallel=3 --passWithNoTests
+        run: npx nx run-many -t test --parallel=3
+
 
