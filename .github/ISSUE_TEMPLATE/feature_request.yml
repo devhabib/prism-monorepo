@@ -1,0 +1,53 @@
+name: Feature Request
+description: Suggest a new component, API, or improvement
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: dropdown
+    id: feature-type
+    attributes:
+      label: Feature type
+      options:
+        - "New component"
+        - "Existing component improvement"
+        - "New design token / theme feature"
+        - "New icon"
+        - "API or developer experience improvement"
+        - "Documentation improvement"
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Problem or motivation
+      placeholder: What problem does this solve? What is the use case?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      placeholder: Describe what you would like to see added or changed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      placeholder: Describe any alternative solutions or workarounds you've considered.
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      placeholder: Add any other context, screenshots, or code snippets here.
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I read and agree to the [Code of Conduct](https://github.com/devhabib/prism-monorepo/blob/development/CODE_OF_CONDUCT.md)
+          required: true

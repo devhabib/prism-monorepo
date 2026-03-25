@@ -20,6 +20,10 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('./pages/getting-started/accessibility/accessibility.component').then(m => m.AccessibilityComponent),
       },
       {
+        path: 'getting-started/contributing',
+        loadComponent: () => import('./pages/getting-started/contributing/contributing.component').then(m => m.ContributingComponent),
+      },
+      {
         path: 'icons',
         loadComponent: () => import('./pages/icons-demo/icons-demo.component').then(m => m.IconsDemoComponent),
       },

@@ -1,0 +1,71 @@
+name: Bug Report
+description: Report a reproducible bug in a Prism component or library
+labels: ["bug", "needs-triage"]
+body:
+  - type: dropdown
+    id: package
+    attributes:
+      label: Package affected
+      options:
+        - "@devynelogic/prism-core"
+        - "@devynelogic/prism-theme"
+        - "@devynelogic/prism-icons"
+        - "prism-docs (documentation site)"
+        - "Other / unsure"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      placeholder: What happened? What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. See error
+    validations:
+      required: true
+
+  - type: input
+    id: angular-version
+    attributes:
+      label: Angular version
+      placeholder: e.g. 17.0.0
+    validations:
+      required: true
+
+  - type: input
+    id: prism-version
+    attributes:
+      label: Prism package version
+      placeholder: e.g. 0.0.5
+    validations:
+      required: true
+
+  - type: input
+    id: node-version
+    attributes:
+      label: Node.js version
+      placeholder: e.g. 22.11.0
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      placeholder: Add any other context, screenshots, or code snippets here.
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I read and agree to the [Code of Conduct](https://github.com/devhabib/prism-monorepo/blob/development/CODE_OF_CONDUCT.md)
+          required: true

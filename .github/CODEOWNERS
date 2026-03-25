@@ -1,0 +1,11 @@
+# Default owner for everything
+* @devhabib
+
+# Library source code
+/libs/ @devhabib
+
+# CI/CD and GitHub configuration
+/.github/ @devhabib
+
+# Documentation app
+/apps/prism-docs/ @devhabib
