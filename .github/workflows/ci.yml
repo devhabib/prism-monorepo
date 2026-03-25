@@ -10,18 +10,16 @@ permissions:
   contents: read
 
 jobs:
-  validate:
+  lint:
+    name: "CI — Lint"
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-
       - name: Cache Node Modules and Nx
         uses: actions/cache@v4
         with:
@@ -31,20 +29,33 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-
       - name: Install Dependencies
         run: npm ci
-
       - name: Run Lint
         run: npx nx run-many -t lint --parallel=3
 
-
-
+  build-test:
+    name: "Build & Test"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Cache Node Modules and Nx
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .nx/cache
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install Dependencies
+        run: npm ci
       - name: Run Build
         run: npx nx run-many -t build -p prism-core prism-theme prism-icons --configuration=production --parallel=3
-
-
       - name: Run Tests
         run: npx nx run-many -t test --parallel=3
-
-
